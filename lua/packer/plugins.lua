@@ -3,8 +3,6 @@ local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
     print('Installing packer...(reopen neovim for the changes to take effect)')
-    -- search and source the plugin files inside of packer.nvim
-    vim.cmd [[packadd packer.nvim]]
 end
 
 -- use a protected call so we don't error out on first use
@@ -21,7 +19,7 @@ return packer.startup({function(use)
     use {
         'akinsho/bufferline.nvim',
         config = function()
-            require'config/plugin/bufferline'
+            require('config/plugin/bufferline')
         end
     }
 
@@ -31,7 +29,7 @@ return packer.startup({function(use)
         'lewis6991/gitsigns.nvim',
         requires = {'nvim-lua/plenary.nvim'},
         config = function()
-            require'gitsigns'.setup()
+            require('gitsigns').setup()
         end
     }
 
@@ -40,7 +38,7 @@ return packer.startup({function(use)
         'nvim-telescope/telescope.nvim',
         requires = {{'kyazdani42/nvim-web-devicons'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}},
         config = function()
-            require'config/plugin/telescope'
+            require('config/plugin/telescope')
         end
     }
 
@@ -57,14 +55,14 @@ return packer.startup({function(use)
         },
         ft = { 'cpp', 'c', 'objc', 'objcpp' },
         config = function()
-            require'config/plugin/lsp'
+            require('config/plugin/lsp')
         end
     }
     use {
         'hrsh7th/cmp-buffer',
         requires = {{'hrsh7th/nvim-cmp'}},
         config = function()
-            require'cmp'.setup {
+            require('cmp').setup {
                 sources = {{ name = 'buffer' }},
                 get_bufnrs = function()
                     local bufs = {}
@@ -74,7 +72,7 @@ return packer.startup({function(use)
                     return vim.tbl_keys(bufs)
                 end
             }
-            require'cmp'.setup.cmdline('/', {
+            require('cmp').setup.cmdline('/', {
                 sources = {{ name = 'buffer' }}
             })
         end
@@ -84,7 +82,7 @@ return packer.startup({function(use)
         'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true,
         ft = { 'cpp', 'c', 'css', 'html', 'javascript', 'lua', 'python', 'vim' },
         config = function()
-            require'config/plugin/treesitter'
+            require('config/plugin/treesitter')
         end
     }
 
@@ -92,13 +90,13 @@ return packer.startup({function(use)
     use {
         'lukas-reineke/indent-blankline.nvim',
         config = function()
-            require'config/plugin/indentline'
+            require('config/plugin/indentline')
         end
     }
     use {
         'windwp/nvim-autopairs',
         config = function()
-            require'nvim-autopairs'.setup()
+            require('nvim-autopairs').setup()
         end
     }
 
