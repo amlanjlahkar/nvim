@@ -1,4 +1,3 @@
--- setup lsp
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
     -- setup keymaps
@@ -29,22 +28,6 @@ local on_attach = function(client, bufnr)
         false)
     end
 end
-
--- setup autocompletion
-local cmp = require'cmp'
-local luasnip = require 'luasnip'
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp.exapand(args.body)
-    end,
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip'  },
-        { name = 'buffer'   },
-    }
-})
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = { 'clangd' }

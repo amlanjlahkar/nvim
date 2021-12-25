@@ -45,39 +45,24 @@ return packer.startup({function(use)
     -- lsp related
     use {
         'neovim/nvim-lspconfig',
-        requires = {
-            {'hrsh7th/nvim-cmp',
-            requires = {
-                {'hrsh7th/cmp-nvim-lsp'},
-                {'saadparwaiz1/cmp_luasnip'},
-                {'L3MON4D3/LuaSnip'},
-            }}
-        },
         ft = { 'cpp', 'c', 'objc', 'objcpp' },
         config = function()
             require('config/plugin/lsp')
         end
     }
     use {
-        'hrsh7th/cmp-buffer',
-        requires = {{'hrsh7th/nvim-cmp'}},
+        'hrsh7th/nvim-cmp',
+        requires = {
+            {'hrsh7th/cmp-buffer'},
+            {'hrsh7th/cmp-path'},
+            {'hrsh7th/cmp-nvim-lsp'},
+            {'L3MON4D3/LuaSnip'},
+            {'saadparwaiz1/cmp_luasnip'},
+        },
         config = function()
-            require('cmp').setup {
-                sources = {{ name = 'buffer' }},
-                get_bufnrs = function()
-                    local bufs = {}
-                    for _, win in ipairs(vim.api.nvim_list_wins()) do
-                        bufs[vim.api.nvim_win_get_buf(win)] = true
-                    end
-                    return vim.tbl_keys(bufs)
-                end
-            }
-            require('cmp').setup.cmdline('/', {
-                sources = {{ name = 'buffer' }}
-            })
+            require('config/plugin/cmp')
         end
     }
-
     use {
         'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true,
         ft = { 'cpp', 'c', 'css', 'html', 'javascript', 'lua', 'python', 'vim' },
