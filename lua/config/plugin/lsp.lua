@@ -29,16 +29,24 @@ local on_attach = function(client, bufnr)
     end
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok then
+  return
+else
+    capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+end
+
 local servers = { 'clangd' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-    }
-end
+--for _, lsp in ipairs(servers) do
+--    nvim_lsp[lsp].setup {
+--        on_attach = on_attach,
+--        capabilities = capabilities,
+--    }
+--end
 
 -- server specific commands
 nvim_lsp.clangd.setup{
@@ -49,6 +57,8 @@ nvim_lsp.clangd.setup{
             "--completion-style=detailed",
             "--compile-commands-dir="
     },
+    on_attach = on_attach,
+    capabilities = capabilities,
 }
 
 -- use custom diagnostic signs
