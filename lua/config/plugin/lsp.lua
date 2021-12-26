@@ -5,8 +5,8 @@ local on_attach = function(client, bufnr)
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
     -- enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-    local opts = { noremap=true, silent=true }
 
+    local opts = { noremap=true, silent=true }
     buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
@@ -34,11 +34,22 @@ local servers = { 'clangd' }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+    nvim_lsp[lsp].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+    }
 end
+
+-- server specific commands
+nvim_lsp.clangd.setup{
+    cmd = { "clangd",
+            "--background-index",
+            "--suggest-missing-includes",
+            "--all-scopes-completion",
+            "--completion-style=detailed",
+            "--compile-commands-dir="
+    },
+}
 
 -- use custom diagnostic signs
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
