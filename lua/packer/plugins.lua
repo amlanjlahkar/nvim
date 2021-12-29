@@ -82,6 +82,13 @@ return packer.startup({function(use)
             require('nvim-autopairs').setup()
         end
     }
+    use {
+        'ThePrimeagen/harpoon',
+        requires = { {'nvim-lua/plenary.nvim'} },
+        config = function()
+            require('config/plugin/harpoon')
+        end
+    }
 
     -- colorscheme
     use 'sainnhe/gruvbox-material'
