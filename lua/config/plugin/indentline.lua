@@ -4,6 +4,7 @@ vim.opt.list = true
 require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = false,
+    space_char_blankline = " ",
 }
 
 g.indent_blankline_buftype_exlude = { 'terminal', 'nofile' }
@@ -37,6 +38,7 @@ vim.g.indent_blankline_context_patterns = {
     "jsx_self_closing_element",
     "try_statement",
     "switch_statement",
+    "^case",
     "catch_clause",
     "import_statement",
     "operation_type",

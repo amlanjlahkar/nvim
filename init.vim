@@ -19,6 +19,7 @@ set cursorline                               " for highlighting the current line
 set laststatus=2                             " for always displaying the statusbar at the bottom
 set showtabline=1                            " for displaying of tabline at the top
 set noshowmode                               " for disabling showing of different modes below the statusline(INSERT,NORMAL,V-BLOCK,REPLACE... etc.)
+set signcolumn=yes                           " always display the sign column(gutter)"
 set nohlsearch                               " for disabling highlighting on search results
 set pumheight=20                             " setting custom height for pop-up menus
 set completeopt=menu,menuone,noselect        " completion menu options

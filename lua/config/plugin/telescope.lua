@@ -9,7 +9,6 @@ require('telescope').setup {
 require('telescope').load_extension('fzy_native')
 
 -- keymaps
-
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
