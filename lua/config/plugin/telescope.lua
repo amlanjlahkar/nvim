@@ -1,21 +1,33 @@
 require('telescope').setup {
+    defaults = {
+        vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--trim"
+        },
+    },
     extensions = {
         fzy_native = {
             override_generic_sorter = false,
             override_file_sorter = true,
-        }
+        },
     }
 }
-require('telescope').load_extension('fzy_native')
+
 -- keymaps
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 map('n', '<C-f>', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
-map('n', '<C-b>', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
-map('n', '<leader>th', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 map('n', '<leader>tg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
+map('n', '<leader>n', '<cmd>lua require("config/plugin/telescope").nvim_files()<cr>', opts)
 
+-- extensions
+require('telescope').load_extension('fzy_native')
 local is_available, harpoon = pcall(require, "harpoon")
 if is_available then
     require("telescope").load_extension('harpoon')
@@ -24,3 +36,14 @@ else
     return
 end
 
+-- custom functions
+local M = {}
+M.nvim_files = function()
+    require("telescope.builtin").find_files({
+        prompt_title = "Nvim >",
+        cwd = vim.fn.stdpath("config"),
+        hidden = false,
+    })
+end
+
+return M

@@ -7,6 +7,7 @@ function! NetrwMaps()
     nmap <buffer> l <CR>
     nmap <buffer> .  gh
     nmap <buffer> <TAB> mf
+    nmap <buffer> <S-TAB> mF
 endfunction
 
 augroup netrw_mapping
