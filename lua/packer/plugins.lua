@@ -89,6 +89,7 @@ return packer.startup({function(use)
             require('config/plugin/harpoon')
         end
     }
+    use 'ggandor/lightspeed.nvim'
 
     -- colorscheme
     use 'sainnhe/gruvbox-material'
