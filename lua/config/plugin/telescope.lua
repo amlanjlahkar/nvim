@@ -16,8 +16,8 @@ map('n', '<C-b>', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
 map('n', '<leader>th', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 map('n', '<leader>tg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
 
-local status_ok, harpoon = pcall(require, "harpoon")
-if status_ok then
+local is_available, harpoon = pcall(require, "harpoon")
+if is_available then
     require("telescope").load_extension('harpoon')
     map('n', '<leader>tm', '<cmd>Telescope harpoon marks<cr>', opts)
 else
