@@ -89,10 +89,15 @@ return packer.startup({function(use)
             require('config/plugin/harpoon')
         end
     }
-    use 'ggandor/lightspeed.nvim'
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
 
     -- colorscheme
-    use 'sainnhe/gruvbox-material'
+    use 'Mofiqul/vscode.nvim'
 
     if packer_bootstrap then
         require('packer').sync()

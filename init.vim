@@ -40,14 +40,9 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-let g:gruvbox_material_sign_column_background = 'none'
-let g:gruvbox_material_background = 'medium'
-let g:gruvbox_material_diagnostic_virtual_text = 'colored'
-let g:gruvbox_material_enable_bold = 0
-let g:gruvbox_material_enable_italic = 1
-let g:gruvbox_material_transparent_background = 0
-let g:gruvbox_material_better_performance = 1
-colorscheme gruvbox-material
+let g:vscode_style='dark'
+let g:vscode_italic_comment=1
+colorscheme vscode
 " }}}
 
 " source loader code for compiled plugins by packer {{{
