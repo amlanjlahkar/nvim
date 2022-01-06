@@ -1,39 +1,65 @@
 require("bufferline").setup {
     options = {
-        separator_style = "thin",
-        show_buffer_close_icons = false,
-        show_close_icon = false,
+		indicator_icon = ' ',
+    	modified_icon = '●',
+    	close_icon = '',
+		close_command = "Bdelete %d",
+		right_mouse_command = "Bdelete! %d",
+		offsets = {{filetype = "NvimTree", text = "EXPLORER", text_align = "center"}},
+		show_tab_indicators = true,
         enforce_regular_tabs = false,
+        show_buffer_close_icons = false,
+		show_close_icon = false,
+        separator_style = "thin",
         max_name_length = 20,
-        modified_icon = '',
         numbers = function(opts)
             return string.format('%s. ', opts.ordinal)
         end
-    },
-    highlights = {
-        background = {
-            guibg = '#1d2021',
-        },
-        fill = {
-            guibg = '#1d2021',
-        },
-        buffer_visible = {
-            guibg = '#1d2021',
-        },
-        buffer_selected = {
-            gui = "bold",
-        },
-        indicator_selected = {
-            guifg = '#7daea3',
-        },
-        separator = {
-            guifg = '#1d2021'
-        },
-        separator_selected = {
-            guifg = '#1d2021'
-        }
-
-    }
+	},
+	highlights = {
+		fill = {
+			guifg = {attribute = "fg", highlight = "Normal"},
+			guibg = {attribute = "bg", highlight = "StatusLineNC"},
+		},
+		background = {
+			guifg = {attribute = "fg", highlight = "Normal"},
+			guibg = {attribute = "bg", highlight = "StatusLine"}
+		},
+		buffer_visible = {
+			gui = "",
+            guifg = {attribute = "fg", highlight="Normal"},
+            guibg = {attribute = "bg", highlight = "Normal"}
+		},
+		buffer_selected = {
+			gui = "",
+            guifg = {attribute = "fg", highlight="Normal"},
+            guibg = {attribute = "bg", highlight = "Normal"}
+		},
+		separator = {
+			guifg = {attribute = "bg", highlight = "Normal"},
+			guibg = {attribute = "bg", highlight = "StatusLine"},
+		},
+		separator_selected = {
+            guifg = {attribute = "fg", highlight="Special"},
+            guibg = {attribute = "bg", highlight = "Normal"}
+		},
+		separator_visible = {
+			guifg = {attribute = "fg", highlight = "Normal"},
+			guibg = {attribute = "bg", highlight = "StatusLineNC"},
+		},
+		close_button = {
+			guifg = {attribute = "fg", highlight = "Normal"},
+			guibg = {attribute = "bg", highlight = "StatusLine"}
+		},
+		close_button_selected = {
+            guifg = {attribute = "fg", highlight="normal"},
+            guibg = {attribute = "bg", highlight = "normal"}
+		},
+		close_button_visible = {
+            guifg = {attribute = "fg", highlight="normal"},
+            guibg = {attribute = "bg", highlight = "normal"}
+		}
+	}
 }
 
 -- keymap

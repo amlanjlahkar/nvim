@@ -45,3 +45,4 @@ vim.g.indent_blankline_context_patterns = {
 }
 g.indent_blankline_show_first_indent_level = true
 g.indent_blankline_use_treesitter = true
+vim.cmd [[ highlight IndentBlanklineContextChar guifg=#D4D4D4 gui=nocombine ]]
