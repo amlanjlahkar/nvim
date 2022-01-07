@@ -27,9 +27,15 @@ set completeopt=menu,menuone,noselect        " completion menu options
 
 " importing {{{
 source $HOME/.config/nvim/mapping.vim
-lua require('impatient') -- must be sourced before any other lua modules
-lua require('modules/statusline')
-lua require('packer/plugins')
+
+lua << EOF
+local is_available, packer = pcall(require, "packer")
+if is_available then
+    require('impatient') -- must be loaded first before any lua modules
+end
+require('modules/statusline')
+require('packer/plugins')
+EOF
 " }}}
 
 " colorscheme {{{
@@ -46,5 +52,10 @@ colorscheme vscode
 " }}}
 
 " source loader code for compiled plugins by packer {{{
-lua require('packer/packer_compiled')
+lua << EOF
+local is_available, packer = pcall(require, "packer")
+if is_available then
+    require('packer/packer_compiled')
+end
+EOF
 " }}}
