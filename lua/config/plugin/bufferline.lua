@@ -34,6 +34,10 @@ require("bufferline").setup {
             guifg = {attribute = "fg", highlight="Normal"},
             guibg = {attribute = "bg", highlight = "Normal"}
 		},
+        modified = {
+            guifg = {attribute = "fg", highlight="Character"},
+            guibg = {attribute = "bg", highlight = "StatusLine"}
+        },
 		separator = {
 			guifg = {attribute = "bg", highlight = "Normal"},
 			guibg = {attribute = "bg", highlight = "StatusLine"},

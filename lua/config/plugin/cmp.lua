@@ -103,4 +103,3 @@ cmp.setup.cmdline('/', {
     sources = {{ name = 'buffer' }},
 })
 
-
