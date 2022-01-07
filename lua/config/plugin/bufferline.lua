@@ -5,12 +5,11 @@ require("bufferline").setup {
     	close_icon = '',
 		close_command = "Bdelete %d",
 		right_mouse_command = "Bdelete! %d",
-		offsets = {{filetype = "NvimTree", text = "EXPLORER", text_align = "center"}},
+		offsets = {{filetype = "netrw", text = "Explorer", text_align = "center"}},
 		show_tab_indicators = true,
         enforce_regular_tabs = false,
         show_buffer_close_icons = false,
 		show_close_icon = false,
-        separator_style = "thin",
         max_name_length = 20,
         numbers = function(opts)
             return string.format('%s. ', opts.ordinal)
