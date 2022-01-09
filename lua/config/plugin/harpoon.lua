@@ -1,3 +1,8 @@
+local is_available, harpoon = pcall(require, "harpoon")
+if not is_available then
+    return
+end
+
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = false }
 

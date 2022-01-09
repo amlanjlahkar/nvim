@@ -1,7 +1,11 @@
-local g = vim.g
+local is_available, indent_blankline = pcall(require, "indent_blankline")
+if not is_available then
+    return
+end
 
+local g = vim.g
 vim.opt.list = true
-require("indent_blankline").setup {
+indent_blankline.setup {
     show_current_context = true,
     show_current_context_start = false,
     space_char_blankline = " ",

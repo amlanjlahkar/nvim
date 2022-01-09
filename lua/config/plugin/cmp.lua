@@ -1,5 +1,9 @@
-local cmp = require('cmp')
-local luasnip = require('luasnip')
+local cmp_available, cmp = pcall(require, "cmp")
+local snip_available, luasnip = pcall(require, "luasnip")
+if not cmp_available and snip_available then
+    return
+end
+
 require('luasnip/loaders/from_vscode').lazy_load()
 
 local kind_icons = {

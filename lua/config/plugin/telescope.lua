@@ -1,4 +1,9 @@
-require('telescope').setup {
+local is_available, telescope = pcall(require, "telescope")
+if not is_available then
+    return
+end
+
+telescope.setup {
     defaults = {
         vimgrep_arguments = {
             "rg",
@@ -27,10 +32,10 @@ map('n', '<leader>tg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', 
 map('n', '<leader>n', '<cmd>lua require("config/plugin/telescope").nvim_files()<cr>', opts)
 
 -- extensions
-require('telescope').load_extension('fzy_native')
+telescope.load_extension('fzy_native')
 local is_available, harpoon = pcall(require, "harpoon")
 if is_available then
-    require("telescope").load_extension('harpoon')
+    telescope.load_extension('harpoon')
     map('n', '<leader>tm', '<cmd>Telescope harpoon marks<cr>', opts)
 else
     return

@@ -1,4 +1,9 @@
-require("bufferline").setup {
+local is_available, bufferline = pcall(require, "bufferline")
+if not is_available then
+    return
+end
+
+bufferline.setup {
     options = {
 		indicator_icon = ' ',
     	modified_icon = '●',
@@ -30,7 +35,7 @@ require("bufferline").setup {
             guibg = {attribute = "bg", highlight = "Normal"}
 		},
 		buffer_selected = {
-			gui = "",
+			gui = "Bold",
             guifg = {attribute = "fg", highlight="Normal"},
             guibg = {attribute = "bg", highlight = "Normal"}
 		},

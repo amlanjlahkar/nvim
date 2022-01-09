@@ -12,7 +12,6 @@ set smartindent                              " for making indenting smart
 set shiftwidth=4                             " decide how many spaces to insert for auto indention
 set expandtab                                " treat tabs as spaces
 set tabstop=4                                " decide how many spaces to convert into tabs
-set encoding=UTF-8                           " setting UTF-8 encoding support
 set number relativenumber                    " for displaying (hybrid)row numbers
 set numberwidth=4                            " for setting the gap/width between row numbers and window edge
 set cursorline                               " for highlighting the current line
@@ -29,7 +28,7 @@ set completeopt=menu,menuone,noselect        " completion menu options
 source $HOME/.config/nvim/mapping.vim
 
 lua << EOF
-local is_available, packer = pcall(require, "packer")
+local is_available, impatient = pcall(require, "impatient")
 if is_available then
     require('impatient') -- must be loaded first before any lua modules
 end
@@ -53,9 +52,12 @@ colorscheme vscode
 
 " source loader code for compiled plugins by packer {{{
 lua << EOF
-local is_available, packer = pcall(require, "packer")
-if is_available then
+local fn = vim.fn
+local compile_path = vim.fn.stdpath('config')..'/lua/packer/packer_compiled.lua'
+if fn.empty(fn.expand(fn.glob(compile_path))) then
     require('packer/packer_compiled')
+else
+    return
 end
 EOF
 " }}}
