@@ -5,8 +5,11 @@ end
 
 local g = vim.g
 indent_blankline.setup {
+    max_indent_increase = 1,
+    use_treesiter = false,
     show_current_context = true,
     show_current_context_start = false,
+    show_trailing_blankline_indent = false,
     space_char_blankline = " ",
 }
 
@@ -29,8 +32,8 @@ vim.g.indent_blankline_context_patterns = {
     "class",
     "return",
     "function",
-    "method",
     "^if",
+    "method",
     "^while",
     "jsx_element",
     "^for",
@@ -38,7 +41,6 @@ vim.g.indent_blankline_context_patterns = {
     "^table",
     "block",
     "arguments",
-    "if_statement",
     "else_clause",
     "jsx_element",
     "jsx_self_closing_element",
@@ -49,6 +51,3 @@ vim.g.indent_blankline_context_patterns = {
     "import_statement",
     "operation_type",
 }
-g.indent_blankline_show_first_indent_level = true
-g.indent_blankline_use_treesitter = true
-vim.cmd [[ highlight IndentBlanklineContextChar guifg=#D4D4D4 gui=nocombine ]]

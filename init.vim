@@ -23,6 +23,8 @@ set nohlsearch                               " for disabling highlighting on sea
 set pumheight=20                             " setting custom height for pop-up menus
 set pumblend=15                              " transparency for pop-up menus
 set completeopt=menu,menuone,noselect        " completion menu options
+set list
+set listchars=trail:⋅
 " }}}
 
 " importing {{{
@@ -49,7 +51,6 @@ endif
 
 let g:edge_enable_italic = 1
 let g:edge_diagnostic_text_highlight = 0
-let g:edge_current_word = 'grey background'
 let g:edge_diagnostic_virtual_text = 'colored'
 let g:edge_transparent_background = 1
 let g:edge_better_performance = 1
