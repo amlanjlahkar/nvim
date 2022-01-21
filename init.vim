@@ -21,6 +21,7 @@ set noshowmode                               " for disabling showing of differen
 set signcolumn=yes                           " always display the sign column(gutter)
 set nohlsearch                               " for disabling highlighting on search results
 set pumheight=20                             " setting custom height for pop-up menus
+set pumblend=15                              " transparency for pop-up menus
 set completeopt=menu,menuone,noselect        " completion menu options
 " }}}
 
@@ -38,6 +39,7 @@ EOF
 " }}}
 
 " colorscheme {{{
+set background=light
 " enable truecolor support
 if exists('+termguicolors')
     let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -45,9 +47,13 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-let g:vscode_style='dark'
-let g:vscode_italic_comment=1
-colorscheme vscode
+let g:edge_enable_italic = 1
+let g:edge_diagnostic_text_highlight = 0
+let g:edge_current_word = 'grey background'
+let g:edge_diagnostic_virtual_text = 'colored'
+let g:edge_transparent_background = 1
+let g:edge_better_performance = 1
+colorscheme edge
 " }}}
 
 " source loader code for compiled plugins by packer {{{

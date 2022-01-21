@@ -97,7 +97,7 @@ return packer.startup({function(use)
     }
 
     -- colorscheme
-    use 'Mofiqul/vscode.nvim'
+    use 'sainnhe/edge'
 
     if packer_bootstrap then
         require('packer').sync()
