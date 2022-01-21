@@ -5,17 +5,15 @@ end
 
 bufferline.setup {
     options = {
-		indicator_icon = ' ',
-    	modified_icon = '●',
-    	close_icon = '',
-		close_command = "Bdelete %d",
-		right_mouse_command = "Bdelete! %d",
-		offsets = {{filetype = "netrw", text = "Explorer", text_align = "center"}},
-		show_tab_indicators = true,
-        enforce_regular_tabs = false,
+        indicator_icon = ' ',
+        modified_icon = '●',
+        offsets = {{filetype = "netrw", text = "Explorer", text_align = "center"}},
+        show_tab_indicators = true,
+        enforce_regular_tabs = true,
         show_buffer_close_icons = false,
-		show_close_icon = false,
-        max_name_length = 20,
+        show_close_icon = false,
+        tab_size = 25,
+        max_name_length = 25,
         numbers = function(opts)
             return string.format('%s. ', opts.ordinal)
         end

@@ -14,10 +14,10 @@ nnoremap <silent> <C-j> <cmd>wincmd j<CR>
 nnoremap <silent> <C-h> <cmd>wincmd h<CR>
 nnoremap <silent> <C-l> <cmd>wincmd l<CR>
 
-nnoremap <silent> <leader>rl <cmd>vertical resize +7<CR>
-nnoremap <silent> <leader>rh <cmd>vertical resize -7<CR>
-nnoremap <silent> <leader>rj <cmd>resize +7<CR>
-nnoremap <silent> <leader>rk <cmd>resize -7<CR>
+nnoremap <silent> <leader><Right> <cmd>vertical resize +7<CR>
+nnoremap <silent> <leader><Left> <cmd>vertical resize -7<CR>
+nnoremap <silent> <leader><Down> <cmd>resize +7<CR>
+nnoremap <silent> <leader><Up> <cmd>resize -7<CR>
 " }}}
 
 " terminal related {{{

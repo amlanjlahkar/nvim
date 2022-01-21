@@ -4,7 +4,6 @@ if not is_available then
 end
 
 local g = vim.g
-vim.opt.list = true
 indent_blankline.setup {
     show_current_context = true,
     show_current_context_start = false,
@@ -13,6 +12,9 @@ indent_blankline.setup {
 
 g.indent_blankline_buftype_exlude = { 'terminal', 'nofile' }
 g.indent_blankline_filetype_exclude = {
+    'conf',
+    'checkhealth',
+    'css',
     'help',
     'text',
     'markdown',
