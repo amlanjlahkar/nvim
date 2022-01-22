@@ -74,7 +74,7 @@ vim.diagnostic.config({
     virtual_text = false,
     signs = true,
     update_in_insert = true,
-    underline = true,
+    underline = false,
     severity_sort = false,
     float = {
       focusable = false,
@@ -85,3 +85,16 @@ vim.diagnostic.config({
       prefix = "",
     },
 })
+
+local is_available, trouble = pcall(require, "trouble")
+if not is_available then
+    return
+else
+    trouble.setup {
+        use_diagnostic_signs = true
+    }
+    local map = vim.api.nvim_set_keymap
+    local opts = { noremap = true, silent = true }
+    map('n', '<leader>tb', '<cmd>TroubleToggle document_diagnostics<cr>', opts)
+end
+

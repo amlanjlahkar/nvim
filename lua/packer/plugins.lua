@@ -25,7 +25,7 @@ return packer.startup({function(use)
     use { 'tpope/vim-fugitive', opt = true, cmd = {'Git'} }
     use {
         'lewis6991/gitsigns.nvim',
-        requires = {'nvim-lua/plenary.nvim'},
+        requires = 'nvim-lua/plenary.nvim',
         config = function()
             require('gitsigns').setup()
         end
@@ -62,8 +62,17 @@ return packer.startup({function(use)
         end
     }
     use {
+        'folke/trouble.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            require('trouble').setup()
+        end 
+    }
+
+    -- treesitter
+    use {
         'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true,
-        ft = { 'cpp', 'c', 'css', 'html', 'javascript', 'lua', 'python', 'vim' },
+        ft = { 'bash', 'sh', 'zsh', 'cpp', 'c', 'css', 'html', 'javascript', 'lua', 'python', 'vim' },
         config = function()
             require('config/plugin/treesitter')
         end
@@ -84,7 +93,7 @@ return packer.startup({function(use)
     }
     use {
         'ThePrimeagen/harpoon',
-        requires = { {'nvim-lua/plenary.nvim'} },
+        requires = 'nvim-lua/plenary.nvim',
         config = function()
             require('config/plugin/harpoon')
         end
