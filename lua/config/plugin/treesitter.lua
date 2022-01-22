@@ -4,7 +4,7 @@ if not is_available then
 end
 
 TS_configs.setup {
-    ensure_installed = { "cpp", "c", "css", "html", "javascript", "lua", "python", "vim" },
+    ensure_installed = { "bash", "cpp", "c", "css", "html", "javascript", "lua", "python", "vim" },
     ignore_install = {},
     highlight = {
         enable = true,
@@ -12,3 +12,5 @@ TS_configs.setup {
         additional_vim_regex_highlighting = false,
     },
 }
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.bash.used_by = { "sh", "zsh" }
