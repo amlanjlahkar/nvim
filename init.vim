@@ -49,12 +49,7 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-let g:edge_enable_italic = 1
-let g:edge_diagnostic_text_highlight = 0
-let g:edge_diagnostic_virtual_text = 'colored'
-let g:edge_transparent_background = 1
-let g:edge_better_performance = 1
-colorscheme edge
+colorscheme melange
 " }}}
 
 " source loader code for compiled plugins by packer {{{
