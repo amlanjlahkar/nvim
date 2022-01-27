@@ -46,7 +46,7 @@ M.modes = setmetatable({
 
 M.get_current_mode = function(self)
   local current_mode = api.nvim_get_mode().mode
-  return string.format(" [%s] ", self.modes[current_mode]):upper()
+  return string.format("[%s]", self.modes[current_mode]):upper()
 end
 
 M.get_git_status = function(self)
@@ -56,13 +56,13 @@ M.get_git_status = function(self)
   local is_head_empty = signs.head ~= ""
 
   if self:is_truncated(self.trunc_width.git_status) then
-    return is_head_empty and string.format(" [ %s] ", signs.head or "") or ""
+    return is_head_empty and string.format(" ( %s) ", signs.head or "") or ""
   end
 
   -- stylua: ignore
   return is_head_empty
     and string.format(
-      " [+%s ~%s -%s] [ %s] ",
+      " [+%s ~%s -%s] ( %s) ",
       signs.added,
       signs.changed,
       signs.removed,
@@ -96,15 +96,15 @@ M.get_filetype = function()
   -- stylua: ignore
   return filetype == ""
     and " No FT "
-    or string.format("[ft: %s] ", filetype):lower()
+    or string.format(" ft: %s ", filetype):lower()
 end
 
 M.get_fileformat = function()
-  return string.format("[%s]", vim.o.fileformat):lower()
+  return string.format(" [%s] ", vim.o.fileformat):lower()
 end
 
 M.get_line_col = function()
-  return "[%l:%c]"
+  return "| %l : %c "
 end
 
 M.lsp_progress = function()
@@ -131,16 +131,16 @@ M.set_active = function(self)
   return table.concat {
     "%#StatusLine#",
     self:get_current_mode(),
-    "%#StatusLineAccent#",
-    self:get_line_col(),
-    "%#StatusLine#",
     self:get_filepath(),
     self:get_filename(),
+    self:get_git_status(),
     "%=",
     self:lsp_progress(),
     self:get_filetype(),
     self:get_fileformat(),
-    self:get_git_status(),
+    "%#StatusLineAccent#",
+    self:get_line_col(),
+    "%#StatusLine#",
   }
 end
 
