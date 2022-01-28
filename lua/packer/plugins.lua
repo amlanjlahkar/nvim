@@ -27,7 +27,7 @@ return packer.startup({function(use)
         'lewis6991/gitsigns.nvim',
         requires = 'nvim-lua/plenary.nvim',
         config = function()
-            require('gitsigns').setup()
+            require('config/plugin/gitsigns')
         end
     }
 
@@ -64,6 +64,7 @@ return packer.startup({function(use)
     use {
         'folke/trouble.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
+        ft = { 'cpp', 'c', 'objc', 'objcpp' },
         config = function()
             require('trouble').setup()
         end 
@@ -78,7 +79,7 @@ return packer.startup({function(use)
         end
     }
 
-    -- good to have
+    -- misc
     use {
         'lukas-reineke/indent-blankline.nvim',
         config = function()
@@ -106,7 +107,7 @@ return packer.startup({function(use)
     }
 
     -- colorscheme
-    use 'savq/melange'
+    use 'rktjmp/lush.nvim'
 
     if packer_bootstrap then
         require('packer').sync()

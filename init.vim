@@ -49,7 +49,9 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-colorscheme melange
+lua << EOF
+require('lush')(require('colors/melange'))
+EOF
 " }}}
 
 " source loader code for compiled plugins by packer {{{
