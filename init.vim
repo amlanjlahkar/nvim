@@ -23,6 +23,7 @@ set nohlsearch                               " for disabling highlighting on sea
 set pumheight=20                             " setting custom height for pop-up menus
 set pumblend=15                              " transparency for pop-up menus
 set completeopt=menu,menuone,noselect        " completion menu options
+set foldmethod=marker                        " use markers(curly braces) for specifying folds
 set list
 set listchars=trail:⋅
 " }}}
@@ -64,4 +65,20 @@ else
     return
 end
 EOF
+" }}}
+
+" disable unnecessary vim builtin plugins {{{
+let g:loaded_gzip = 1
+let g:loaded_tar = 1
+let g:loaded_zip = 1
+let g:loaded_tarPlugin = 1
+let g:loaded_zipPlugin = 1
+let g:loaded_2html_plugin = 1
+let g:loaded_matchit = 1
+let g:loaded_matchparen = 1
+let g:loaded_spec = 1
+
+" replacing vim's default filetype detection file(filetype.vim) with
+" filetype.nvim plugin(line 16: lua/packer/plugins.lua)
+let g:did_load_filetypes = 1
 " }}}

@@ -10,10 +10,14 @@ if not is_available then
 end
 
 return packer.startup({function(use)
+    -- imp
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
+    use 'nathom/filetype.nvim'
+    use { 'nvim-lua/plenary.nvim', module_pattern = "plenary.*" }
+    use { 'kyazdani42/nvim-web-devicons', module = "nvim-web-devicons" }
 
-    -- info bars
+    -- buffer indicator
     use {
         'akinsho/bufferline.nvim',
         config = function()
@@ -25,7 +29,6 @@ return packer.startup({function(use)
     use { 'tpope/vim-fugitive', opt = true, cmd = {'Git'} }
     use {
         'lewis6991/gitsigns.nvim',
-        requires = 'nvim-lua/plenary.nvim',
         config = function()
             require('config/plugin/gitsigns')
         end
@@ -34,7 +37,9 @@ return packer.startup({function(use)
     -- fuzzy finding
     use {
         'nvim-telescope/telescope.nvim',
-        requires = {{'kyazdani42/nvim-web-devicons'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}},
+        requires = {
+            { 'nvim-telescope/telescope-fzy-native.nvim' }
+        },
         config = function()
             require('config/plugin/telescope')
         end
@@ -42,20 +47,21 @@ return packer.startup({function(use)
 
     -- lsp related
     use {
-        'neovim/nvim-lspconfig',
+        'neovim/nvim-lspconfig', as = 'lsp',
         ft = { 'cpp', 'c', 'objc', 'objcpp' },
         config = function()
             require('config/plugin/lsp')
         end
     }
     use {
-        'hrsh7th/nvim-cmp',
+        'hrsh7th/nvim-cmp', as = 'cmp',
+        event = { "InsertEnter" },
         requires = {
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'L3MON4D3/LuaSnip'},
-            {'saadparwaiz1/cmp_luasnip'},
+            { 'hrsh7th/cmp-buffer', after = 'cmp'},
+            { 'hrsh7th/cmp-path' , after = 'cmp' },
+            { 'hrsh7th/cmp-nvim-lsp', after = 'cmp' },
+            { 'L3MON4D3/LuaSnip', event = 'InsertEnter' },
+            { 'saadparwaiz1/cmp_luasnip', after = 'cmp' },
         },
         config = function()
             require('config/plugin/cmp')
@@ -64,7 +70,7 @@ return packer.startup({function(use)
     use {
         'folke/trouble.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
-        ft = { 'cpp', 'c', 'objc', 'objcpp' },
+        after = 'lsp', 
         config = function()
             require('trouble').setup()
         end 
@@ -94,7 +100,6 @@ return packer.startup({function(use)
     }
     use {
         'ThePrimeagen/harpoon',
-        requires = 'nvim-lua/plenary.nvim',
         config = function()
             require('config/plugin/harpoon')
         end
