@@ -13,7 +13,6 @@ return packer.startup({function(use)
     -- imp
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
-    use 'nathom/filetype.nvim'
     use { 'nvim-lua/plenary.nvim', module_pattern = "plenary.*" }
     use { 'kyazdani42/nvim-web-devicons', module = "nvim-web-devicons" }
 

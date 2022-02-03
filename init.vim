@@ -77,8 +77,4 @@ let g:loaded_2html_plugin = 1
 let g:loaded_matchit = 1
 let g:loaded_matchparen = 1
 let g:loaded_spec = 1
-
-" replacing vim's default filetype detection file(filetype.vim) with
-" filetype.nvim plugin(line 16: lua/packer/plugins.lua)
-let g:did_load_filetypes = 1
 " }}}
