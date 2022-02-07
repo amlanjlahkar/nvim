@@ -78,7 +78,7 @@ return packer.startup({function(use)
     -- treesitter
     use {
         'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', opt = true,
-        ft = { 'bash', 'sh', 'zsh', 'cpp', 'c', 'css', 'html', 'javascript', 'lua', 'python', 'vim', "yaml" },
+        ft = { 'bash', 'sh', 'zsh', 'cpp', 'c', 'css', 'html', 'javascript', 'lua', 'python', "yaml" },
         config = function()
             require('config/plugin/treesitter')
         end
@@ -111,7 +111,7 @@ return packer.startup({function(use)
     }
 
     -- colorscheme
-    use 'rktjmp/lush.nvim'
+    use 'sainnhe/everforest'
 
     if packer_bootstrap then
         require('packer').sync()

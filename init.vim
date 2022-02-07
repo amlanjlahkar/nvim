@@ -42,7 +42,7 @@ EOF
 " }}}
 
 " colorscheme {{{
-set background=light
+set background=dark
 " enable truecolor support
 if exists('+termguicolors')
     let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -50,9 +50,14 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-lua << EOF
-require('lush')(require('colors/melange'))
-EOF
+let g:everforest_background = 'hard'
+let g:everforest_sign_column_background = 'none'
+let g:everforest_enable_italic = 1
+let g:everforest_diagnostic_text_highlight = 1
+let g:everforest_diagnostic_virtual_text = 'colored'
+let g:everforest_better_performance = 1
+colorscheme everforest
+
 " }}}
 
 " source loader code for compiled plugins by packer {{{
