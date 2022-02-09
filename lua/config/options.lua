@@ -29,10 +29,12 @@ opt.pumblend = 15                                   -- transparency for pop-up m
 opt.foldmethod = "marker"                           -- use markers(curly braces) for specifying folds
 opt.spelllang = "en_us"                             -- language(s) to spellcheck for
 opt.spellsuggest = { "best", 5 }                    -- method to use for spellsuggest and number of maximum suggestions to list
+opt.scrolloff = 8                                   -- minimal number of lines to keep up and below when scrolling vertically
+opt.sidescrolloff = 8                               -- scrolloffset but for horizontal scrolling
 opt.list = true
 opt.listchars = { trail = "⋅", tab = "| " }
 opt.completeopt = { "menu", "menuone", "noselect" }     -- completion menu options
---- }}}
+-- }}}
 
 -- disable unnecessary vim builtin plugins {{{
 gvar.loaded_gzip = 1
@@ -44,5 +46,4 @@ gvar.loaded_2html_plugin = 1
 gvar.loaded_matchit = 1
 gvar.loaded_matchparen = 1
 gvar.loaded_spec = 1
---- }}}
-
+-- }}}
