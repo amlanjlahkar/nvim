@@ -49,5 +49,3 @@ for name, opts in pairs(servers) do
         }, opts))
     end
 end
-
-
