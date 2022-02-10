@@ -77,6 +77,8 @@ cmp.setup({
         ["<C-l>"] = cmp.mapping(function(fallback)
             if ls.choice_active() then
                 ls.change_choice()
+            else
+                fallback()
             end
         end, { "i", "s", silent = true }),
     },
