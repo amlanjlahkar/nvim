@@ -101,7 +101,7 @@ return packer.startup({function(use)
     }
 
     -- colorscheme
-    use 'sainnhe/everforest'
+    use 'rebelot/kanagawa.nvim'
 
     if PACKER_BOOTSTRAP then
         require("packer").sync()

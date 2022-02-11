@@ -1,5 +1,4 @@
 local opt = vim.opt
-local gvar = vim.g
 
 opt.background = "dark"
 vim.cmd [[
@@ -10,16 +9,19 @@ if exists('+termguicolors')
 endif
 ]]
 
--- everforest
-gvar.everforest_background = 'hard'
-gvar.everforest_sign_column_background = 'none'
-gvar.everforest_enable_italic = 1
-gvar.everforest_diagnostic_text_highlight = 1
-gvar.everforest_diagnostic_virtual_text = 'colored'
-gvar.everforest_better_performance = 1
+local is_available, _ = pcall(require, "kanagawa")
+if is_available then
+    local default_colors = require("kanagawa.colors").setup()
+    local custom_hl = {
+        VertSplit  = { fg = default_colors.bg_dark, bg = "NONE" },
+        CursorLineNr = { fg = default_colors.fg_dark },
+    }
+    require'kanagawa'.setup({ overrides = custom_hl })
+end
+
 vim.cmd [[
 try
-    colorscheme everforest
+    colorscheme kanagawa
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
 endtry
