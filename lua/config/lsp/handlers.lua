@@ -12,7 +12,7 @@ local function lsp_ui()
           style = "minimal",
           border = "rounded",
           source = "always",
-          header = "",
+          header = "Diagnostic Info",
           prefix = "",
         },
     })
