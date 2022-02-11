@@ -101,7 +101,7 @@ return packer.startup({function(use)
     }
 
     -- colorscheme
-    use 'rebelot/kanagawa.nvim'
+    use 'bluz71/vim-moonfly-colors'
 
     if PACKER_BOOTSTRAP then
         require("packer").sync()

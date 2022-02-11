@@ -9,20 +9,22 @@ if exists('+termguicolors')
 endif
 ]]
 
-local is_available, _ = pcall(require, "kanagawa")
-if is_available then
-    local default_colors = require("kanagawa.colors").setup()
-    local custom_hl = {
-        VertSplit  = { fg = default_colors.bg_dark, bg = "NONE" },
-        CursorLineNr = { fg = default_colors.fg_dark },
-    }
-    require'kanagawa'.setup({ overrides = custom_hl })
-end
-
 vim.cmd [[
 try
-    colorscheme kanagawa
+    colorscheme moonfly
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
 endtry
 ]]
+
+-- set custom highlighting
+vim.cmd [[
+    if has_colorscheme#colorscheme('vim-moonfly-colors')
+        highlight StatusLine    guibg='#191919'
+        highlight StatusLineNC  guibg='#101010'
+        highlight CursorLine    guibg='#191919'
+        highlight CursorLineNr  guifg='#c6c6c6' guibg='NONE' gui=bold
+        highlight VertSplit     guifg='#1e1e1e' guibg='NONE'
+    endif
+]]
+
