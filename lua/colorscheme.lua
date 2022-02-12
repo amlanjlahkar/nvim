@@ -10,16 +10,12 @@ endif
 ]]
 
 vim.cmd [[
-try
-    colorscheme moonfly
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme default
-endtry
-]]
-
--- set custom highlighting
-vim.cmd [[
-    if has_colorscheme#colorscheme('vim-moonfly-colors')
+    try
+        colorscheme moonfly
+    catch /^Vim\%((\a\+)\)\=:E185/
+        colorscheme default
+    endtry
+    if (has_colorscheme#SetTo() ==# 'moonfly')
         highlight StatusLine    guibg='#191919'
         highlight StatusLineNC  guibg='#101010'
         highlight CursorLine    guibg='#191919'

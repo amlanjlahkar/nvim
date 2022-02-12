@@ -1,4 +1,7 @@
-function! has_colorscheme#colorscheme(name) abort
-    let plugin_dir = 'pack/packer/start/' .a:name
-    return !empty(globpath(&rtp, plugin_dir))
+function! has_colorscheme#SetTo() abort
+    try
+        return g:colors_name
+    catch /^Vim\%((\a\+)\)\=:E121/
+        return 0
+    endtry
 endfunction
