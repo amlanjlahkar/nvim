@@ -15,7 +15,7 @@ map("n", "<leader>db", "<cmd>%bd|e#|bd#|normal `<CR>", opts)
 
 -- terminal related {{{
 vim.cmd "autocmd termopen * startinsert"
-map("n", "<leader>tn", "<cmd>new term://zsh<CR>", opts)
+map("n", "<leader><leader>t", "<cmd>new term://zsh<CR>", opts)
 -- }}}
 
 -- movements {{{
