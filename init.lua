@@ -10,9 +10,9 @@ if is_available then
     require("impatient") -- must be loaded before any lua modules
 end
 require('packer/plugins')
-local compiled_obj = vim.fn.stdpath('config') .. '/lua/packer/packer_compiled.lua'
-if vim.fn.exists(vim.fn.glob(compiled_obj)) > 0 then
+
+local fn = vim.fn
+local compiled_obj = fn.stdpath('config') .. '/lua/packer/packer_compiled.lua'
+if fn.empty(fn.glob(compiled_obj)) ~= 1 then
     require('packer/packer_compiled')
-else
-    require("packer").compile()
 end
