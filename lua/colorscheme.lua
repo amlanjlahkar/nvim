@@ -19,7 +19,7 @@ vim.cmd [[
         highlight StatusLine    guibg='#191919'
         highlight StatusLineNC  guibg='#101010'
         highlight CursorLine    guibg='#191919'
-        highlight CursorLineNr  guifg='#c6c6c6' guibg='NONE' gui=bold
+        highlight CursorLineNr  guifg='#c6c6c6' guibg='NONE' gui=NONE
         highlight VertSplit     guifg='#1e1e1e' guibg='NONE'
     endif
 ]]

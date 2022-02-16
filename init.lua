@@ -11,7 +11,7 @@ if is_available then
 end
 require('packer/plugins')
 local compiled_obj = vim.fn.stdpath('config') .. '/lua/packer/packer_compiled.lua'
-if vim.fn.exists(vim.fn.glob(compiled_obj)) then
+if vim.fn.exists(vim.fn.glob(compiled_obj)) > 0 then
     require('packer/packer_compiled')
 else
     require("packer").compile()

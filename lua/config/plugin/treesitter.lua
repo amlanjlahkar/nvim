@@ -23,4 +23,4 @@ TS_configs.setup {
 }
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.bash.used_by = { "sh", "zsh" }
+parser_config.bash.filetype_to_parsename = { "sh", "zsh" }

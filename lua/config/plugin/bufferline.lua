@@ -5,8 +5,7 @@ end
 
 bufferline.setup {
     options = {
-        indicator_icon = ' ',
-        modified_icon = '●',
+        modified_icon = ' ',
         offsets = {{filetype = "netrw", text = "Explorer", text_align = "center"}},
         show_tab_indicators = true,
         enforce_regular_tabs = true,
@@ -52,7 +51,10 @@ bufferline.setup {
         separator_visible = {
             guifg = {attribute = "fg", highlight = "Normal"},
             guibg = {attribute = "bg", highlight = "StatusLineNC"},
-        }
+        },
+        indicator_selected = {
+            guifg = "#80a0ff",
+        },
     }
 }
 

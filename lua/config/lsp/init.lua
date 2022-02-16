@@ -4,7 +4,7 @@ if not lspc_available then
 end
 
 local on_attach = function(client)
-    require('config/lsp/handlers').on_attach()
+    require('config/lsp/settings').on_attach()
     -- highlight symbol under cursor
     if client.resolved_capabilities.document_highlight then
         vim.api.nvim_exec(

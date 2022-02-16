@@ -2,9 +2,16 @@ local is_available, telescope = pcall(require, "telescope")
 if not is_available then
     return
 end
+local builtin = require("telescope.builtin")
+local utils = require("telescope.utils")
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
 
+telescope.load_extension('fzy_native')
 telescope.setup {
     defaults = {
+        prompt_prefix = ' 🔍 ',
+        selection_caret = ' > ',
         vimgrep_arguments = {
             "rg",
             "--color=never",
@@ -15,6 +22,13 @@ telescope.setup {
             "--trim"
         },
     },
+    pickers = {
+        find_files = {
+            hidden = false,
+            previewer = false,
+            layout_strategy = "center",
+        },
+    },
     extensions = {
         fzy_native = {
             override_generic_sorter = false,
@@ -23,32 +37,16 @@ telescope.setup {
     }
 }
 
--- keymaps
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
-map('n', '<C-f>', '<cmd>lua require("telescope.builtin").find_files()<cr>', opts)
-map('n', '<leader>tg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
-map('n', '<leader>n', '<cmd>lua require("config/plugin/telescope").nvim_files()<cr>', opts)
-
--- extensions
-telescope.load_extension('fzy_native')
-local is_available, harpoon = pcall(require, "harpoon")
-if is_available then
-    telescope.load_extension('harpoon')
-    map('n', '<leader>tm', '<cmd>Telescope harpoon marks<cr>', opts)
-else
-    return
-end
-
--- custom functions
 local M = {}
-M.nvim_files = function()
-    require("telescope.builtin").find_files({
-        prompt_title = "Nvim >",
-        cwd = vim.fn.stdpath("config"),
-        hidden = false,
+M.get_files = function()
+    builtin.find_files({
+        cwd = utils.buffer_dir(),
     })
 end
+
+-- keymaps
+map('n', '<leader>tg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
+map('n', '<leader>tn', '<cmd>lua require("telescope.builtin").find_files({cwd = "~/.config/nvim",})<cr>', opts)
+map('n', '<C-f>',      '<cmd>lua require("config/plugin/telescope").get_files()<cr>', opts)
 
 return M

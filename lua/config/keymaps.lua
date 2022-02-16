@@ -37,4 +37,6 @@ map("n", "<leader><Up>", "<cmd>resize -7<CR>", opts)
 
 map("n", "<F11>", "<cmd>set spell!<CR>", opts)
 map("i", "<F11>", "<C-o>:set spell!<CR>", opts)
+
+map("n", "<leader><leader>s", "<cmd>:write | source %<CR>", opts)
 -- }}}
