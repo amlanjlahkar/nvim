@@ -6,8 +6,8 @@ local opts = { noremap = true, silent = true }
 gvar.mapleader = ' '
 
 -- handling buffers {{{
-map("n", "<leader>bn", "<cmd>bn<CR>", opts)
-map("n", "<leader>bp", "<cmd>bp<CR>", opts)
+map("n", "<leader>.", "<cmd>bn<CR>", opts)
+map("n", "<leader>,", "<cmd>bp<CR>", opts)
 map("n", "<leader>bd", "<cmd>bd<CR>", opts)
 map("n", "<leader>bu", "<cmd>bunload<CR>", opts)
 map("n", "<leader>db", "<cmd>%bd|e#|bd#|normal `<CR>", opts)
