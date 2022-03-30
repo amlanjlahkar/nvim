@@ -34,6 +34,14 @@ opt.sidescrolloff = 8                               -- scrolloffset but for hori
 opt.list = true
 opt.listchars = { trail = "⋅", tab = "| " }
 opt.completeopt = { "menu", "menuone", "noselect" }     -- completion menu options
+
+-- highlight on yank
+vim.cmd [[
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=90})
+augroup END
+]]
 -- }}}
 
 -- disable unnecessary vim builtin plugins {{{
