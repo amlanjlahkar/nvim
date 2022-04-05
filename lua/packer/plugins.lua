@@ -103,8 +103,16 @@ return require("packer").startup({
             end
         }
 
+        use {
+            "folke/zen-mode.nvim",
+            config = function()
+                require("zen-mode").setup()
+            end
+        }
+
         -- colorscheme
         use 'bluz71/vim-moonfly-colors'
+        use 'tobi-wan-kenobi/zengarden'
 
         if BOOTSTRAP_PACKER then
             require("packer").sync()

@@ -31,6 +31,7 @@ opt.spelllang = "en_us"                             -- language(s) to spellcheck
 opt.spellsuggest = { "best", 5 }                    -- method to use for spellsuggest and number of maximum suggestions to list
 opt.scrolloff = 8                                   -- minimal number of lines to keep up and below when scrolling vertically
 opt.sidescrolloff = 8                               -- scrolloffset but for horizontal scrolling
+opt.autowrite = true
 opt.list = true
 opt.listchars = { trail = "⋅", tab = "| " }
 opt.completeopt = { "menu", "menuone", "noselect" }     -- completion menu options

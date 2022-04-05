@@ -16,6 +16,7 @@ map("n", "<leader>db", "<cmd>%bd|e#|bd#|normal `<CR>", opts)
 -- terminal related {{{
 vim.cmd "autocmd termopen * startinsert"
 map("n", "<leader><leader>t", "<cmd>new term://bash<CR>", opts)
+map("n", "<leader>c", "<cmd>make %< <Bar> terminal ./%< <CR>", opts)
 -- }}}
 
 -- movements {{{
@@ -25,6 +26,8 @@ map("v", "J", "<cmd>m '>+1<CR>gv=gv", opts)
 map("v", "K", "<cmd>m '<-2<CR>gv=gv", opts)
 map("n", "n", "nzzzv", opts)
 map("n", "N", "Nzzzv", opts)
+map("n", "<C-j>", "<cmd>cnext<CR>", opts)
+map("n", "<C-k>", "<cmd>cprev<CR>", opts)
 -- }}}
 
 -- misc {{{

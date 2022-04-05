@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-opt.background = "dark"
+opt.background = "light"
 vim.cmd [[
 if exists('+termguicolors')
     let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -11,7 +11,7 @@ endif
 
 vim.cmd [[
     try
-        colorscheme moonfly
+        colorscheme zengarden
     catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme default
     endtry

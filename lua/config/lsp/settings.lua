@@ -3,7 +3,7 @@ local M = {}
 local function lsp_ui()
     vim.diagnostic.config({
         virtual_text = false,
-        signs = true,
+        signs = false,
         update_in_insert = true,
         underline = false,
         severity_sort = false,
