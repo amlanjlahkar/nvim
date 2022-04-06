@@ -17,7 +17,7 @@ bufferline.setup {
             return string.format('%s. ', opts.ordinal)
         end
     },
-    --[[ highlights = {
+    highlights = {
         fill = {
             guifg = {attribute = "fg", highlight = "Normal"},
             guibg = {attribute = "bg", highlight = "StatusLineNC"},
@@ -55,7 +55,7 @@ bufferline.setup {
         indicator_selected = {
             guifg = "#80a0ff",
         },
-    } ]]
+    }
 }
 
 -- keymap

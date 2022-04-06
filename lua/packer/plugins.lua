@@ -112,7 +112,6 @@ return require("packer").startup({
 
         -- colorscheme
         use 'bluz71/vim-moonfly-colors'
-        use 'tobi-wan-kenobi/zengarden'
 
         if BOOTSTRAP_PACKER then
             require("packer").sync()
