@@ -5,7 +5,7 @@ end
 
 bufferline.setup {
     options = {
-        modified_icon = ' ',
+        modified_icon = '● ',
         offsets = {{filetype = "netrw", text = "Explorer", text_align = "center"}},
         show_tab_indicators = true,
         enforce_regular_tabs = true,

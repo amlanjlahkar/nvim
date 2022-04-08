@@ -21,7 +21,5 @@ vim.cmd [[
         highlight CursorLine    guibg='#191919'
         highlight CursorLineNr  guifg='#c6c6c6' guibg='NONE' gui=NONE
         highlight VertSplit     guifg='#1e1e1e' guibg='NONE'
-    elseif (has_colorscheme#SetTo() ==# 'zengarden')
-        highlight Visual        cterm=NONE gui=NONE
     endif
 ]]

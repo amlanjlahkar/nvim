@@ -6,8 +6,8 @@ require('colorscheme')
 
 -- plugins
 local is_available, _ = pcall(require, "impatient")
-if is_available then
-    require("impatient") -- must be loaded before any lua modules
+if not is_available then
+    return
 end
 require('packer/plugins')
 

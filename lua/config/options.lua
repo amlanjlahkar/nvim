@@ -12,9 +12,9 @@ opt.wrap = false                                    -- disable line wrapping
 opt.ignorecase = true                               -- disable case-sensitive searching of patterns
 opt.autoindent = true                               -- for enabling auto indentation
 opt.smartindent = true                              -- for making indenting smart
-opt.shiftwidth = 4                                  -- decide how many spaces to insert for auto indention
+opt.shiftwidth = 2                                  -- decide how many spaces to insert for auto indention
 opt.expandtab = true                                -- treat tabs as spaces
-opt.tabstop = 4                                     -- decide how many spaces to convert into tabs
+opt.tabstop = 2                                     -- decide how many spaces to convert into tabs
 opt.number = true                                   -- for displaying hybrid line numbers
 opt.relativenumber = true
 opt.numberwidth = 4                                 -- for setting the gap/width between row numbers and window edge
@@ -35,6 +35,7 @@ opt.autowrite = true
 opt.list = true
 opt.listchars = { trail = "⋅", tab = "| " }
 opt.completeopt = { "menu", "menuone", "noselect" }     -- completion menu options
+gvar.shfmt_opt = "-ci"
 
 -- highlight on yank
 vim.cmd [[

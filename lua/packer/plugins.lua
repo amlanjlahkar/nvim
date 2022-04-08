@@ -82,6 +82,7 @@ return require("packer").startup({
         }
 
         -- misc
+        use 'sbdchd/neoformat'
         use {
             'lukas-reineke/indent-blankline.nvim',
             config = use_config("indentline")
