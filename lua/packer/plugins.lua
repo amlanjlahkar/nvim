@@ -49,7 +49,8 @@ return require("packer").startup({
 
         -- lsp related
         use {
-            'neovim/nvim-lspconfig',
+            'neovim/nvim-lspconfig', opt = true,
+            ft = {'c'},
             config = [[ require('config/lsp') ]]
         }
         use {
@@ -79,25 +80,27 @@ return require("packer").startup({
         -- treesitter
         use {
             'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
+            opt = true,
+            ft = {'bash', 'c', 'cpp', 'html', 'javascript', 'lua', 'python', 'vim', 'yaml'},
             config = use_config("treesitter")
         }
 
         -- misc
         use 'sbdchd/neoformat'
-        use {
+        --[[ use {
             'lukas-reineke/indent-blankline.nvim',
             config = use_config("indentline")
-        }
+        } ]]
         use {
             'windwp/nvim-autopairs',
             config = function()
                 require("nvim-autopairs").setup()
             end
         }
-        use {
+        --[[ use {
             'ThePrimeagen/harpoon',
             config = use_config("harpoon")
-        }
+        } ]]
         use {
             'numToStr/Comment.nvim',
             config = function()
