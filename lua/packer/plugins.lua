@@ -49,8 +49,7 @@ return require("packer").startup({
 
         -- lsp related
         use {
-            'neovim/nvim-lspconfig', opt = true,
-            ft = {'c'},
+            'neovim/nvim-lspconfig',
             config = [[ require('config/lsp') ]]
         }
         use {
