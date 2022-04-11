@@ -1,14 +1,14 @@
--- create cache files for better startuptime
-local is_available, _ = pcall(require, "impatient")
-if not is_available then
-    return
-end
-
 -- importing
 require('config/options')
 require('config/keymaps')
 require('modules/statusline')
 require('colorscheme')
+
+-- create cache files for better startuptime
+local is_available, _ = pcall(require, "impatient")
+if not is_available then
+    return
+end
 
 -- plugins
 require('packer/plugins')
