@@ -80,8 +80,6 @@ return require("packer").startup({
         -- treesitter
         use {
             'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
-            opt = true,
-            ft = {'bash', 'c', 'cpp', 'html', 'javascript', 'lua', 'python', 'vim', 'yaml'},
             config = use_config("treesitter")
         }
 
