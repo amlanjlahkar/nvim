@@ -32,7 +32,7 @@ bufferline.setup {
             guibg = {attribute = "bg", highlight = "Normal"}
         },
         buffer_selected = {
-            gui = "",
+            gui = "Bold",
             guifg = {attribute = "fg", highlight="Normal"},
             guibg = {attribute = "bg", highlight = "Normal"}
         },

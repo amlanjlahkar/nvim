@@ -29,6 +29,7 @@ return require("packer").startup({
         -- buffer indicator
         use {
             'akinsho/bufferline.nvim',
+            tag = "*",
             config = use_config("bufferline")
         }
 

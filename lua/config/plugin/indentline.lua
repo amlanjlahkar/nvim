@@ -27,6 +27,7 @@ g.indent_blankline_filetype_exclude = {
     'lspinfo',
     'TelescopePrompt',
     'TelescopeResults',
+    'trouble',
 }
 vim.g.indent_blankline_context_patterns = {
     "class",
