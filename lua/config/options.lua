@@ -36,6 +36,11 @@ opt.list = true
 opt.listchars = { trail = "⋅", tab = "| " }
 opt.completeopt = { "menu", "menuone", "noselect" }     -- completion menu options
 gvar.shfmt_opt = "-ci"
+-- italic font support for vim inside of tmux
+vim.cmd [[
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+]]
 
 -- highlight on yank
 vim.cmd [[
