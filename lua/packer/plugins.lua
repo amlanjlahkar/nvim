@@ -49,8 +49,8 @@ return require("packer").startup({
 
         -- lsp related
         use {
-            'neovim/nvim-lspconfig', opt = true,
-            ft = {'c', 'cpp', 'objc', 'objcpp'},
+            'neovim/nvim-lspconfig', opt = false,
+            -- ft = {'c', 'cpp', 'objc', 'objcpp'},
             config = [[ require('config/lsp') ]]
         }
         use {
@@ -85,20 +85,20 @@ return require("packer").startup({
 
         -- misc
         use 'sbdchd/neoformat'
-        --[[ use {
+        use {
             'lukas-reineke/indent-blankline.nvim',
             config = use_config("indentline")
-        } ]]
+        }
         use {
             'windwp/nvim-autopairs',
             config = function()
                 require("nvim-autopairs").setup()
             end
         }
-        --[[ use {
+        use {
             'ThePrimeagen/harpoon',
             config = use_config("harpoon")
-        } ]]
+        }
         use {
             'numToStr/Comment.nvim',
             config = function()
@@ -129,7 +129,7 @@ return require("packer").startup({
             end
         },
         profile = {
-            enable = true,
+            enable = false,
             threshold = 1
         },
         compile_path = fn.stdpath('config') .. '/lua/packer/packer_compiled.lua'
