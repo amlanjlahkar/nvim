@@ -4,7 +4,7 @@ if not is_available then
 end
 local builtin = require("telescope.builtin")
 local utils = require("telescope.utils")
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 telescope.load_extension('fzy_native')

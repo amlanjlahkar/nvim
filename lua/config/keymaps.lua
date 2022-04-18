@@ -1,5 +1,5 @@
 local gvar = vim.g
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- leader key
@@ -42,4 +42,5 @@ map("n", "<F11>", "<cmd>set spell!<CR>", opts)
 map("i", "<F11>", "<C-o>:set spell!<CR>", opts)
 
 map("n", "<leader><leader>s", "<cmd>:write | source %<CR>", opts)
+map("n", "<F2>", "<cmd>!$BROWSER %<CR>", opts)
 -- }}}

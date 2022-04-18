@@ -3,7 +3,7 @@ if not is_available then
     return
 end
 
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = false }
 
 map('n', '<leader>hm', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', opts)
