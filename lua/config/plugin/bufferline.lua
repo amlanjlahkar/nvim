@@ -13,9 +13,9 @@ bufferline.setup {
         show_close_icon = false,
         tab_size = 25,
         max_name_length = 25,
-        numbers = function(opts)
+        --[[ numbers = function(opts)
             return string.format('%s. ', opts.ordinal)
-        end
+        end ]]
     },
     highlights = {
         fill = {
@@ -27,7 +27,7 @@ bufferline.setup {
             guibg = {attribute = "bg", highlight = "StatusLine"}
         },
         buffer_visible = {
-            gui = "",
+            gui = "NONE",
             guifg = {attribute = "fg", highlight="Normal"},
             guibg = {attribute = "bg", highlight = "Normal"}
         },
@@ -59,13 +59,13 @@ bufferline.setup {
 }
 
 -- keymap
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 map('n', '<leader>f', '<cmd>BufferLinePick<cr>', opts)
-map ('n', '<leader>1', '<cmd>BufferLineGoToBuffer 1<cr>', opts)
-map ('n', '<leader>2', '<cmd>BufferLineGoToBuffer 2<cr>', opts)
-map ('n', '<leader>3', '<cmd>BufferLineGoToBuffer 3<cr>', opts)
-map ('n', '<leader>4', '<cmd>BufferLineGoToBuffer 4<cr>', opts)
-map ('n', '<leader>5', '<cmd>BufferLineGoToBuffer 5<cr>', opts)
+map('n', '<leader>1', '<cmd>BufferLineGoToBuffer 1<cr>', opts)
+map('n', '<leader>2', '<cmd>BufferLineGoToBuffer 2<cr>', opts)
+map('n', '<leader>3', '<cmd>BufferLineGoToBuffer 3<cr>', opts)
+map('n', '<leader>4', '<cmd>BufferLineGoToBuffer 4<cr>', opts)
+map('n', '<leader>5', '<cmd>BufferLineGoToBuffer 5<cr>', opts)
 
