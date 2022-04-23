@@ -19,7 +19,7 @@ opt.number = true                                   -- for displaying hybrid lin
 opt.relativenumber = true
 opt.numberwidth = 4                                 -- for setting the gap/width between row numbers and window edge
 opt.cursorline = true                               -- for highlighting the current line
-opt.laststatus = 2                                  -- for always displaying the statusbar at the bottom
+opt.laststatus = 3                                  -- for always displaying the statusbar at the bottom
 opt.showtabline = 1                                 -- for displaying of tabline at the top
 opt.showmode = false                                -- for disabling showing of different modes below the statusline(INSERT,NORMAL,V-BLOCK,REPLACE... etc.)
 opt.signcolumn = "yes"                              -- always display the sign column(gutter)
@@ -34,6 +34,15 @@ opt.sidescrolloff = 8                               -- scrolloffset but for hori
 opt.autowrite = true
 opt.list = true
 opt.listchars = { trail = "⋅", tab = "| " }
+opt.fillchars:append({
+    horiz = '━',
+    horizup = '┻',
+    horizdown = '┳',
+    vert = '┃',
+    vertleft = '┨',
+    vertright = '┣',
+    verthoriz = '╋',
+})
 opt.completeopt = { "menu", "menuone", "noselect" }     -- completion menu options
 gvar.shfmt_opt = "-ci"
 -- italic font support for vim inside of tmux
