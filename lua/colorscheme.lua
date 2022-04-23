@@ -12,10 +12,11 @@ endif
 local kanagawa = require("kanagawa")
 local default_colors = require("kanagawa.colors").setup()
 local overrides = {
-  VertSplit  = { fg = default_colors.bg_dark, bg = "NONE" },
+  VertSplit = { fg = default_colors.bg_dark, bg = "NONE" },
+  CursorLineNr = { fg = default_colors.fg, bg = "NONE", style = "NONE" },
 }
 kanagawa.setup({
-  dimInactive = true,
+  dimInactive = false,
   globalStatus = true,
   overrides = overrides,
 })

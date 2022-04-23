@@ -53,7 +53,7 @@ bufferline.setup {
             guibg = {attribute = "bg", highlight = "StatusLineNC"},
         },
         indicator_selected = {
-            guifg = "#80a0ff",
+            guifg = "#658594",
         },
     }
 }
