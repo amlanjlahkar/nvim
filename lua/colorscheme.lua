@@ -9,24 +9,25 @@ if exists('+termguicolors')
 endif
 ]]
 
-local kanagawa = require("kanagawa")
-local default_colors = require("kanagawa.colors").setup()
-local overrides = {
-  VertSplit = { fg = default_colors.bg_dark, bg = "NONE" },
-  CursorLineNr = { fg = default_colors.fg, bg = "NONE", style = "NONE" },
-}
-kanagawa.setup({
-  dimInactive = false,
-  globalStatus = true,
-  overrides = overrides,
-})
-
 vim.cmd [[
     try
-        colorscheme kanagawa
+        colorscheme moonfly
     catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme default
     endtry
+    if (has_colorscheme#SetTo() ==# 'moonfly')
+        let g:moonflyTransparent = 0
+        let g:moonflyUnderlineMatchParen = 0
+        let g:moonflyWinSeparator = 2
+        highlight StatusLine    guibg='#191919'
+        highlight StatusLineNC  guibg='#101010'
+        highlight CursorLine    guibg='#191919'
+        highlight CursorLineNr  guifg='#c6c6c6' guibg='NONE' gui=NONE
+        highlight VertSplit     guifg='#1e1e1e' guibg='NONE'
+
+        highlight LspReferenceText   gui=undercurl
+        highlight LspReferenceRead   gui=undercurl
+        highlight LspReferenceWrite  gui=undercurl
+    endif
+
 ]]
-
-

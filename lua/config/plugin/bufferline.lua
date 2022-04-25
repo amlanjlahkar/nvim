@@ -18,42 +18,8 @@ bufferline.setup {
         end ]]
     },
     highlights = {
-        fill = {
-            guifg = {attribute = "fg", highlight = "Normal"},
-            guibg = {attribute = "bg", highlight = "StatusLineNC"},
-        },
-        background = {
-            guifg = {attribute = "fg", highlight = "Normal"},
-            guibg = {attribute = "bg", highlight = "StatusLine"}
-        },
-        buffer_visible = {
-            gui = "NONE",
-            guifg = {attribute = "fg", highlight="Normal"},
-            guibg = {attribute = "bg", highlight = "Normal"}
-        },
-        buffer_selected = {
-            gui = "Bold",
-            guifg = {attribute = "fg", highlight="Normal"},
-            guibg = {attribute = "bg", highlight = "Normal"}
-        },
-        modified = {
-            guifg = {attribute = "fg", highlight="Character"},
-            guibg = {attribute = "bg", highlight = "StatusLine"}
-        },
-        separator = {
-            guifg = {attribute = "bg", highlight = "Normal"},
-            guibg = {attribute = "bg", highlight = "StatusLine"},
-        },
-        separator_selected = {
-            guifg = {attribute = "fg", highlight="Special"},
-            guibg = {attribute = "bg", highlight = "Normal"}
-        },
-        separator_visible = {
-            guifg = {attribute = "fg", highlight = "Normal"},
-            guibg = {attribute = "bg", highlight = "StatusLineNC"},
-        },
         indicator_selected = {
-            guifg = "#658594",
+            guifg = "#80a0ff",  
         },
     }
 }
