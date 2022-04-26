@@ -10,24 +10,17 @@ endif
 ]]
 
 vim.cmd [[
+    let g:moonflyWinSeparator = 2
+    let g:moonflyNormalFloat = 1
     try
         colorscheme moonfly
     catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme default
     endtry
     if (has_colorscheme#SetTo() ==# 'moonfly')
-        let g:moonflyTransparent = 0
-        let g:moonflyUnderlineMatchParen = 0
-        let g:moonflyWinSeparator = 2
-        highlight StatusLine    guibg='#191919'
-        highlight StatusLineNC  guibg='#101010'
-        highlight CursorLine    guibg='#191919'
-        highlight CursorLineNr  guifg='#c6c6c6' guibg='NONE' gui=NONE
-        highlight VertSplit     guifg='#1e1e1e' guibg='NONE'
-
+        highlight CursorLineNr       guifg='#c6c6c6' guibg='NONE' gui=NONE
         highlight LspReferenceText   gui=undercurl
         highlight LspReferenceRead   gui=undercurl
         highlight LspReferenceWrite  gui=undercurl
     endif
-
 ]]
