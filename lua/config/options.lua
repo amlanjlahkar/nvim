@@ -25,7 +25,7 @@ opt.showmode = false                                -- for disabling showing of 
 opt.signcolumn = "yes"                              -- always display the sign column(gutter)
 opt.hlsearch = false                                -- for disabling highlighting on search results
 opt.pumheight = 20                                  -- setting custom height for pop-up menus
-opt.pumblend = 10                                   -- transparency for pop-up menus
+opt.pumblend = 0                                   -- transparency for pop-up menus
 opt.foldmethod = "marker"                           -- use markers(curly braces) for specifying folds
 opt.spelllang = "en_us"                             -- language(s) to spellcheck for
 opt.spellsuggest = { "best", 5 }                    -- method to use for spellsuggest and number of maximum suggestions to list
@@ -35,6 +35,7 @@ opt.autowrite = true
 opt.list = true
 opt.listchars = { trail = "⋅", tab = "| " }
 opt.fillchars:append({
+    eob = ' ',
     horiz = '━',
     horizup = '┻',
     horizdown = '┳',

@@ -11,7 +11,14 @@ telescope.load_extension('fzy_native')
 telescope.setup {
     defaults = {
         prompt_prefix = ' 🔍 ',
-        selection_caret = ' > ',
+        multi_icon = ' + ',
+        layout_config = {
+          center = {
+            height = 0.5,
+            prompt_position = "bottom",
+            width = 0.4,
+          },
+        },
         vimgrep_arguments = {
             "rg",
             "--color=never",

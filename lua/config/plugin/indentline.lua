@@ -5,6 +5,7 @@ end
 
 local g = vim.g
 indent_blankline.setup {
+    enabled = false,
     max_indent_increase = 1,
     use_treesiter = false,
     show_current_context = true,

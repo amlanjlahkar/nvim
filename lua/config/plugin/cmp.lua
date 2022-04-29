@@ -34,13 +34,23 @@ local kind_icons = {
   TypeParameter = '  ',
 }
 
+local border = {
+    { "╭", "CmpBorder" },
+    { "─", "CmpBorder" },
+    { "╮", "CmpBorder" },
+    { "│", "CmpBorder" },
+    { "╯", "CmpBorder" },
+    { "─", "CmpBorder" },
+    { "╰", "CmpBorder" },
+    { "│", "CmpBorder" },
+}
+
 cmp.setup({
     snippet = {
         expand = function(args)
             ls.lsp_expand(args.body)
         end,
     },
-
     mapping = {
         -- general cmp mappings
         ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -82,14 +92,12 @@ cmp.setup({
             end
         end, { "i", "s", silent = true }),
     },
-
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip'  },
         { name = 'buffer'   },
         { name = 'path'     },
     },
-
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
@@ -103,7 +111,14 @@ cmp.setup({
             return vim_item
         end
     },
-
+    window = {
+      documentation = {
+        border = nil,
+      },
+    },
+    experimental = {
+      ghost_text = true,
+    },
     get_bufnrs = function()
         local bufs = {}
         for _, win in ipairs(vim.api.nvim_list_wins()) do
