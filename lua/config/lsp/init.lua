@@ -33,11 +33,10 @@ local servers = {
         "--all-scopes-completion",
         "--completion-style=detailed",
         "--compile-commands-dir=" } },
-
-    -- sumneko_lua = require('config/lsp/lsconf/lua').setup
     html = {},
     cssls = {},
     eslint = {},
+    sumneko_lua = require('config/lsp/lsconf/lua').setup
 }
 
 for name, opts in pairs(servers) do
