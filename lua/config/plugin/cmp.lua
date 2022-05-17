@@ -45,6 +45,10 @@ local border = {
     { "│", "CmpBorder" },
 }
 
+local winhighlight = {
+  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+}
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -115,6 +119,8 @@ cmp.setup({
       documentation = {
         border = nil,
       },
+      completion = cmp.config.window.bordered(winhighlight),
+      documentation = cmp.config.window.bordered(winhighlight),
     },
     experimental = {
       ghost_text = true,

@@ -9,6 +9,7 @@ bufferline.setup {
         offsets = {{filetype = "netrw", text = "Explorer", text_align = "center"}},
         show_tab_indicators = true,
         enforce_regular_tabs = true,
+        show_buffer_icons = false,
         show_buffer_close_icons = false,
         show_close_icon = false,
         tab_size = 25,

@@ -12,6 +12,7 @@ endif
 vim.cmd [[
     let g:moonflyWinSeparator = 2
     let g:moonflyNormalFloat = 1
+    let g:moonflyTransparent = 1
     try
         colorscheme moonfly
     catch /^Vim\%((\a\+)\)\=:E185/
