@@ -52,7 +52,8 @@ return require("packer").startup({
             'neovim/nvim-lspconfig', opt = false,
             config = [[ require('config/lsp') ]]
         }
-        use {
+
+        --[[ use {
             'hrsh7th/nvim-cmp',
             event = { "InsertEnter" },
             wants = { "LuaSnip" },
@@ -64,11 +65,13 @@ return require("packer").startup({
             },
             config = use_config("cmp")
         }
+
         use {
             'L3MON4D3/LuaSnip',
             after = "nvim-cmp",
             config = use_config("luasnip")
-        }
+        } ]]
+
         use {
             'folke/trouble.nvim',
             requires = 'kyazdani42/nvim-web-devicons',
@@ -88,16 +91,19 @@ return require("packer").startup({
             'lukas-reineke/indent-blankline.nvim',
             config = use_config("indentline")
         }
+
         use {
             'windwp/nvim-autopairs',
             config = function()
                 require("nvim-autopairs").setup()
             end
         }
+
         use {
             'ThePrimeagen/harpoon',
             config = use_config("harpoon")
         }
+
         use {
             'numToStr/Comment.nvim',
             config = function()
@@ -105,15 +111,13 @@ return require("packer").startup({
             end
         }
 
+        -- colorscheme
         use {
-            "folke/zen-mode.nvim",
-            config = function()
-                require("zen-mode").setup()
-            end
+            "mcchrish/zenbones.nvim",
+            requires = "rktjmp/lush.nvim"
         }
 
-        -- colorscheme
-        use 'bluz71/vim-moonfly-colors'
+        use "github/copilot.vim"
 
         if BOOTSTRAP_PACKER then
             require("packer").sync()
