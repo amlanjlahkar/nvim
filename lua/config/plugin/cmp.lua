@@ -119,8 +119,8 @@ cmp.setup({
       documentation = {
         border = nil,
       },
-      completion = cmp.config.window.bordered(winhighlight),
-      documentation = cmp.config.window.bordered(winhighlight),
+      --[[ completion = cmp.config.window.bordered(winhighlight),
+      documentation = cmp.config.window.bordered(winhighlight), ]]
     },
     experimental = {
       ghost_text = true,
