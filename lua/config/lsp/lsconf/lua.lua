@@ -1,5 +1,5 @@
 local M = {}
-local ls_root_path = "/home/amlan/tools/lua_lsp"
+local ls_root_path = "/home/amlan/tools/language_specific/Lua/lua_lsp"
 M.setup = {
   cmd = { ls_root_path .. "/bin/lua-language-server", "-E", ls_root_path .. "/main.lua" },
   settings = {
