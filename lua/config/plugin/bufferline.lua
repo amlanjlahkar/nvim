@@ -19,14 +19,8 @@ bufferline.setup {
         end ]]
     },
     highlights = {
-        fill = {
-            guibg = "#303030",
-        },
-        separator = {
-            guifg = "#303030",
-        },
         indicator_selected = {
-            guifg = "#80a0ff",
+            guifg = "#b77e64",
         },
     }
 }

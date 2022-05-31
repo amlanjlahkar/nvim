@@ -13,8 +13,11 @@ vim.cmd [[
     let g:moonflyWinSeparator = 2
     let g:moonflyNormalFloat = 1
     let g:moonflyTransparent = 1
+    let g:zenbones_solid_linnr = v:true
+    let g:zenbones_transparent_background = v:false
+    let g:zenbones_solid_float_border = v:true
     try
-        colorscheme moonfly
+        colorscheme zenbones
     catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme default
     endtry
