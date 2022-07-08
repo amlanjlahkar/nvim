@@ -46,6 +46,9 @@ opt.fillchars:append({
 })
 opt.completeopt = { "menu", "menuone", "noselect" }     -- completion menu options
 gvar.shfmt_opt = "-ci"
+gvar.loaded_node_provider = 0
+gvar.loaded_perl_provider = 0
+gvar.loaded_python3_provider = 0
 -- italic font support for vim inside of tmux
 vim.cmd [[
 let &t_ZH="\e[3m"

@@ -18,11 +18,11 @@ bufferline.setup {
             return string.format('%s. ', opts.ordinal)
         end ]]
     },
-    highlights = {
+    --[[ highlights = {
         indicator_selected = {
             guifg = "#b77e64",
         },
-    }
+    } ]]
 }
 
 -- keymap

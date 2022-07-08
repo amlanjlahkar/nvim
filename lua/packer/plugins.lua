@@ -53,7 +53,7 @@ return require("packer").startup({
             config = [[ require('config/lsp') ]]
         }
 
-        --[[ use {
+        use {
             'hrsh7th/nvim-cmp',
             event = { "InsertEnter" },
             wants = { "LuaSnip" },
@@ -70,7 +70,7 @@ return require("packer").startup({
             'L3MON4D3/LuaSnip',
             after = "nvim-cmp",
             config = use_config("luasnip")
-        } ]]
+        }
 
         use {
             'folke/trouble.nvim',
@@ -116,8 +116,48 @@ return require("packer").startup({
             "mcchrish/zenbones.nvim",
             requires = "rktjmp/lush.nvim"
         }
+        use {
+          "rose-pine/neovim",
+          config = function()
+            require('rose-pine').setup({
+              dark_variant = 'main',
+              bold_vert_split = false,
+              dim_nc_background = false,
+              disable_background = false,
+              disable_float_background = true,
+              disable_italics = false,
 
-        use "github/copilot.vim"
+              groups = {
+                background = 'base',
+                panel = 'surface',
+                border = 'highlight_med',
+                comment = 'muted',
+                link = 'iris',
+                punctuation = 'subtle',
+
+                error = 'love',
+                hint = 'iris',
+                info = 'foam',
+                warn = 'gold',
+
+                headings = {
+                  h1 = 'iris',
+                  h2 = 'foam',
+                  h3 = 'rose',
+                  h4 = 'gold',
+                  h5 = 'pine',
+                  h6 = 'foam',
+                }
+              },
+
+              highlight_groups = {
+                ColorColumn = { bg = 'rose' }
+              }
+            })
+          end
+        }
+
+        -- use "github/copilot.vim"
 
         if BOOTSTRAP_PACKER then
             require("packer").sync()

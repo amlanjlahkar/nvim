@@ -9,6 +9,46 @@ if exists('+termguicolors')
 endif
 ]]
 
+-- using stock rose-pine settings
+local is_available, _ = pcall(require, "rose-pine")
+if is_available then
+  require('rose-pine').setup({
+    dark_variant = 'main',
+    bold_vert_split = false,
+    dim_nc_background = false,
+    disable_background = false,
+    disable_float_background = true,
+    disable_italics = false,
+
+    groups = {
+      background = 'base',
+      panel = 'surface',
+      border = 'highlight_med',
+      comment = 'muted',
+      link = 'iris',
+      punctuation = 'subtle',
+
+      error = 'love',
+      hint = 'iris',
+      info = 'foam',
+      warn = 'gold',
+
+      headings = {
+        h1 = 'iris',
+        h2 = 'foam',
+        h3 = 'rose',
+        h4 = 'gold',
+        h5 = 'pine',
+        h6 = 'foam',
+      }
+    },
+
+    highlight_groups = {
+      ColorColumn = { bg = 'rose' }
+    }
+  })
+end
+
 vim.cmd [[
     let g:moonflyWinSeparator = 2
     let g:moonflyNormalFloat = 1
@@ -17,7 +57,7 @@ vim.cmd [[
     let g:zenbones_transparent_background = v:false
     let g:zenbones_solid_float_border = v:true
     try
-        colorscheme zenbones
+        colorscheme rose-pine
     catch /^Vim\%((\a\+)\)\=:E185/
         colorscheme default
     endtry
