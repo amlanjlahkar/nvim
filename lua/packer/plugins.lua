@@ -23,6 +23,8 @@ return require("packer").startup({
         -- imp
         use 'wbthomason/packer.nvim'
         use 'lewis6991/impatient.nvim'
+        use 'nathom/filetype.nvim'
+        -- use 'github/copilot.vim'
         use { 'nvim-lua/plenary.nvim', module_pattern = "plenary.*" }
         use { 'kyazdani42/nvim-web-devicons', module = "nvim-web-devicons" }
 
@@ -87,9 +89,17 @@ return require("packer").startup({
 
         -- misc
         use 'sbdchd/neoformat'
+        use 'Pocco81/TrueZen.nvim'
         use {
             'lukas-reineke/indent-blankline.nvim',
             config = use_config("indentline")
+        }
+
+        use {
+            'kylechui/nvim-surround',
+            config = function()
+                require("nvim-surround").setup()
+            end
         }
 
         use {
@@ -112,52 +122,7 @@ return require("packer").startup({
         }
 
         -- colorscheme
-        use {
-            "mcchrish/zenbones.nvim",
-            requires = "rktjmp/lush.nvim"
-        }
-        use {
-          "rose-pine/neovim",
-          config = function()
-            require('rose-pine').setup({
-              dark_variant = 'main',
-              bold_vert_split = false,
-              dim_nc_background = false,
-              disable_background = false,
-              disable_float_background = true,
-              disable_italics = false,
-
-              groups = {
-                background = 'base',
-                panel = 'surface',
-                border = 'highlight_med',
-                comment = 'muted',
-                link = 'iris',
-                punctuation = 'subtle',
-
-                error = 'love',
-                hint = 'iris',
-                info = 'foam',
-                warn = 'gold',
-
-                headings = {
-                  h1 = 'iris',
-                  h2 = 'foam',
-                  h3 = 'rose',
-                  h4 = 'gold',
-                  h5 = 'pine',
-                  h6 = 'foam',
-                }
-              },
-
-              highlight_groups = {
-                ColorColumn = { bg = 'rose' }
-              }
-            })
-          end
-        }
-
-        -- use "github/copilot.vim"
+        use 'rose-pine/neovim'
 
         if BOOTSTRAP_PACKER then
             require("packer").sync()
