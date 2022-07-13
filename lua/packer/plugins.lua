@@ -36,7 +36,7 @@ return require("packer").startup({
         }
 
         -- git integration
-        use { 'tpope/vim-fugitive', opt = true, cmd = {'Git'} }
+        use { 'tpope/vim-fugitive', opt = true, cmd = "Git" }
         use {
             'lewis6991/gitsigns.nvim',
             config = use_config("gitsigns")
@@ -45,14 +45,17 @@ return require("packer").startup({
         -- fuzzy finding
         use {
             'nvim-telescope/telescope.nvim',
+            keys = { "<C-f>", "<leader>tn", "<leader>tg" },
             requires = 'nvim-telescope/telescope-fzy-native.nvim',
             config = use_config("telescope")
         }
 
         -- lsp related
         use {
-            'neovim/nvim-lspconfig', opt = false,
-            config = [[ require('config/lsp') ]]
+            'neovim/nvim-lspconfig', opt = true,
+            ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript" },
+            event = "BufReadPre",
+            config = [[ require("config/lsp") ]]
         }
 
         use {
@@ -70,33 +73,32 @@ return require("packer").startup({
 
         use {
             'L3MON4D3/LuaSnip',
-            after = "nvim-cmp",
+            after = 'nvim-cmp',
             config = use_config("luasnip")
         }
 
         use {
             'folke/trouble.nvim',
             requires = 'kyazdani42/nvim-web-devicons',
-            after = "nvim-lspconfig",
+            after = 'nvim-lspconfig',
             config = use_config("trouble")
         }
 
         -- treesitter
         use {
-            'nvim-treesitter/nvim-treesitter', run = ':TSUpdate',
+            'nvim-treesitter/nvim-treesitter',
+            run = ":TSUpdate",
             config = use_config("treesitter")
         }
 
         -- misc
         use 'sbdchd/neoformat'
-        use 'Pocco81/TrueZen.nvim'
-        use {
-            'lukas-reineke/indent-blankline.nvim',
-            config = use_config("indentline")
-        }
+        use { 'Pocco81/TrueZen.nvim', cmd = "TZMinimalist" }
+        use { 'lukas-reineke/indent-blankline.nvim', config = use_config("indentline") }
 
         use {
             'kylechui/nvim-surround',
+            event = "InsertEnter",
             config = function()
                 require("nvim-surround").setup()
             end
