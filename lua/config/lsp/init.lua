@@ -26,6 +26,15 @@ if lscmp_available then
 end
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+local function verify_luaLs()
+  if (vim.fn.executable("lua-language-server") == 1) then
+    SETUP_LUALS = require('config/lsp/lsconf/lua').setup;
+  else
+    SETUP_LUALS = print("executable for lua-language-server missing!");
+  end
+  return SETUP_LUALS;
+end
+
 local servers = {
     clangd = { cmd = { "clangd",
         "--background-index",
@@ -36,7 +45,7 @@ local servers = {
     html = {},
     cssls = {},
     eslint = {},
-    sumneko_lua = require('config/lsp/lsconf/lua').setup
+    sumneko_lua = verify_luaLs(),
 }
 
 for name, opts in pairs(servers) do
