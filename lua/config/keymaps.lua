@@ -14,7 +14,7 @@ map("n", "<leader>db", "<cmd>%bd|e#|bd#|normal `<CR>", opts)
 --- }}}
 
 -- terminal related {{{
-vim.cmd "autocmd termopen * startinsert"
+vim.cmd "autocmd TermOpen * setlocal nonumber norelativenumber | startinsert"
 map("n", "<leader><leader>t", "<cmd>new term://bash<CR>", opts)
 map("n", "<leader>c", "<cmd>make %< <Bar> terminal ./%< <CR>", opts)
 -- }}}
