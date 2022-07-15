@@ -3,7 +3,7 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- leader key
-gvar.mapleader = ' '
+gvar.mapleader = " "
 
 -- handling buffers {{{
 map("n", "<leader>.", "<cmd>bn<CR>", opts)
