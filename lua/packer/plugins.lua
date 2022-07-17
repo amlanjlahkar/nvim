@@ -94,7 +94,6 @@ return require("packer").startup {
     -- misc
     use "sbdchd/neoformat"
     use { "Pocco81/TrueZen.nvim", cmd = "TZMinimalist" }
-    use { "lukas-reineke/indent-blankline.nvim", config = use_config "indentline" }
 
     use {
       "kylechui/nvim-surround",
