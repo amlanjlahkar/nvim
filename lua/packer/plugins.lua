@@ -30,9 +30,8 @@ return require("packer").startup {
 
     -- buffer indicator
     use {
-      "akinsho/bufferline.nvim",
-      tag = "*",
-      config = use_config "bufferline",
+        "jose-elias-alvarez/buftabline.nvim",
+        config = use_config "buftabline"
     }
 
     -- git integration
