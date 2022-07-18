@@ -1,11 +1,10 @@
-local lspc_available, nvim_lsp = pcall(require, "lspconfig")
-if not lspc_available then
+local lspconfig = require("lspconfig")
+local is_available, lsp_installer = pcall(require, "nvim-lsp-installer")
+if not is_available then
   return
 end
 
 local on_attach = function(client)
-  require("config/lsp/settings").on_attach()
-  -- highlight symbol under cursor
   if client.server_capabilities.document_highlight then
     vim.api.nvim_exec(
       [[
@@ -27,41 +26,19 @@ if lscmp_available then
 end
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local function verify_luaLs()
-  if vim.fn.executable "lua-language-server" == 1 then
-    SETUP_LUALS = require("config/lsp/lsconf/lua").setup
-  else
-    SETUP_LUALS = print "executable for lua-language-server missing!"
-  end
-  return SETUP_LUALS
-end
+local servers = { "clangd", "html", "cssls", "tsserver", "sumneko_lua" }
+lsp_installer.setup({
+  ensure_installed = servers,
+})
 
-local servers = {
-  clangd = {
-    cmd = {
-      "clangd",
-      "--background-index",
-      "--suggest-missing-includes",
-      "--all-scopes-completion",
-      "--completion-style=detailed",
-      "--compile-commands-dir=",
-    },
-  },
-  html = {},
-  cssls = {},
-  eslint = {},
-  sumneko_lua = verify_luaLs(),
-}
-
-for name, opts in pairs(servers) do
-  if type(opts) == "function" then
-    opts()
-  else
-    local client = nvim_lsp[name]
-    client.setup(vim.tbl_extend("force", {
-      flags = { debounce_text_changes = 150 },
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }, opts))
+for _, server in pairs(servers) do
+  local opts = {
+    on_attach = on_attach and require("config/lsp/settings").on_attach(),
+    capabilities = capabilities,
+  }
+  local has_custom_opts, server_custom_opts = pcall(require, "config/lsp/lsconf" .. server)
+  if has_custom_opts then
+    opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
   end
+  lspconfig[server].setup(opts)
 end
