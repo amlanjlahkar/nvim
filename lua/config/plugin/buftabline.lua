@@ -10,7 +10,7 @@ btline.setup({
   start_hidden = false,
   auto_hide = false,
   disable_commands = false,
-  go_to_maps = false,
+  go_to_maps = true,
   flags = {
       modified = " [+]",
       not_modifiable = " [-]",

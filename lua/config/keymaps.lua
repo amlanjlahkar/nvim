@@ -43,4 +43,5 @@ map("i", "<F11>", "<C-o>:set spell!<CR>", opts)
 
 map("n", "<leader><leader>s", "<cmd>:write | source %<CR>", opts)
 map("n", "<F2>", "<cmd>!$BROWSER %<CR>", opts)
+map("n", "X", "r<space>", opts )
 -- }}}

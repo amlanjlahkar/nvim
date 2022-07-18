@@ -46,6 +46,7 @@ opt.fillchars:append {
 }
 opt.completeopt = { "menu", "menuone", "noselect" } -- completion menu options
 gvar.shfmt_opt = "-ci"
+gvar.loaded_ruby_provider = 0
 gvar.loaded_node_provider = 0
 gvar.loaded_perl_provider = 0
 gvar.loaded_python3_provider = 0
