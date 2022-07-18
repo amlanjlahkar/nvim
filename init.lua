@@ -2,6 +2,7 @@
 require "config/options"
 require "config/keymaps"
 require "modules/statusline"
+require "autocmds"
 require "colorscheme"
 
 -- create cache files for better startuptime
