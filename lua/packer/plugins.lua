@@ -20,36 +20,14 @@ end
 
 return require("packer").startup {
   function(use)
-    -- imp
+    --- Core {{{1
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
     use "nathom/filetype.nvim"
     -- use 'github/copilot.vim'
     use { "nvim-lua/plenary.nvim", module_pattern = "plenary.*" }
-    use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
 
-    -- buffer indicator
-    use {
-        "jose-elias-alvarez/buftabline.nvim",
-        config = use_config "buftabline"
-    }
-
-    -- git integration
-    use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
-    use {
-      "lewis6991/gitsigns.nvim",
-      config = use_config "gitsigns",
-    }
-
-    -- fuzzy finding
-    use {
-      "nvim-telescope/telescope.nvim",
-      keys = { "<C-f>", "<leader>tn", "<leader>tg" },
-      requires = "nvim-telescope/telescope-fzy-native.nvim",
-      config = use_config "telescope",
-    }
-
-    -- lsp related
+    --- LSP and Completion {{{2
     use {
       "neovim/nvim-lspconfig",
       opt = true,
@@ -83,17 +61,31 @@ return require("packer").startup {
       after = "nvim-lspconfig",
       config = use_config "trouble",
     }
+    --- }}}
 
-    -- treesitter
+    --- Treesitter {{{2
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = use_config "treesitter",
     }
+    --- 2}}}
+    --- }}}
 
-    -- misc
+    --- Intuitve Development {{{
     use "sbdchd/neoformat"
-    use { "Pocco81/TrueZen.nvim", cmd = "TZMinimalist" }
+    use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
+    use {
+      "tpope/vim-ragtag",
+      ft = { "html", "xml" },
+    }
+
+    use {
+      "nvim-telescope/telescope.nvim",
+      keys = { "<C-f>", "<leader>tn", "<leader>tg" },
+      requires = "nvim-telescope/telescope-fzy-native.nvim",
+      config = use_config "telescope",
+    }
 
     use {
       "kylechui/nvim-surround",
@@ -111,19 +103,32 @@ return require("packer").startup {
     }
 
     use {
-      "ThePrimeagen/harpoon",
-      config = use_config "harpoon",
-    }
-
-    use {
       "numToStr/Comment.nvim",
       config = function()
         require("Comment").setup()
       end,
     }
 
+    use {
+      "ThePrimeagen/harpoon",
+      config = use_config "harpoon",
+    }
+    --- }}}
+
+    --- UI related {{{
+    use { "Pocco81/TrueZen.nvim", cmd = "TZMinimalist" }
+    use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
+    use {
+      "jose-elias-alvarez/buftabline.nvim",
+      config = use_config "buftabline",
+    }
+    use {
+      "lewis6991/gitsigns.nvim",
+      config = use_config "gitsigns",
+    }
     -- colorscheme
     use "rose-pine/neovim"
+    --- }}}
 
     if BOOTSTRAP_PACKER then
       require("packer").sync()
