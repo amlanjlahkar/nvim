@@ -32,10 +32,12 @@ return require("packer").startup {
       "neovim/nvim-lspconfig",
       opt = true,
       ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript" },
-      event = "BufReadPre",
       config = [[ require("config/lsp") ]],
     }
-
+    use {
+      "williamboman/nvim-lsp-installer",
+      after = "nvim-lspconfig"
+    }
     use {
       "hrsh7th/nvim-cmp",
       event = { "InsertEnter" },
@@ -48,13 +50,11 @@ return require("packer").startup {
       },
       config = use_config "cmp",
     }
-
     use {
       "L3MON4D3/LuaSnip",
       after = "nvim-cmp",
       config = use_config "luasnip",
     }
-
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
@@ -79,14 +79,12 @@ return require("packer").startup {
       "tpope/vim-ragtag",
       ft = { "html", "xml" },
     }
-
     use {
       "nvim-telescope/telescope.nvim",
       keys = { "<C-f>", "<leader>tn", "<leader>tg" },
       requires = "nvim-telescope/telescope-fzy-native.nvim",
       config = use_config "telescope",
     }
-
     use {
       "kylechui/nvim-surround",
       event = "InsertEnter",
@@ -94,21 +92,18 @@ return require("packer").startup {
         require("nvim-surround").setup()
       end,
     }
-
     use {
       "windwp/nvim-autopairs",
       config = function()
         require("nvim-autopairs").setup()
       end,
     }
-
     use {
       "numToStr/Comment.nvim",
       config = function()
         require("Comment").setup()
       end,
     }
-
     use {
       "ThePrimeagen/harpoon",
       config = use_config "harpoon",
