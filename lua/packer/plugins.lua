@@ -31,18 +31,20 @@ return require("packer").startup {
     use {
       "neovim/nvim-lspconfig",
       opt = true,
-      ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript" },
-      config = [[ require("config/lsp") ]],
+      ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript", "php" },
+      config = function()
+        require "config/lsp"
+      end,
     }
     use {
-       "jose-elias-alvarez/null-ls.nvim",
-       config = function()
-         require("config/lsp/null-ls")
-       end
+      "jose-elias-alvarez/null-ls.nvim",
+      config = function()
+        require "config/lsp/null-ls"
+      end,
     }
     use {
       "williamboman/nvim-lsp-installer",
-      after = "nvim-lspconfig"
+      after = "nvim-lspconfig",
     }
     use {
       "hrsh7th/nvim-cmp",

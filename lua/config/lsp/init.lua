@@ -26,8 +26,9 @@ if lscmp_available then
 end
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local servers = { "clangd", "html", "cssls", "tsserver", "sumneko_lua" }
+local servers = { "clangd", "html", "cssls", "tsserver", "sumneko_lua", "phpactor" }
 lsp_installer.setup({
+  ui = { border = "rounded", },
   ensure_installed = servers,
 })
 
