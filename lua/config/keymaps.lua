@@ -28,6 +28,7 @@ map("n", "n", "nzzzv", opts)
 map("n", "N", "Nzzzv", opts)
 map("n", "<C-j>", "<cmd>cnext<CR>", opts)
 map("n", "<C-k>", "<cmd>cprev<CR>", opts)
+map("n", "<C-c>", "<cmd>cclose<CR>", opts)
 -- }}}
 
 -- misc {{{

@@ -4,7 +4,7 @@ if not is_available then
 end
 
 btline.setup({
-  tab_format = "  #{i} #{b}#{f}  ",
+  tab_format = "  #{n}: #{b}#{f}  ",
   buffer_id_index = false,
   icon_colors = true,
   start_hidden = false,
@@ -12,8 +12,8 @@ btline.setup({
   disable_commands = false,
   go_to_maps = true,
   flags = {
-      modified = " [+]",
-      not_modifiable = " [-]",
+      modified = " ●",
+      not_modifiable = " ",
       readonly = " [RO]",
   },
   hlgroups = {

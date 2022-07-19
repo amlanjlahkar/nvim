@@ -28,6 +28,7 @@ telescope.setup {
       "--column",
       "--trim",
     },
+    file_ignore_patterns = { "vendor" },
   },
   pickers = {
     find_files = {
@@ -52,8 +53,8 @@ M.get_files = function()
 end
 
 -- keymaps
-map("n", "<leader>tg", '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
-map("n", "<leader>tn", '<cmd>lua require("telescope.builtin").find_files({cwd = "~/.config/nvim",})<cr>', opts)
-map("n", "<C-f>", '<cmd>lua require("config/plugin/telescope").get_files()<cr>', opts)
+map("n", "<C-f>", '<cmd>lua require("telescope.builtin").find_files()<CR>', opts)
+map("n", "<leader>tg", '<cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
+map("n", "<leader>tn", '<cmd>lua require("telescope.builtin").find_files({cwd = "~/.config/nvim",})<CR>', opts)
 
 return M
