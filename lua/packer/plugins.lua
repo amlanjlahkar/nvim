@@ -35,6 +35,12 @@ return require("packer").startup {
       config = [[ require("config/lsp") ]],
     }
     use {
+       "jose-elias-alvarez/null-ls.nvim",
+       config = function()
+         require("config/lsp/null-ls")
+       end
+    }
+    use {
       "williamboman/nvim-lsp-installer",
       after = "nvim-lspconfig"
     }
@@ -73,11 +79,10 @@ return require("packer").startup {
     --- }}}
 
     --- Intuitve Development {{{
-    use "sbdchd/neoformat"
     use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
     use {
       "tpope/vim-ragtag",
-      ft = { "html", "xml" },
+      ft = { "html", "php", "xml" },
     }
     use {
       "nvim-telescope/telescope.nvim",
