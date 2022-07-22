@@ -44,13 +44,7 @@ opt.fillchars:append {
   vertright = "┣",
   verthoriz = "╋",
 }
-opt.completeopt = { "menu", "menuone", "noselect" } -- completion menu options
-gvar.shfmt_opt = "-ci"
-gvar.loaded_ruby_provider = 0
-gvar.loaded_node_provider = 0
-gvar.loaded_perl_provider = 0
-gvar.loaded_python3_provider = 0
-gvar.did_load_filetypes = 1
+opt.completeopt = { "menu", "menuone", "noselect" }
 -- italic font support for vim inside of tmux
 vim.cmd [[
 let &t_ZH="\e[3m"
@@ -58,7 +52,7 @@ let &t_ZR="\e[23m"
 ]]
 -- }}}
 
--- disable unnecessary vim builtin plugins {{{
+-- disable unnecessary nvim builtin plugins/providers {{{
 gvar.loaded_gzip = 1
 gvar.loaded_tar = 1
 gvar.loaded_zip = 1
@@ -68,4 +62,15 @@ gvar.loaded_2html_plugin = 1
 gvar.loaded_matchit = 1
 -- gvar.loaded_matchparen = 1
 gvar.loaded_spec = 1
+
+gvar.loaded_ruby_provider = 0
+gvar.loaded_node_provider = 0
+gvar.loaded_perl_provider = 0
+gvar.loaded_python3_provider = 0
+
+-- }}}
+
+-- use filetype.lua for filetype detection {{{
+gvar.do_filetype_lua = 1
+gvar.did_load_filetypes = 0
 -- }}}

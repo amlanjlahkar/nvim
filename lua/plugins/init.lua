@@ -23,7 +23,6 @@ return require("packer").startup {
     -- Core {{{1
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
-    use "nathom/filetype.nvim"
     -- use 'github/copilot.vim'
     use { "nvim-lua/plenary.nvim", module_pattern = "plenary.*" }
 
@@ -130,7 +129,6 @@ return require("packer").startup {
     }
     -- colorscheme
     use "RRethy/nvim-base16"
-    use "rose-pine/neovim"
     -- }}}
 
     if BOOTSTRAP_PACKER then
