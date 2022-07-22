@@ -19,8 +19,9 @@ gitsigns.setup {
     noremap = true,
     ["n ]c"] = { expr = true, "&diff ? ']c'  : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
     ["n [c"] = { expr = true, "&diff ? '[c'  : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
-    ["n <leader>hr"] = "<cmd>Gitsigns reset_hunk<CR>",
-    ["n <leader>hp"] = "<cmd>Gitsigns preview_hunk<CR>",
+    ["n <leader>grb"] = "<cmd>Gitsigns reset_buffer<CR>",
+    ["n <leader>ghr"] = "<cmd>Gitsigns reset_hunk<CR>",
+    ["n <leader>ghp"] = "<cmd>Gitsigns preview_hunk<CR>",
   },
   watch_gitdir = {
     interval = 1000,

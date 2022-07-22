@@ -66,6 +66,6 @@ gvar.loaded_tarPlugin = 1
 gvar.loaded_zipPlugin = 1
 gvar.loaded_2html_plugin = 1
 gvar.loaded_matchit = 1
-gvar.loaded_matchparen = 1
+-- gvar.loaded_matchparen = 1
 gvar.loaded_spec = 1
 -- }}}
