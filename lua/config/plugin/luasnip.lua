@@ -5,25 +5,17 @@ local function prequire(...)
   end
   return nil
 end
-
 local ls = prequire "luasnip"
-local types = require "luasnip.util.types"
-local snip = ls.snippet
-local ins = ls.insert_node
-local tn = ls.text_node
 
 ls.config.setup {
   history = true,
   updateevents = "TextChanged,TextChangedI",
+  region_check_events = "CursorMoved,CursorHold,InsertEnter",
+  delete_check_events = "InsertLeave",
   enable_autosnippets = true,
 }
 
-ls.add_snippets("all", {
-  ls.snippet("ternary", {
-    ins(1, "cond"),
-    tn " ? ",
-    ins(2, "then"),
-    tn " : ",
-    ins(3, "else"),
-  }),
-})
+-- load custom defined snippets
+require("luasnip.loaders.from_vscode").lazy_load {
+  paths = vim.fn.stdpath "config" .. "/snippets",
+}
