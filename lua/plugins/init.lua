@@ -20,14 +20,14 @@ end
 
 return require("packer").startup {
   function(use)
-    --- Core {{{1
+    -- Core {{{1
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
     use "nathom/filetype.nvim"
     -- use 'github/copilot.vim'
     use { "nvim-lua/plenary.nvim", module_pattern = "plenary.*" }
 
-    --- LSP and Completion {{{2
+    -- LSP and Completion {{{2
     use {
       "neovim/nvim-lspconfig",
       opt = true,
@@ -69,18 +69,18 @@ return require("packer").startup {
       after = "nvim-lspconfig",
       config = use_config "trouble",
     }
-    --- }}}
+    -- }}}
 
-    --- Treesitter {{{2
+    -- Treesitter {{{2
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = use_config "treesitter",
     }
-    --- 2}}}
-    --- }}}
+    -- 2}}}
+    -- }}}
 
-    --- Intuitve Development {{{
+    -- Intuitve Development {{{
     use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
     use {
       "tpope/vim-ragtag",
@@ -115,9 +115,9 @@ return require("packer").startup {
       "ThePrimeagen/harpoon",
       config = use_config "harpoon",
     }
-    --- }}}
+    -- }}}
 
-    --- UI related {{{
+    -- UI {{{
     use { "Pocco81/TrueZen.nvim", cmd = "TZMinimalist" }
     use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
     use {
@@ -129,8 +129,9 @@ return require("packer").startup {
       config = use_config "gitsigns",
     }
     -- colorscheme
+    use "RRethy/nvim-base16"
     use "rose-pine/neovim"
-    --- }}}
+    -- }}}
 
     if BOOTSTRAP_PACKER then
       require("packer").sync()
@@ -147,6 +148,6 @@ return require("packer").startup {
       enable = false,
       threshold = 1,
     },
-    compile_path = fn.stdpath "config" .. "/lua/packer/packer_compiled.lua",
+    compile_path = fn.stdpath "config" .. "/lua/plugins/packer_compiled.lua",
   },
 }
