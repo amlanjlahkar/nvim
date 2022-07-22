@@ -14,11 +14,12 @@ vim.cmd [[
     colorscheme default
   endtry
   if (has_colorscheme#SetTo() ==# 'base16-rose-pine')
-    highlight VertSplit          guifg='#524f67'
-    highlight StatusLineNC       guibg='NONE'
-    highlight StatusLine         guibg='NONE' guifg='#908caa'
-    highlight TabLineFill        guibg='NONE'
-    highlight TabLineNorm        guibg='NONE' guifg='#908caa'
-    highlight TabLineSel         guibg='#26233a' guifg='#e0def4'
+    hi VertSplit       guifg='#524f67'
+    hi StatusLineNC    guibg='NONE'
+    hi StatusLine      guibg='NONE' guifg='#908caa'
+    hi TabLineFill     guibg='NONE'
+    hi TabLineNorm     guibg='NONE' guifg='#908caa'
+    hi TabLineSel      guibg='#26233a' guifg='#e0def4'
+    hi MatchParen      guibg='NONE' guifg='#eb6f92' gui=Bold
   endif
 ]]
