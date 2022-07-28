@@ -131,6 +131,13 @@ return require("packer").startup {
     use "RRethy/nvim-base16"
     -- }}}
 
+-- Neorg {{{
+  use {
+    "nvim-neorg/neorg",
+    config = use_config "neorg",
+  }
+-- }}}
+
     if BOOTSTRAP_PACKER then
       require("packer").sync()
     end
