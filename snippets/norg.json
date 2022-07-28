@@ -1,0 +1,17 @@
+{
+  "Meta Tag": {
+    "prefix": "meta",
+    "body": [
+      "@document.meta\n  title: $1\n  author: Amlan\n  created: $2\n  categories: [ $0 ]\n@end"
+    ],
+    "description": "Insert metadata in neorg document"
+  },
+
+  "Code Tag": {
+    "prefix": "code",
+    "body": [
+      "@code ${1:lang}\n  ${2:statements}\n@end"
+    ],
+    "description": "Insert a code block in neorg document"
+  }
+}

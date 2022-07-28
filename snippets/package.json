@@ -10,6 +10,11 @@
       {
         "language": "cpp",
         "path": "./cpp.json"
+      },
+
+      {
+        "language": "norg",
+        "path": "./norg.json"
       }
     ]
   }
