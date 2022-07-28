@@ -21,5 +21,9 @@ vim.cmd [[
     hi TabLineNorm     guibg='NONE' guifg='#908caa'
     hi TabLineSel      guibg='#26233a' guifg='#e0def4'
     hi MatchParen      guibg='NONE' guifg='#eb6f92' gui=Bold
+    hi Pmenu           guifg='#908caa'
+    hi PmenuSbar       guibg='#26233a'
+    hi PmenuSel        guibg='#403d52' guifg='#e0def4'
+    hi PmenuThumb      guibg='#e0def4'
   endif
 ]]

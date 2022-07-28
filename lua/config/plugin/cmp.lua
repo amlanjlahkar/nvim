@@ -5,6 +5,7 @@ local function prequire(...)
   end
   return nil
 end
+
 local cmp = prequire "cmp"
 local ls = prequire "luasnip"
 
@@ -34,21 +35,6 @@ local kind_icons = {
   Event = "  ",
   Operator = "  ",
   TypeParameter = "  ",
-}
-
-local border = {
-  { "╭", "CmpBorder" },
-  { "─", "CmpBorder" },
-  { "╮", "CmpBorder" },
-  { "│", "CmpBorder" },
-  { "╯", "CmpBorder" },
-  { "─", "CmpBorder" },
-  { "╰", "CmpBorder" },
-  { "│", "CmpBorder" },
-}
-
-local winhighlight = {
-  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
 }
 
 cmp.setup {
@@ -119,11 +105,8 @@ cmp.setup {
     end,
   },
   window = {
-    documentation = {
-      border = nil,
-    },
-    --[[ completion = cmp.config.window.bordered(winhighlight),
-      documentation = cmp.config.window.bordered(winhighlight), ]]
+    completion = cmp.config.window.bordered(winhighlight),
+    documentation = cmp.config.window.bordered(winhighlight),
   },
   experimental = {
     ghost_text = true,
