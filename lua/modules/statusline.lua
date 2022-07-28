@@ -59,15 +59,15 @@ M.get_git_status = function(self)
   end
 
   -- stylua: ignore
-    return is_head_empty
-    and string.format(
+  return is_head_empty
+      and string.format(
         " [+%s ~%s -%s] ( %s) ",
         signs.added,
         signs.changed,
         signs.removed,
         signs.head
-    )
-    or ""
+      )
+      or ""
 end
 
 M.get_filepath = function(self)
@@ -88,10 +88,10 @@ end
 M.get_filetype = function()
   local filetype = vim.bo.filetype
 
-    -- stylua: ignore
-    return filetype == ""
-    and " No FT "
-    or string.format(" ft: %s ", filetype):lower()
+  -- stylua: ignore
+  return filetype == ""
+      and " No FT "
+      or string.format(" ft: %s ", filetype):lower()
 end
 
 M.get_fileformat = function()
@@ -148,12 +148,21 @@ Statusline = setmetatable(M, {
 })
 
 -- set statusline
--- TODO(elianiva): replace this once we can define autocmd using lua
-vim.cmd [[
-    augroup Statusline
-    au!
-    au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline('active')
-    au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline('inactive')
-    au WinEnter,BufEnter,FileType netrw setlocal statusline=%!v:lua.Statusline('explorer')
-    augroup END
-]]
+local au = api.nvim_create_autocmd
+local augroup = api.nvim_create_augroup("StatusLine", { clear = true })
+
+au({ "WinEnter", "BufEnter" }, {
+  group = augroup,
+  pattern = "*",
+  command = "setlocal statusline=%!v:lua.Statusline('active')",
+})
+au({ "WinLeave", "BufLeave" }, {
+  group = augroup,
+  pattern = "*",
+  command = "setlocal statusline=%!v:lua.Statusline('inactive')",
+})
+au("FileType", {
+  group = augroup,
+  pattern = "netrw",
+  command = "setlocal statusline=%!v:lua.Statusline('explorer')",
+})
