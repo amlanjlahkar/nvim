@@ -2,6 +2,7 @@ local opt = vim.opt
 local gvar = vim.g
 
 -- options {{{
+opt.mouse = "nv" -- nervous laughter
 opt.hidden = true
 opt.confirm = true
 opt.updatetime = 200
