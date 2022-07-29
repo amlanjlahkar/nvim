@@ -9,9 +9,7 @@
 
   "Code Tag": {
     "prefix": "code",
-    "body": [
-      "@code ${1:lang}\n  ${2:statements}\n@end"
-    ],
+    "body": ["@code ${1:lang}\n  ${2:statements}\n@end"],
     "description": "Insert a code block in neorg document"
   }
 }

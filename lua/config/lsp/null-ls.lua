@@ -9,7 +9,7 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
   sources = {
     -- html, css, js, json, yaml, md
-    formatting.prettier_d_slim,
+    formatting.prettier,
     -- lua
     formatting.stylua,
     -- php

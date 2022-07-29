@@ -9,9 +9,7 @@
 
   "Define Function": {
     "prefix": "func",
-    "body": [
-      "${1:return_type} ${2:function_name} {\n  ${0:code}\n}"
-    ]
+    "body": ["${1:return_type} ${2:function_name} {\n  ${0:code}\n}"]
   },
 
   "For Loop": {
