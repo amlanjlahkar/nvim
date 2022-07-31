@@ -37,6 +37,10 @@ local kind_icons = {
   TypeParameter = "  ",
 }
 
+local winhighlight = {
+  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+}
+
 cmp.setup {
   snippet = {
     expand = function(args)

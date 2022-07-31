@@ -5,6 +5,7 @@ local function prequire(...)
   end
   return nil
 end
+
 local ls = prequire "luasnip"
 
 ls.config.setup {

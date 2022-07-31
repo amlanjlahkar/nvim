@@ -4,7 +4,7 @@ if not is_available then
 end
 
 btline.setup({
-  tab_format = "  #{n}: #{b}#{f}  ",
+  tab_format = "  #{i} #{b}#{f}  ",
   buffer_id_index = false,
   icon_colors = true,
   start_hidden = false,

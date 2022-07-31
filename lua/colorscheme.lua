@@ -8,22 +8,20 @@ vim.cmd [[
 ]]
 
 vim.cmd [[
+  let g:moonflyNormalFloat = v:true
+  let g:moonflyTransparent = v:true
   try
-    colorscheme base16-rose-pine
+    colorscheme moonfly
   catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
   endtry
-  if (has_colorscheme#SetTo() ==# 'base16-rose-pine')
-    hi VertSplit       guifg='#524f67'
+  if (has_colorscheme#SetTo() ==# 'moonfly')
+    hi VertSplit       guibg='NONE'
     hi StatusLineNC    guibg='NONE'
-    hi StatusLine      guibg='NONE' guifg='#908caa'
+    hi StatusLine      guibg='NONE' guifg='#767778'
     hi TabLineFill     guibg='NONE'
-    hi TabLineNorm     guibg='NONE' guifg='#908caa'
-    hi TabLineSel      guibg='#26233a' guifg='#e0def4'
-    hi MatchParen      guibg='NONE' guifg='#eb6f92' gui=Bold
-    hi Pmenu           guifg='#908caa'
-    hi PmenuSbar       guibg='#26233a'
-    hi PmenuSel        guibg='#403d52' guifg='#e0def4'
-    hi PmenuThumb      guibg='#e0def4'
+    hi TabLine         guibg='NONE' guifg='#323437'
+    hi TabLineSel      guibg='NONE' guifg='#767778'
+    hi CursorLineNr    guibg='NONE' guifg='#b2b2b2' gui='bold'
   endif
 ]]

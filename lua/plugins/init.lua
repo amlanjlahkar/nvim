@@ -81,10 +81,8 @@ return require("packer").startup {
 
     -- Intuitve Development {{{
     use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
-    use {
-      "tpope/vim-ragtag",
-      ft = { "html", "php", "xml" },
-    }
+    use { "tpope/vim-ragtag", ft = { "html", "php", "xml" } }
+    use { "ThePrimeagen/harpoon", config = use_config "harpoon" }
     use {
       "nvim-telescope/telescope.nvim",
       keys = { "<C-f>", "<leader>tn", "<leader>tg" },
@@ -110,33 +108,23 @@ return require("packer").startup {
         require("Comment").setup()
       end,
     }
-    use {
-      "ThePrimeagen/harpoon",
-      config = use_config "harpoon",
-    }
     -- }}}
 
     -- UI {{{
-    use { "Pocco81/TrueZen.nvim", cmd = "TZMinimalist" }
+    use { "Pocco81/true-zen.nvim", cmd = "TZAtaraxis", config = use_config "truezen" }
     use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
-    use {
-      "jose-elias-alvarez/buftabline.nvim",
-      config = use_config "buftabline",
-    }
-    use {
-      "lewis6991/gitsigns.nvim",
-      config = use_config "gitsigns",
-    }
+    use { "jose-elias-alvarez/buftabline.nvim", config = use_config "buftabline" }
+    use { "lewis6991/gitsigns.nvim", config = use_config "gitsigns" }
     -- colorscheme
-    use "RRethy/nvim-base16"
+    use 'bluz71/vim-moonfly-colors'
     -- }}}
 
--- Neorg {{{
-  use {
-    "nvim-neorg/neorg",
-    config = use_config "neorg",
-  }
--- }}}
+    -- Neorg {{{
+    use {
+      "nvim-neorg/neorg",
+      config = use_config "neorg",
+    }
+    -- }}}
 
     if BOOTSTRAP_PACKER then
       require("packer").sync()
