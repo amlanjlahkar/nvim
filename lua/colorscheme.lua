@@ -10,6 +10,7 @@ vim.cmd [[
 vim.cmd [[
   let g:moonflyNormalFloat = v:true
   let g:moonflyTransparent = v:true
+  let g:moonflyWinSeparator = 2
   try
     colorscheme moonfly
   catch /^Vim\%((\a\+)\)\=:E185/
@@ -18,10 +19,10 @@ vim.cmd [[
   if (has_colorscheme#SetTo() ==# 'moonfly')
     hi VertSplit       guibg='NONE'
     hi StatusLineNC    guibg='NONE'
-    hi StatusLine      guibg='NONE' guifg='#767778'
+    hi StatusLine      guibg='NONE' guifg='#b2b2b2'
     hi TabLineFill     guibg='NONE'
-    hi TabLine         guibg='NONE' guifg='#323437'
-    hi TabLineSel      guibg='NONE' guifg='#767778'
+    hi TabLine         guibg='NONE' guifg='#9e9e9e'
+    hi TabLineSel      guibg='NONE' guifg='#b2b2b2' gui='bold'
     hi CursorLineNr    guibg='NONE' guifg='#b2b2b2' gui='bold'
   endif
 ]]
