@@ -97,12 +97,6 @@ return require("packer").startup {
       end,
     }
     use {
-      "windwp/nvim-autopairs",
-      config = function()
-        require("nvim-autopairs").setup()
-      end,
-    }
-    use {
       "numToStr/Comment.nvim",
       config = function()
         require("Comment").setup()
@@ -116,7 +110,7 @@ return require("packer").startup {
     use { "jose-elias-alvarez/buftabline.nvim", config = use_config "buftabline" }
     use { "lewis6991/gitsigns.nvim", config = use_config "gitsigns" }
     -- colorscheme
-    use 'bluz71/vim-moonfly-colors'
+    use "bluz71/vim-moonfly-colors"
     -- }}}
 
     -- Neorg {{{
