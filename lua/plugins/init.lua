@@ -36,14 +36,19 @@ return require("packer").startup {
       end,
     }
     use {
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup {
+          ui = { border = "rounded" },
+        }
+      end,
+    }
+    use "williamboman/mason-lspconfig"
+    use {
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
         require "config/lsp/null-ls"
       end,
-    }
-    use {
-      "williamboman/nvim-lsp-installer",
-      after = "nvim-lspconfig",
     }
     use {
       "hrsh7th/nvim-cmp",

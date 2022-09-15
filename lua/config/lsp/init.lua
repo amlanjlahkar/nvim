@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local is_available, lsp_installer = pcall(require, "nvim-lsp-installer")
+local is_available, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not is_available then
   return
 end
@@ -27,10 +27,10 @@ end
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local servers = { "clangd", "html", "cssls", "tsserver", "sumneko_lua", "phpactor" }
-lsp_installer.setup({
-  ui = { border = "rounded", },
+mason_lspconfig.setup {
   ensure_installed = servers,
-})
+  automatic_installation = false,
+}
 
 for _, server in pairs(servers) do
   local opts = {
