@@ -12,17 +12,20 @@ vim.cmd [[
   let g:moonflyTransparent = v:true
   let g:moonflyWinSeparator = 2
   try
-    colorscheme moonfly
+    colorscheme base16-tokyo-night-terminal-dark
   catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
   endtry
-  if (has_colorscheme#SetTo() ==# 'moonfly')
-    hi VertSplit       guibg='NONE'
-    hi StatusLineNC    guibg='NONE'
-    hi StatusLine      guibg='NONE' guifg='#b2b2b2'
-    hi TabLineFill     guibg='NONE'
-    hi TabLine         guibg='NONE' guifg='#9e9e9e'
-    hi TabLineSel      guibg='NONE' guifg='#b2b2b2' gui='bold'
-    hi CursorLineNr    guibg='NONE' guifg='#b2b2b2' gui='bold'
+  if (has_colorscheme#SetTo() ==# 'base16-tokyo-night-terminal-dark')
+    hi StatusLineNC               guibg='NONE'
+    hi StatusLine                 guibg='#13131b' guifg='#787c99'
+    hi TelescopeSelection         guifg='#c0caf5'
+    hi PmenuSel                   guibg='#2a2f41' guifg='#c0caf5'
+    hi PmenuSbar                  guibg='#13131b'
+    hi PmenuThumb                 guibg='#787c99'
+    hi TabLineFill                guibg='#13131b'
+    hi TabLine                    guibg='#13131b'
+    hi TabLineSel                 guibg='#16161e'
+    hi VertSplit                  guifg='#13131b'
   endif
 ]]
