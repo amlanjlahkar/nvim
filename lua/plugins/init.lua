@@ -23,7 +23,6 @@ return require("packer").startup {
     -- Core {{{1
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
-    -- use 'github/copilot.vim'
     use { "nvim-lua/plenary.nvim", module_pattern = "plenary.*" }
 
     -- LSP and Completion {{{2
@@ -73,7 +72,7 @@ return require("packer").startup {
       after = "nvim-lspconfig",
       config = use_config "trouble",
     }
-    -- }}}
+    -- 2}}}
 
     -- Treesitter {{{2
     use {
@@ -81,6 +80,7 @@ return require("packer").startup {
       run = ":TSUpdate",
       config = use_config "treesitter",
     }
+    use { "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" }
     -- 2}}}
     -- }}}
 
@@ -119,10 +119,10 @@ return require("packer").startup {
     -- }}}
 
     -- Neorg {{{
-    use {
+    --[[ use {
       "nvim-neorg/neorg",
       config = use_config "neorg",
-    }
+    } ]]
     -- }}}
 
     if BOOTSTRAP_PACKER then

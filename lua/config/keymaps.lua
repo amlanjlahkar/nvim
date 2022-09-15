@@ -11,7 +11,7 @@ map("n", "<leader>,", "<cmd>bp<CR>", opts)
 map("n", "<leader>bd", "<cmd>bd<CR>", opts)
 map("n", "<leader>bu", "<cmd>bunload<CR>", opts)
 map("n", "<leader>db", "<cmd>%bd|e#|bd#|normal `<CR>", opts)
---- }}}
+-- }}}
 
 -- terminal related {{{
 vim.cmd "autocmd TermOpen * setlocal nonumber norelativenumber | startinsert"
