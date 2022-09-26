@@ -26,6 +26,9 @@ vim.cmd [[
     hi TabLineFill                guibg='#13131b'
     hi TabLine                    guibg='#13131b'
     hi TabLineSel                 guibg='#16161e'
-    hi VertSplit                  guifg='#13131b'
+    " hi IlluminatedWordText        guibg='#303a51' gui='NONE'
+    " hi IlluminatedWordRead        guibg='#303a51' gui='NONE'
+    " hi IlluminatedWordWrite       guibg='#303a51' gui='NONE'
+    " hi VertSplit                  guifg='#13131b'
   endif
 ]]
