@@ -24,6 +24,16 @@ local autocmd_definitions = {
       end,
     },
   },
+
+  {
+    "TermOpen",
+    {
+      group = "_convention",
+      desc = "Open terminal directly in insert mode",
+      pattern = "*",
+      command = "setlocal norelativenumber nonumber | startinsert",
+    },
+  },
 }
 
 for _, entry in ipairs(autocmd_definitions) do
