@@ -128,6 +128,7 @@ return require("packer").startup {
     use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
     use { "jose-elias-alvarez/buftabline.nvim", config = use_config "buftabline" }
     use { "lewis6991/gitsigns.nvim", config = use_config "gitsigns" }
+    use { "folke/which-key.nvim", config = use_config "which_key" }
     -- colorscheme
     use "RRethy/nvim-base16"
     -- }}}
