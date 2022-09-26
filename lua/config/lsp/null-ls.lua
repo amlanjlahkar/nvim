@@ -8,13 +8,10 @@ local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup {
   sources = {
-    -- html, css, js, json, yaml, md
+    formatting.black,
     formatting.prettier,
-    -- lua
     formatting.stylua,
-    -- php
     formatting.phpcbf.with { command = "./vendor/bin/phpcbf" },
-    -- sh, bash
     formatting.shfmt.with {
       extra_args = { "-i", "2", "-ci", "-bn" },
       extra_filetypes = { "bash" },
@@ -22,4 +19,4 @@ null_ls.setup {
   },
 }
 
-vim.keymap.set("n", "<leader>f", "<cmd>lua vim.lsp.buf.format()<CR>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", { silent = true, noremap = true, desc = "Format buffer" })

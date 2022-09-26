@@ -30,7 +30,7 @@ return require("packer").startup {
       "neovim/nvim-lspconfig",
       requires = "folke/trouble.nvim",
       opt = true,
-      ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript", "php" },
+      ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript", "php", "python" },
       config = function()
         require "config/lsp"
       end,
