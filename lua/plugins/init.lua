@@ -50,6 +50,20 @@ return require("packer").startup {
       end,
     }
     use {
+      "simrat39/symbols-outline.nvim",
+      after = "nvim-lspconfig",
+      config = use_config "symbols",
+    }
+    use {
+      "RRethy/vim-illuminate",
+      after = "nvim-lspconfig",
+      config = function()
+        require("illuminate").configure {
+          filetypes_denylist = { "netrw", "fugitive", "help", "markdown" },
+        }
+      end,
+    }
+    use {
       "hrsh7th/nvim-cmp",
       event = { "InsertEnter" },
       wants = { "LuaSnip" },
