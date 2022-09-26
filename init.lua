@@ -1,9 +1,6 @@
 -- importing
-require "config/options"
-require "config/keymaps"
-require "modules/statusline"
-require "autocmds"
-require "colorscheme"
+require "amlan.general"
+require "modules.statusline"
 
 -- plugins
 -- create cache files for better startuptime
