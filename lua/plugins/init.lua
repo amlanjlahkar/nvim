@@ -28,6 +28,7 @@ return require("packer").startup {
     -- LSP and Completion {{{2
     use {
       "neovim/nvim-lspconfig",
+      requires = "folke/trouble.nvim",
       opt = true,
       ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript", "php" },
       config = function()
@@ -80,12 +81,6 @@ return require("packer").startup {
       after = "nvim-cmp",
       config = use_config "luasnip",
     }
-    use {
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      after = "nvim-lspconfig",
-      config = use_config "trouble",
-    }
     -- 2}}}
 
     -- Treesitter {{{2
@@ -100,20 +95,11 @@ return require("packer").startup {
 
     -- Intuitve Development {{{
     use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
-    use { "tpope/vim-ragtag", ft = { "html", "php", "xml" } }
     use { "ThePrimeagen/harpoon", config = use_config "harpoon" }
     use {
       "nvim-telescope/telescope.nvim",
       keys = { "<C-f>", "<leader>tn", "<leader>tg" },
-      requires = "nvim-telescope/telescope-fzy-native.nvim",
       config = use_config "telescope",
-    }
-    use {
-      "kylechui/nvim-surround",
-      event = "InsertEnter",
-      config = function()
-        require("nvim-surround").setup()
-      end,
     }
     use {
       "numToStr/Comment.nvim",
@@ -126,7 +112,7 @@ return require("packer").startup {
     -- UI {{{
     use { "Pocco81/true-zen.nvim", cmd = "TZAtaraxis", config = use_config "truezen" }
     use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
-    use { "jose-elias-alvarez/buftabline.nvim", config = use_config "buftabline" }
+    -- use { "jose-elias-alvarez/buftabline.nvim", config = use_config "buftabline" }
     use { "lewis6991/gitsigns.nvim", config = use_config "gitsigns" }
     use { "folke/which-key.nvim", config = use_config "which_key" }
     -- colorscheme
@@ -158,3 +144,11 @@ return require("packer").startup {
     compile_path = fn.stdpath "config" .. "/lua/plugins/packer_compiled.lua",
   },
 }
+
+-- autocmd to source and recompile whenever this file gets written/modified
+local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "source <afile> | PackerCompile",
+  group = packer_group,
+  pattern = fn.stdpath "config" .. "/lua/plugins/init.lua",
+})
