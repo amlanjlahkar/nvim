@@ -3,15 +3,14 @@ local gvar = vim.g
 
 -- options {{{
 opt.mouse = "nv" -- nervous laughter
-opt.hidden = true
 opt.confirm = true
 opt.updatetime = 200
 opt.clipboard = "unnamedplus"
+opt.backspace = 'indent,eol,start'
 opt.splitbelow = true
 opt.splitright = true
 opt.wrap = false
 opt.ignorecase = true
-opt.autoindent = true
 opt.smartindent = true
 opt.shiftwidth = 2
 opt.expandtab = true
@@ -34,7 +33,7 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.autowrite = true
 opt.list = true
-opt.listchars = { trail = "⋅", tab = "| " }
+opt.listchars = { tab = '»·', nbsp = '+', trail = '·', extends = '→', precedes = '←' }
 opt.fillchars:append {
   eob = " ",
   horiz = "━",
@@ -46,6 +45,9 @@ opt.fillchars:append {
   verthoriz = "╋",
 }
 opt.completeopt = { "menu", "menuone", "noselect" }
+opt.browsedir = "buffer"
+opt.virtualedit = 'block'
+opt.grepprg = 'rg --hidden --vimgrep --smart-case --'
 -- italic font support for vim inside of tmux
 vim.cmd [[
 let &t_ZH="\e[3m"
