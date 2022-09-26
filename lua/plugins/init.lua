@@ -15,10 +15,10 @@ end
 
 -- function to conveniently source plugin configurations
 local function use_config(plugin)
-  return string.format('require("config/plugin/%s")', plugin)
+  return string.format('require("config.plugin.%s")', plugin)
 end
 
-return require("packer").startup {
+require("packer").startup {
   function(use)
     -- Core {{{1
     use "wbthomason/packer.nvim"
@@ -44,6 +44,7 @@ return require("packer").startup {
       end,
     }
     use "williamboman/mason-lspconfig"
+
     use {
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
