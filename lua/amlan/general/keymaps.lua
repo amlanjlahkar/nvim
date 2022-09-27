@@ -27,8 +27,8 @@ map("n", "<leader>j", "<cmd>m .+1<CR>==", attrs("Move current line up"))
 map("n", "<leader>k", "<cmd>m .-2<CR>==", attrs("Move current line down"))
 map("n", "n", "nzzzv", attrs())
 map("n", "N", "Nzzzv", attrs())
-map("n", "<C-j>", "<cmd>cnext<CR>", attrs())
-map("n", "<C-k>", "<cmd>cprev<CR>", attrs())
+map("n", "]q", "<cmd>cnext<CR>", attrs())
+map("n", "[q", "<cmd>cprev<CR>", attrs())
 map("n", "<C-c>", "<cmd>cclose<CR>", attrs())
 -- }}}
 
