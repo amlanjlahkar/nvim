@@ -4,7 +4,20 @@ if not is_available then
 end
 
 TS_configs.setup {
-  ensure_installed = { "bash", "cpp", "c", "css", "html", "javascript", "lua", "python", "vim", "yaml", "norg" },
+  ensure_installed = {
+    "bash",
+    "cpp",
+    "c",
+    "css",
+    "html",
+    "javascript",
+    "java",
+    "lua",
+    "python",
+    "vim",
+    "yaml",
+    "norg"
+  },
   ignore_install = {},
   highlight = {
     enable = true,
