@@ -46,5 +46,4 @@ map("i", "<F11>", "<C-o>:set spell!<CR>", attrs())
 map("n", "<leader><leader>s", "<cmd>:write | source %<CR>", attrs("Save and source lua file"))
 
 map("n", "<F2>", "<cmd>!$BROWSER %<CR>", attrs())
-map("n", "X", "r<space>", attrs())
 -- }}}

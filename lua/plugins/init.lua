@@ -92,14 +92,18 @@ require("packer").startup {
     }
     use { "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" }
     -- 2}}}
-    -- }}}
+
+    -- language specific {{{2
+    use "mfussenegger/nvim-jdtls"
+    -- 2}}}
+    -- 1}}}
 
     -- Intuitve Development {{{
     use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
     use { "ThePrimeagen/harpoon", config = use_config "harpoon" }
     use {
       "nvim-telescope/telescope.nvim",
-      keys = { "<C-f>", "<leader>tn", "<leader>tg" },
+      keys = { "<leader>tf", "<leader>tn", "<leader>tb", "<leader>tg", "<leader>th" },
       config = use_config "telescope",
     }
     use {

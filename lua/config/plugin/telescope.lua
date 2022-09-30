@@ -31,6 +31,11 @@ telescope.setup {
       previewer = false,
       layout_strategy = "center",
     },
+    help_tags = {
+      hidden = false,
+      previewer = false,
+      layout_strategy = "center",
+    },
   },
   extensions = {
     fzy_native = {
@@ -48,6 +53,7 @@ local telescope_wk_mappings = {
     f = { '<cmd>lua require("telescope.builtin").find_files()<CR>', "Find files" },
     b = { '<cmd>lua require("telescope.builtin").buffers()<CR>', "Switch between buffers" },
     g = { '<cmd>lua require("telescope.builtin").live_grep()<CR>', "Live grep" },
+    h = { '<cmd>lua require("telescope.builtin").help_tags()<CR>', "Help tags" },
     n = { '<cmd>lua require("telescope.builtin").find_files({cwd = "~/.config/nvim/" })<CR>', "Find nvim confs" },
   },
 }
