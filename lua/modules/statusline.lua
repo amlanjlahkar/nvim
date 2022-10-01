@@ -71,7 +71,7 @@ M.get_git_status = function(self)
 end
 
 M.get_filepath = function(self)
-  local filepath = fn.fnamemodify(fn.expand "%", ":.:h")
+  local filepath = fn.fnamemodify(fn.expand("%"), ":.:h")
 
   if filepath == "" or filepath == "." or self:is_truncated(self.trunc_width.filename) then
     return " "
@@ -81,7 +81,7 @@ M.get_filepath = function(self)
 end
 
 M.get_filename = function()
-  local filename = fn.expand "%:t"
+  local filename = fn.expand("%:t")
   return filename == "" and "" or filename
 end
 

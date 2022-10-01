@@ -16,7 +16,7 @@ local servers = {
 }
 mason_lspconfig.setup {
   ensure_installed = servers,
-  automatic_installation = false
+  automatic_installation = false,
 }
 
 for _, server in pairs(servers) do

@@ -16,6 +16,7 @@ M.setup = function()
       prefix = "",
     },
   }
+
   local signs = { Error = "E ", Warn = "W ", Hint = "H ", Info = "I " }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
@@ -27,7 +28,7 @@ M.setup = function()
     fold_open = "v",
     fold_closed = ">",
     indent_lines = false,
-    use_diagnostic_signs = true
+    use_diagnostic_signs = true,
   }
   local is_trouble_available, trouble = pcall(require, "trouble")
   if is_trouble_available then
@@ -46,11 +47,11 @@ local function lsp_keymaps()
       gd = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto definition" },
       gi = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
       gr = { "<cmd>lua vim.lsp.buf.references()<CR>", "List references" },
-      r  = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol" },
-      s  = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help" },
-      k  = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover information" },
-      d  = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
-      D  = { "<cmd>TroubleToggle document_diagnostics<cr>", "Show diagnostics" },
+      r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol" },
+      s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help" },
+      k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover information" },
+      d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
+      D = { "<cmd>TroubleToggle document_diagnostics<cr>", "Show diagnostics" },
     },
   }
   wk.register(lsp_wk_mappings, { prefix = "<leader>" })

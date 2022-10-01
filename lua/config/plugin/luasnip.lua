@@ -6,7 +6,7 @@ local function prequire(...)
   return nil
 end
 
-local ls = prequire "luasnip"
+local ls = prequire("luasnip")
 
 ls.config.setup {
   history = true,
@@ -18,5 +18,5 @@ ls.config.setup {
 
 -- load custom defined snippets
 require("luasnip.loaders.from_vscode").lazy_load {
-  paths = vim.fn.stdpath "config" .. "/snippets",
+  paths = vim.fn.stdpath("config") .. "/snippets",
 }

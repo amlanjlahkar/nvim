@@ -3,7 +3,7 @@ if not is_available then
   return
 end
 
-btline.setup({
+btline.setup {
   tab_format = "  #{i} #{b}#{f}  ",
   buffer_id_index = false,
   icon_colors = true,
@@ -12,15 +12,15 @@ btline.setup({
   disable_commands = false,
   go_to_maps = true,
   flags = {
-      modified = " ●",
-      not_modifiable = " ",
-      readonly = " [RO]",
+    modified = " ●",
+    not_modifiable = " ",
+    readonly = " [RO]",
   },
   hlgroups = {
-      current = "TabLineSel",
-      normal = "TabLine",
+    current = "TabLineSel",
+    normal = "TabLine",
   },
   show_tabpages = true,
   tabpage_format = " #{n} ",
   tabpage_position = "right",
-})
+}

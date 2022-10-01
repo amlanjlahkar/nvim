@@ -6,8 +6,8 @@ local function prequire(...)
   return nil
 end
 
-local cmp = prequire "cmp"
-local ls = prequire "luasnip"
+local cmp = prequire("cmp")
+local ls = prequire("luasnip")
 
 local kind_icons = {
   Text = "  ",

@@ -19,4 +19,9 @@ null_ls.setup {
   },
 }
 
-vim.keymap.set("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", { silent = true, noremap = true, desc = "Format buffer" })
+vim.keymap.set(
+  "n",
+  "<leader>f",
+  "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>",
+  { silent = true, noremap = true, desc = "Format buffer" }
+)

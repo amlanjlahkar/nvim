@@ -1,13 +1,13 @@
 vim.opt.background = "dark"
-vim.cmd [[
+vim.cmd([[
   if exists('+termguicolors')
       let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
       let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
       set termguicolors
   endif
-]]
+]])
 
-vim.cmd [[
+vim.cmd([[
   let g:moonflyNormalFloat = v:true
   let g:moonflyTransparent = v:true
   let g:moonflyWinSeparator = 2
@@ -31,4 +31,4 @@ vim.cmd [[
     " hi IlluminatedWordRead        guibg='#303a51' gui='NONE'
     " hi IlluminatedWordWrite       guibg='#303a51' gui='NONE'
   endif
-]]
+]])

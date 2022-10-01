@@ -5,7 +5,9 @@ local create_command = vim.api.nvim_create_user_command
 local map = vim.keymap.set
 
 local autocmd_definitions = {
-  { "BufWritePre", {
+  {
+    "BufWritePre",
+    {
       group = "_convention",
       desc = "Remove trailing whitespaces on writing a buffer",
       pattern = { "*" },
@@ -13,7 +15,9 @@ local autocmd_definitions = {
     },
   },
 
-  { "TextYankPost", {
+  {
+    "TextYankPost",
+    {
       group = "_convention",
       desc = "Highlight text on yank",
       pattern = "*",
@@ -23,7 +27,9 @@ local autocmd_definitions = {
     },
   },
 
-  { "TermOpen", {
+  {
+    "TermOpen",
+    {
       group = "_convention",
       desc = "Open terminal directly in insert mode",
       pattern = "*",
@@ -31,13 +37,15 @@ local autocmd_definitions = {
     },
   },
 
-  { "BufWritePost", {
+  {
+    "BufWritePost",
+    {
       group = "_interprete",
       desc = "Interprete python code from the terminal",
       pattern = "*.py",
       callback = function()
         local filetype = vim.bo.filetype
-        local filename = vim.fn.expand "%"
+        local filename = vim.fn.expand("%")
         if filetype == "python" then
           create_command("TestCode", "vnew | terminal python " .. filename, {})
         end

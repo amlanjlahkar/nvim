@@ -6,7 +6,7 @@ opt.mouse = "nv" -- nervous laughter
 opt.confirm = true
 opt.updatetime = 200
 opt.clipboard = "unnamedplus"
-opt.backspace = 'indent,eol,start'
+opt.backspace = "indent,eol,start"
 opt.splitbelow = true
 opt.splitright = true
 opt.wrap = false
@@ -33,7 +33,7 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.autowrite = true
 opt.list = true
-opt.listchars = { tab = '»·', nbsp = '+', trail = '·', extends = '→', precedes = '←' }
+opt.listchars = { tab = "»·", nbsp = "+", trail = "·", extends = "→", precedes = "←" }
 opt.fillchars:append {
   eob = " ",
   horiz = "━",
@@ -46,13 +46,13 @@ opt.fillchars:append {
 }
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.browsedir = "buffer"
-opt.virtualedit = 'block'
-opt.grepprg = 'rg --hidden --vimgrep --smart-case --'
+opt.virtualedit = "block"
+opt.grepprg = "rg --hidden --vimgrep --smart-case --"
 -- italic font support for vim inside of tmux
-vim.cmd [[
+vim.cmd([[
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-]]
+]])
 -- }}}
 
 -- disable unnecessary nvim builtin plugins/providers {{{

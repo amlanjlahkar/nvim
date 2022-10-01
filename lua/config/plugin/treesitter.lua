@@ -16,7 +16,7 @@ TS_configs.setup {
     "python",
     "vim",
     "yaml",
-    "norg"
+    "norg",
   },
   ignore_install = {},
   highlight = {

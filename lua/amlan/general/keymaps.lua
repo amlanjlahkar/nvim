@@ -3,7 +3,7 @@ local function attrs(description)
   local opts = {
     silent = true,
     noremap = true,
-    desc = description or {}
+    desc = description or {},
   }
   return opts
 end
