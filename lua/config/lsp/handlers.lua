@@ -1,6 +1,6 @@
 local M = {}
 
-local function lsp_ui()
+M.setup = function()
   vim.diagnostic.config {
     virtual_text = false,
     signs = false,
@@ -43,9 +43,15 @@ local function lsp_keymaps()
   wk.register(lsp_wk_mappings, { prefix = "<leader>" })
 end
 
-M.on_attach = function()
+M.on_attach = function(client)
+  M.capabilities = vim.lsp.protocol.make_client_capabilities()
+  M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+  local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
+  if is_cmp_available then
+    M.capabilities = cmp_nvim.update_capabilities(M.capabilities)
+  end
+
   lsp_keymaps()
-  lsp_ui()
 end
 
 return M
