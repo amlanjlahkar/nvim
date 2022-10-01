@@ -21,6 +21,19 @@ M.setup = function()
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
+
+  local trouble_setup = {
+    icons = false,
+    fold_open = "v",
+    fold_closed = ">",
+    indent_lines = false,
+    use_diagnostic_signs = true
+  }
+  local is_trouble_available, trouble = pcall(require, "trouble")
+  if is_trouble_available then
+    trouble.setup(trouble_setup)
+  end
+
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 end
