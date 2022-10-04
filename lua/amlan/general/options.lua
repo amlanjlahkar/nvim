@@ -70,10 +70,4 @@ gvar.loaded_ruby_provider = 0
 gvar.loaded_node_provider = 0
 gvar.loaded_perl_provider = 0
 gvar.loaded_python3_provider = 0
-
--- }}}
-
--- use filetype.lua for filetype detection {{{
-gvar.do_filetype_lua = 1
-gvar.did_load_filetypes = 0
 -- }}}

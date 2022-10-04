@@ -37,10 +37,6 @@ local kind_icons = {
   TypeParameter = "  ",
 }
 
-local winhighlight = {
-  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
-}
-
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -109,8 +105,15 @@ cmp.setup {
     end,
   },
   window = {
-    completion = cmp.config.window.bordered(winhighlight),
-    documentation = cmp.config.window.bordered(winhighlight),
+    completion = {
+      border = "single",
+      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+    },
+    documentation = {
+      border = "single",
+      max_width = 60,
+      max_height = 25,
+    },
   },
   experimental = {
     ghost_text = true,

@@ -38,6 +38,16 @@ local autocmd_definitions = {
   },
 
   {
+    "FileType",
+    {
+      group = "_convention",
+      desc = "Disable line numbers in git interface",
+      pattern = "fugitive",
+      command = "setlocal norelativenumber nonumber",
+    },
+  },
+
+  {
     "BufWritePost",
     {
       group = "_interprete",

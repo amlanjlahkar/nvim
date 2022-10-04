@@ -22,6 +22,6 @@ null_ls.setup {
 vim.keymap.set(
   "n",
   "<leader>f",
-  "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>",
+  "<cmd>lua vim.lsp.buf.format()<CR>",
   { silent = true, noremap = true, desc = "Format buffer" }
 )

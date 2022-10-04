@@ -8,9 +8,6 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-  let g:moonflyNormalFloat = v:true
-  let g:moonflyTransparent = v:true
-  let g:moonflyWinSeparator = 2
   try
     colorscheme base16-tokyo-night-terminal-dark
   catch /^Vim\%((\a\+)\)\=:E185/
@@ -18,7 +15,8 @@ vim.cmd([[
   endtry
   if (has_colorscheme#SetTo() ==# 'base16-tokyo-night-terminal-dark')
     hi StatusLineNC               guibg='NONE'
-    hi StatusLine                 guibg='#13131b' guifg='#787c99'
+    hi StatusLine                 guibg='NONE' guifg='#555b79'
+    hi WinBar                     guibg='NONE' guifg='#5b607f'
     hi TelescopeSelection         guifg='#c0caf5'
     hi PmenuSel                   guibg='#2a2f41' guifg='#c0caf5'
     hi PmenuSbar                  guibg='#13131b'
