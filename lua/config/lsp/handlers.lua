@@ -57,12 +57,21 @@ local function lsp_keymaps()
   wk.register(lsp_wk_mappings, { prefix = "<leader>" })
 end
 
-M.on_attach = function(client)
+M.on_attach = function(client, bufnr)
   M.capabilities = vim.lsp.protocol.make_client_capabilities()
   M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+
   local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
   if is_cmp_available then
     M.capabilities = cmp_nvim.update_capabilities(M.capabilities)
+  end
+
+  local is_navic_available, navic = pcall(require, "nvim-navic")
+  if is_navic_available then
+    if client.server_capabilities.documentSymbolProvider then
+      vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+      navic.attach(client, bufnr)
+    end
   end
 
   lsp_keymaps()

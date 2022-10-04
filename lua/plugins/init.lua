@@ -52,9 +52,9 @@ require("packer").startup {
       end,
     }
     use {
-      "simrat39/symbols-outline.nvim",
+      "SmiteshP/nvim-navic",
       after = "nvim-lspconfig",
-      config = use_config("symbols"),
+      config = use_config("navic")
     }
     use {
       "RRethy/vim-illuminate",
