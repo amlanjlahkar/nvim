@@ -35,6 +35,7 @@ require("packer").startup {
         require("config/lsp")
       end,
     }
+
     use {
       "williamboman/mason.nvim",
       config = function()
@@ -51,11 +52,13 @@ require("packer").startup {
         require("config/lsp/null-ls")
       end,
     }
+
     use {
       "SmiteshP/nvim-navic",
       after = "nvim-lspconfig",
       config = use_config("navic")
     }
+
     use {
       "RRethy/vim-illuminate",
       after = "nvim-lspconfig",
@@ -65,6 +68,7 @@ require("packer").startup {
         }
       end,
     }
+
     use {
       "hrsh7th/nvim-cmp",
       event = { "InsertEnter" },
@@ -77,6 +81,7 @@ require("packer").startup {
       },
       config = use_config("cmp"),
     }
+
     use {
       "L3MON4D3/LuaSnip",
       after = "nvim-cmp",
@@ -90,7 +95,6 @@ require("packer").startup {
       run = ":TSUpdate",
       config = use_config("treesitter"),
     }
-    use { "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" }
     -- 2}}}
 
     -- language specific {{{2
@@ -115,9 +119,7 @@ require("packer").startup {
     -- }}}
 
     -- UI {{{
-    use { "Pocco81/true-zen.nvim", cmd = "TZAtaraxis", config = use_config("truezen") }
     use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
-    -- use { "jose-elias-alvarez/buftabline.nvim", config = use_config "buftabline" }
     use { "lewis6991/gitsigns.nvim", config = use_config("gitsigns") }
     use { "folke/which-key.nvim", config = use_config("which_key") }
     -- colorscheme
