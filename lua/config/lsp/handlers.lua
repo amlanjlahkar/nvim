@@ -74,6 +74,32 @@ M.on_attach = function(client, bufnr)
     end
   end
 
+  -- Highlight references for symbol  under cursor
+  if client.server_capabilities.documentHighlightProvider then
+    local hl = vim.api.nvim_set_hl
+    hl(0, "LspReferenceRead", { bg = "#2a2f41" })
+    hl(0, "LspReferenceText", { bg = "#2a2f41" })
+    hl(0, "LspReferenceWrite", { bg = "#2a2f41" })
+
+    vim.api.nvim_create_augroup("lsp_document_highlight", {
+      clear = false,
+    })
+    vim.api.nvim_clear_autocmds {
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+    }
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      group = "lsp_document_highlight",
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = "lsp_document_highlight",
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
+
   lsp_keymaps()
 end
 

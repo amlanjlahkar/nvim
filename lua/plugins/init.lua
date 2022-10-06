@@ -59,14 +59,6 @@ require("packer").startup {
       config = use_config("navic")
     }
 
-    use {
-      "RRethy/vim-illuminate",
-      after = "nvim-lspconfig",
-      config = function()
-        require("illuminate").configure {
-          filetypes_denylist = { "netrw", "fugitive", "help", "markdown" },
-        }
-      end,
     }
 
     use {
