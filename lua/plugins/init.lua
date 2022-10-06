@@ -22,7 +22,12 @@ require("packer").startup {
   function(use)
     -- Core {{{1
     use("wbthomason/packer.nvim")
-    use("lewis6991/impatient.nvim")
+    use {
+      "lewis6991/impatient.nvim",
+      config = function()
+        require("impatient")
+      end,
+    }
     use { "nvim-lua/plenary.nvim", module_pattern = "plenary.*" }
 
     -- LSP and Completion {{{2
@@ -56,9 +61,7 @@ require("packer").startup {
     use {
       "SmiteshP/nvim-navic",
       after = "nvim-lspconfig",
-      config = use_config("navic")
-    }
-
+      config = use_config("navic"),
     }
 
     use {
@@ -90,13 +93,17 @@ require("packer").startup {
     -- 2}}}
 
     -- language specific {{{2
-    use("mfussenegger/nvim-jdtls")
+    use {
+      "mfussenegger/nvim-jdtls",
+      ft = "java",
+    }
     -- 2}}}
     -- 1}}}
 
     -- Intuitve Development {{{
     use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
     use { "ThePrimeagen/harpoon", config = use_config("harpoon") }
+
     use {
       "nvim-telescope/telescope.nvim",
       keys = { "<leader>tf", "<leader>tn", "<leader>tb", "<leader>tg", "<leader>th" },
@@ -106,6 +113,13 @@ require("packer").startup {
       "numToStr/Comment.nvim",
       config = function()
         require("Comment").setup()
+      end,
+    }
+
+    use {
+      "kylechui/nvim-surround",
+      config = function()
+        require("nvim-surround").setup()
       end,
     }
     -- }}}
@@ -135,12 +149,13 @@ require("packer").startup {
       open_fn = function()
         return require("packer.util").float { border = "single" }
       end,
+      prompt_border = "single",
     },
     profile = {
       enable = false,
       threshold = 1,
     },
-    compile_path = fn.stdpath("config") .. "/lua/plugins/packer_compiled.lua",
+    compile_path = fn.stdpath("config") .. "/lua/plugin/packer_compiled.lua",
   },
 }
 
