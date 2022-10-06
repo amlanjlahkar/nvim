@@ -173,6 +173,7 @@ M.set_active = function(self)
     self:get_lsp_diagnostic(),
     "%=",
     self:lsp_progress(),
+    "%#StatusLine#",
     self:get_filetype(),
     "%#LineNr#",
     self:treesitter_status(),
