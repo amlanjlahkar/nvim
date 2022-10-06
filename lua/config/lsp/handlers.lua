@@ -10,7 +10,7 @@ M.setup = function()
     float = {
       focusable = false,
       style = "minimal",
-      border = "rounded",
+      border = "single",
       source = "always",
       header = "Diagnostic Info",
       prefix = "",
@@ -24,16 +24,13 @@ M.setup = function()
   end
 
   local trouble_setup = {
-    icons = false,
-    fold_open = "v",
-    fold_closed = ">",
+    icons = true,
+    fold_open = "",
+    fold_closed = "",
     indent_lines = false,
     use_diagnostic_signs = true,
   }
-  local is_trouble_available, trouble = pcall(require, "trouble")
-  if is_trouble_available then
-    trouble.setup(trouble_setup)
-  end
+  require("trouble").setup(trouble_setup)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
@@ -46,12 +43,13 @@ local function lsp_keymaps()
       name = "LSP",
       gd = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto definition" },
       gi = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
-      gr = { "<cmd>lua vim.lsp.buf.references()<CR>", "List references" },
+      gr = { "<cmd>TroubleToggle lsp_references<CR>", "List references" },
       r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol" },
       s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help" },
       k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover information" },
-      d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
-      D = { "<cmd>TroubleToggle document_diagnostics<cr>", "Show diagnostics" },
+      l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
+      d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Show document diagnostics" },
+      D = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Show workspace diagnostics" },
     },
   }
   wk.register(lsp_wk_mappings, { prefix = "<leader>" })
