@@ -106,8 +106,9 @@ require("packer").startup {
 
     use {
       "nvim-telescope/telescope.nvim",
-      keys = { "<leader>tf", "<leader>tn", "<leader>tb", "<leader>tg", "<leader>th" },
-      config = use_config("telescope"),
+      config = function()
+        require("config.telescope")
+      end,
     }
     use {
       "numToStr/Comment.nvim",
