@@ -103,7 +103,7 @@ M.get_fileformat = function()
 end
 
 M.get_line_col = function()
-  return " %l:%c "
+  return " %l:%c"
 end
 
 -- LSP progress, diagnostics and treesitter status

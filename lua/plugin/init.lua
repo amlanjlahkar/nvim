@@ -140,9 +140,7 @@ require("packer").startup {
     } ]]
     -- }}}
 
-    if BOOTSTRAP_PACKER then
-      require("packer").sync()
-    end
+    if BOOTSTRAP_PACKER then require("packer").sync() end
   end,
 
   config = {

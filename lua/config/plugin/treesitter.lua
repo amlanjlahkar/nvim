@@ -21,7 +21,7 @@ TS_configs.setup {
   ignore_install = {},
   highlight = {
     enable = true,
-    disable = {},
+    disable = { "help" },
     additional_vim_regex_highlighting = false,
   },
   incremental_selection = {

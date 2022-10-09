@@ -12,7 +12,7 @@ opt.splitright = true
 opt.wrap = false
 opt.breakindent = true
 opt.linebreak = true
-opt.ignorecase = true
+opt.ignorecase = false
 opt.smartindent = true
 opt.shiftwidth = 2
 opt.expandtab = true
@@ -65,7 +65,7 @@ gvar.loaded_tarPlugin = 1
 gvar.loaded_zipPlugin = 1
 gvar.loaded_2html_plugin = 1
 gvar.loaded_matchit = 1
--- gvar.loaded_matchparen = 1
+gvar.loaded_matchparen = 1
 gvar.loaded_spec = 1
 
 gvar.loaded_ruby_provider = 0

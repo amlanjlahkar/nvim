@@ -86,12 +86,12 @@ M.on_attach = function(client, bufnr)
       buffer = bufnr,
       group = "lsp_document_highlight",
     }
-    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_document_highlight",
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
-    vim.api.nvim_create_autocmd("CursorMoved", {
+    vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
       group = "lsp_document_highlight",
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
