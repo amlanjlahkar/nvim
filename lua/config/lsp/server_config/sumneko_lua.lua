@@ -1,26 +1,18 @@
-local M = {}
-M.setup = {
+return {
   settings = {
     Lua = {
       completion = {
         enable = true,
         callSnippet = "Replace",
       },
-      runtime = {
-        version = "LuaJIT",
-        path = (function()
-          local runtime_path = vim.split(package.path, ";")
-          table.insert(runtime_path, "lua/?.lua")
-          table.insert(runtime_path, "lua/?/init.lua")
-          return runtime_path
-        end)(),
-      },
       diagnostics = {
-        enable = true,
         globals = { "vim" },
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
+        library = {
+          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+          [vim.fn.stdpath("config") .. "/lua"] = true,
+        },
       },
       telemetry = {
         enable = false,
@@ -28,5 +20,3 @@ M.setup = {
     },
   },
 }
-
-return M
