@@ -32,6 +32,9 @@ map("n", "[q", "<cmd>cprev<CR>", attrs())
 map("n", "<C-c>", "<cmd>cclose<CR>", attrs())
 -- }}}
 
+-- external {{{
+  map("n", "<leader>v", "<cmd>tab Git<CR>", attrs("Open vcs interface"))
+-- }}}
 -- misc {{{
 map("n", "<leader>e", "<cmd>Lexplore<CR>", attrs())
 

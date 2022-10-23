@@ -14,12 +14,17 @@ null_ls.setup {
       extra_args = { "-i", "2", "-ci", "-bn" },
       extra_filetypes = { "bash" },
     },
+    diagnostics.shellcheck.with {
+      extra_filetypes = { "sh" },
+    },
   },
 }
 
-vim.keymap.set(
-  "n",
-  "<leader>f",
-  "<cmd>lua vim.lsp.buf.format()<CR>",
-  { silent = true, noremap = true, desc = "Format buffer" }
-)
+vim.keymap.set("n", "<leader>f", function()
+  vim.lsp.buf.format {
+    filter = function(client)
+      return client.name == "null-ls"
+    end,
+    timeout_ms = 2000,
+  }
+end, { silent = true, noremap = true, desc = "Format buffer" })

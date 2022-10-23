@@ -35,7 +35,7 @@ require("packer").startup {
       "neovim/nvim-lspconfig",
       requires = "folke/trouble.nvim",
       opt = true,
-      ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript", "java", "php", "python" },
+      ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript", "java", "php", "python", "sh", "bash" },
       config = function()
         require("config/lsp")
       end,
@@ -97,13 +97,23 @@ require("packer").startup {
       run = ":TSUpdate",
       config = use_config("treesitter"),
     }
+
+    use {
+     "windwp/nvim-ts-autotag",
+     ft = "html",
+     config = function()
+       require("nvim-ts-autotag").setup()
+     end,
+    }
+    -- 2}}}
+
+    -- Debugging {{{2
+    use { "mfussenegger/nvim-dap", ft = { "java" } }
+    use { "rcarriga/nvim-dap-ui", after = "nvim-dap" }
     -- 2}}}
 
     -- language specific {{{2
-    use {
-      "mfussenegger/nvim-jdtls",
-      ft = "java",
-    }
+    use("mfussenegger/nvim-jdtls")
     -- 2}}}
     -- 1}}}
 

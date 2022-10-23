@@ -7,6 +7,7 @@ local fn = require("config.telescope.function")
 local telescope_wk_mappings = {
   t = {
     name = "Telescope",
+    t = { '<cmd>lua require("telescope.builtin").find_files({ layout_strategy = "center" })<CR>', "Buffers" },
     b = { '<cmd>lua require("telescope.builtin").buffers()<CR>', "Buffers" },
     g = { '<cmd>lua require("telescope.builtin").live_grep()<CR>', "Live grep" },
     h = { '<cmd>lua require("telescope.builtin").help_tags()<CR>', "Help tags" },

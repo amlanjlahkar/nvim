@@ -23,7 +23,7 @@ telescope.setup {
       "--column",
       "--trim",
     },
-    file_ignore_patterns = { "vendor" },
+    file_ignore_patterns = { "vendor/*", "node_modules/*" },
   },
 }
 

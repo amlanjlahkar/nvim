@@ -13,6 +13,7 @@ local servers = {
   "sumneko_lua",
   "phpactor",
   "pyright",
+  "tailwindcss",
 }
 mason_lspconfig.setup {
   ensure_installed = servers,
