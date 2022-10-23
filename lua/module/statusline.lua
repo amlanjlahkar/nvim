@@ -146,7 +146,7 @@ M.get_lsp_diagnostic = function()
     warnings = " %#LspDiagnosticsDefaultWarning# " .. count["warnings"]
   end
   if count["hints"] ~= 0 then
-    hints = " %#LspDiagnosticsDefaultHint# " .. count["hints"]
+    hints = " %#LspDiagnosticsDefaultHint# " .. count["hints"]
   end
   if count["info"] ~= 0 then
     info = " %#LspDiagnosticsDefaultInformation# " .. count["info"]

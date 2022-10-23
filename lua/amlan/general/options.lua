@@ -28,6 +28,7 @@ opt.signcolumn = "yes"
 opt.hlsearch = false
 opt.pumheight = 20
 opt.pumblend = 0
+opt.winblend = 10
 opt.foldmethod = "marker"
 opt.spelllang = "en_us"
 opt.spellsuggest = { "best", 5 }
@@ -65,7 +66,7 @@ gvar.loaded_tarPlugin = 1
 gvar.loaded_zipPlugin = 1
 gvar.loaded_2html_plugin = 1
 gvar.loaded_matchit = 1
-gvar.loaded_matchparen = 1
+-- gvar.loaded_matchparen = 1
 gvar.loaded_spec = 1
 
 gvar.loaded_ruby_provider = 0

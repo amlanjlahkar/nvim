@@ -45,7 +45,14 @@ require("packer").startup {
       "williamboman/mason.nvim",
       config = function()
         require("mason").setup {
-          ui = { border = "rounded" },
+          ui = {
+            border = "single",
+            icons = {
+              package_installed = " ",
+              package_pending = "勒",
+              package_uninstalled = " ",
+            },
+          },
         }
       end,
     }
@@ -145,10 +152,15 @@ require("packer").startup {
 
   config = {
     display = {
+      compact = true,
       open_fn = function()
         return require("packer.util").float { border = "single" }
       end,
       prompt_border = "single",
+      moved_sym = " ",
+      error_sym = " ",
+      done_sym = " ",
+      removed_sym = " ",
     },
     profile = {
       enable = false,

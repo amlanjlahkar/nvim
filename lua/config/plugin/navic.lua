@@ -33,6 +33,7 @@ navic.setup {
     TypeParameter = ' '
   },
   highlight = true,
+  depth_limit = 6,
 }
 
 local hl = vim.api.nvim_set_hl
