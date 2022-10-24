@@ -58,12 +58,7 @@ require("packer").startup {
     }
     use("williamboman/mason-lspconfig")
 
-    use {
-      "jose-elias-alvarez/null-ls.nvim",
-      config = function()
-        require("config/lsp/null-ls")
-      end,
-    }
+    use("jose-elias-alvarez/null-ls.nvim")
 
     use {
       "SmiteshP/nvim-navic",
@@ -99,11 +94,11 @@ require("packer").startup {
     }
 
     use {
-     "windwp/nvim-ts-autotag",
-     ft = "html",
-     config = function()
-       require("nvim-ts-autotag").setup()
-     end,
+      "windwp/nvim-ts-autotag",
+      ft = "html",
+      config = function()
+        require("nvim-ts-autotag").setup()
+      end,
     }
     -- 2}}}
 
@@ -113,7 +108,7 @@ require("packer").startup {
     -- 2}}}
 
     -- language specific {{{2
-    use("mfussenegger/nvim-jdtls")
+    use{ "mfussenegger/nvim-jdtls", ft = "java" }
     -- 2}}}
     -- 1}}}
 

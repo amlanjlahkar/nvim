@@ -35,16 +35,17 @@ map("n", "<C-c>", "<cmd>cclose<CR>", attrs())
 -- external {{{
   map("n", "<leader>v", "<cmd>tab Git<CR>", attrs("Open vcs interface"))
 -- }}}
+
 -- misc {{{
-map("n", "<leader>e", "<cmd>Lexplore<CR>", attrs())
+-- map("n", "<leader>e", "<cmd>Lexplore<CR>", attrs())
 
 map("n", "<leader><Right>", "<cmd>vertical resize +7<CR>", attrs("Resize pane towards right"))
 map("n", "<leader><Left>", "<cmd>vertical resize -7<CR>", attrs("Resize pane towards left"))
 map("n", "<leader><Down>", "<cmd>resize +7<CR>", attrs("Resize pane towards down"))
 map("n", "<leader><Up>", "<cmd>resize -7<CR>", attrs("Resize pane towards up"))
 
-map("n", "<F11>", "<cmd>set spell!<CR>", attrs())
-map("i", "<F11>", "<C-o>:set spell!<CR>", attrs())
+map("n", "<F11>", "<cmd>setlocal spell!<CR>", attrs())
+map("i", "<F11>", "<C-o>:setlocal spell!<CR>", attrs())
 
 map("n", "<leader><leader>s", "<cmd>:write | source %<CR>", attrs("Save and source lua file"))
 

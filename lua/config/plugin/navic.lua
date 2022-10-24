@@ -33,6 +33,7 @@ navic.setup {
     TypeParameter = ' '
   },
   highlight = true,
+  separator = "  ",
   depth_limit = 6,
 }
 

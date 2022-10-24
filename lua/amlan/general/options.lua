@@ -62,12 +62,22 @@ let &t_ZR="\e[23m"
 gvar.loaded_gzip = 1
 gvar.loaded_tar = 1
 gvar.loaded_zip = 1
+gvar.loaded_getscript = 1
+gvar.loaded_vimball = 1
 gvar.loaded_tarPlugin = 1
 gvar.loaded_zipPlugin = 1
+gvar.loaded_getscriptPlugin = 1
+gvar.loaded_vimballPlugin = 1
 gvar.loaded_2html_plugin = 1
 gvar.loaded_matchit = 1
 -- gvar.loaded_matchparen = 1
 gvar.loaded_spec = 1
+gvar.loaded_logiPat = 1
+gvar.loaded_rrhelper = 1
+
+gvar.loaded_netrw = 1
+gvar.loaded_netrwPlugin = 1
+gvar.loaded_netrwSettings = 1
 
 gvar.loaded_ruby_provider = 0
 gvar.loaded_node_provider = 0

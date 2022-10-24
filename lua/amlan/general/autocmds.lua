@@ -2,7 +2,6 @@ local get_autocmds = vim.api.nvim_get_autocmds
 local create_autocmd = vim.api.nvim_create_autocmd
 local create_augroup = vim.api.nvim_create_augroup
 local create_command = vim.api.nvim_create_user_command
-local map = vim.keymap.set
 
 local autocmd_definitions = {
   {
@@ -10,7 +9,7 @@ local autocmd_definitions = {
     {
       group = "_convention",
       desc = "Remove trailing whitespaces on writing a buffer",
-      pattern = { "*" },
+      pattern = "*",
       command = [[%s/\s\+$//e]],
     },
   },
@@ -59,7 +58,7 @@ local autocmd_definitions = {
         if filetype == "python" then
           create_command("TestCode", "vnew | terminal python " .. filename, {})
         end
-        map("n", "<leader>x", "<cmd>TestCode<CR>", { silent = true, noremap = true })
+        vim.keymap.set("n", "<leader>x", "<cmd>TestCode<CR>", { silent = true, noremap = true })
       end,
     },
   },

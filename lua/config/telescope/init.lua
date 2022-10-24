@@ -6,6 +6,7 @@ end
 telescope.setup {
   defaults = {
     prompt_prefix = " 🔎 ",
+    selection_caret = "  ",
     multi_icon = " + ",
     layout_config = {
       center = {
