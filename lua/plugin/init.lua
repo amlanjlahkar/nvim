@@ -108,7 +108,7 @@ require("packer").startup {
     -- 2}}}
 
     -- language specific {{{2
-    use{ "mfussenegger/nvim-jdtls", ft = "java" }
+    use { "mfussenegger/nvim-jdtls", ft = "java" }
     -- 2}}}
     -- 1}}}
 
@@ -152,7 +152,9 @@ require("packer").startup {
     } ]]
     -- }}}
 
-    if BOOTSTRAP_PACKER then require("packer").sync() end
+    if BOOTSTRAP_PACKER then
+      require("packer").sync()
+    end
   end,
 
   config = {

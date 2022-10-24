@@ -60,7 +60,9 @@ M.on_attach = function(client, bufnr)
   M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
-  if is_cmp_available then M.capabilities = cmp_nvim.default_capabilities(M.capabilities) end
+  if is_cmp_available then
+    M.capabilities = cmp_nvim.default_capabilities(M.capabilities)
+  end
 
   local is_navic_available, navic = pcall(require, "nvim-navic")
   if is_navic_available then

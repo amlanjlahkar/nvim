@@ -33,7 +33,7 @@ map("n", "<C-c>", "<cmd>cclose<CR>", attrs())
 -- }}}
 
 -- external {{{
-  map("n", "<leader>v", "<cmd>tab Git<CR>", attrs("Open vcs interface"))
+map("n", "<leader>v", "<cmd>tab Git<CR>", attrs("Open vcs interface"))
 -- }}}
 
 -- misc {{{

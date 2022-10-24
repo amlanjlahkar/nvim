@@ -1,5 +1,7 @@
 local is_available, null_ls = pcall(require, "null-ls")
-if not is_available then return end
+if not is_available then
+  return
+end
 
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics

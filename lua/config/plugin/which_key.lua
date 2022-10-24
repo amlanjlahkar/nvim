@@ -1,5 +1,7 @@
 local is_avialble, wk = pcall(require, "which-key")
-if not is_avialble then return end
+if not is_avialble then
+  return
+end
 
 local margin = { 1, 0, 1, 0 }
 vim.api.nvim_create_autocmd({ "VimResized", "BufEnter" }, {
