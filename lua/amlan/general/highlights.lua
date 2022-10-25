@@ -7,7 +7,7 @@ local tokyo_hl_def = {
   { "StatusLineNC",       { bg = "NONE" } },
   { "VertSplit",          { fg = "#13131b" } },
   { "WinBar",             { bg = "NONE", fg = "#5b607f" } },
-  { "TelescopeSelection", { fg = "#c0caf5" } },
+  { "TelescopeSelection", { bg = "#2a2f41", fg = "#c0caf5" } },
   { "PmenuSel",           { bg = "#2a2f41", fg = "#c0caf5" } },
   { "PmenuSbar",          { bg = "#13131b" } },
   { "PmenuThumb",         { bg = "#787c99" } },

@@ -25,13 +25,16 @@ TS_configs.setup {
     additional_vim_regex_highlighting = false,
   },
   incremental_selection = {
-    enable = false,
+    enable = true,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      init_selection = "<CR>",
+      node_incremental = "<C-n>",
+      node_decremental = "<C-p>",
+      scope_incremental = "<C-s>",
     },
+  },
+  indent = {
+    enable = true,
   },
 }
 

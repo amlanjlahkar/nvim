@@ -23,10 +23,20 @@ null_ls.setup {
 }
 
 vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format {
+  vim.lsp.buf.format({
     filter = function(client)
-      return client.name == "null-ls"
+      local use_builtin = { "clangd" }
+      for _, v in pairs(use_builtin) do
+        if client.name == v then
+          _ISATTACHED = true
+        end
+      end
+      if _ISATTACHED then
+        return client.name ~= "null-ls"
+      else
+        return client.name == "null-ls"
+      end
     end,
-    timeout_ms = 2000,
-  }
+    timeout_ms = 5000,
+  })
 end, { silent = true, noremap = true, desc = "Format buffer" })
