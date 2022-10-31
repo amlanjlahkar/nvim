@@ -46,6 +46,7 @@ local function lsp_keymaps()
       gr = { "<cmd>TroubleToggle lsp_references<CR>", "List references" },
       r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol" },
       s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help" },
+      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code actions" },
       k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover information" },
       l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
       d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Show document diagnostics" },

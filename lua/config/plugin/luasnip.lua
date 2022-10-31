@@ -1,12 +1,7 @@
-local function prequire(...)
-  local status, lib = pcall(require, ...)
-  if status then
-    return lib
-  end
-  return nil
+local is_available, ls = pcall(require, "luasnip")
+if not is_available then
+  return
 end
-
-local ls = prequire("luasnip")
 
 ls.config.setup {
   history = true,

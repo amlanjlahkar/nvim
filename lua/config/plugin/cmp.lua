@@ -1,13 +1,8 @@
-local function prequire(...)
-  local status, lib = pcall(require, ...)
-  if status then
-    return lib
-  end
-  return nil
+local is_available_cmp, cmp = pcall(require, "cmp")
+local is_available_snip, ls = pcall(require, "luasnip")
+if not (is_available_cmp or is_available_snip) then
+  return
 end
-
-local cmp = prequire("cmp")
-local ls = prequire("luasnip")
 
 local kind_icons = {
   Text = "  ",

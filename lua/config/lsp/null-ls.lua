@@ -11,7 +11,8 @@ null_ls.setup {
     formatting.black,
     formatting.prettier,
     formatting.stylua,
-    formatting.phpcbf.with { command = "./vendor/bin/phpcbf" },
+    -- formatting.phpcbf.with { command = "./vendor/bin/phpcbf" },
+    formatting.phpcsfixer,
     formatting.shfmt.with {
       extra_args = { "-i", "2", "-ci", "-bn" },
       extra_filetypes = { "bash" },
@@ -19,13 +20,14 @@ null_ls.setup {
     diagnostics.shellcheck.with {
       extra_filetypes = { "sh" },
     },
+    diagnostics.phpcs,
   },
 }
 
 vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format({
+  vim.lsp.buf.format {
     filter = function(client)
-      local use_builtin = { "clangd" }
+      local use_builtin = { "clangd", "jdtls" }
       for _, v in pairs(use_builtin) do
         if client.name == v then
           _ISATTACHED = true
@@ -38,5 +40,5 @@ vim.keymap.set("n", "<leader>f", function()
       end
     end,
     timeout_ms = 5000,
-  })
+  }
 end, { silent = true, noremap = true, desc = "Format buffer" })
