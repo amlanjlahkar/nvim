@@ -7,7 +7,9 @@ end
 wk.register({
   h = {
     name = "Harpoon",
-    m = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', "Toggle quick menu" },
     a = { '<cmd>lua require("harpoon.mark").add_file()<CR>', "Add files into quick menu" },
+    n = { '<cmd>lua require("harpoon.ui").nav_next()<CR>', "Navigate to next mark" },
+    p = { '<cmd>lua require("harpoon.ui").nav_prev()<CR>', "Navigate to previous mark" },
+    m = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', "Toggle quick menu" },
   },
 }, { prefix = "<leader>" })

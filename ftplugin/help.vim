@@ -1,2 +1,2 @@
 setlocal wrap
-setlocal ignorecase
+setlocal signcolumn=no

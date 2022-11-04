@@ -1,19 +1,18 @@
 local fn = vim.fn
-local exec = vim.api.nvim_command
-local frmt = string.format
 
+-- bootstrap packer installation
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  exec(frmt("!git clone --depth 1 https://github.com/wbthomason/packer.nvim %s", install_path))
-  -- add packer.nvim to runtimepath on first creation
+  vim.api.nvim_exec(string.format("!git clone --depth 1 https://github.com/wbthomason/packer.nvim %s", install_path))
+
   local rtp_addition = vim.fn.stdpath("data") .. "/site/pack/*/start/*"
   if not string.find(vim.o.runtimepath, rtp_addition) then
     vim.o.runtimepath = rtp_addition .. "," .. vim.o.runtimepath
   end
+
   BOOTSTRAP_PACKER = true
 end
 
--- function to conveniently source plugin configurations
 local function use_config(plugin)
   return string.format('require("config.plugin.%s")', plugin)
 end
@@ -35,7 +34,23 @@ require("packer").startup {
       "neovim/nvim-lspconfig",
       requires = "folke/trouble.nvim",
       opt = true,
-      ft = { "c", "objc", "cpp", "objcpp", "lua", "html", "css", "javascript", "java", "php", "python", "sh", "bash" },
+      ft = {
+        "c",
+        "objc",
+        "cpp",
+        "objcpp",
+        "lua",
+        "html",
+        "css",
+        "javascript",
+        "java",
+        "php",
+        "python",
+        "sh",
+        "bash",
+        "json",
+        "yaml",
+      },
       config = function()
         require("config/lsp")
       end,

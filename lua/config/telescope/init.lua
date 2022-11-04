@@ -10,7 +10,8 @@ telescope.setup {
     multi_icon = " + ",
     layout_config = {
       center = {
-        height = 0.7,
+        anchor = "S",
+        height = 0.6,
         width = 0.4,
         prompt_position = "bottom",
       },
@@ -24,7 +25,14 @@ telescope.setup {
       "--column",
       "--trim",
     },
-    file_ignore_patterns = { "vendor/*", "node_modules/*", "*.spl" },
+    file_ignore_patterns = {
+      "vendor/*",
+      "node_modules/*",
+      "spell/*",
+      "**/*.bin",
+      "**/*.class",
+      "**/*.jar",
+    },
   },
 }
 

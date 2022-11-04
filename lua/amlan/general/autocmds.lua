@@ -1,7 +1,21 @@
-local get_autocmds = vim.api.nvim_get_autocmds
-local create_autocmd = vim.api.nvim_create_autocmd
-local create_augroup = vim.api.nvim_create_augroup
-local create_command = vim.api.nvim_create_user_command
+local api = vim.api
+local fn = vim.fn
+
+-- stylua: ignore
+local function gcc()
+  local fpath = fn.expand("%:p")
+  local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
+  local exit_code
+  require("plenary.job"):new({
+      command = "gcc",
+      args = { "-o", outfile, fpath },
+      on_stderr = function(_, data)
+        print((data and "Compilation error!"))
+        exit_code = 2
+      end,
+    }):sync()
+  return exit_code == 2 and exit_code or outfile
+end
 
 local autocmd_definitions = {
   {
@@ -39,24 +53,29 @@ local autocmd_definitions = {
   {
     "FileType",
     {
-      group = "_convention",
-      desc = "Disable line numbers in git interface",
-      pattern = "fugitive",
-      command = "setlocal norelativenumber nonumber",
-    },
-  },
-
-  {
-    "BufWritePost",
-    {
-      group = "_interprete",
-      desc = "Interprete python code from the terminal",
-      pattern = "*.py",
+      group = "_code",
+      desc = "Run interpreted/compiled code",
+      pattern = { "python", "c", "cpp" },
       callback = function()
         local filetype = vim.bo.filetype
-        local filename = vim.fn.expand("%")
+        local filename = fn.expand("%:p")
+        local cc = api.nvim_create_user_command
         if filetype == "python" then
-          create_command("TestCode", "vnew | terminal python " .. filename, {})
+          cc("TestCode", "terminal python " .. filename, {})
+        elseif filetype == "c" then
+          cc("TestCode", function()
+            local res = gcc()
+            if res ~= 2 then
+              api.nvim_exec("terminal " .. res, false)
+            end
+          end, {})
+        elseif filetype == "cpp" then
+          cc("TestCode", function()
+            local res = gcc()
+            if res ~= 2 then
+              api.nvim_exec("terminal " .. res, false)
+            end
+          end, {})
         end
         vim.keymap.set("n", "<leader>x", "<cmd>TestCode<CR>", { silent = true, noremap = true })
       end,
@@ -68,10 +87,10 @@ for _, entry in ipairs(autocmd_definitions) do
   local event = entry[1]
   local opts = entry[2]
   if type(opts.group) == "string" and opts.group ~= "" then
-    local exists, _ = pcall(get_autocmds, { group = opts.group })
+    local exists, _ = pcall(api.nvim_get_autocmds, { group = opts.group })
     if not exists then
-      create_augroup(opts.group, { clear = true })
+      api.nvim_create_augroup(opts.group, { clear = true })
     end
   end
-  create_autocmd(event, opts)
+  api.nvim_create_autocmd(event, opts)
 end

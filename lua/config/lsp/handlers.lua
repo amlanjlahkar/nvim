@@ -2,11 +2,16 @@ local M = {}
 
 M.setup = function()
   vim.diagnostic.config {
-    virtual_text = false,
     signs = false,
     update_in_insert = true,
     underline = false,
-    severity_sort = false,
+    severity_sort = true,
+    virtual_text = false,
+    --[[ virtual_text = {
+      prefix = "",
+      source = "if_many",
+      severity = { max = vim.diagnostic.severity.WARN }
+    }, ]]
     float = {
       focusable = false,
       style = "minimal",
@@ -44,6 +49,8 @@ local function lsp_keymaps()
       gd = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto definition" },
       gi = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
       gr = { "<cmd>TroubleToggle lsp_references<CR>", "List references" },
+      gn = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Goto next diagnostic" },
+      gp = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Goto previous diagnostic" },
       r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol" },
       s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help" },
       a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code actions" },
@@ -68,7 +75,9 @@ M.on_attach = function(client, bufnr)
   local is_navic_available, navic = pcall(require, "nvim-navic")
   if is_navic_available then
     if client.server_capabilities.documentSymbolProvider then
-      vim.wo.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+      local fname = vim.fn.expand("%:t")
+      local ficon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
+      vim.wo.winbar = string.format("%s %s  %s", ficon, fname, "%{%v:lua.require'nvim-navic'.get_location()%}")
       navic.attach(client, bufnr)
     end
   end

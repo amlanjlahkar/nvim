@@ -1,6 +1,6 @@
 local is_available_cmp, cmp = pcall(require, "cmp")
-local is_available_snip, ls = pcall(require, "luasnip")
-if not (is_available_cmp or is_available_snip) then
+local is_available_luasnip, luasnip = pcall(require, "luasnip")
+if not (is_available_cmp or is_available_luasnip) then
   return
 end
 
@@ -32,52 +32,58 @@ local kind_icons = {
   TypeParameter = "  ",
 }
 
+local function has_words_before()
+  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 cmp.setup {
   snippet = {
     expand = function(args)
-      ls.lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
   mapping = {
-    -- general cmp mappings
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-2), { "i", "s" }),
+    ["<C-n>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<C-p>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    ["<TAB>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        return cmp.complete_common_string()
+      end
+      fallback()
+    end, { "i", "s" }),
+
     ["<C-j>"] = cmp.mapping(cmp.mapping.scroll_docs(2), { "i", "s" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "s" }),
+    ["<C-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-2), { "i", "s" }),
     ["<C-e>"] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     },
+
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
+      select = true,
     },
-
-    -- luasnip mappings
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if ls.expand_or_locally_jumpable() then
-        ls.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s", silent = true }),
-
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if ls.jumpable(-1) then
-        ls.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s", silent = true }),
-
-    ["<C-l>"] = cmp.mapping(function(fallback)
-      if ls.choice_active() then
-        ls.change_choice()
-      else
-        fallback()
-      end
-    end, { "i", "s", silent = true }),
   },
   sources = {
     { name = "nvim_lsp" },
@@ -106,6 +112,7 @@ cmp.setup {
     },
     documentation = {
       border = "single",
+      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
       max_width = 60,
       max_height = 25,
     },

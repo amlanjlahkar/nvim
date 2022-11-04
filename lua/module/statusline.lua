@@ -5,6 +5,7 @@ local M = {}
 
 M.trunc_width = setmetatable({
   git_status = 90,
+  filetype = 90,
   filename = 140,
 }, {
   __index = function()
@@ -44,7 +45,6 @@ M.modes = setmetatable({
   end,
 })
 
--- Get different modes
 M.get_current_mode = function(self)
   local current_mode = api.nvim_get_mode().mode
   return string.format("[%s]", self.modes[current_mode]):upper()
@@ -63,7 +63,7 @@ M.get_git_status = function(self)
   -- stylua: ignore
   return is_head_empty
       and string.format(
-        " (#%s) [+%s ~%s -%s] ",
+        "(#%s) [+%s ~%s -%s]",
         signs.head,
         signs.added,
         signs.changed,
@@ -85,17 +85,25 @@ end
 
 M.get_filename = function()
   local filename = fn.expand("%:t")
-  return filename == "" and "" or filename
+  return filename == "" and "" or filename .. " "
 end
 
-M.get_filetype = function()
+M.get_filetype = function(self)
   local filetype = vim.bo.filetype
   local is_devicons_available, devicons = pcall(require, "nvim-web-devicons")
-  if not is_devicons_available then
+  if self:is_truncated(self.trunc_width.filetype) then
+    return ""
+  elseif not is_devicons_available then
     return filetype == "" and " No FT " or string.format(" ft: %s ", filetype):lower()
   end
   local ft_icon = devicons.get_icon_by_filetype(filetype)
   return filetype == "" and " No FT " or string.format(" %s %s ", ft_icon, filetype):lower()
+end
+
+M.get_filesize = function()
+  local wc = fn.wordcount()
+  local size = math.floor(wc.bytes * 0.000977)
+  return string.format(" %s Kb ", size)
 end
 
 M.get_fileformat = function()
@@ -156,16 +164,16 @@ M.get_lsp_diagnostic = function()
 end
 
 M.treesitter_status = function()
-  local ts_avail, ts = pcall(require, "nvim-treesitter.parsers")
-  return (ts_avail and ts.has_parser()) and " ts_enabled " or ""
+  local buf = api.nvim_get_current_buf()
+  local hl = require("vim.treesitter.highlighter")
+  return hl.active[buf] and "  " or ""
 end
 
--- Define statusline apperance for different modes
 M.set_active = function(self)
   return table.concat {
     "%#StatusLine#",
     self:get_current_mode(),
-    "%#LineNr#",
+    "%#StatusLineImp#",
     self:get_filepath(),
     self:get_filename(),
     "%#StatusLine#",
@@ -175,7 +183,7 @@ M.set_active = function(self)
     self:lsp_progress(),
     "%#StatusLine#",
     self:get_filetype(),
-    "%#LineNr#",
+    "%#StatusLineInd#",
     self:treesitter_status(),
     "%#StatusLine#",
     self:get_fileformat(),
@@ -198,22 +206,19 @@ Statusline = setmetatable(M, {
   end,
 })
 
--- Set the statusline based on events
-local au = api.nvim_create_autocmd
 local augroup = api.nvim_create_augroup("StatusLine", { clear = true })
-
-au({ "WinEnter", "BufEnter" }, {
+api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
   group = augroup,
   pattern = "*",
   command = "setlocal statusline=%!v:lua.Statusline('active')",
 })
-au({ "WinLeave", "BufLeave" }, {
+api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
   group = augroup,
   pattern = "*",
   command = "setlocal statusline=%!v:lua.Statusline('inactive')",
 })
-au("FileType", {
+api.nvim_create_autocmd("FileType", {
   group = augroup,
-  pattern = "netrw",
+  pattern = { "netrw", "neotree" },
   command = "setlocal statusline=%!v:lua.Statusline('explorer')",
 })

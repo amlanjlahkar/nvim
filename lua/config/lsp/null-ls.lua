@@ -40,5 +40,6 @@ vim.keymap.set("n", "<leader>f", function()
       end
     end,
     timeout_ms = 5000,
+    async = true,
   }
 end, { silent = true, noremap = true, desc = "Format buffer" })
