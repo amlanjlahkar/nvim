@@ -25,6 +25,7 @@ local tokyo_hl_def = {
   { "NormalFloat",           { bg = "#1a1b26", fg = "#787c99" } },
   { "FloatBorder",           { bg = "#1a1b26", fg = "#1a1b26" } },
   { "CmpItemAbbr",           { link = "NormalFloat" } },
+  { "LspReference",          { bg = "#2a2f41" } },
 }
 
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -46,3 +47,4 @@ local try_colorscheme = function(colorscheme)
 end
 
 try_colorscheme("base16-tokyo-night-terminal-dark")
+-- try_colorscheme("base16-gruvbox-material-light-soft")

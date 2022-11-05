@@ -77,17 +77,19 @@ M.on_attach = function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
       local fname = vim.fn.expand("%:t")
       local ficon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
-      vim.wo.winbar = string.format("%s %s  %s", ficon, fname, "%{%v:lua.require'nvim-navic'.get_location()%}")
+      vim.wo.winbar = string.format(" %s %s  %s", ficon, fname, "%{%v:lua.require'nvim-navic'.get_location()%}")
       navic.attach(client, bufnr)
     end
   end
 
   -- Highlight references for symbol  under cursor
   if client.server_capabilities.documentHighlightProvider then
-    local hl = vim.api.nvim_set_hl
-    hl(0, "LspReferenceRead", { bg = "#2a2f41" })
-    hl(0, "LspReferenceText", { bg = "#2a2f41" })
-    hl(0, "LspReferenceWrite", { bg = "#2a2f41" })
+    local is_defined, _ = pcall(vim.cmd, "silent hi LspReference")
+    if is_defined then
+      vim.api.nvim_set_hl(0, "LspReferenceRead", { link = "LspReference" })
+      vim.api.nvim_set_hl(0, "LspReferenceText", { link = "LspReference" })
+      vim.api.nvim_set_hl(0, "LspReferenceWrite", { link = "LspReference" })
+    end
 
     vim.api.nvim_create_augroup("lsp_document_highlight", {
       clear = false,
