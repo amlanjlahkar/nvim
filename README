@@ -1,2 +1,4 @@
-this repository contains personal configuration files
-to make neovim comfortable to use, for myself(not perfectly inherited OTAD yet).
+Personal configuration files for Neovim(v8.0.0).
+Dependencies:
+  - node.js (mason)
+  - fd, ripgrep (telescope)
