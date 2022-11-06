@@ -1,5 +1,6 @@
 -- importing
 require("amlan.general")
+require("color")
 require("module.statusline")
 
 -- plugins
