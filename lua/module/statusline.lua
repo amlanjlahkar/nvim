@@ -6,15 +6,15 @@ local M = {}
 M.trunc_width = setmetatable({
   git_status = 90,
   filetype = 90,
-  filename = 140,
+  filepath = 90,
 }, {
   __index = function()
     return 80
   end,
 })
 
-M.is_truncated = function(_, width)
-  local current_width = require("util").get_width({ global = true })
+M.is_truncated = function(_, width, global)
+  local current_width = require("util").get_width({ global = global })
   return current_width < width
 end
 
@@ -76,7 +76,7 @@ end
 M.get_filepath = function(self)
   local filepath = fn.fnamemodify(fn.expand("%"), ":.:h")
 
-  if filepath == "" or filepath == "." or self:is_truncated(self.trunc_width.filename) then
+  if filepath == "" or filepath == "." or self:is_truncated(self.trunc_width.filepath, false) then
     return " "
   end
 

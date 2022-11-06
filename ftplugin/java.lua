@@ -37,8 +37,8 @@ local config = {
     workspace_dir,
   },
   root_dir = jdtls.setup.find_root { ".git", "mvnw", "gradlew", "pom.xml" },
-  on_attach = require("config.lsp.handlers").on_attach,
-  extendedClientCapabilities = extendedClientCapabilities,
+  on_attach = require("config.lsp.handler").on_attach,
+  capabilities = require("config.lsp.handler").capabilities,
 
   -- eclipse.jdt.ls specific settings
   -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
