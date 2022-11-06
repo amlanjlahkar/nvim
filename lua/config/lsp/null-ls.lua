@@ -30,14 +30,10 @@ vim.keymap.set("n", "<leader>f", function()
       local use_builtin = { "clangd", "jdtls" }
       for _, v in pairs(use_builtin) do
         if client.name == v then
-          _ISATTACHED = true
+          return client.name ~= "null-ls"
         end
       end
-      if _ISATTACHED then
-        return client.name ~= "null-ls"
-      else
-        return client.name == "null-ls"
-      end
+      return client.name == "null-ls"
     end,
     timeout_ms = 5000,
     async = true,

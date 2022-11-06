@@ -19,7 +19,7 @@ map("n", "<leader>bD", "<cmd>%bd|e#|bd#|normal `<CR>", attrs("Delete all except 
 -- }}}
 
 -- terminal related {{{
-map("n", "<leader><leader>t", "<cmd>vnew term://bash<CR>", attrs("Open terminal"))
+map("n", "<leader><leader>t", "<cmd>tab terminal<CR>", attrs("Open terminal"))
 -- }}}
 
 -- movements {{{
@@ -47,7 +47,7 @@ map("n", "<leader><Up>", "<cmd>resize -7<CR>", attrs("Resize pane towards up"))
 map("n", "<F11>", "<cmd>setlocal spell!<CR>", attrs())
 map("i", "<F11>", "<C-o>:setlocal spell!<CR>", attrs())
 
-map("n", "<leader><leader>s", "<cmd>:write | source %<CR>", attrs("Save and source lua file"))
+map("n", "<leader><leader>s", "<cmd> silent :write | source %<CR>", attrs("Save and source lua file"))
 
 map("n", "<F2>", "<cmd>!$BROWSER %<CR>", attrs())
 -- }}}

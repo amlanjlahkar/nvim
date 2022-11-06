@@ -20,7 +20,7 @@ wk.setup {
   window = {
     border = "single",
     margin = margin,
-    winblend = 10,
+    winblend = vim.opt.winblend:get(),
   },
   show_help = false,
   triggers = "<leader>",

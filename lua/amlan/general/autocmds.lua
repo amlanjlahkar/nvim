@@ -5,7 +5,7 @@ local fn = vim.fn
 local function gcc()
   local fpath = fn.expand("%:p")
   local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
-  local exit_code
+  local exit_code = nil
   require("plenary.job"):new({
       command = "gcc",
       args = { "-o", outfile, fpath },
@@ -46,7 +46,13 @@ local autocmd_definitions = {
       group = "_convention",
       desc = "Open terminal directly in insert mode",
       pattern = "*",
-      command = "setlocal norelativenumber nonumber | startinsert",
+      callback = function()
+        vim.cmd([[
+          setlocal norelativenumber
+          setlocal nonumber
+          startinsert
+        ]])
+      end,
     },
   },
 

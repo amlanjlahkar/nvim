@@ -19,35 +19,35 @@ M.is_truncated = function(_, width)
 end
 
 M.modes = setmetatable({
-  ["n"] = "N",
+  ["n"] = "%#VimModeNormal# N %#StatusLine#",
   ["no"] = "N·P",
-  ["v"] = "V",
-  ["V"] = "V·L",
-  [""] = "V·B",
+  ["v"] = "%#VimModeVisual# V %#StatusLine#",
+  ["V"] = "%#VimModeVisual# V·L %#StatusLine#",
+  [""] = "%#VimModeVisual# V·B %#StatusLine#",
   ["s"] = "S",
   ["S"] = "S·L",
   [""] = "S·B",
-  ["i"] = "I",
+  ["i"] = "%#VimModeInsert# I %#StatusLine#",
   ["ic"] = "I",
   ["R"] = "R",
   ["Rv"] = "V·R",
-  ["c"] = "C",
+  ["c"] = "%#VimModeCommand# C %#StatusLine#",
   ["cv"] = "V·E",
   ["ce"] = "E",
   ["r"] = "P",
   ["rm"] = "RM",
   ["r?"] = "C",
   ["!"] = "S",
-  ["t"] = "T",
+  ["t"] = "%#VimModeExtra# T %#StatusLine#",
 }, {
   __index = function()
-    return "U" -- handle edge cases
+    return "%#VimModeExtra# U %#StatusLine#" -- handle edge cases
   end,
 })
 
 M.get_current_mode = function(self)
   local current_mode = api.nvim_get_mode().mode
-  return string.format("[%s]", self.modes[current_mode]):upper()
+  return string.format("%s", self.modes[current_mode]):upper()
 end
 
 -- Git info
@@ -111,7 +111,7 @@ M.get_fileformat = function()
 end
 
 M.get_line_col = function()
-  return " %l:%c"
+  return " %l:%c "
 end
 
 -- LSP progress, diagnostics and treesitter status
@@ -148,16 +148,16 @@ M.get_lsp_diagnostic = function()
   local info = ""
 
   if count["errors"] ~= 0 then
-    errors = " %#LspDiagnosticsDefaultError# " .. count["errors"]
+    errors = " %#StatusLineDiagnosticError# " .. count["errors"]
   end
   if count["warnings"] ~= 0 then
-    warnings = " %#LspDiagnosticsDefaultWarning# " .. count["warnings"]
+    warnings = " %#StatusLineDiagnosticWarn# " .. count["warnings"]
   end
   if count["hints"] ~= 0 then
-    hints = " %#LspDiagnosticsDefaultHint# " .. count["hints"]
+    hints = " %#StatusLineDiagnosticHint# " .. count["hints"]
   end
   if count["info"] ~= 0 then
-    info = " %#LspDiagnosticsDefaultInformation# " .. count["info"]
+    info = " %#StatusLineDiagnosticInfo# " .. count["info"]
   end
 
   return errors .. warnings .. hints .. info .. "%#StatusLineNC#"
@@ -180,8 +180,8 @@ M.set_active = function(self)
     self:get_git_status(),
     self:get_lsp_diagnostic(),
     "%=",
-    self:lsp_progress(),
     "%#StatusLine#",
+    self:lsp_progress(),
     self:get_filetype(),
     "%#StatusLineInd#",
     self:treesitter_status(),

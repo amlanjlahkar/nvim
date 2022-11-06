@@ -35,6 +35,7 @@ opt.spelllang = "en_us"
 opt.spellsuggest = { "best", 5 }
 opt.scrolloff = 8
 opt.sidescrolloff = 8
+opt.cmdheight = 1
 opt.autowrite = true
 opt.list = true
 opt.listchars = { tab = "»·", nbsp = "+", trail = "·", extends = "→", precedes = "←" }
