@@ -14,7 +14,7 @@ M.trunc_width = setmetatable({
 })
 
 M.is_truncated = function(_, width)
-  local current_width = require("utils").get_width({ global = true })
+  local current_width = require("util").get_width({ global = true })
   return current_width < width
 end
 

@@ -22,8 +22,8 @@ mason_lspconfig.setup {
 
 for _, server in pairs(servers) do
   local opts = {
-    on_attach = require("config.lsp.handlers").on_attach,
-    capabilities = require("config.lsp.handlers").capabilities,
+    on_attach = require("config.lsp.handler").on_attach,
+    capabilities = require("config.lsp.handler").capabilities,
   }
   local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.server_config." .. server)
   if has_custom_opts then

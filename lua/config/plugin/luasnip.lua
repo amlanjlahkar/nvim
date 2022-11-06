@@ -13,5 +13,5 @@ ls.config.setup {
 
 -- load custom defined snippets
 require("luasnip.loaders.from_vscode").lazy_load {
-  paths = vim.fn.stdpath("config") .. "/snippets",
+  paths = vim.fn.stdpath("config") .. "/snippet",
 }

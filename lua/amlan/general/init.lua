@@ -1,3 +1,3 @@
-require("amlan.general.options")
-require("amlan.general.keymaps")
-require("amlan.general.autocmds")
+require("amlan.general.option")
+require("amlan.general.keymap")
+require("amlan.general.autocmd")

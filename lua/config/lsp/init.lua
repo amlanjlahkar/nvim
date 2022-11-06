@@ -3,6 +3,6 @@ if not is_available then
   return
 end
 
-require("config.lsp.servers")
-require("config.lsp.handlers").setup()
+require("config.lsp.server")
+require("config.lsp.handler").setup()
 require("config.lsp.null-ls")
