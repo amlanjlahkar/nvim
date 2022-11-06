@@ -34,6 +34,15 @@ telescope.setup {
       "**/*.jar",
     },
   },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+  },
 }
 
 require("config.telescope.keymap")
+telescope.load_extension("fzf")
