@@ -14,7 +14,7 @@ M.trunc_width = setmetatable({
 })
 
 M.is_truncated = function(_, width)
-  local current_width = api.nvim_win_get_width(0)
+  local current_width = require("utils").get_width({ global = true })
   return current_width < width
 end
 
