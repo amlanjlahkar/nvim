@@ -4,7 +4,7 @@ if not is_available then
 end
 
 local g = vim.g
-indent_blankline.setup {
+indent_blankline.setup({
   enabled = false,
   max_indent_increase = 1,
   use_treesiter = false,
@@ -12,7 +12,7 @@ indent_blankline.setup {
   show_current_context_start = false,
   show_trailing_blankline_indent = false,
   space_char_blankline = " ",
-}
+})
 
 g.indent_blankline_buftype_exlude = { "terminal", "nofile" }
 g.indent_blankline_filetype_exclude = {

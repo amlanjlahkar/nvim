@@ -3,7 +3,7 @@ if not is_available then
   return
 end
 
-telescope.setup {
+telescope.setup({
   defaults = {
     prompt_prefix = " 🔎 ",
     selection_caret = "  ",
@@ -42,7 +42,7 @@ telescope.setup {
       case_mode = "smart_case",
     },
   },
-}
+})
 
 require("config.telescope.keymap")
 telescope.load_extension("fzf")

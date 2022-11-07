@@ -39,7 +39,7 @@ opt.cmdheight = 1
 opt.autowrite = true
 opt.list = true
 opt.listchars = { tab = "»·", nbsp = "+", trail = "·", extends = "→", precedes = "←" }
-opt.fillchars:append {
+opt.fillchars:append({
   eob = " ",
   horiz = "━",
   horizup = "┻",
@@ -48,7 +48,7 @@ opt.fillchars:append {
   vertleft = "┨",
   vertright = "┣",
   verthoriz = "╋",
-}
+})
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.browsedir = "buffer"
 opt.virtualedit = "block"

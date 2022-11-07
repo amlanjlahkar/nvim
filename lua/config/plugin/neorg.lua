@@ -3,7 +3,7 @@ if not is_avail then
   return
 end
 
-neorg.setup {
+neorg.setup({
   load = {
     ["core.defaults"] = {},
     ["core.norg.concealer"] = {},
@@ -18,4 +18,4 @@ neorg.setup {
       },
     },
   },
-}
+})

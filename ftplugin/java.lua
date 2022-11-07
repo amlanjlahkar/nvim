@@ -36,7 +36,7 @@ local config = {
     "-data",
     workspace_dir,
   },
-  root_dir = jdtls.setup.find_root { ".git", "mvnw", "gradlew", "pom.xml" },
+  root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml" }),
   on_attach = require("config.lsp.handler").on_attach,
   capabilities = require("config.lsp.handler").capabilities,
 

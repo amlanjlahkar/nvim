@@ -15,10 +15,10 @@ local servers = {
   "pyright",
   "tailwindcss",
 }
-mason_lspconfig.setup {
+mason_lspconfig.setup({
   ensure_installed = servers,
   automatic_installation = false,
-}
+})
 
 for _, server in pairs(servers) do
   local opts = {

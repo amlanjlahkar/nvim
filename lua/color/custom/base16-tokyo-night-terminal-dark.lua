@@ -1,7 +1,7 @@
 local palette = {
   floatbg = "#1a1b26",
   barbg = "#1a1b26",
-  tabbg  = "NONE",
+  tabbg = "NONE",
 }
 
 local M = {}

@@ -17,20 +17,20 @@ local function use_config(plugin)
   return string.format('require("config.plugin.%s")', plugin)
 end
 
-require("packer").startup {
+require("packer").startup({
   function(use)
     -- Core {{{1
     use("wbthomason/packer.nvim")
-    use {
+    use({
       "lewis6991/impatient.nvim",
       config = function()
         require("impatient")
       end,
-    }
-    use { "nvim-lua/plenary.nvim", module_pattern = "plenary.*" }
+    })
+    use({ "nvim-lua/plenary.nvim", module_pattern = "plenary.*" })
 
     -- LSP and Completion {{{2
-    use {
+    use({
       "neovim/nvim-lspconfig",
       requires = "folke/trouble.nvim",
       opt = true,
@@ -54,12 +54,12 @@ require("packer").startup {
       config = function()
         require("config/lsp")
       end,
-    }
+    })
 
-    use {
+    use({
       "williamboman/mason.nvim",
       config = function()
-        require("mason").setup {
+        require("mason").setup({
           ui = {
             border = "single",
             icons = {
@@ -68,20 +68,20 @@ require("packer").startup {
               package_uninstalled = " ",
             },
           },
-        }
+        })
       end,
-    }
+    })
     use("williamboman/mason-lspconfig")
 
     use("jose-elias-alvarez/null-ls.nvim")
 
-    use {
+    use({
       "SmiteshP/nvim-navic",
       after = "nvim-lspconfig",
       config = use_config("navic"),
-    }
+    })
 
-    use {
+    use({
       "hrsh7th/nvim-cmp",
       event = { "InsertEnter" },
       wants = { "LuaSnip" },
@@ -92,72 +92,72 @@ require("packer").startup {
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
       config = use_config("cmp"),
-    }
+    })
 
-    use {
+    use({
       "L3MON4D3/LuaSnip",
       after = "nvim-cmp",
       config = use_config("luasnip"),
-    }
+    })
     -- 2}}}
 
     -- Treesitter {{{2
-    use {
+    use({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = use_config("treesitter"),
-    }
+    })
 
-    use {
+    use({
       "windwp/nvim-ts-autotag",
       ft = "html",
       config = function()
         require("nvim-ts-autotag").setup()
       end,
-    }
+    })
     -- 2}}}
 
     -- Debugging {{{2
-    use { "mfussenegger/nvim-dap", ft = { "java" } }
-    use { "rcarriga/nvim-dap-ui", after = "nvim-dap" }
+    use({ "mfussenegger/nvim-dap", ft = { "java" } })
+    use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
     -- 2}}}
 
     -- language specific {{{2
-    use { "mfussenegger/nvim-jdtls", ft = "java" }
+    use({ "mfussenegger/nvim-jdtls", ft = "java" })
     -- 2}}}
     -- 1}}}
 
     -- Intuitve Development {{{
-    use { "tpope/vim-fugitive", opt = true, cmd = "Git" }
-    use { "ThePrimeagen/harpoon", config = use_config("harpoon") }
+    use({ "tpope/vim-fugitive", opt = true, cmd = "Git" })
+    use({ "ThePrimeagen/harpoon", config = use_config("harpoon") })
 
-    use {
+    use({
       "nvim-telescope/telescope-fzf-native.nvim",
       requires = "nvim-telescope/telescope.nvim",
       run = "make",
       config = function()
         require("config.telescope")
       end,
-    }
-    use {
+    })
+    use({
       "numToStr/Comment.nvim",
       config = function()
         require("Comment").setup()
       end,
-    }
+    })
 
-    use {
+    use({
       "kylechui/nvim-surround",
       config = function()
         require("nvim-surround").setup()
       end,
-    }
+    })
     -- }}}
 
     -- UI {{{
-    use { "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" }
-    use { "lewis6991/gitsigns.nvim", config = use_config("gitsigns") }
-    use { "folke/which-key.nvim", config = use_config("which_key") }
+    use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
+    use({ "lewis6991/gitsigns.nvim", config = use_config("gitsigns") })
+    use({ "folke/which-key.nvim", config = use_config("which_key") })
     -- colorscheme
     use("RRethy/nvim-base16")
     -- }}}
@@ -178,7 +178,7 @@ require("packer").startup {
     display = {
       compact = true,
       open_fn = function()
-        return require("packer.util").float { border = "single" }
+        return require("packer.util").float({ border = "single" })
       end,
       prompt_border = "single",
       moved_sym = " ",
@@ -192,7 +192,7 @@ require("packer").startup {
     },
     compile_path = fn.stdpath("config") .. "/lua/plugin/packer_compiled.lua",
   },
-}
+})
 
 -- autocmd to source and recompile whenever this file gets written/modified
 local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })

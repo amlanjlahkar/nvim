@@ -3,7 +3,7 @@ if not is_available then
   return
 end
 
-TS_configs.setup {
+TS_configs.setup({
   ensure_installed = {
     "bash",
     "cpp",
@@ -38,7 +38,7 @@ TS_configs.setup {
   indent = {
     enable = true,
   },
-}
+})
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.bash.filetype_to_parsename = { "sh", "zsh" }

@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd({ "VimResized", "BufEnter" }, {
   end,
 })
 
-wk.setup {
+wk.setup({
   window = {
     border = "single",
     margin = margin,
@@ -24,4 +24,4 @@ wk.setup {
   },
   show_help = false,
   triggers = "<leader>",
-}
+})

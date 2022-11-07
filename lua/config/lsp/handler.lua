@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function()
-  vim.diagnostic.config {
+  vim.diagnostic.config({
     signs = false,
     update_in_insert = true,
     underline = false,
@@ -20,7 +20,7 @@ M.setup = function()
       header = "Diagnostic Info",
       prefix = "",
     },
-  }
+  })
 
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
   for type, icon in pairs(signs) do
@@ -93,10 +93,10 @@ M.on_attach = function(client, bufnr)
     vim.api.nvim_create_augroup("lsp_document_highlight", {
       clear = false,
     })
-    vim.api.nvim_clear_autocmds {
+    vim.api.nvim_clear_autocmds({
       buffer = bufnr,
       group = "lsp_document_highlight",
-    }
+    })
     vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_document_highlight",
       buffer = bufnr,

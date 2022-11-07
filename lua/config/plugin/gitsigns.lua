@@ -3,7 +3,7 @@ if not is_available then
   return
 end
 
-gitsigns.setup {
+gitsigns.setup({
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -42,4 +42,4 @@ gitsigns.setup {
     map("n", "<leader>gR", gs.reset_buffer, { silent = true, noremap = true, desc = "Gitsigns reset buffer" })
     map("n", "<leader>gp", gs.preview_hunk, { silent = true, noremap = true, desc = "Gitsigns preview diff" })
   end,
-}
+})
