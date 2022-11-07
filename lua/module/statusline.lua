@@ -13,9 +13,9 @@ M.trunc_width = setmetatable({
   end,
 })
 
-M.is_truncated = function(_, width, global)
-  global = global == nil and true
-  local current_width = require("core.util").get_width({ global = global })
+M.is_truncated = function(_, width, is_statusglobal)
+  is_statusglobal = is_statusglobal or true
+  local current_width = require("core.util").get_width({ combined = is_statusglobal })
   return current_width < width
 end
 
@@ -77,8 +77,10 @@ end
 M.get_filepath = function(self)
   local filepath = fn.fnamemodify(fn.expand("%"), ":.:h")
 
-  if filepath == "" or filepath == "." or self:is_truncated(self.trunc_width.filepath, false) then
+  if filepath == "" or filepath == "." then
     return " "
+  elseif self:is_truncated(self.trunc_width.filepath, false) then
+    return string.format(" %s/", fn.pathshorten(filepath, 2))
   end
 
   return string.format(" %%<%s/", filepath)
@@ -171,7 +173,7 @@ M.treesitter_status = function()
 end
 
 M.set_active = function(self)
-  return table.concat {
+  return table.concat({
     "%#StatusLine#",
     self:get_current_mode(),
     "%#StatusLineImp#",
@@ -190,7 +192,7 @@ M.set_active = function(self)
     self:get_fileformat(),
     self:get_line_col(),
     "%#StatusLine#",
-  }
+  })
 end
 
 M.set_inactive = function()
