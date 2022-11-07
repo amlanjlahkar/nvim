@@ -7,7 +7,7 @@ local margin = { 1, 0, 1, 0 }
 vim.api.nvim_create_autocmd({ "VimResized", "BufEnter" }, {
   desc = "Resize which key window based on nvim_window width",
   callback = function()
-    local width = require("util").get_width()
+    local width = require("core.util").get_width()
     if width >= 160 then
       margin[2] = 100
     else

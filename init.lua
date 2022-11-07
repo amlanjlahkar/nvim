@@ -1,4 +1,4 @@
-require("amlan.general")
+require("core")
 require("color")
 require("module.statusline")
 require("plugin")
