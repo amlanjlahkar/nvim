@@ -14,31 +14,32 @@ M.trunc_width = setmetatable({
 })
 
 M.is_truncated = function(_, width, global)
-  local current_width = require("util").get_width({ global = global })
+  global = global == nil and true
+  local current_width = require("core.util").get_width({ global = global })
   return current_width < width
 end
 
 M.modes = setmetatable({
   ["n"] = "%#VimModeNormal# N %#StatusLine#",
-  ["no"] = "N·P",
+  ["i"] = "%#VimModeInsert# I %#StatusLine#",
   ["v"] = "%#VimModeVisual# V %#StatusLine#",
   ["V"] = "%#VimModeVisual# V·L %#StatusLine#",
   [""] = "%#VimModeVisual# V·B %#StatusLine#",
+  ["c"] = "%#VimModeCommand# C %#StatusLine#",
+  ["t"] = "%#VimModeExtra# T %#StatusLine#",
+  ["no"] = "N·P",
   ["s"] = "S",
   ["S"] = "S·L",
   [""] = "S·B",
-  ["i"] = "%#VimModeInsert# I %#StatusLine#",
   ["ic"] = "I",
   ["R"] = "R",
   ["Rv"] = "V·R",
-  ["c"] = "%#VimModeCommand# C %#StatusLine#",
   ["cv"] = "V·E",
   ["ce"] = "E",
   ["r"] = "P",
   ["rm"] = "RM",
   ["r?"] = "C",
   ["!"] = "S",
-  ["t"] = "%#VimModeExtra# T %#StatusLine#",
 }, {
   __index = function()
     return "%#VimModeExtra# U %#StatusLine#" -- handle edge cases
