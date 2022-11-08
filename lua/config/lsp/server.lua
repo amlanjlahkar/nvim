@@ -1,7 +1,5 @@
-local is_masonconfig_available, mason_lspconfig = pcall(require, "mason-lspconfig")
-local is_lspconfig_available, lspconfig = pcall(require, "lspconfig")
-
-if not (is_lspconfig_available or is_masonconfig_available) then
+local is_available, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not is_available then
   return
 end
 
@@ -35,7 +33,7 @@ function M:setup_servers()
       if has_custom_opts then
         opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
       end
-      lspconfig[server].setup(opts)
+      require("lspconfig")[server].setup(opts)
     end
     self.is_installed = true
   end

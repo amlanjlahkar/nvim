@@ -8,6 +8,7 @@ telescope.setup({
     prompt_prefix = " 🔎 ",
     selection_caret = "  ",
     multi_icon = " + ",
+    borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
     layout_config = {
       center = {
         anchor = "S",
