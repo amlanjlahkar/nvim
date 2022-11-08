@@ -3,7 +3,8 @@ local fn = vim.fn
 -- bootstrap packer installation
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
-  vim.api.nvim_exec(string.format("!git clone --depth 1 https://github.com/wbthomason/packer.nvim %s", install_path))
+  vim.notify("Installing packer and corresponding plugins, please wait...", vim.log.levels.INFO)
+  vim.api.nvim_exec(string.format("silent !git clone --depth 1 https://github.com/wbthomason/packer.nvim %s", install_path), false)
 
   local rtp_addition = vim.fn.stdpath("data") .. "/site/pack/*/start/*"
   if not string.find(vim.o.runtimepath, rtp_addition) then
@@ -104,7 +105,10 @@ require("packer").startup({
     -- Treesitter {{{2
     use({
       "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
+      run = function()
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        ts_update()
+      end,
       config = use_config("treesitter"),
     })
 

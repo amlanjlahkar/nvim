@@ -15,19 +15,30 @@ local servers = {
   "pyright",
   "tailwindcss",
 }
-mason_lspconfig.setup({
-  ensure_installed = servers,
-  automatic_installation = false,
-})
 
-for _, server in pairs(servers) do
-  local opts = {
-    on_attach = require("config.lsp.handler").on_attach,
-    capabilities = require("config.lsp.handler").capabilities,
-  }
-  local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.server_config." .. server)
-  if has_custom_opts then
-    opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
+local M = {}
+M.setup_servers = function()
+  if next(mason_lspconfig.get_installed_servers()) == nil then
+    vim.notify("Installing language servers...", vim.log.levels.INFO)
+    mason_lspconfig.setup({
+      ensure_installed = servers,
+      automatic_installation = false,
+    })
+    return 1
+  else
+    for _, server in pairs(servers) do
+      local opts = {
+        on_attach = require("config.lsp.handler").on_attach,
+        capabilities = require("config.lsp.handler").capabilities,
+      }
+      local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.server_config." .. server)
+      if has_custom_opts then
+        opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
+      end
+      lspconfig[server].setup(opts)
+    end
+    return 0
   end
-  lspconfig[server].setup(opts)
 end
+
+return M
