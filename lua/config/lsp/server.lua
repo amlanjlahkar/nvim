@@ -24,7 +24,6 @@ M.setup_servers = function()
       ensure_installed = servers,
       automatic_installation = false,
     })
-    return 1
   else
     for _, server in pairs(servers) do
       local opts = {
@@ -37,7 +36,7 @@ M.setup_servers = function()
       end
       lspconfig[server].setup(opts)
     end
-    return 0
+    return 1
   end
 end
 
