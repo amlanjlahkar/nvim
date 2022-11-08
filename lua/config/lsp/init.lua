@@ -4,7 +4,8 @@ if not is_available then
 end
 require("lspconfig.ui.windows").default_options.border = "single"
 
-if require("config.lsp.server").setup_servers() == 1 then
+local servers = require("config.lsp.server"):setup_servers()
+if servers.is_installed then
   require("config.lsp.handler").setup()
   require("config.lsp.null-ls")
 end
