@@ -1,6 +1,6 @@
-local is_available, harpoon = pcall(require, "harpoon")
-local wk = require("which-key")
-if not is_available then
+local is_available, _ = pcall(require, "harpoon")
+local is_wk_available, wk = pcall(require, "which-key")
+if is_available == false or is_wk_available == false then
   return
 end
 
