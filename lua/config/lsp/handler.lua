@@ -41,28 +41,24 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 end
 
-local function lsp_keymaps()
-  local is_wk_available, wk = pcall(require, "which-key")
-  if is_wk_available then
-    local lsp_wk_mappings = {
-      l = {
-        name = "LSP",
-        gd = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto definition" },
-        gi = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto implementation" },
-        gr = { "<cmd>TroubleToggle lsp_references<CR>", "List references" },
-        gn = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Goto next diagnostic" },
-        gp = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Goto previous diagnostic" },
-        r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename symbol" },
-        s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Show signature help" },
-        a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code actions" },
-        k = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover information" },
-        l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Show line diagnostic" },
-        d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Show document diagnostics" },
-        D = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Show workspace diagnostics" },
-      },
-    }
-    wk.register(lsp_wk_mappings, { prefix = "<leader>" })
-  end
+-- stylua: ignore
+local function lsp_keymaps(bufnr)
+  local key = require("core.keymap.maputil")
+  local cmd, opts = key.cmd, key.new_opts
+  key.nmap({
+    { "<leader>lgd",  cmd("lua vim.lsp.buf.definition()"),          opts(bufnr, "LSP: Goto definition") },
+    { "<leader>lgi",  cmd("lua vim.lsp.buf.implementation()"),      opts(bufnr, "LSP: Goto implementation") },
+    { "<leader>lr",   cmd("lua vim.lsp.buf.rename()"),              opts(bufnr, "LSP: Rename symbol under cursor") },
+    { "<leader>la",   cmd("lua vim.lsp.buf.code_action()"),        opts(bufnr, "LSP: List available code actions") },
+    { "<leader>ls",   cmd("lua vim.lsp.buf.signature_help()"),      opts(bufnr, "LSP: Show signature info for symbol under cursor") },
+    { "<leader>lk",   cmd("lua vim.lsp.buf.hover()"),               opts(bufnr, "LSP: Show hover information") },
+    { "<leader>lgr",  cmd("TroubleToggle lsp_references"),          opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
+    { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),    opts(bufnr, "LSP/Trouble: List document diagnostics") },
+    { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),   opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
+    { "<leader>ll",   cmd("lua vim.diagnostic.open_float()"),       opts(bufnr, "LSP: Show line diagnostic") },
+    { "]d",           cmd("lua vim.diagnostic.goto_next()"),        opts(bufnr, "LSP: Goto next diagnostic occurrence") },
+    { "[d",           cmd("lua vim.diagnostic.goto_prev()"),        opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
+  })
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -111,7 +107,7 @@ M.on_attach = function(client, bufnr)
     })
   end
 
-  lsp_keymaps()
+  lsp_keymaps(bufnr)
 end
 
 return M

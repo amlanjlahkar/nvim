@@ -108,49 +108,20 @@ local config = {
 jdtls.start_or_attach(config)
 
 -- Keymaps
-local is_wk_available, wk = pcall(require, "which-key")
-if not is_wk_available then
-  return
-end
+local key = require("core.keymap.maputil")
+local cmd, opts = key.cmd, key.new_opts
+local nowait = key.nowait
 
-local opts = {
-  mode = "n",
-  prefix = "<leader>",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = true,
-}
+key.nmap({
+  { "<leader>eo", cmd("lua require('jdtls').organize_imports()"), opts(nowait, "Jdtls: Organize imports") },
+  { "<leader>ev", cmd("lua require('jdtls').extract_variable()"), opts(nowait, "Jdtls: Extract variable") },
+  { "<leader>ec", cmd("lua require('jdtls').organize_constant()"), opts(nowait, "Jdtls: Extract constant") },
+  { "<leader>et", cmd("lua require('jdtls').test_nearest_method()"), opts(nowait, "Jdtls: Test method") },
+  { "<leader>eT", cmd("lua require('jdtls').test_class()"), opts(nowait, "Jdtls: Test class") },
+})
 
-local vopts = {
-  mode = "v",
-  prefix = "<leader>",
-  buffer = nil,
-  silent = true,
-  noremap = true,
-  nowait = true,
-}
-
-local mappings = {
-  e = {
-    name = "Jdtls",
-    o = { "<Cmd>lua require('jdtls').organize_imports()<CR>", "Organize Imports" },
-    v = { "<Cmd>lua require('jdtls').extract_variable()<CR>", "Extract Variable" },
-    c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", "Extract Constant" },
-    t = { "<Cmd>lua require('jdtls').test_nearest_method()<CR>", "Test Method" },
-    T = { "<Cmd>lua require('jdtls').test_class()<CR>", "Test Class" },
-    u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
-  },
-}
-
-local vmappings = {
-  e = {
-    name = "Jdtls",
-    v = { "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable" },
-    c = { "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant" },
-    m = { "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method" },
-  },
-}
-
-wk.register(mappings, opts)
-wk.register(vmappings, vopts)
+key.vmap({
+  { "<leader>ev", cmd("lua require('jdtls').extract_variable(true)"), opts(nowait, "Jdtls: Extract variable") },
+  { "<leader>ec", cmd("lua require('jdtls').organize_constant(true)"), opts(nowait, "Jdtls: Extract constant") },
+  { "<leader>em", cmd("lua require('jdtls').extract_method(true)"), opts(nowait, "Jdtls: Extract method") },
+})
