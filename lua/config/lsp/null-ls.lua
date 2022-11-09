@@ -11,7 +11,6 @@ null_ls.setup({
     formatting.black,
     formatting.prettier,
     formatting.stylua,
-    -- formatting.phpcbf.with { command = "./vendor/bin/phpcbf" },
     formatting.phpcsfixer,
     formatting.shfmt.with({
       extra_args = { "-i", "2", "-ci", "-bn" },
