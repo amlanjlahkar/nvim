@@ -16,7 +16,7 @@ local servers = {
 
 local M = {}
 
-function M:setup_servers()
+function M:setup_server()
   if #(mason_lspconfig.get_installed_servers()) == nil then
     vim.notify("Installing language servers...", vim.log.levels.INFO)
     mason_lspconfig.setup({

@@ -49,7 +49,7 @@ local function lsp_keymaps(bufnr)
     { "<leader>lgd",  cmd("lua vim.lsp.buf.definition()"),          opts(bufnr, "LSP: Goto definition") },
     { "<leader>lgi",  cmd("lua vim.lsp.buf.implementation()"),      opts(bufnr, "LSP: Goto implementation") },
     { "<leader>lr",   cmd("lua vim.lsp.buf.rename()"),              opts(bufnr, "LSP: Rename symbol under cursor") },
-    { "<leader>la",   cmd("lua vim.lsp.buf.code_action()"),        opts(bufnr, "LSP: List available code actions") },
+    { "<leader>la",   cmd("lua vim.lsp.buf.code_action()"),         opts(bufnr, "LSP: List available code actions") },
     { "<leader>ls",   cmd("lua vim.lsp.buf.signature_help()"),      opts(bufnr, "LSP: Show signature info for symbol under cursor") },
     { "<leader>lk",   cmd("lua vim.lsp.buf.hover()"),               opts(bufnr, "LSP: Show hover information") },
     { "<leader>lgr",  cmd("TroubleToggle lsp_references"),          opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },

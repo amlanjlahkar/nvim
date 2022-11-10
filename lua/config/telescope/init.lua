@@ -10,9 +10,9 @@ telescope.setup({
     multi_icon = " + ",
     borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
     layout_config = {
-      center = {
+      vertical = {
         anchor = "S",
-        height = 0.6,
+        height = 0.7,
         width = 0.4,
         prompt_position = "bottom",
       },

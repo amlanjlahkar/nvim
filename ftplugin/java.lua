@@ -112,16 +112,18 @@ local key = require("core.keymap.maputil")
 local cmd, opts = key.cmd, key.new_opts
 local nowait = key.nowait
 
+-- stylua: ignore start
 key.nmap({
-  { "<leader>eo", cmd("lua require('jdtls').organize_imports()"), opts(nowait, "Jdtls: Organize imports") },
-  { "<leader>ev", cmd("lua require('jdtls').extract_variable()"), opts(nowait, "Jdtls: Extract variable") },
-  { "<leader>ec", cmd("lua require('jdtls').organize_constant()"), opts(nowait, "Jdtls: Extract constant") },
-  { "<leader>et", cmd("lua require('jdtls').test_nearest_method()"), opts(nowait, "Jdtls: Test method") },
-  { "<leader>eT", cmd("lua require('jdtls').test_class()"), opts(nowait, "Jdtls: Test class") },
+  { "<leader>eo", cmd("lua require('jdtls').organize_imports()"),       opts(nowait, "Jdtls: Organize imports") },
+  { "<leader>ev", cmd("lua require('jdtls').extract_variable()"),       opts(nowait, "Jdtls: Extract variable") },
+  { "<leader>ec", cmd("lua require('jdtls').organize_constant()"),      opts(nowait, "Jdtls: Extract constant") },
+  { "<leader>et", cmd("lua require('jdtls').test_nearest_method()"),    opts(nowait, "Jdtls: Test method") },
+  { "<leader>eT", cmd("lua require('jdtls').test_class()"),             opts(nowait, "Jdtls: Test class") },
 })
 
 key.vmap({
-  { "<leader>ev", cmd("lua require('jdtls').extract_variable(true)"), opts(nowait, "Jdtls: Extract variable") },
-  { "<leader>ec", cmd("lua require('jdtls').organize_constant(true)"), opts(nowait, "Jdtls: Extract constant") },
-  { "<leader>em", cmd("lua require('jdtls').extract_method(true)"), opts(nowait, "Jdtls: Extract method") },
+  { "<leader>ev", cmd("lua require('jdtls').extract_variable(true)"),   opts(nowait, "Jdtls: Extract variable") },
+  { "<leader>ec", cmd("lua require('jdtls').organize_constant(true)"),  opts(nowait, "Jdtls: Extract constant") },
+  { "<leader>em", cmd("lua require('jdtls').extract_method(true)"),     opts(nowait, "Jdtls: Extract method") },
 })
+-- stylua: ignore end
