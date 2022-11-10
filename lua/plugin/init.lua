@@ -162,6 +162,7 @@ require("packer").startup({
     -- }}}
 
     -- UI {{{
+    use({ "stevearc/dressing.nvim", config = use_config("dressing") })
     use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
     use({ "lewis6991/gitsigns.nvim", config = use_config("gitsigns") })
     use({ "folke/which-key.nvim", config = use_config("which_key") })

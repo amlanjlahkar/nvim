@@ -20,7 +20,7 @@ local function try_colorscheme(colorscheme)
     hl_override(colorscheme, custom_hl)
   end
   if not pcall(vim.api.nvim_exec, "colorscheme " .. colorscheme, false) then
-    vim.api.nvim_exec("colorscheme default", false)
+    vim.api.nvim_exec("colorscheme slate", false)
   end
 end
 

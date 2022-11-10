@@ -169,7 +169,7 @@ end
 M.treesitter_status = function()
   local buf = api.nvim_get_current_buf()
   local hl = require("vim.treesitter.highlighter")
-  return hl.active[buf] and "  " or ""
+  return hl.active[buf] and "  " or ""
 end
 
 M.set_active = function(self)
