@@ -100,6 +100,7 @@ require("packer").startup({
 
     use({
       "L3MON4D3/LuaSnip",
+      requires = { { "rafamadriz/friendly-snippets", opt = true } },
       after = "nvim-cmp",
       config = use_config("luasnip"),
     })
