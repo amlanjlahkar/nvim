@@ -1,6 +1,7 @@
 require("dressing").setup({
   input = {
     border = "single",
+    winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
   },
   select = {
     get_config = function(opts)

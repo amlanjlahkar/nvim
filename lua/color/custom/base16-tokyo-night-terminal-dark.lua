@@ -13,7 +13,7 @@ local palette = {
   Blue = "#7aa2f7",
   Magenta = "#bb9af7",
   Cyan = "#7dcfff",
-  White = "#c0caf5"
+  White = "#c0caf5",
 }
 
 local M = {}
@@ -45,12 +45,19 @@ M.custom = {
   { "FloatTitle",                 { bg = palette.Bg, fg = palette.White } },
   { "FloatBorder",                { bg = palette.Bg, fg = palette.BgShadeLighter } },
   { "NormalFloat",                { bg = palette.Bg, fg = palette.Fg } },
+  { "NormalFloatAlt",             { bg = palette.BgShadeLight, fg = palette.Fg } },
+  { "FloatBorderAlt",             { bg = palette.BgShadeLight, fg = palette.BgShadeLight } },
   { "LspReference",               { bg = palette.BgShadeLighter } },
   { "VimModeNormal",              { bg = "#041b4d", fg = palette.Blue } },
   { "VimModeInsert",              { bg = "#16373c", fg = palette.Green } },
   { "VimModeVisual",              { bg = "#521e00", fg = palette.Orange } },
   { "VimModeCommand",             { bg = "#1e064b", fg = palette.Magenta } },
   { "VimModeExtra",               { bg = "#4d0412", fg = palette.Red } },
+  { "SnipChoiceNode",             { bg = palette.BgShadeLight, fg = palette.Orange } },
+  { "SnipInsertNode",             { bg = palette.BgShadeLight, fg = palette.Green } },
+  { "TroubleText",                { bg = "NONE", fg = palette.Fg } },
+  { "TroubleFoldIcon",            { bg = "NONE", fg = palette.Fg } },
+  { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weired paren,brace highlighting on floating windows by default
   { "CmpItemAbbr",                { link = "NormalFloat" } },
 }
 
