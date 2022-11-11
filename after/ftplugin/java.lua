@@ -1,3 +1,8 @@
+vim.cmd([[
+  hi javaError guibg=NONE guifg=NONE
+  hi javaError2 guibg=NONE guifg=NONE
+]])
+
 local is_available, jdtls = pcall(require, "jdtls")
 if not is_available then
   return
