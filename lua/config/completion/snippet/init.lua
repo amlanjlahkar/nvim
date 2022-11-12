@@ -4,6 +4,25 @@ if not is_available then
 end
 local types = require("luasnip.util.types")
 
+local key = require("core.keymap.maputil")
+local ismap, opts = key.ismap, key.new_opts
+
+-- stylua: ignore
+ismap({
+  { "<TAB>", function()
+      if ls.expand_or_locally_jumpable() then
+        ls.expand_or_jump()
+      end
+    end,
+  },
+  { "<S-TAB>", function()
+      if ls.jumpable(-1) then
+        ls.jump(-1)
+      end
+    end,
+  },
+})
+
 ls.config.setup({
   history = true,
   updateevents = "TextChanged,TextChangedI",
@@ -28,5 +47,5 @@ require("luasnip.loaders.from_vscode").lazy_load({
   paths = vim.fn.stdpath("data") .. "/site/pack/packer/opt/friendly-snippets",
 })
 require("luasnip.loaders.from_lua").lazy_load({
-  paths = vim.fn.stdpath("config") .. "/luasnippet",
+  paths = vim.fn.stdpath("config") .. "/lua/config/completion/snippet/ft"
 })

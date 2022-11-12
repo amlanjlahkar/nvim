@@ -107,6 +107,7 @@ keymap.cmap = map("c")
 keymap.vmap = map("v")
 keymap.xmap = map("x")
 keymap.tmap = map("t")
+keymap.ismap = map({ "i", "s" })
 keymap.nvmap = map({ "n", "v" })
 
 return keymap

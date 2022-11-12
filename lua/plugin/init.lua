@@ -17,8 +17,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
   BOOTSTRAP_PACKER = true
 end
 
+local function extend(plugin)
+  return string.format("require('plugin.extend.%s')", plugin)
+end
+
 local function use_config(plugin)
-  return string.format('require("config.plugin.%s")', plugin)
+  return string.format("require('config.%s')", plugin)
 end
 
 require("packer").startup({
@@ -33,7 +37,7 @@ require("packer").startup({
     })
     use({ "nvim-lua/plenary.nvim", module_pattern = "plenary.*" })
 
-    -- LSP and Completion {{{2
+    -- LSP {{{2
     use({
       "neovim/nvim-lspconfig",
       requires = "folke/trouble.nvim",
@@ -55,54 +59,51 @@ require("packer").startup({
         "json",
         "yaml",
       },
-      config = function()
-        require("config/lsp")
-      end,
+      config = use_config("lsp")
     })
 
     use({
       "williamboman/mason.nvim",
-      config = function()
-        require("mason").setup({
-          ui = {
-            border = "single",
-            icons = {
-              package_installed = " ",
-              package_pending = "勒",
-              package_uninstalled = " ",
-            },
-          },
-        })
-      end,
+      requires = "williamboman/mason-lspconfig",
     })
-    use("williamboman/mason-lspconfig")
 
     use("jose-elias-alvarez/null-ls.nvim")
 
-    use({
-      "SmiteshP/nvim-navic",
-      after = "nvim-lspconfig",
-      config = use_config("navic"),
-    })
+    -- Debugging {{{3
+    use({ "mfussenegger/nvim-dap", ft = { "java" } })
+    use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
+    -- 3}}}
 
+    -- language specific {{{3
+    use({ "mfussenegger/nvim-jdtls", ft = "java" })
+    -- 3}}}
+    -- 2}}}
+
+    -- Completion {{{2
     use({
       "hrsh7th/nvim-cmp",
-      event = { "InsertEnter" },
-      wants = { "LuaSnip" },
+      event = "InsertEnter",
       requires = {
         { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
         { "hrsh7th/cmp-path", after = "nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
-      config = use_config("cmp"),
+      config = use_config("completion")
     })
 
     use({
       "L3MON4D3/LuaSnip",
       requires = { { "rafamadriz/friendly-snippets", opt = true } },
       after = "nvim-cmp",
-      config = use_config("luasnip"),
+      -- config = use_config("luasnip"),
+    })
+
+    use({
+      "kylechui/nvim-surround",
+      config = function()
+        require("nvim-surround").setup()
+      end,
     })
     -- 2}}}
 
@@ -113,7 +114,7 @@ require("packer").startup({
         local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
         ts_update()
       end,
-      config = use_config("treesitter"),
+      config = extend("treesitter"),
     })
 
     use({
@@ -124,28 +125,17 @@ require("packer").startup({
       end,
     })
     -- 2}}}
-
-    -- Debugging {{{2
-    use({ "mfussenegger/nvim-dap", ft = { "java" } })
-    use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
-    -- 2}}}
-
-    -- language specific {{{2
-    use({ "mfussenegger/nvim-jdtls", ft = "java" })
-    -- 2}}}
     -- 1}}}
 
     -- Intuitve Development {{{
     use({ "tpope/vim-fugitive", opt = true, cmd = "Git" })
-    use({ "ThePrimeagen/harpoon", config = use_config("harpoon") })
+    use({ "ThePrimeagen/harpoon", config = extend("harpoon") })
 
     use({
       "nvim-telescope/telescope.nvim",
-      config = function()
-        require("config.telescope")
-      end,
+      requires = { { "nvim-telescope/telescope-fzf-native.nvim", run = "make" } },
+      config = use_config("telescope")
     })
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
     use({
       "numToStr/Comment.nvim",
@@ -153,20 +143,15 @@ require("packer").startup({
         require("Comment").setup()
       end,
     })
-
-    use({
-      "kylechui/nvim-surround",
-      config = function()
-        require("nvim-surround").setup()
-      end,
-    })
     -- }}}
 
     -- UI {{{
-    use({ "stevearc/dressing.nvim", config = use_config("dressing") })
+    use({ "stevearc/dressing.nvim", config = extend("dressing") })
     use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
-    use({ "lewis6991/gitsigns.nvim", config = use_config("gitsigns") })
-    use({ "folke/which-key.nvim", config = use_config("which_key") })
+    use({ "lewis6991/gitsigns.nvim", config = extend("gitsigns") })
+    use({ "folke/which-key.nvim", config = extend("which_key") })
+    use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
+
     -- colorscheme
     use("RRethy/nvim-base16")
     -- }}}

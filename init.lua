@@ -1,6 +1,5 @@
 require("core")
 require("color")
-require("module.statusline")
 require("plugin")
 
 local compiled_obj = vim.fn.stdpath("config") .. "/lua/plugin/packer_compiled.lua"

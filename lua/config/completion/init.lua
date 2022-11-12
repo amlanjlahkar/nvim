@@ -1,6 +1,6 @@
 local is_available_cmp, cmp = pcall(require, "cmp")
 local is_available_luasnip, luasnip = pcall(require, "luasnip")
-if not (is_available_cmp or is_available_luasnip) then
+if is_available_cmp == false or is_available_luasnip == false  then
   return
 end
 
@@ -32,6 +32,7 @@ local kind_icons = {
   TypeParameter = "  ",
 }
 
+
 local function has_words_before()
   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -47,8 +48,6 @@ cmp.setup({
     ["<C-n>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
       else
@@ -59,19 +58,17 @@ cmp.setup({
     ["<C-p>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
     end, { "i", "s" }),
 
-    ["<TAB>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        return cmp.complete_common_string()
-      end
-      fallback()
-    end, { "i", "s" }),
+    -- ["<TAB>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     return cmp.complete_common_string()
+    --   end
+    --   fallback()
+    -- end, { "i", "s" }),
 
     ["<C-j>"] = cmp.mapping(cmp.mapping.scroll_docs(2), { "i", "s" }),
     ["<C-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-2), { "i", "s" }),
@@ -128,3 +125,6 @@ cmp.setup({
     return vim.tbl_keys(bufs)
   end,
 })
+
+-- load luasnip configuration
+require("config.completion.snippet")
