@@ -29,12 +29,7 @@ require("packer").startup({
   function(use)
     -- Core {{{1
     use("wbthomason/packer.nvim")
-    use({
-      "lewis6991/impatient.nvim",
-      config = function()
-        require("impatient")
-      end,
-    })
+    use("lewis6991/impatient.nvim") -- already loaded from core, but is defined here to pull new changes
     use({ "nvim-lua/plenary.nvim", module_pattern = "plenary.*" })
 
     -- LSP {{{2
