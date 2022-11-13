@@ -13,7 +13,7 @@ local palette = {
   Blue = "#7aa2f7",
   Magenta = "#bb9af7",
   Cyan = "#7dcfff",
-  White = "#c0caf5",
+  White = "#b0b8e0",
 }
 
 local M = {}
@@ -37,7 +37,7 @@ M.custom = {
   { "PmenuThumb",                 { bg = palette.BgShadeLighter } },
   { "TabLineFill",                { bg = "NONE" } },
   { "TabLine",                    { bg = "NONE", fg = palette.FgShadeDarker } },
-  { "TabLineSel",                 { bg = "NONE", fg = palette.Orange } },
+  { "TabLineSel",                 { bg = "NONE", fg = palette.White } },
   { "TelescopeSelection",         { bg = palette.BgShadeLighter , fg = palette.White } },
   { "TelescopeNormal",            { bg = palette.BgShadeLight } },
   { "TelescopeBorder",            { bg = palette.BgShadeLight, fg = palette.BgShadeLight } },

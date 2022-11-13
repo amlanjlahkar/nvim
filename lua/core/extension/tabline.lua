@@ -1,0 +1,38 @@
+local fn = vim.fn
+
+local function tabline()
+  local t = ""
+  for index = 1, fn.tabpagenr("$") do
+    local winnr = fn.tabpagewinnr(index)
+    local buflist = fn.tabpagebuflist(index)
+    local bufnr = buflist[winnr]
+    local bufname = fn.bufname(bufnr)
+
+    if index == fn.tabpagenr() then
+      t = t .. "%#TabLineSel#"
+    else
+      t = t .. "%#TabLine#"
+    end
+
+    t = t .. string.format(" %s:", index)
+
+    if bufname:match("^fugitive://%g+") then
+      t = t .. "Fugitive"
+    elseif bufname:match("^term://%g+") then
+      t = t .. "Terminal"
+    elseif bufname ~= "" then
+      t = t .. string.format("%s ", fn.fnamemodify(bufname, ":t:r")):lower()
+    else
+      t = t .. string.format("%s ", vim.bo.filetype):lower()
+    end
+  end
+
+  t = t .. "%#TabLineFill#"
+  return t
+end
+
+function _G.set_tabline()
+  return tabline()
+end
+
+vim.o.tabline = "%!v:lua.set_tabline()"
