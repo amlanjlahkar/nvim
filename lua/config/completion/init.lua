@@ -1,6 +1,6 @@
 local is_available_cmp, cmp = pcall(require, "cmp")
 local is_available_luasnip, luasnip = pcall(require, "luasnip")
-if is_available_cmp == false or is_available_luasnip == false  then
+if is_available_cmp == false or is_available_luasnip == false then
   return
 end
 

@@ -1,12 +1,8 @@
-local is_available, ls = pcall(require, "luasnip")
-if not is_available then
-  return
-end
+local ls = require("luasnip")
 local types = require("luasnip.util.types")
 
 local key = require("core.keymap.maputil")
 local ismap, opts = key.ismap, key.new_opts
-
 -- stylua: ignore
 ismap({
   { "<TAB>", function()
@@ -47,5 +43,5 @@ require("luasnip.loaders.from_vscode").lazy_load({
   paths = vim.fn.stdpath("data") .. "/site/pack/packer/opt/friendly-snippets",
 })
 require("luasnip.loaders.from_lua").lazy_load({
-  paths = vim.fn.stdpath("config") .. "/lua/config/completion/snippet/ft"
+  paths = vim.fn.stdpath("config") .. "/lua/config/completion/snippet/ft",
 })

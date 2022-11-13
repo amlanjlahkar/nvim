@@ -57,7 +57,7 @@ M.custom = {
   { "SnipInsertNode",             { bg = palette.BgShadeLight, fg = palette.Green } },
   { "TroubleText",                { bg = "NONE", fg = palette.Fg } },
   { "TroubleFoldIcon",            { bg = "NONE", fg = palette.Fg } },
-  { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weired paren,brace highlighting on floating windows by default
+  { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weird paren,brace highlighting on floating windows by default
   { "CmpItemAbbr",                { link = "NormalFloat" } },
 }
 
