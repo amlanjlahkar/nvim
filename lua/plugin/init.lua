@@ -35,7 +35,6 @@ require("packer").startup({
     -- LSP {{{2
     use({
       "neovim/nvim-lspconfig",
-      requires = "folke/trouble.nvim",
       opt = true,
       ft = {
         "c",
@@ -54,48 +53,46 @@ require("packer").startup({
         "json",
         "yaml",
       },
-      config = use_config("lsp")
+      config = use_config("lsp"),
     })
 
-    use({
-      "williamboman/mason.nvim",
-      requires = "williamboman/mason-lspconfig",
-    })
-
-    use("jose-elias-alvarez/null-ls.nvim")
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig")
+    use({ "jose-elias-alvarez/null-ls.nvim", opt = true, module = "lspconfig" })
+    use({ "folke/trouble.nvim", opt = true, module = "lspconfig" })
 
     -- Debugging {{{3
-    use({ "mfussenegger/nvim-dap", ft = { "java" } })
-    use({ "rcarriga/nvim-dap-ui", after = "nvim-dap" })
+    use({ "mfussenegger/nvim-dap", opt = true, module = "lspconfig", ft = { "java" } })
+    use({ "rcarriga/nvim-dap-ui", opt = true, after = "nvim-dap" })
     -- 3}}}
 
-    -- language specific {{{3
-    use({ "mfussenegger/nvim-jdtls", ft = "java" })
+    -- Language specific {{{3
+    use({ "mfussenegger/nvim-jdtls", opt = true, module = "lspconfig", ft = "java" })
     -- 3}}}
     -- 2}}}
 
     -- Completion {{{2
     use({
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
       requires = {
         { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
         { "hrsh7th/cmp-path", after = "nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
-      config = use_config("completion")
+      event = "InsertEnter",
+      config = use_config("completion"),
     })
 
     use({
       "L3MON4D3/LuaSnip",
       requires = { { "rafamadriz/friendly-snippets", opt = true } },
       after = "nvim-cmp",
-      -- config = use_config("luasnip"),
     })
 
     use({
       "kylechui/nvim-surround",
+      keys = { "ys", "cs", "ds" },
       config = function()
         require("nvim-surround").setup()
       end,
@@ -114,6 +111,8 @@ require("packer").startup({
 
     use({
       "windwp/nvim-ts-autotag",
+      opt = true,
+      after = "nvim-treesitter",
       ft = "html",
       config = function()
         require("nvim-ts-autotag").setup()
@@ -124,16 +123,17 @@ require("packer").startup({
 
     -- Intuitve Development {{{
     use({ "tpope/vim-fugitive", opt = true, cmd = "Git" })
-    use({ "ThePrimeagen/harpoon", config = extend("harpoon") })
+    use({ "ThePrimeagen/harpoon", opt = true, keys = { "<leader>h", "]h", "[h" }, config = extend("harpoon") })
 
     use({
       "nvim-telescope/telescope.nvim",
-      requires = { { "nvim-telescope/telescope-fzf-native.nvim", run = "make" } },
-      config = use_config("telescope")
+      requires = { { "nvim-telescope/telescope-fzf-native.nvim", run = "make", module = "telescope" } },
+      config = use_config("telescope"),
     })
 
     use({
       "numToStr/Comment.nvim",
+      keys = { "gc", "gb" },
       config = function()
         require("Comment").setup()
       end,
