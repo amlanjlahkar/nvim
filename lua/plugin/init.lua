@@ -92,7 +92,7 @@ require("packer").startup({
 
     use({
       "kylechui/nvim-surround",
-      keys = { "ys", "cs", "ds" },
+      keys = { "ys", "cs", "ds", { "v", "S" } },
       config = function()
         require("nvim-surround").setup()
       end,
@@ -184,9 +184,8 @@ require("packer").startup({
 })
 
 -- autocmd to source and recompile whenever this file gets written/modified
-local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePost", {
-  command = "source <afile> | PackerCompile",
-  group = packer_group,
+  group = vim.api.nvim_create_augroup("Packer", { clear = true }),
   pattern = fn.stdpath("config") .. "/lua/plugin/init.lua",
+  command = "source <afile> | PackerCompile",
 })

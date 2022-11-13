@@ -28,6 +28,7 @@ key.nmap({
   { "]q", cmd("cnext") },
   { "[q", cmd("cprev") },
   { "<C-c>", cmd("cclose") },
+  { ",", "@@" },
   -- }}}
 
   -- external {{{
