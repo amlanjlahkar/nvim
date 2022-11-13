@@ -58,8 +58,8 @@ require("packer").startup({
 
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig")
-    use({ "jose-elias-alvarez/null-ls.nvim", opt = true, module = "lspconfig" })
-    use({ "folke/trouble.nvim", opt = true, module = "lspconfig" })
+    use({ "jose-elias-alvarez/null-ls.nvim", opt = true, module = "null-ls" })
+    use({ "folke/trouble.nvim", opt = true, after = "nvim-lspconfig" })
 
     -- Debugging {{{3
     use({ "mfussenegger/nvim-dap", opt = true, module = "lspconfig", ft = { "java" } })
