@@ -14,6 +14,7 @@ local launcher_path =
 local config_path = home .. "/tools/language_specific/Java/jdtls/config_linux/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/documents/projects/personal/dev/java/" .. project_name
+local jol_path = home .. "/tools/language_specific/Java/jol-cli-0.9-full.jar"
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -42,6 +43,7 @@ local config = {
     workspace_dir,
   },
   root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml" }),
+
   on_attach = require("config.lsp.handler").on_attach,
   capabilities = require("config.lsp.handler").capabilities,
 
@@ -110,6 +112,7 @@ local config = {
   jdtls.setup.add_commands(),
 }
 
+jdtls.jol_path = jol_path
 jdtls.start_or_attach(config)
 
 -- Keymaps
