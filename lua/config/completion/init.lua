@@ -105,11 +105,11 @@ cmp.setup({
   window = {
     completion = {
       border = "single",
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+      winhighlight = "Normal:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
     },
     documentation = {
       border = "single",
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+      winhighlight = "Normal:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
       max_width = 60,
       max_height = 25,
     },

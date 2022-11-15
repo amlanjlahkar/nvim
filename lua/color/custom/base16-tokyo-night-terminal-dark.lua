@@ -41,8 +41,8 @@ M.custom = {
   { "TelescopeBorder",            { bg = BgShadeLight, fg = BgShadeLight } },
   { "TelescopeResultsTitle",      { bg = BgShadeLight, fg = BgShadeLight } },
   { "FloatTitle",                 { bg = Bg, fg = White } },
-  { "FloatBorder",                { bg = Bg, fg = BgShadeLighter } },
   { "NormalFloat",                { bg = Bg, fg = Fg } },
+  { "FloatBorder",                { bg = Bg, fg = BgShadeLighter } },
   { "NormalFloatAlt",             { bg = BgShadeLight, fg = Fg } },
   { "FloatBorderAlt",             { bg = BgShadeLight, fg = BgShadeLight } },
   { "LspReference",               { bg = BgShadeLighter } },
@@ -55,8 +55,11 @@ M.custom = {
   { "SnipInsertNode",             { bg = BgShadeLight, fg = Green } },
   { "TroubleText",                { bg = "NONE", fg = Fg } },
   { "TroubleFoldIcon",            { bg = "NONE", fg = Fg } },
+  { "GitSignsChangeInline",       { bg = Bg, fg = White, bold = true } },
+  { "GitSignsDeleteInline",       { bg = Bg, fg = White, bold = true } },
+  { "DiffAdd",                    { bg = Green, fg = Bg } },
+  { "DiffDelete",                 { bg = Red, fg = Bg } },
   { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weird paren,brace highlighting on floating windows by default
-  { "CmpItemAbbr",                { link = "NormalFloat" } },
 }
 
 return M.custom

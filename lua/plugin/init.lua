@@ -62,12 +62,12 @@ require("packer").startup({
     use({ "folke/trouble.nvim", opt = true, after = "nvim-lspconfig" })
 
     -- Debugging {{{3
-    use({ "mfussenegger/nvim-dap", opt = true, module = "lspconfig", ft = { "java" } })
+    use({ "mfussenegger/nvim-dap", opt = true, module = "dap", ft = { "java" } })
     use({ "rcarriga/nvim-dap-ui", opt = true, after = "nvim-dap" })
     -- 3}}}
 
     -- Language specific {{{3
-    use({ "mfussenegger/nvim-jdtls", opt = true, module = "lspconfig", ft = "java" })
+    use({ "mfussenegger/nvim-jdtls", opt = true, ft = "java" })
     -- 3}}}
     -- 2}}}
 
@@ -92,7 +92,7 @@ require("packer").startup({
 
     use({
       "kylechui/nvim-surround",
-      keys = { "ys", "cs", "ds", { "v", "S" } },
+      -- keys = { "ys", "cs", "ds", { "v", "S" } },
       config = function()
         require("nvim-surround").setup()
       end,
@@ -148,6 +148,7 @@ require("packer").startup({
     use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
 
     -- colorscheme
+    use("aktersnurra/no-clown-fiesta.nvim")
     use("RRethy/nvim-base16")
     -- }}}
 
@@ -183,9 +184,17 @@ require("packer").startup({
   },
 })
 
--- autocmd to source and recompile whenever this file gets written/modified
+-- extras
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = vim.api.nvim_create_augroup("Packer", { clear = true }),
   pattern = fn.stdpath("config") .. "/lua/plugin/init.lua",
   command = "source <afile> | PackerCompile",
+})
+
+local key = require("core.keymap.maputil")
+local cmd, opts = key.cmd, key.new_opts
+key.nmap({
+  { "<leader>pi", cmd("PackerInstall"), opts("Packer: Install missing plugins") },
+  { "<leader>psy", cmd("PackerSync"), opts("Packer: Sync plugin repositories") },
+  { "<leader>pst", cmd("PackerStatus"), opts("Packer status") },
 })

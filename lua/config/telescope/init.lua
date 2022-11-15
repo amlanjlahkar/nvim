@@ -5,10 +5,9 @@ end
 
 telescope.setup({
   defaults = {
-    prompt_prefix = " 🔎 ",
+    prompt_prefix = "   ",
     selection_caret = "  ",
     multi_icon = " + ",
-    borderchars = { "━", "┃", "━", "┃", "┏", "┓", "┛", "┗" },
     layout_config = {
       vertical = {
         anchor = "S",

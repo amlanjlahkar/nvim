@@ -38,7 +38,7 @@ opt.sidescrolloff = 8
 opt.cmdheight = 1
 opt.autowrite = true
 opt.list = true
-opt.listchars = { tab = "»·", nbsp = "+", trail = "·", extends = "→", precedes = "←" }
+opt.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "→", precedes = "←" })
 opt.fillchars:append({
   eob = " ",
   horiz = "━",

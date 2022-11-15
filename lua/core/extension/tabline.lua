@@ -17,9 +17,9 @@ local function tabline()
     t = t .. string.format(" %s:", index)
 
     if bufname:match("^fugitive://%g+") then
-      t = t .. "fugitive"
+      t = t .. "fugitive "
     elseif bufname:match("^term://%g+") then
-      t = t .. "terminal"
+      t = t .. "terminal "
     elseif bufname ~= "" then
       t = t .. string.format("%s ", fn.fnamemodify(bufname, ":t:r")):lower()
     else

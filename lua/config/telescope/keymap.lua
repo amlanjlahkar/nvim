@@ -21,6 +21,14 @@ key.nmap({
   },
 
   {
+    "<leader>tc",
+    function()
+      builtin.colorscheme({ layout_strategy = "vertical" })
+    end,
+    opts("Telescope: Colorschemes"),
+  },
+
+  {
     "<leader>tg",
     function()
       builtin.live_grep()

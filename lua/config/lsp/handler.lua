@@ -34,21 +34,22 @@ end
 
 -- stylua: ignore
 local function lsp_keymaps(bufnr)
+  local lsp = vim.lsp.buf
   local key = require("core.keymap.maputil")
   local cmd, opts = key.cmd, key.new_opts
   key.nmap({
-    { "<leader>lgd",  cmd("lua vim.lsp.buf.definition()"),          opts(bufnr, "LSP: Goto definition") },
-    { "<leader>lgi",  cmd("lua vim.lsp.buf.implementation()"),      opts(bufnr, "LSP: Goto implementation") },
-    { "<leader>lr",   cmd("lua vim.lsp.buf.rename()"),              opts(bufnr, "LSP: Rename symbol under cursor") },
-    { "<leader>la",   cmd("lua vim.lsp.buf.code_action()"),         opts(bufnr, "LSP: List available code actions") },
-    { "<leader>ls",   cmd("lua vim.lsp.buf.signature_help()"),      opts(bufnr, "LSP: Show signature info for symbol under cursor") },
-    { "<leader>lk",   cmd("lua vim.lsp.buf.hover()"),               opts(bufnr, "LSP: Show hover information") },
+    { "<leader>lgd",  lsp.definition,                               opts(bufnr, "LSP: Goto definition") },
+    { "<leader>lgi",  lsp.implementation,                           opts(bufnr, "LSP: Goto implementation") },
+    { "<leader>lr",   lsp.rename,                                   opts(bufnr, "LSP: Rename symbol under cursor") },
+    { "<leader>la",   lsp.code_action,                              opts(bufnr, "LSP: List available code actions") },
+    { "<leader>ls",   lsp.signature_help,                           opts(bufnr, "LSP: Show signature info for symbol under cursor") },
+    { "<leader>lk",   lsp.hover,                                    opts(bufnr, "LSP: Show hover information") },
+    { "<leader>ll",   vim.diagnostic.open_float,                    opts(bufnr, "LSP: Show line diagnostic") },
+    { "]d",           vim.diagnostic.goto_next,                     opts(bufnr, "LSP: Goto next diagnostic occurrence") },
+    { "[d",           vim.diagnostic.goto_prev,                     opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
     { "<leader>lgr",  cmd("TroubleToggle lsp_references"),          opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),    opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),   opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
-    { "<leader>ll",   cmd("lua vim.diagnostic.open_float()"),       opts(bufnr, "LSP: Show line diagnostic") },
-    { "]d",           cmd("lua vim.diagnostic.goto_next()"),        opts(bufnr, "LSP: Goto next diagnostic occurrence") },
-    { "[d",           cmd("lua vim.diagnostic.goto_prev()"),        opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
   })
 end
 
