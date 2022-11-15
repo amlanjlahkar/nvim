@@ -2,12 +2,15 @@ local ls = require("luasnip")
 local types = require("luasnip.util.types")
 
 local key = require("core.keymap.maputil")
-local ismap, opts = key.ismap, key.new_opts
+local tab = vim.api.nvim_replace_termcodes("<TAB>", true, false, true)
+
 -- stylua: ignore
-ismap({
+key.ismap({
   { "<TAB>", function()
       if ls.expand_or_locally_jumpable() then
         ls.expand_or_jump()
+      else
+        vim.api.nvim_feedkeys(tab, "n", false)
       end
     end,
   },
@@ -23,7 +26,7 @@ ls.config.setup({
   history = true,
   updateevents = "TextChanged,TextChangedI",
   region_check_events = "CursorMoved,CursorHold,InsertEnter",
-  delete_check_events = "InsertLeave",
+  delete_check_events = "TextChanged",
   enable_autosnippets = false,
   ext_opts = {
     [types.choiceNode] = {
