@@ -93,13 +93,13 @@ end
 
 M.get_filetype = function(self)
   local filetype = vim.bo.filetype
-  local is_devicons_available, devicons = pcall(require, "nvim-web-devicons")
+  local is_icons_available, icons = pcall(require, "nvim-web-devicons")
   if self:is_truncated(self.trunc_width.filetype) then
     return ""
-  elseif not is_devicons_available then
+  elseif not is_icons_available then
     return filetype == "" and " No FT " or string.format(" ft: %s ", filetype):lower()
   end
-  local ft_icon = devicons.get_icon_by_filetype(filetype)
+  local ft_icon = icons.get_icon_by_filetype(filetype)
   return filetype == "" and " No FT " or string.format(" %s %s ", ft_icon, filetype):lower()
 end
 

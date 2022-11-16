@@ -39,14 +39,14 @@ local function lsp_keymaps(bufnr)
   local cmd, opts = key.cmd, key.new_opts
   key.nmap({
     { "K",            lsp.hover,                                    opts(bufnr, "LSP: Show hover information") },
-    { "gd",           lsp.definition,                               opts(bufnr, "LSP: Goto definition") },
-    { "gi",           lsp.implementation,                           opts(bufnr, "LSP: Goto implementation") },
     { "<leader>lr",   lsp.rename,                                   opts(bufnr, "LSP: Rename symbol under cursor") },
     { "<leader>la",   lsp.code_action,                              opts(bufnr, "LSP: List available code actions") },
     { "<leader>ls",   lsp.signature_help,                           opts(bufnr, "LSP: Show signature info for symbol under cursor") },
     { "<leader>ll",   vim.diagnostic.open_float,                    opts(bufnr, "LSP: Show line diagnostic") },
     { "]d",           vim.diagnostic.goto_next,                     opts(bufnr, "LSP: Goto next diagnostic occurrence") },
     { "[d",           vim.diagnostic.goto_prev,                     opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
+    { "gd",           cmd("TroubleToggle lsp_definitions"),         opts(bufnr, "LSP: Goto definition") },
+    { "gi",           cmd("TroubleToggle lsp_implementations"),     opts(bufnr, "LSP: Goto implementation") },
     { "gr",           cmd("TroubleToggle lsp_references"),          opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),    opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),   opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
@@ -65,8 +65,13 @@ M.on_attach = function(client, bufnr)
   if is_navic_available then
     if client.server_capabilities.documentSymbolProvider then
       local fname = vim.fn.expand("%:t")
-      local ficon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
-      vim.wo.winbar = string.format(" %s %s  %s", ficon, fname, "%{%v:lua.require'nvim-navic'.get_location()%}")
+      local is_avail, icons = pcall(require, "nvim-web-devicons")
+      if is_avail then
+        local ficon = icons.get_icon_by_filetype(vim.bo.filetype)
+        vim.wo.winbar = string.format(" %s %s  %s", ficon, fname, "%{%v:lua.require'nvim-navic'.get_location()%}")
+      else
+        vim.wo.winbar = string.format(" %s  %s", fname, "%{%v:lua.require'nvim-navic'.get_location()%}")
+      end
       navic.attach(client, bufnr)
     end
   end

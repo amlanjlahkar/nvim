@@ -69,9 +69,9 @@ M.custom = {
   { "GitGutterChangeDelete",      { bg = BgShadeLighter, fg = Magenta } },
   { "GitGutterDelete",            { bg = BgShadeLighter, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = true } },
-  { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = true } },
+  { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
   { "diffAdded",                  { bg = DiffAdd, fg = Green, bold = true } },
-  { "diffRemoved",                { bg = DiffDelete, fg = Red, italic = true } },
+  { "diffRemoved",                { bg = DiffDelete, fg = Red, italic = false } },
   { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 

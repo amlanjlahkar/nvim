@@ -9,9 +9,9 @@ local servers = {
   "cssls",
   "tsserver",
   "sumneko_lua",
-  "phpactor",
   "pyright",
-  "tailwindcss",
+  -- "phpactor",
+  -- "tailwindcss",
 }
 
 local M = {}

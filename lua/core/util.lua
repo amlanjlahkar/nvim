@@ -1,12 +1,12 @@
 local fn = vim.fn
 local api = vim.api
 
-local utils = {}
+local util = {}
 
 -- @param statusline Table with a single pair.
 -- @field combined(boolean) Get combined or per-window width.
 -- @return Width of all the nested windows combined if statusline.global is true, else width of the current window.
-utils.get_width = function(window)
+util.get_width = function(window)
   local width = 0
   if window == nil or window.combined then
     for i = 1, fn.winnr("$") do
@@ -27,9 +27,9 @@ end
 -- @param group Highlight group ID.
 -- @param attr Attribute.
 -- @return Attribute value
-utils.get_hl_attr = function(group, attr)
+util.get_hl_attr = function(group, attr)
   local color = fn.synIDattr(fn.hlID(group), attr)
   return color == "" and nil or color
 end
 
-return utils
+return util
