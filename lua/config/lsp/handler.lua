@@ -38,16 +38,16 @@ local function lsp_keymaps(bufnr)
   local key = require("core.keymap.maputil")
   local cmd, opts = key.cmd, key.new_opts
   key.nmap({
-    { "<leader>lgd",  lsp.definition,                               opts(bufnr, "LSP: Goto definition") },
-    { "<leader>lgi",  lsp.implementation,                           opts(bufnr, "LSP: Goto implementation") },
+    { "K",            lsp.hover,                                    opts(bufnr, "LSP: Show hover information") },
+    { "gd",           lsp.definition,                               opts(bufnr, "LSP: Goto definition") },
+    { "gi",           lsp.implementation,                           opts(bufnr, "LSP: Goto implementation") },
     { "<leader>lr",   lsp.rename,                                   opts(bufnr, "LSP: Rename symbol under cursor") },
     { "<leader>la",   lsp.code_action,                              opts(bufnr, "LSP: List available code actions") },
     { "<leader>ls",   lsp.signature_help,                           opts(bufnr, "LSP: Show signature info for symbol under cursor") },
-    { "<leader>lk",   lsp.hover,                                    opts(bufnr, "LSP: Show hover information") },
     { "<leader>ll",   vim.diagnostic.open_float,                    opts(bufnr, "LSP: Show line diagnostic") },
     { "]d",           vim.diagnostic.goto_next,                     opts(bufnr, "LSP: Goto next diagnostic occurrence") },
     { "[d",           vim.diagnostic.goto_prev,                     opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
-    { "<leader>lgr",  cmd("TroubleToggle lsp_references"),          opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
+    { "gr",           cmd("TroubleToggle lsp_references"),          opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),    opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),   opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
   })

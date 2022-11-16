@@ -59,7 +59,7 @@ local config = {
       referencesCodeLens = { enabled = true },
       format = { enabled = true },
       configuration = { updateBuildConfiguration = "interactive" },
-      import = { maven = { enabled = false } },
+      import = { maven = { enabled = true } },
     },
     signatureHelp = { enabled = true },
     completion = {

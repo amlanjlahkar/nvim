@@ -50,6 +50,7 @@ local autocmd_definitions = {
         vim.cmd([[
           setlocal norelativenumber
           setlocal nonumber
+          setlocal scl=no
           startinsert
         ]])
       end,
