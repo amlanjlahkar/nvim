@@ -148,7 +148,7 @@ require("packer").startup({
     use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
 
     -- colorscheme
-    use("aktersnurra/no-clown-fiesta.nvim")
+    use("xiyaowong/nvim-transparent")
     use("RRethy/nvim-base16")
     -- }}}
 

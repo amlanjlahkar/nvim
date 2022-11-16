@@ -1,6 +1,7 @@
 local Bg = "#16161e"
+local BgShadeDark = "#111118"
 local BgShadeLight = "#1a1b26"
-local BgShadeLighter = "#2a2f41"
+local BgShadeLighter = "#202431"
 local Fg = "#787c99"
 local FgShadeDark = "#5b607f"
 local FgShadeDarker = "#555b79"
@@ -14,28 +15,32 @@ local Magenta = "#bb9af7"
 local Cyan = "#7dcfff"
 local White = "#b0b8e0"
 
+local DiffDelete = "#3a0411"
+local DiffAdd = "#10292d"
+
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = BgShadeLight, fg = "NONE" } },
-  { "StatusLine",                 { bg = BgShadeLight, fg = FgShadeDarker } },
-  { "StatusLineImp",              { bg = BgShadeLight, fg = Fg } },
-  { "StatusLineInd",              { bg = BgShadeLight, fg = Green } },
-  { "StatusLineDiagnosticError",  { bg = BgShadeLight, fg = Red } },
-  { "StatusLineDiagnosticWarn",   { bg = BgShadeLight, fg = Magenta } },
-  { "StatusLineDiagnosticHint",   { bg = BgShadeLight, fg = Cyan } },
-  { "StatusLineDiagnosticInfo",   { bg = BgShadeLight, fg = Fg } },
-  { "LineNr",                     { bg = "NONE", fg = FgShadeDarker } },
-  { "CursorLineNr",               { bg = BgShadeLight, fg = Fg, bold = false } },
-  { "WinBar",                     { bg = BgShadeLight, fg = FgShadeDark } },
-  { "WinBarNC",                   { bg = BgShadeLight, fg = FgShadeDark } },
+  { "StatusLineNC",               { bg = BgShadeDark, fg = "NONE" } },
+  { "StatusLine",                 { bg = BgShadeDark, fg = FgShadeDarker } },
+  { "StatusLineImp",              { bg = BgShadeDark, fg = Fg } },
+  { "StatusLineInd",              { bg = BgShadeDark, fg = Green } },
+  { "StatusLineDiagnosticError",  { bg = BgShadeDark, fg = Red } },
+  { "StatusLineDiagnosticWarn",   { bg = BgShadeDark, fg = Magenta } },
+  { "StatusLineDiagnosticHint",   { bg = BgShadeDark, fg = Cyan } },
+  { "StatusLineDiagnosticInfo",   { bg = BgShadeDark, fg = Fg } },
+  { "SignColumn",                 { bg = BgShadeLighter } },
+  { "LineNr",                     { bg = BgShadeDark, fg = FgShadeDarker } },
+  { "CursorLineNr",               { bg = BgShadeLighter, fg = White, bold = false } },
+  { "WinBar",                     { bg = BgShadeLighter, fg = "#6b779e" } },
+  { "WinBarNC",                   { bg = BgShadeLighter, fg = "#6b779e" } },
   { "VertSplit",                  { fg = "#272834" } },
   { "PmenuSel",                   { bg = BgShadeLighter , fg = White } },
   { "PmenuSbar",                  { bg = Bg  } },
   { "PmenuThumb",                 { bg = BgShadeLighter } },
-  { "TabLineFill",                { bg = "NONE" } },
-  { "TabLine",                    { bg = "NONE", fg = FgShadeDarker } },
-  { "TabLineSel",                 { bg = "NONE", fg = White } },
+  { "TabLineFill",                { bg = BgShadeDark } },
+  { "TabLine",                    { bg = BgShadeDark, fg = FgShadeDarker } },
+  { "TabLineSel",                 { bg = BgShadeLighter, fg = "#b5bbcf", bold = false } },
   { "TelescopeSelection",         { bg = BgShadeLighter , fg = White } },
   { "TelescopeNormal",            { bg = BgShadeLight } },
   { "TelescopeBorder",            { bg = BgShadeLight, fg = BgShadeLight } },
@@ -55,10 +60,18 @@ M.custom = {
   { "SnipInsertNode",             { bg = BgShadeLight, fg = Green } },
   { "TroubleText",                { bg = "NONE", fg = Fg } },
   { "TroubleFoldIcon",            { bg = "NONE", fg = Fg } },
-  { "GitSignsChangeInline",       { bg = Bg, fg = White, bold = true } },
-  { "GitSignsDeleteInline",       { bg = Bg, fg = White, bold = true } },
-  { "DiffAdd",                    { bg = Green, fg = Bg } },
-  { "DiffDelete",                 { bg = Red, fg = Bg } },
+  { "TroubleIndent",              { bg = "NONE", fg = FgShadeDark } },
+  { "TroubleLocation",            { bg = "NONE", fg = FgShadeDark } },
+  { "DiffAdd",                    { bg = DiffAdd, fg = Fg } },
+  { "DiffDelete",                 { bg = DiffDelete, fg = Fg } },
+  { "GitGutterAdd",               { bg = BgShadeLighter, fg = Green } },
+  { "GitGutterChange",            { bg = BgShadeLighter, fg = Blue } },
+  { "GitGutterChangeDelete",      { bg = BgShadeLighter, fg = Magenta } },
+  { "GitGutterDelete",            { bg = BgShadeLighter, fg = Red } },
+  { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = true } },
+  { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = true } },
+  { "diffAdded",                  { bg = DiffAdd, fg = Green, bold = true } },
+  { "diffRemoved",                { bg = DiffDelete, fg = Red, italic = true } },
   { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 

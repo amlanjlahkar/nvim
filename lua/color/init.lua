@@ -1,6 +1,33 @@
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
+local is_avail, transparent = pcall(require, "transparent")
+if is_avail then
+  transparent.setup({
+    enable = false,
+    extra_groups = {
+      "NormalFloat",
+      "FloatBorder",
+      "WinBar",
+      "WinBarNC",
+      "CursorLine",
+      "GitGutterAdd",
+      "GitGutterChange",
+      "GitGutterDelete",
+      "DiffLine",
+      "CmpItemAbbr",
+      "StatusLine",
+      "StatusLineNC",
+      "StatusLineImp",
+      "StatusLineInd",
+      "StatusLineDiagnosticError",
+      "StatusLineDiagnosticWarn",
+      "StatusLineDiagnosticHint",
+      "StatusLineDiagnosticInfo",
+    },
+  })
+end
+
 local function hl_override(colorscheme, custom_hl)
   vim.api.nvim_create_autocmd("ColorScheme", {
     group = vim.api.nvim_create_augroup("_hlOverride", { clear = true }),
