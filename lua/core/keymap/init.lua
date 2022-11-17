@@ -42,3 +42,11 @@ key.nmap({
   { "<leader><leader>s", cmd("silent :write | source %"), opts("Save and source lua file") },
   -- }}}
 })
+
+-- manual use of clipboard register to yank and paste
+key.nmap({
+  { "<leader>p", '"+p', opts("Paste from system clipboard") },
+  { "<leader>y", '"+yy', opts("Yank line to system clipboard") },
+  { "<leader>Y", '"+y$', opts("Yank(eol) to system clipboard") },
+})
+key.xmap({ "<leader>y", '"+yy', opts("Yank line to system clipboard") })
