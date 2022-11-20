@@ -8,12 +8,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     string.format("silent !git clone --depth 1 https://github.com/wbthomason/packer.nvim %s", install_path),
     false
   )
-
-  local rtp_addition = vim.fn.stdpath("data") .. "/site/pack/*/start/*"
-  if not string.find(vim.o.runtimepath, rtp_addition) then
-    vim.o.runtimepath = rtp_addition .. "," .. vim.o.runtimepath
-  end
-
   BOOTSTRAP_PACKER = true
 end
 
@@ -121,9 +115,13 @@ require("packer").startup({
     -- 2}}}
     -- 1}}}
 
-    -- Intuitve Development {{{
+    -- Intuitve Development {{{1
+    -- Git Integration {{{2
     use({ "tpope/vim-fugitive", opt = true, cmd = "Git" })
-    use({ "ThePrimeagen/harpoon", opt = true, keys = { "<leader>h", "]h", "[h" }, config = extend("harpoon") })
+    use({ "lewis6991/gitsigns.nvim", config = extend("gitsigns") })
+    -- 2}}}
+
+    use({ "ThePrimeagen/harpoon", opt = true, keys = "<leader>h", config = extend("harpoon") })
 
     use({
       "nvim-telescope/telescope.nvim",
@@ -138,13 +136,12 @@ require("packer").startup({
         require("Comment").setup()
       end,
     })
-    -- }}}
+    -- 1}}}
 
     -- UI {{{
     use({ "stevearc/dressing.nvim", config = extend("dressing") })
     use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
-    use({ "lewis6991/gitsigns.nvim", config = extend("gitsigns") })
-    use({ "folke/which-key.nvim", config = extend("which_key") })
+    -- use({ "folke/which-key.nvim", config = extend("which_key") })
     use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
 
     -- colorscheme
@@ -191,10 +188,10 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   command = "source <afile> | PackerCompile",
 })
 
-local key = require("core.keymap.maputil")
-local cmd, opts = key.cmd, key.new_opts
-key.nmap({
-  { "<leader>pi", cmd("PackerInstall"), opts("Packer: Install missing plugins") },
-  { "<leader>psy", cmd("PackerSync"), opts("Packer: Sync plugin repositories") },
-  { "<leader>pst", cmd("PackerStatus"), opts("Packer status") },
-})
+-- local key = require("core.keymap.maputil")
+-- local cmd, opts = key.cmd, key.new_opts
+-- key.nmap({
+--   { "<leader>pi", cmd("PackerInstall"), opts("Packer: Install missing plugins") },
+--   { "<leader>psy", cmd("PackerSync"), opts("Packer: Sync plugin repositories") },
+--   { "<leader>pst", cmd("PackerStatus"), opts("Packer status") },
+-- })

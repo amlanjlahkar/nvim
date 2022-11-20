@@ -35,7 +35,7 @@ local autocmd_definitions = {
       desc = "Highlight text on yank",
       pattern = "*",
       callback = function()
-        require("vim.highlight").on_yank({ higroup = "IncSearch", timeout = 100 })
+        require("vim.highlight").on_yank({ higroup = "IncSearch", timeout = 50 })
       end,
     },
   },

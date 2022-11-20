@@ -1,11 +1,10 @@
 local Bg = "#16161e"
-local BgShadeDark = "#111118"
 local BgShadeLight = "#1a1b26"
 local BgShadeLighter = "#202431"
 local Fg = "#787c99"
 local FgShadeDark = "#5b607f"
 local FgShadeDarker = "#555b79"
-local Black = "#13131b"
+local Black = "#111118"
 local Red = "#f7768e"
 local Green = "#41a6b5"
 local Yellow = "#e0af68"
@@ -21,25 +20,25 @@ local DiffAdd = "#10292d"
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = BgShadeDark, fg = "NONE" } },
-  { "StatusLine",                 { bg = BgShadeDark, fg = FgShadeDarker } },
-  { "StatusLineImp",              { bg = BgShadeDark, fg = Fg } },
-  { "StatusLineInd",              { bg = BgShadeDark, fg = Green } },
-  { "StatusLineDiagnosticError",  { bg = BgShadeDark, fg = Red } },
-  { "StatusLineDiagnosticWarn",   { bg = BgShadeDark, fg = Magenta } },
-  { "StatusLineDiagnosticHint",   { bg = BgShadeDark, fg = Cyan } },
-  { "StatusLineDiagnosticInfo",   { bg = BgShadeDark, fg = Fg } },
-  { "SignColumn",                 { bg = BgShadeLighter } },
-  { "LineNr",                     { bg = BgShadeDark, fg = FgShadeDarker } },
-  { "CursorLineNr",               { bg = BgShadeLighter, fg = White, bold = false } },
+  { "StatusLineNC",               { bg = Black, fg = "NONE" } },
+  { "StatusLine",                 { bg = Black, fg = FgShadeDarker } },
+  { "StatusLineImp",              { bg = Black, fg = Fg } },
+  { "StatusLineInd",              { bg = Black, fg = Green } },
+  { "StatusLineDiagnosticError",  { bg = Black, fg = Red } },
+  { "StatusLineDiagnosticWarn",   { bg = Black, fg = Magenta } },
+  { "StatusLineDiagnosticHint",   { bg = Black, fg = Cyan } },
+  { "StatusLineDiagnosticInfo",   { bg = Black, fg = Fg } },
+  { "SignColumn",                 { bg = Bg } },
+  { "LineNr",                     { bg = Bg, fg = FgShadeDarker } },
+  { "CursorLineNr",               { bg = Bg, fg = White, bold = false } },
   { "WinBar",                     { bg = BgShadeLighter, fg = "#6b779e" } },
   { "WinBarNC",                   { bg = BgShadeLighter, fg = "#6b779e" } },
   { "VertSplit",                  { fg = "#272834" } },
   { "PmenuSel",                   { bg = BgShadeLighter , fg = White } },
   { "PmenuSbar",                  { bg = Bg  } },
   { "PmenuThumb",                 { bg = BgShadeLighter } },
-  { "TabLineFill",                { bg = BgShadeDark } },
-  { "TabLine",                    { bg = BgShadeDark, fg = FgShadeDarker } },
+  { "TabLineFill",                { bg = Black } },
+  { "TabLine",                    { bg = Black, fg = FgShadeDarker } },
   { "TabLineSel",                 { bg = BgShadeLighter, fg = "#b5bbcf", bold = false } },
   { "TelescopeSelection",         { bg = BgShadeLighter , fg = White } },
   { "TelescopeNormal",            { bg = BgShadeLight } },
@@ -62,16 +61,14 @@ M.custom = {
   { "TroubleFoldIcon",            { bg = "NONE", fg = Fg } },
   { "TroubleIndent",              { bg = "NONE", fg = FgShadeDark } },
   { "TroubleLocation",            { bg = "NONE", fg = FgShadeDark } },
-  { "DiffAdd",                    { bg = DiffAdd, fg = Fg } },
-  { "DiffDelete",                 { bg = DiffDelete, fg = Fg } },
-  { "GitGutterAdd",               { bg = BgShadeLighter, fg = Green } },
-  { "GitGutterChange",            { bg = BgShadeLighter, fg = Blue } },
-  { "GitGutterChangeDelete",      { bg = BgShadeLighter, fg = Magenta } },
-  { "GitGutterDelete",            { bg = BgShadeLighter, fg = Red } },
+  { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
+  { "DiffDelete",                 { bg = DiffDelete, fg = Red } },
+  { "GitGutterAdd",               { bg = Bg, fg = Green } },
+  { "GitGutterChange",            { bg = Bg, fg = Blue } },
+  { "GitGutterChangeDelete",      { bg = Bg, fg = Magenta } },
+  { "GitGutterDelete",            { bg = Bg, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = true } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
-  { "diffAdded",                  { bg = DiffAdd, fg = Green, bold = true } },
-  { "diffRemoved",                { bg = DiffDelete, fg = Red, italic = false } },
   { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 

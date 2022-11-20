@@ -46,7 +46,7 @@ key.nmap({
 -- manual use of clipboard register to yank and paste
 key.nmap({
   { "<leader>p", '"+p', opts("Paste from system clipboard") },
-  { "<leader>y", '"+yy', opts("Yank line to system clipboard") },
+  { "<leader>y", '"+y', opts("Yank line to system clipboard") },
   { "<leader>Y", '"+y$', opts("Yank(eol) to system clipboard") },
 })
-key.xmap({ "<leader>y", '"+yy', opts("Yank line to system clipboard") })
+key.xmap({ "<leader>y", '"+yyy', opts("Yank line to system clipboard") })

@@ -36,8 +36,13 @@ gitsigns.setup({
       },
       { "<leader>gR", gs.reset_buffer, opts("Gitsigns: reset buffer") },
       { "<leader>gp", gs.preview_hunk, opts("Gitsigns: preview_hunk") },
+      { "<leader>gr", cmd("Gitsigns reset_hunk"), opts("Gitsigns: reset hunk") },
+      { "<leader>gs", cmd("Gitsigns stage_hunk"), opts("Gitsigns: stage hunk") },
     })
-    key.nvmap({ "<leader>gr", cmd("Gitsigns reset_hunk"), opts("Gitsigns: reset hunk") })
+    key.xmap({
+      { "<leader>gr", cmd("Gitsigns reset_hunk"), opts("Gitsigns: reset hunk") },
+      { "<leader>gs", cmd("Gitsigns stage_hunk"), opts("Gitsigns: stage hunk") },
+    })
     -- stylua: ignore end
   end,
 })

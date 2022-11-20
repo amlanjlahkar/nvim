@@ -4,7 +4,7 @@ local gvar = vim.g
 -- options {{{
 opt.mouse = "nv" -- nervous laughter
 opt.confirm = true
-opt.updatetime = 200
+opt.updatetime = 50
 opt.clipboard = ""
 opt.backspace = "indent,eol,start"
 opt.splitbelow = true
@@ -25,7 +25,7 @@ opt.cursorline = true
 opt.laststatus = 3
 opt.showtabline = 1
 opt.showmode = false
-opt.signcolumn = "auto"
+opt.signcolumn = "yes"
 opt.hlsearch = false
 opt.pumheight = 20
 opt.pumblend = 0
