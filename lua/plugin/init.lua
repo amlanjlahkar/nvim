@@ -1,15 +1,20 @@
 local fn = vim.fn
 
 -- bootstrap packer installation
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  vim.notify("Installing packer and corresponding plugins, please wait...", vim.log.levels.INFO)
-  vim.api.nvim_exec(
-    string.format("silent !git clone --depth 1 https://github.com/wbthomason/packer.nvim %s", install_path),
-    false
-  )
-  BOOTSTRAP_PACKER = true
+local function ensure_packer()
+  local install_path = fn.stdpath("data") .. "/site/pack/packer"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    vim.notify("Installing packer and corresponding plugins, please wait...", vim.log.levels.INFO)
+    vim.api.nvim_exec(
+      string.format("silent !git clone --depth 1 https://github.com/wbthomason/packer.nvim %s/start/packer.nvim", install_path),
+      false
+    )
+    vim.opt.runtimepath:append(install_path)
+    return true
+  end
+  return false
 end
+local bootstrap = ensure_packer()
 
 local function extend(plugin)
   return string.format("require('plugin.extend.%s')", plugin)
@@ -23,10 +28,35 @@ require("packer").startup({
   function(use)
     -- Core {{{1
     use("wbthomason/packer.nvim")
-    use("lewis6991/impatient.nvim") -- already loaded from core, but is defined here to pull new changes
+    use("lewis6991/impatient.nvim")
     use({ "nvim-lua/plenary.nvim", module_pattern = "plenary.*" })
 
     -- LSP {{{2
+    use({
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup({
+          ui = {
+            border = "single",
+            icons = {
+              package_installed = " ",
+              package_pending = "勒",
+              package_uninstalled = " ",
+            },
+          },
+        })
+      end
+    })
+    use({
+      "williamboman/mason-lspconfig",
+      config = function()
+        local servers = require("config.lsp.server").pass_servers()
+        require("mason-lspconfig").setup({
+          ensure_installed = servers,
+          automatic_installation = false,
+        })
+      end
+    })
     use({
       "neovim/nvim-lspconfig",
       opt = true,
@@ -49,9 +79,6 @@ require("packer").startup({
       },
       config = use_config("lsp"),
     })
-
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig")
     use({ "jose-elias-alvarez/null-ls.nvim", opt = true, module = "null-ls" })
     use({ "folke/trouble.nvim", opt = true, after = "nvim-lspconfig" })
 
@@ -156,7 +183,7 @@ require("packer").startup({
     } ]]
     -- }}}
 
-    if BOOTSTRAP_PACKER then
+    if bootstrap then
       require("packer").sync()
     end
   end,

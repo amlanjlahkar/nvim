@@ -46,8 +46,14 @@ local function try_colorscheme(colorscheme)
   if is_defined then
     hl_override(colorscheme, custom_hl)
   end
-  if not pcall(vim.api.nvim_exec, "colorscheme " .. colorscheme, false) then
-    vim.api.nvim_exec("colorscheme slate", false)
+  if not pcall(vim.cmd, "colorscheme " .. colorscheme, false) then
+    vim.cmd([[
+      setlocal bg=dark scl=no ls=0 nonu nornu nocul
+      colorscheme quiet
+      hi Normal guibg=NONE
+      hi NormalFloat guibg=NONE
+      hi FloatBorder guibg=NONE guifg=NONE
+    ]])
   end
 end
 

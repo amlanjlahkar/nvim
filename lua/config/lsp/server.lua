@@ -10,21 +10,19 @@ local servers = {
   "tsserver",
   "sumneko_lua",
   "pyright",
-  -- "phpactor",
-  -- "tailwindcss",
 }
 
 local M = {}
 
+function M.pass_servers()
+  return servers
+end
+
 function M:setup_server()
-  if next(mason_lspconfig.get_installed_servers()) == nil then
-    vim.notify("Installing language servers...", vim.log.levels.INFO)
-    mason_lspconfig.setup({
-      ensure_installed = servers,
-      automatic_installation = false,
-    })
-  else
-    for _, server in pairs(servers) do
+  local installed = mason_lspconfig.get_installed_servers()
+  if #installed ~= 0 then
+    self.is_installed = true
+    for _, server in pairs(installed) do
       local opts = {
         on_attach = require("config.lsp.handler").on_attach,
         capabilities = require("config.lsp.handler").capabilities,
@@ -35,7 +33,6 @@ function M:setup_server()
       end
       require("lspconfig")[server].setup(opts)
     end
-    self.is_installed = true
   end
   return self
 end

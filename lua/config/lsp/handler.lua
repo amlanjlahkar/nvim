@@ -1,39 +1,6 @@
 local M = {}
-
-M.setup = function()
-  vim.diagnostic.config({
-    signs = false,
-    update_in_insert = true,
-    underline = false,
-    severity_sort = true,
-    virtual_text = false,
-    --[[ virtual_text = {
-      prefix = "",
-      source = "if_many",
-      severity = { max = vim.diagnostic.severity.WARN }
-    }, ]]
-    float = {
-      focusable = false,
-      style = "minimal",
-      border = "single",
-      source = "always",
-      header = "Diagnostic Info",
-      prefix = "",
-    },
-  })
-
-  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-end
-
 -- stylua: ignore
-local function lsp_keymaps(bufnr)
+function M.keymaps(bufnr)
   local lsp = vim.lsp.buf
   local key = require("core.keymap.maputil")
   local cmd, opts = key.cmd, key.new_opts
@@ -60,7 +27,7 @@ if is_cmp_available then
   M.capabilities = cmp_nvim.default_capabilities(M.capabilities)
 end
 
-M.on_attach = function(client, bufnr)
+function M.on_attach(client, bufnr)
   local is_navic_available, navic = pcall(require, "nvim-navic")
   if is_navic_available then
     if client.server_capabilities.documentSymbolProvider then
@@ -103,8 +70,7 @@ M.on_attach = function(client, bufnr)
       callback = vim.lsp.buf.clear_references,
     })
   end
-
-  lsp_keymaps(bufnr)
+  M.keymaps(bufnr)
 end
 
 return M
