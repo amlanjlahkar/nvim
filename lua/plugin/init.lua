@@ -2,13 +2,10 @@ local fn = vim.fn
 
 -- bootstrap packer installation
 local function ensure_packer()
-  local install_path = fn.stdpath("data") .. "/site/pack/packer"
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
     vim.notify("Installing packer and corresponding plugins, please wait...", vim.log.levels.INFO)
-    vim.api.nvim_exec(
-      string.format("silent !git clone --depth 1 https://github.com/wbthomason/packer.nvim %s/start/packer.nvim", install_path),
-      false
-    )
+    vim.cmd(string.format("silent !git clone --depth 1 https://github.com/wbthomason/packer.nvim %s", install_path))
     vim.opt.runtimepath:append(install_path)
     return true
   end

@@ -30,7 +30,7 @@ end
 
 local function hl_override(colorscheme, custom_hl)
   vim.api.nvim_create_autocmd("ColorScheme", {
-    group = vim.api.nvim_create_augroup("_hlOverride", { clear = true }),
+    group = vim.api.nvim_create_augroup("_color", { clear = true }),
     pattern = colorscheme,
     callback = function()
       for _, def in ipairs(custom_hl) do
@@ -46,7 +46,7 @@ local function try_colorscheme(colorscheme)
   if is_defined then
     hl_override(colorscheme, custom_hl)
   end
-  if not pcall(vim.cmd, "colorscheme " .. colorscheme, false) then
+  if not pcall(vim.cmd, "colorscheme " .. colorscheme) then
     vim.cmd([[
       setlocal bg=dark scl=no ls=0 nonu nornu nocul
       colorscheme quiet
