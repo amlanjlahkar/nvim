@@ -13,7 +13,7 @@ local launcher_path =
   vim.fn.glob(home .. "/tools/language_specific/Java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
 local config_path = home .. "/tools/language_specific/Java/jdtls/config_linux/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = home .. "/documents/projects/code/java/" .. project_name
+local workspace_dir = home .. "/documents/projects/code/java/workspaces/" .. project_name
 local jol_path = home .. "/tools/language_specific/Java/jol-cli-0.9-full.jar"
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
