@@ -2,9 +2,10 @@ local opt = vim.opt
 local gvar = vim.g
 
 -- options {{{
+opt.shada = "!,'0,<0,/0,:20,f0"
 opt.mouse = "nv" -- nervous laughter
 opt.confirm = true
-opt.updatetime = 50
+opt.updatetime = 100
 opt.clipboard = ""
 opt.backspace = "indent,eol,start"
 opt.splitbelow = true
@@ -60,7 +61,7 @@ let &t_ZR="\e[23m"
 ]])
 -- }}}
 
--- disable unnecessary nvim builtin plugins/providers {{{
+-- disable unnecessary nvim services {{{
 gvar.loaded_gzip = 1
 gvar.loaded_tar = 1
 gvar.loaded_zip = 1

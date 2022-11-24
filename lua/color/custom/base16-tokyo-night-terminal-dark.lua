@@ -1,3 +1,4 @@
+local none = "NONE"
 local Bg = "#16161e"
 local BgShadeLight = "#1a1b26"
 local BgShadeLighter = "#202431"
@@ -20,7 +21,7 @@ local DiffAdd = "#10292d"
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = Black, fg = "NONE" } },
+  { "StatusLineNC",               { bg = Black, fg = none } },
   { "StatusLine",                 { bg = Black, fg = FgShadeDarker } },
   { "StatusLineImp",              { bg = Black, fg = Fg } },
   { "StatusLineInd",              { bg = Black, fg = Green } },
@@ -33,7 +34,7 @@ M.custom = {
   { "CursorLineNr",               { bg = Bg, fg = White, bold = false } },
   { "WinBar",                     { bg = BgShadeLighter, fg = "#6b779e" } },
   { "WinBarNC",                   { bg = BgShadeLighter, fg = "#6b779e" } },
-  { "VertSplit",                  { fg = "#272834" } },
+  { "VertSplit",                  { fg = BgShadeLighter } },
   { "PmenuSel",                   { bg = BgShadeLighter , fg = White } },
   { "PmenuSbar",                  { bg = Bg  } },
   { "PmenuThumb",                 { bg = BgShadeLighter } },
@@ -57,10 +58,10 @@ M.custom = {
   { "VimModeExtra",               { bg = "#4d0412", fg = Red } },
   { "SnipChoiceNode",             { bg = BgShadeLight, fg = Orange } },
   { "SnipInsertNode",             { bg = BgShadeLight, fg = Green } },
-  { "TroubleText",                { bg = "NONE", fg = Fg } },
-  { "TroubleFoldIcon",            { bg = "NONE", fg = Fg } },
-  { "TroubleIndent",              { bg = "NONE", fg = FgShadeDark } },
-  { "TroubleLocation",            { bg = "NONE", fg = FgShadeDark } },
+  { "TroubleText",                { bg = none, fg = Fg } },
+  { "TroubleFoldIcon",            { bg = none, fg = Fg } },
+  { "TroubleIndent",              { bg = none, fg = FgShadeDark } },
+  { "TroubleLocation",            { bg = none, fg = FgShadeDark } },
   { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
   { "DiffDelete",                 { bg = DiffDelete, fg = Red } },
   { "GitGutterAdd",               { bg = Bg, fg = Green } },
@@ -69,7 +70,7 @@ M.custom = {
   { "GitGutterDelete",            { bg = Bg, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = true } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
-  { "Error",                      { bg = "NONE", fg = "NONE" } }, -- causes weird paren,brace highlighting on floating windows by default
+  { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 
 return M.custom

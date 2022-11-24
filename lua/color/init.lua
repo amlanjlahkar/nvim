@@ -48,7 +48,7 @@ local function try_colorscheme(colorscheme)
   end
   if not pcall(vim.cmd, "colorscheme " .. colorscheme) then
     vim.cmd([[
-      setlocal bg=dark scl=no ls=0 nonu nornu nocul
+      set bg=dark scl=no ls=0 nonu nornu nocul
       colorscheme quiet
       hi Normal guibg=NONE
       hi NormalFloat guibg=NONE

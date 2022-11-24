@@ -23,6 +23,9 @@ key.nmap({
   -- movements and editing {{{
   { "<leader>j", "<cmd>m .+1<CR>==", opts("Move current line down") },
   { "<leader>k", "<cmd>m .-2<CR>==", opts("Move current line up") },
+  { "<leader>a", "VGogg", opts("Select buffer content") },
+  { "L", "$" },
+  { "H", "_" },
   { "n", "nzzzv" },
   { "N", "Nzzzv" },
   { "]q", cmd("cnext") },
@@ -45,8 +48,7 @@ key.nmap({
 
 -- manual use of clipboard register to yank and paste
 key.nmap({
-  { "<leader>p", '"+p', opts("Paste from system clipboard") },
-  { "<leader>y", '"+y', opts("Yank line to system clipboard") },
-  { "<leader>Y", '"+y$', opts("Yank(eol) to system clipboard") },
+  { "<C-p>", '"+p', opts("Paste from system clipboard") },
+  { "<C-y>", '"+y$', opts("Yank(eol) to system clipboard") },
 })
-key.xmap({ "<leader>y", '"+yyy', opts("Yank line to system clipboard") })
+key.xmap({ "<C-y>", '"+yy', opts("Yank line to system clipboard") })

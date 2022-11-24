@@ -107,14 +107,6 @@ require("packer").startup({
       requires = { { "rafamadriz/friendly-snippets", opt = true } },
       after = "nvim-cmp",
     })
-
-    use({
-      "kylechui/nvim-surround",
-      -- keys = { "ys", "cs", "ds", { "v", "S" } },
-      config = function()
-        require("nvim-surround").setup()
-      end,
-    })
     -- 2}}}
 
     -- Treesitter {{{2
@@ -139,7 +131,7 @@ require("packer").startup({
     -- 2}}}
     -- 1}}}
 
-    -- Intuitve Development {{{1
+    -- Ease of Workflow {{{1
     -- Git Integration {{{2
     use({ "tpope/vim-fugitive", opt = true, cmd = "Git" })
     use({ "lewis6991/gitsigns.nvim", config = extend("gitsigns") })
@@ -158,6 +150,14 @@ require("packer").startup({
       keys = { "gc", "gb" },
       config = function()
         require("Comment").setup()
+      end,
+    })
+
+    use({
+      "kylechui/nvim-surround",
+      -- keys = { "ys", "cs", "ds", { "v", "S" } },
+      config = function()
+        require("nvim-surround").setup()
       end,
     })
     -- 1}}}
@@ -212,10 +212,10 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   command = "source <afile> | PackerCompile",
 })
 
--- local key = require("core.keymap.maputil")
--- local cmd, opts = key.cmd, key.new_opts
--- key.nmap({
---   { "<leader>pi", cmd("PackerInstall"), opts("Packer: Install missing plugins") },
---   { "<leader>psy", cmd("PackerSync"), opts("Packer: Sync plugin repositories") },
---   { "<leader>pst", cmd("PackerStatus"), opts("Packer status") },
--- })
+local key = require("core.keymap.maputil")
+local cmd, opts = key.cmd, key.new_opts
+key.nmap({
+  { "<leader>pi", cmd("PackerInstall"), opts("Packer: Install missing plugins") },
+  { "<leader>py", cmd("PackerSync"), opts("Packer: Sync plugin repositories") },
+  { "<leader>ps", cmd("PackerStatus"), opts("Packer status") },
+})
