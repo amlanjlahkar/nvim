@@ -24,7 +24,13 @@ local autocmd_definitions = {
       group = "_convention",
       desc = "Remove trailing whitespaces on writing a buffer",
       pattern = "*",
-      command = [[%s/\s\+$//e]],
+      callback = function()
+        if vim.bo.filetype ~= "diff" then
+          local view = vim.fn.winsaveview()
+          vim.cmd([[keeppatterns %s/\s\+$//e]])
+          vim.fn.winrestview(view)
+        end
+      end,
     },
   },
 
