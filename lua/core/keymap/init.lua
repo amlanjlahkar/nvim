@@ -40,7 +40,6 @@ key.nmap({
 
   -- misc {{{
   { "<F11>", cmd("setlocal spell!") },
-  { "<F11>", cmd("<C-o>:setlocal spell!<CR>") },
   { "<F2>", cmd("!$BROWSER %") },
   { "<leader><leader>s", cmd("silent :write | source %"), opts("Save and source lua file") },
   -- }}}

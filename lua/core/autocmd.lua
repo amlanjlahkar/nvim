@@ -8,7 +8,7 @@ local function gcc()
   local exit_code = nil
   require("plenary.job"):new({
       command = "gcc",
-      args = { "-o", outfile, fpath },
+      args = { "-lm", "-lstdc++", "-o", outfile, fpath },
       on_stderr = function(_, data)
         print((data and "Compilation error!"))
         exit_code = 2
@@ -21,7 +21,6 @@ local autocmd_definitions = {
   {
     "BufWritePre",
     {
-      group = "_convention",
       desc = "Remove trailing whitespaces on writing a buffer",
       pattern = "*",
       callback = function()
@@ -37,7 +36,6 @@ local autocmd_definitions = {
   {
     "TextYankPost",
     {
-      group = "_convention",
       desc = "Highlight text on yank",
       pattern = "*",
       callback = function()
@@ -49,7 +47,6 @@ local autocmd_definitions = {
   {
     "TermOpen",
     {
-      group = "_convention",
       desc = "Open terminal directly in insert mode",
       pattern = "*",
       callback = function()
@@ -66,7 +63,6 @@ local autocmd_definitions = {
   {
     "FileType",
     {
-      group = "_code",
       desc = "Run interpreted/compiled code",
       pattern = { "python", "c", "cpp" },
       callback = function()
@@ -75,18 +71,11 @@ local autocmd_definitions = {
         local cc = api.nvim_create_user_command
         if filetype == "python" then
           cc("TestCode", "terminal python " .. filename, {})
-        elseif filetype == "c" then
+        elseif filetype == "c" or filetype == "cpp" then
           cc("TestCode", function()
             local res = gcc()
             if res ~= 2 then
-              api.nvim_exec("terminal " .. res, false)
-            end
-          end, {})
-        elseif filetype == "cpp" then
-          cc("TestCode", function()
-            local res = gcc()
-            if res ~= 2 then
-              api.nvim_exec("terminal " .. res, false)
+              vim.cmd("terminal " .. res)
             end
           end, {})
         end
@@ -99,11 +88,10 @@ local autocmd_definitions = {
 for _, entry in ipairs(autocmd_definitions) do
   local event = entry[1]
   local opts = entry[2]
-  if type(opts.group) == "string" and opts.group ~= "" then
-    local exists, _ = pcall(api.nvim_get_autocmds, { group = opts.group })
-    if not exists then
-      api.nvim_create_augroup(opts.group, { clear = true })
-    end
+  opts.group = "_core"
+  local exists, _ = pcall(api.nvim_get_autocmds, { group = opts.group })
+  if not exists then
+    api.nvim_create_augroup(opts.group, { clear = true })
   end
   api.nvim_create_autocmd(event, opts)
 end

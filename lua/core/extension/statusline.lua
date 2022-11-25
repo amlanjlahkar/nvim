@@ -209,7 +209,7 @@ Statusline = setmetatable(M, {
   end,
 })
 
-local augroup = api.nvim_create_augroup("StatusLine", { clear = true })
+local augroup = api.nvim_create_augroup("_ext", { clear = true })
 api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
   group = augroup,
   pattern = "*",
