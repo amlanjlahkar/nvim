@@ -28,6 +28,7 @@ key.nmap({
   { "H", "_" },
   { "n", "nzzzv" },
   { "N", "Nzzzv" },
+  { "J", "mzJ`z" },
   { "]q", cmd("cnext") },
   { "[q", cmd("cprev") },
   { "<C-c>", cmd("cclose") },
@@ -45,9 +46,17 @@ key.nmap({
   -- }}}
 })
 
+-- viusal mode specific
+key.vmap({
+  { "<", "<gv" },
+  { ">", ">gv" },
+  { "J", ":m '>+1<CR>gv=gv" },
+  { "K", ":m '<-2<CR>gv=gv" },
+})
+
 -- manual use of clipboard register to yank and paste
 key.nmap({
-  { "<C-p>", '"+p', opts("Paste from system clipboard") },
   { "<C-y>", '"+y$', opts("Yank(eol) to system clipboard") },
+  { "<C-p>", '"+p', opts("Paste from system clipboard") },
 })
-key.xmap({ "<C-y>", '"+yy', opts("Yank line to system clipboard") })
+key.xmap({ "<C-y>", '"+y', opts("Yank line to system clipboard") })
