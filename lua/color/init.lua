@@ -28,9 +28,10 @@ if is_avail then
   })
 end
 
+local augroup = vim.api.nvim_create_augroup("_color", { clear = true })
 local function hl_override(colorscheme, custom_hl)
   vim.api.nvim_create_autocmd("ColorScheme", {
-    group = vim.api.nvim_create_augroup("_color", { clear = true }),
+    group = augroup,
     pattern = colorscheme,
     callback = function()
       for _, def in ipairs(custom_hl) do

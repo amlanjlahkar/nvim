@@ -16,7 +16,6 @@ local function netrw_maps()
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("_plugin", { clear = true }),
   pattern = "netrw",
   callback = function()
     netrw_maps()

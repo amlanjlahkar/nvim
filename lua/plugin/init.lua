@@ -207,7 +207,6 @@ require("packer").startup({
 
 -- extras
 vim.api.nvim_create_autocmd("BufWritePost", {
-  group = vim.api.nvim_create_augroup("_plugin", { clear = true }),
   pattern = fn.stdpath("config") .. "/lua/plugin/init.lua",
   command = "source <afile> | PackerCompile",
 })

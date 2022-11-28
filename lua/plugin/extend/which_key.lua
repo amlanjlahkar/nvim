@@ -5,7 +5,6 @@ end
 
 local margin = { 1, 0, 1, 0 }
 vim.api.nvim_create_autocmd({ "VimResized", "BufEnter" }, {
-  group = "_plugin",
   desc = "Resize which key window based on nvim_window width",
   callback = function()
     local width = require("core.util").get_width()

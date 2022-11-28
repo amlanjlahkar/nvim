@@ -52,9 +52,7 @@ function M.on_attach(client, bufnr)
       vim.api.nvim_set_hl(0, "LspReferenceWrite", { link = "LspReference" })
     end
 
-    vim.api.nvim_create_augroup("lsp_document_highlight", {
-      clear = false,
-    })
+    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
     vim.api.nvim_clear_autocmds({
       buffer = bufnr,
       group = "lsp_document_highlight",
