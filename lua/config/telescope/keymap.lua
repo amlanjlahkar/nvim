@@ -67,4 +67,21 @@ key.nmap({
     end,
     opts("Telescope: Dwots"),
   },
+
+  {
+    "<leader>tw",
+    function()
+      fn:set_bg()
+    end,
+    opts("Telescope: Set wallpaper"),
+  },
+
+  {
+    "<leader>tr",
+    function()
+      fn:reload_module()
+    end,
+    opts("Telescope: Dwots"),
+  },
+
 })
