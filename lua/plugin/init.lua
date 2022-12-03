@@ -42,7 +42,7 @@ require("packer").startup({
             },
           },
         })
-      end
+      end,
     })
     use({
       "williamboman/mason-lspconfig",
@@ -52,7 +52,7 @@ require("packer").startup({
           ensure_installed = servers,
           automatic_installation = false,
         })
-      end
+      end,
     })
     use({
       "neovim/nvim-lspconfig",
@@ -166,7 +166,7 @@ require("packer").startup({
     use({ "stevearc/dressing.nvim", config = extend("dressing") })
     use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
     -- use({ "folke/which-key.nvim", config = extend("which_key") })
-    use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
+    -- use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
 
     -- colorscheme
     use("xiyaowong/nvim-transparent")

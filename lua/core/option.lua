@@ -54,11 +54,6 @@ opt.completeopt = { "menu", "menuone", "noselect" }
 opt.browsedir = "buffer"
 opt.virtualedit = "block"
 opt.grepprg = "rg --hidden --vimgrep --smart-case --"
--- italic font support for vim inside of tmux
-vim.cmd([[
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
-]])
 -- }}}
 
 -- disable unnecessary nvim services {{{

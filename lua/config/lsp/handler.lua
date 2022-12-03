@@ -28,7 +28,7 @@ if is_cmp_available then
 end
 
 function M.on_attach(client, bufnr)
-  local is_navic_available, navic = pcall(require, "nvim-navic")
+  --[[ local is_navic_available, navic = pcall(require, "nvim-navic")
   if is_navic_available then
     if client.server_capabilities.documentSymbolProvider then
       local fname = vim.fn.expand("%:t")
@@ -41,7 +41,7 @@ function M.on_attach(client, bufnr)
       end
       navic.attach(client, bufnr)
     end
-  end
+  end ]]
 
   -- Highlight references for symbol under cursor
   if client.server_capabilities.documentHighlightProvider then
