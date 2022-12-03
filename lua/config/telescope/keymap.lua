@@ -81,7 +81,7 @@ key.nmap({
     function()
       fn:reload_module()
     end,
-    opts("Telescope: Dwots"),
+    opts("Telescope: Reload lua module"),
   },
 
 })

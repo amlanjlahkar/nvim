@@ -21,7 +21,7 @@ local DiffAdd = "#10292d"
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = Black, fg = none } },
+  { "StatusLineNC",               { bg = Bg, fg = none } },
   { "StatusLine",                 { bg = Black, fg = FgShadeDarker } },
   { "StatusLineImp",              { bg = Black, fg = Fg } },
   { "StatusLineInd",              { bg = Black, fg = Green } },

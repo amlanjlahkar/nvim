@@ -73,9 +73,9 @@ gvar.loaded_spec = 1
 gvar.loaded_logiPat = 1
 gvar.loaded_rrhelper = 1
 
-gvar.loaded_netrw = 1
-gvar.loaded_netrwPlugin = 1
-gvar.loaded_netrwSettings = 1
+-- gvar.loaded_netrw = 1
+-- gvar.loaded_netrwPlugin = 1
+-- gvar.loaded_netrwSettings = 1
 
 gvar.loaded_ruby_provider = 0
 gvar.loaded_node_provider = 0
