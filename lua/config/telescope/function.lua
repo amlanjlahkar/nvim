@@ -49,6 +49,7 @@ function M:set_bg()
       map("i", "<CR>", function()
         local e = require("telescope.actions.state").get_selected_entry()
         vim.fn.system("xwallpaper --zoom " .. path .. "/" .. e.value)
+        -- vim.fn.system(string.format('wal -q -i %s/%s && xwallpaper --zoom "$(< $HOME/.cache/wal/wal)"', path, e.value))
       end)
       return true
     end,
@@ -82,7 +83,7 @@ function M:reload_module()
         vim.notify("Reloaded " .. mod, vim.log.levels.INFO)
       end)
       return true
-    end
+    end,
   }
   tb.find_files(opts)
 end

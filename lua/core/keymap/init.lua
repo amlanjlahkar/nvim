@@ -37,6 +37,7 @@ key.nmap({
 
   -- external {{{
   { "<leader>v", cmd("tab Git"), opts("Open vcs interface") },
+  { "<leader>ld", cmd("TroubleToggle document_diagnostics"), opts("Trouble: List document diagnostics") },
   -- }}}
 
   -- misc {{{

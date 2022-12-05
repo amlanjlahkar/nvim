@@ -1,6 +1,4 @@
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
-
 local is_avail, transparent = pcall(require, "transparent")
 if is_avail then
   transparent.setup({
@@ -49,7 +47,7 @@ local function try_colorscheme(colorscheme)
   end
   if not pcall(vim.cmd, "colorscheme " .. colorscheme) then
     vim.cmd([[
-      set bg=dark scl=no ls=0 nonu nornu nocul
+      set bg=light scl=no ls=0 nonu nornu nocul
       colorscheme quiet
       hi Normal guibg=NONE
       hi NormalFloat guibg=NONE

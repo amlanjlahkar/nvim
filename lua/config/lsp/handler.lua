@@ -18,6 +18,7 @@ function M.keymaps(bufnr)
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),    opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),   opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
   })
+  key.imap({ "<C-k>", lsp.signature_help, })
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()

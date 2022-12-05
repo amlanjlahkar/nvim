@@ -21,12 +21,12 @@ local DiffAdd = "#10292d"
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = Bg, fg = none } },
+  { "StatusLineNC",               { bg = Black, fg = none } },
   { "StatusLine",                 { bg = Black, fg = FgShadeDarker } },
   { "StatusLineImp",              { bg = Black, fg = Fg } },
   { "StatusLineInd",              { bg = Black, fg = Green } },
   { "StatusLineDiagnosticError",  { bg = Black, fg = Red } },
-  { "StatusLineDiagnosticWarn",   { bg = Black, fg = Magenta } },
+  { "StatusLineDiagnosticWarn",   { bg = Black, fg = Yellow } },
   { "StatusLineDiagnosticHint",   { bg = Black, fg = Cyan } },
   { "StatusLineDiagnosticInfo",   { bg = Black, fg = Fg } },
   { "SignColumn",                 { bg = Bg } },
@@ -70,6 +70,7 @@ M.custom = {
   { "GitGutterDelete",            { bg = Bg, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = true } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
+  { "DiagnosticWarn",             { fg = Yellow } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 

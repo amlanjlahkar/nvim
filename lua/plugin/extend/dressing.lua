@@ -1,6 +1,8 @@
 require("dressing").setup({
   input = {
     border = "single",
+  },
+  win_options = {
     winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
   },
   select = {
@@ -10,7 +12,7 @@ require("dressing").setup({
           backend = "telescope",
           telescope = {
             layout_strategy = "vertical",
-          }
+          },
         }
       end
     end,

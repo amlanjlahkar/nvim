@@ -20,6 +20,7 @@ null_ls.setup({
       extra_filetypes = { "sh" },
     }),
     diagnostics.phpcs,
+    diagnostics.jsonlint,
   },
 })
 
