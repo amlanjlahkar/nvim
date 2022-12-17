@@ -151,16 +151,16 @@ M.get_lsp_diagnostic = function()
   local info = ""
 
   if count["errors"] ~= 0 then
-    errors = " %#StatusLineDiagnosticError# " .. count["errors"]
+    errors = " %#StatusLineDiagnosticError# " .. count["errors"]
   end
   if count["warnings"] ~= 0 then
-    warnings = " %#StatusLineDiagnosticWarn# " .. count["warnings"]
+    warnings = " %#StatusLineDiagnosticWarn# " .. count["warnings"]
   end
   if count["hints"] ~= 0 then
-    hints = " %#StatusLineDiagnosticHint# " .. count["hints"]
+    hints = " %#StatusLineDiagnosticHint# " .. count["hints"]
   end
   if count["info"] ~= 0 then
-    info = " %#StatusLineDiagnosticInfo# " .. count["info"]
+    info = " %#StatusLineDiagnosticInfo# " .. count["info"]
   end
 
   return errors .. warnings .. hints .. info .. "%#StatusLineNC#"
@@ -169,7 +169,7 @@ end
 M.treesitter_status = function()
   local buf = api.nvim_get_current_buf()
   local hl = require("vim.treesitter.highlighter")
-  return hl.active[buf] and "  " or ""
+  return hl.active[buf] and "   " or ""
 end
 
 M.set_active = function(self)

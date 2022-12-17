@@ -115,7 +115,7 @@ cmp.setup({
     },
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
   },
   get_bufnrs = function()
     local bufs = {}

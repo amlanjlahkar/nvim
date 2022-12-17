@@ -8,7 +8,7 @@ local FgShadeDarker = "#51494a"
 local Black = "#000000"
 local Red = "#d19299"
 local Green = "#63b0b0"
-local Blue = "#654a96"
+local Blue = "#a9d1df"
 local Magenta = "#d5a8e3"
 local White = "#ffffff"
 
@@ -60,11 +60,12 @@ M.custom = {
   { "GitGutterChange",            { fg = Blue } },
   { "GitGutterChangeDelete",      { fg = Magenta } },
   { "GitGutterDelete",            { fg = Red } },
-  { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = true } },
+  { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = false } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
   { "Visual",                     { bg = BgShadeLighter, fg = Red } },
   { "CmpItemKind",                { fg = FgShadeDark } },
   { "CmpItemMenu",                { fg = FgShadeDarker } },
+  { "NonText",                    { fg = FgShadeDarker } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 
