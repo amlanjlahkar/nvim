@@ -4,7 +4,7 @@ if not is_avail then
 end
 
 local trouble_ui = {
-  icons = true,
+  icons = false,
   fold_open = "",
   fold_closed = "",
   indent_lines = false,

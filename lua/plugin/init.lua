@@ -67,7 +67,6 @@ require("packer").startup({
         "css",
         "javascript",
         "java",
-        "php",
         "python",
         "sh",
         "bash",
@@ -119,6 +118,7 @@ require("packer").startup({
       config = extend("treesitter"),
     })
 
+    use({ "nvim-treesitter/nvim-treesitter-textobjects", opt = true, after = "nvim-treesitter" })
     use({
       "windwp/nvim-ts-autotag",
       opt = true,
@@ -164,7 +164,7 @@ require("packer").startup({
 
     -- UI {{{
     use({ "stevearc/dressing.nvim", config = extend("dressing") })
-    use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
+    -- use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
     -- use({ "folke/which-key.nvim", config = extend("which_key") })
     -- use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
 

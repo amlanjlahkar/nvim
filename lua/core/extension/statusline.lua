@@ -4,9 +4,9 @@ local api = vim.api
 local M = {}
 
 M.trunc_width = setmetatable({
-  git_status = 90,
-  filetype = 90,
-  filepath = 90,
+  git_status = 100,
+  filetype = 100,
+  filepath = 100,
 }, {
   __index = function()
     return 80

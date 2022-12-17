@@ -89,12 +89,13 @@ cmp.setup({
     { name = "path" },
   },
   formatting = {
-    fields = { "abbr", "kind" },
+    fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)
-      vim_item.kind = string.format("%s(%s)", kind_icons[vim_item.kind], vim_item.kind)
+      vim_item.kind = string.format("%s", vim_item.kind)
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
-        luasnip = "[Snippet]",
+        nvim_lua = "[Lua]",
+        luasnip = "[LuaSnip]",
         buffer = "[Buffer]",
         path = "[Path]",
       })[entry.source.name]

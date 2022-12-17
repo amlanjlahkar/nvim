@@ -10,7 +10,6 @@ TS_configs.setup({
     "c",
     "css",
     "html",
-    "php",
     "javascript",
     "java",
     "lua",
