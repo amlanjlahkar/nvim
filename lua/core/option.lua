@@ -2,44 +2,56 @@ local opt = vim.opt
 local gvar = vim.g
 
 -- options {{{
+-- file handling
 opt.shada = "!,'0,<0,/0,:20,f0"
-opt.mouse = "nv" -- nervous laughter
+opt.hidden = true
 opt.confirm = true
+opt.autowrite = true
+opt.swapfile = false
+opt.backup = false
+opt.undofile = true
+opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 opt.updatetime = 100
-opt.clipboard = ""
-opt.backspace = "indent,eol,start"
-opt.splitbelow = true
-opt.splitright = true
-opt.wrap = false
-opt.breakindent = true
-opt.linebreak = true
-opt.ignorecase = true
-opt.smartcase = true
+
+-- indenting and wrapping
+opt.autoindent = true
 opt.smartindent = true
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.tabstop = 2
+opt.wrap = false
+opt.breakindent = true
+opt.linebreak = true
+opt.backspace = "indent,eol,nostop"
+
+-- editor preference
 opt.number = true
 opt.relativenumber = true
 opt.numberwidth = 4
-opt.cursorline = true
-opt.laststatus = 3
-opt.showtabline = 1
-opt.showmode = false
-opt.signcolumn = "yes"
+opt.ignorecase = true
+opt.smartcase = true
+opt.incsearch = true
 opt.hlsearch = false
+opt.scrolloff = 8
+opt.sidescrolloff = 8
+opt.list = true
+opt.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
+opt.virtualedit = "block"
+opt.browsedir = "buffer"
+opt.foldmethod = "marker"
+opt.completeopt = { "menu", "menuone", "noselect" }
+
+opt.showmode = false
+opt.cursorline = true
+opt.showtabline = 1
+opt.cmdheight = 1
+opt.laststatus = 3
+opt.signcolumn = "yes"
 opt.pumheight = 20
 opt.pumblend = 0
 opt.winblend = 0
-opt.foldmethod = "marker"
-opt.spelllang = "en_us"
-opt.spellsuggest = { "best", 5 }
-opt.scrolloff = 8
-opt.sidescrolloff = 8
-opt.cmdheight = 1
-opt.autowrite = true
-opt.list = true
-opt.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "→", precedes = "←" })
+opt.splitbelow = true
+opt.splitright = true
 opt.fillchars:append({
   eob = " ",
   horiz = "━",
@@ -50,10 +62,12 @@ opt.fillchars:append({
   vertright = "┣",
   verthoriz = "╋",
 })
-opt.completeopt = { "menu", "menuone", "noselect" }
-opt.browsedir = "buffer"
-opt.virtualedit = "block"
+
+opt.spelllang = "en_us"
+opt.spellsuggest = { "best", 5 }
 opt.grepprg = "rg --hidden --vimgrep --smart-case --"
+opt.clipboard = ""
+opt.mouse = "nv" -- nervous laughter
 -- }}}
 
 -- disable unnecessary nvim services {{{

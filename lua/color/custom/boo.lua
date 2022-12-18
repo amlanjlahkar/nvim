@@ -1,11 +1,11 @@
 local none = "NONE"
 local Bg = "#0f0f10"
 local BgShadeLight = "#201c1c"
-local BgShadeLighter = "#372f30"
+local BgShadeLighter = "#211c1d"
 local Fg = "#726464"
 local FgShadeDark = "#849da2"
 local FgShadeDarker = "#51494a"
-local Black = "#000000"
+local Black = "#131314"
 local Red = "#d19299"
 local Green = "#63b0b0"
 local Blue = "#a9d1df"
@@ -46,6 +46,11 @@ M.custom = {
   { "NormalFloatAlt",             { bg = BgShadeLight, fg = Fg } },
   { "FloatBorderAlt",             { bg = BgShadeLight, fg = BgShadeLight } },
   { "LspReference",               { bg = BgShadeLighter, underline = false } },
+  { "VimModeNormal",              { bg = BgShadeLighter, fg = Red } },
+  { "VimModeInsert",              { bg = BgShadeLighter, fg = Red } },
+  { "VimModeVisual",              { bg = BgShadeLighter, fg = Red } },
+  { "VimModeCommand",             { bg = BgShadeLighter, fg = Red } },
+  { "VimModeExtra",               { bg = BgShadeLighter, fg = Red } },
   { "SnipChoiceNode",             { bg = BgShadeLight, fg = Blue } },
   { "SnipInsertNode",             { bg = BgShadeLight, fg = Green } },
   { "TroubleText",                { bg = none, fg = Fg } },
@@ -62,7 +67,7 @@ M.custom = {
   { "GitGutterDelete",            { fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = false } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
-  { "Visual",                     { bg = BgShadeLighter, fg = Red } },
+  { "Visual",                     { bg = BgShadeLighter, fg = White } },
   { "CmpItemKind",                { fg = FgShadeDark } },
   { "CmpItemMenu",                { fg = FgShadeDarker } },
   { "NonText",                    { fg = FgShadeDarker } },

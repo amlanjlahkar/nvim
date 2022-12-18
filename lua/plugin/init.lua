@@ -79,8 +79,8 @@ require("packer").startup({
     use({ "folke/trouble.nvim", opt = true, after = "nvim-lspconfig" })
 
     -- Debugging {{{3
-    use({ "mfussenegger/nvim-dap", opt = true, module = "dap", ft = { "java" } })
-    use({ "rcarriga/nvim-dap-ui", opt = true, after = "nvim-dap" })
+    -- use({ "mfussenegger/nvim-dap", opt = true, module = "dap", ft = { "java" } })
+    -- use({ "rcarriga/nvim-dap-ui", opt = true, after = "nvim-dap" })
     -- 3}}}
 
     -- Language specific {{{3
@@ -171,7 +171,7 @@ require("packer").startup({
     -- colorscheme
     use("rockerBOO/boo-colorscheme-nvim")
     use("xiyaowong/nvim-transparent")
-    use("RRethy/nvim-base16")
+    -- use("RRethy/nvim-base16")
     -- }}}
 
     -- Neorg {{{

@@ -16,13 +16,14 @@ TS_configs.setup({
     "python",
     "vim",
     "yaml",
+    "rasi",
     "norg",
     "markdown",
   },
   ignore_install = {},
   highlight = {
     enable = true,
-    disable = { "help" },
+    -- disable = { "help" },
     additional_vim_regex_highlighting = false,
   },
   incremental_selection = {
