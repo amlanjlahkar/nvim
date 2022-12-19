@@ -25,6 +25,7 @@ opt.linebreak = true
 opt.backspace = "indent,eol,nostop"
 
 -- editor preference
+opt.ttimeoutlen = 200
 opt.number = true
 opt.relativenumber = true
 opt.numberwidth = 4
