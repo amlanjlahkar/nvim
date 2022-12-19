@@ -202,7 +202,7 @@ require("packer").startup({
       enable = false,
       threshold = 1,
     },
-    compile_path = fn.stdpath("config") .. "/lua/plugin/packer_compiled.lua",
+    -- compile_path = fn.stdpath("config") .. "/lua/plugin/packer_compiled.lua",
   },
 })
 
