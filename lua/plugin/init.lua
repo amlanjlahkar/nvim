@@ -115,10 +115,10 @@ require("packer").startup({
         local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
         ts_update()
       end,
+      requires = "nvim-treesitter/nvim-treesitter-textobjects",
       config = extend("treesitter"),
     })
 
-    use({ "nvim-treesitter/nvim-treesitter-textobjects", opt = true, after = "nvim-treesitter" })
     use({
       "windwp/nvim-ts-autotag",
       opt = true,
