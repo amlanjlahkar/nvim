@@ -1,22 +1,6 @@
 local api = vim.api
 local fn = vim.fn
 
--- stylua: ignore
-local function gcc()
-  local fpath = fn.expand("%:p")
-  local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
-  local exit_code = nil
-  require("plenary.job"):new({
-      command = "gcc",
-      args = { "-lm", "-lstdc++", "-o", outfile, fpath },
-      on_stderr = function(_, data)
-        print((data and "Compilation error!"))
-        exit_code = 2
-      end,
-    }):sync()
-  return exit_code == 2 and exit_code or outfile
-end
-
 local autocmd_definitions = {
   {
     "BufWritePre",
@@ -25,9 +9,9 @@ local autocmd_definitions = {
       pattern = "*",
       callback = function()
         if vim.bo.filetype ~= "diff" then
-          local view = vim.fn.winsaveview()
-          vim.cmd([[keeppatterns %s/\s\+$//e]])
-          vim.fn.winrestview(view)
+          local view = fn.winsaveview()
+          vim.cmd [[keeppatterns %s/\s\+$//e]]
+          fn.winrestview(view)
         end
       end,
     },
@@ -63,23 +47,17 @@ local autocmd_definitions = {
   {
     "FileType",
     {
-      desc = "Run interpreted/compiled code",
+      desc = "Create Ex command to run compiled/interpreted code",
       pattern = { "python", "c", "cpp" },
       callback = function()
-        local filetype = vim.bo.filetype
-        local filename = fn.expand("%:p")
-        local cc = api.nvim_create_user_command
-        if filetype == "python" then
-          cc("TestCode", "terminal python " .. filename, {})
-        elseif filetype == "c" or filetype == "cpp" then
-          cc("TestCode", function()
-            local res = gcc()
-            if res ~= 2 then
-              vim.cmd("terminal " .. res)
-            end
-          end, {})
-        end
-        vim.keymap.set("n", "<leader>x", "<cmd>TestCode<CR>", { silent = true, noremap = true })
+        local cmd = require("core.util").test_code(vim.bo.filetype)
+        vim.keymap.set("n", "<leader>x", function()
+          if cmd then
+            cmd()
+          else
+            print("No definition provided for " .. vim.bo.filetype)
+          end
+        end, { silent = true, noremap = true, desc = "Compile/interprete current buffer content" })
       end,
     },
   },
