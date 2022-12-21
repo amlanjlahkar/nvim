@@ -13,12 +13,9 @@ local function ensure_packer()
 end
 local bootstrap = ensure_packer()
 
-local function extend(plugin)
-  return string.format("require('plugin.extend.%s')", plugin)
-end
-
-local function use_config(plugin)
-  return string.format("require('config.%s')", plugin)
+local function use_config(sep_namespace, plugin)
+  return sep_namespace and string.format("require('config.%s')", plugin)
+    or string.format("require('plugin.extend.%s')", plugin)
 end
 
 require("packer").startup({
@@ -73,7 +70,7 @@ require("packer").startup({
         "json",
         "yaml",
       },
-      config = use_config("lsp"),
+      config = use_config(true, "lsp"),
     })
     use({ "jose-elias-alvarez/null-ls.nvim", opt = true, module = "null-ls" })
     use({ "folke/trouble.nvim", opt = true, after = "nvim-lspconfig" })
@@ -98,7 +95,7 @@ require("packer").startup({
         { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
       },
       event = "InsertEnter",
-      config = use_config("completion"),
+      config = use_config(true, "completion"),
     })
 
     use({
@@ -116,7 +113,7 @@ require("packer").startup({
         ts_update()
       end,
       requires = "nvim-treesitter/nvim-treesitter-textobjects",
-      config = extend("treesitter"),
+      config = use_config(false, "treesitter"),
     })
 
     use({
@@ -134,15 +131,15 @@ require("packer").startup({
     -- Ease of Workflow {{{1
     -- Git Integration {{{2
     use({ "tpope/vim-fugitive", opt = true, cmd = "Git" })
-    use({ "lewis6991/gitsigns.nvim", config = extend("gitsigns") })
+    use({ "lewis6991/gitsigns.nvim", config = use_config(false, "gitsigns") })
     -- 2}}}
 
-    use({ "ThePrimeagen/harpoon", opt = true, keys = "<leader>h", config = extend("harpoon") })
+    use({ "ThePrimeagen/harpoon", opt = true, keys = "<leader>h", config = use_config(false, "harpoon") })
 
     use({
       "nvim-telescope/telescope.nvim",
       requires = { { "nvim-telescope/telescope-fzf-native.nvim", run = "make", module = "telescope" } },
-      config = use_config("telescope"),
+      config = use_config(true, "telescope"),
     })
 
     use({
@@ -163,10 +160,10 @@ require("packer").startup({
     -- 1}}}
 
     -- UI {{{
-    use({ "stevearc/dressing.nvim", config = extend("dressing") })
+    use({ "stevearc/dressing.nvim", config = use_config(false, "dressing") })
     -- use({ "kyazdani42/nvim-web-devicons", module = "nvim-web-devicons" })
-    -- use({ "folke/which-key.nvim", config = extend("which_key") })
-    -- use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = extend("navic") })
+    -- use({ "folke/which-key.nvim", config = use_config(false, "which_key") })
+    -- use({ "SmiteshP/nvim-navic", after = "nvim-lspconfig", config = use_config(false, "navic") })
 
     -- colorscheme
     use("rockerBOO/boo-colorscheme-nvim")
