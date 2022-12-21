@@ -9,9 +9,11 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup({
   sources = {
     formatting.black,
-    formatting.prettier,
     formatting.stylua,
     formatting.phpcsfixer,
+    formatting.prettier.with({
+      prefer_local = "node_modules/.bin",
+    }),
     formatting.shfmt.with({
       extra_args = { "-i", "2", "-ci", "-bn" },
       extra_filetypes = { "bash" },
