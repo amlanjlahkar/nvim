@@ -1,3 +1,3 @@
 require("core")
 require("color")
-require("plugin")
+require("config.lazy")

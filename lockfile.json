@@ -1,0 +1,7 @@
+{
+  "lazy.nvim": { "branch": "main", "commit": "7a57ea28d30698abed15f22f71f34dfb4dc36c88" },
+  "null-ls.nvim": { "branch": "main", "commit": "db1c7cb5f6d6f6036b7f8433bb3cfcbe985cb3d1" },
+  "nvim-lspconfig": { "branch": "master", "commit": "5292d60976b3084a987bf5634150f6201830ac18" },
+  "plenary.nvim": { "branch": "master", "commit": "4b7e52044bbb84242158d977a50c4cbcd85070c7" },
+  "trouble.nvim": { "branch": "main", "commit": "897542f90050c3230856bc6e45de58b94c700bbf" }
+}

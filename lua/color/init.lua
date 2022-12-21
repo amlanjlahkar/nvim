@@ -49,9 +49,6 @@ local function try_colorscheme(colorscheme)
     vim.cmd([[
       set bg=light scl=no ls=0 nonu nornu nocul
       colorscheme quiet
-      hi Normal guibg=NONE
-      hi NormalFloat guibg=NONE
-      hi FloatBorder guibg=NONE guifg=NONE
     ]])
   end
 end
