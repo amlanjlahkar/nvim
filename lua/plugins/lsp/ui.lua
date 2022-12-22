@@ -1,51 +1,44 @@
-local trouble_ui = {
-  icons = false,
-  fold_open = "",
-  fold_closed = "",
-  indent_lines = false,
-  use_diagnostic_signs = true,
-}
-
-local diagnostic_ui = {
-  signs = false,
-  update_in_insert = true,
-  underline = false,
-  severity_sort = true,
-  virtual_text = false,
-  --[[ virtual_text = {
-      prefix = "",
-      source = "if_many",
-      severity = { max = vim.diagnostic.severity.WARN }
-    }, ]]
-  float = {
-    focusable = false,
-    style = "minimal",
-    border = "single",
-    source = "always",
-    header = "Diagnostic Info",
-    prefix = "",
+local M = {
+  signs = {
+    Error = "",
+    Warn = "",
+    Hint = "",
+    Info = "",
+    Diagnostic = "",
   },
 }
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+
+function M:setup()
+  require("lspconfig.ui.windows").default_options.border = "single"
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+
+  vim.diagnostic.config({
+    signs = false,
+    update_in_insert = true,
+    underline = false,
+    severity_sort = true,
+    virtual_text = true,
+    --[[ virtual_text = {
+    prefix = self.signs.Diagnostic,
+    source = "if_many",
+    severity = { max = vim.diagnostic.severity.WARN }
+    }, ]]
+    float = {
+      focusable = false,
+      style = "minimal",
+      border = "single",
+      source = "always",
+      header = "Diagnostic Info",
+      prefix = "",
+    },
+  })
+
+  for type, icon in pairs(self.signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
+
 end
 
-require("trouble").setup(trouble_ui)
-
-require("mason").setup({
-  ui = {
-    border = "single",
-    icons = {
-      package_installed = " ",
-      package_pending = "勒",
-      package_uninstalled = " ",
-    },
-  },
-})
-
-vim.diagnostic.config(diagnostic_ui)
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-require("lspconfig.ui.windows").default_options.border = "single"
+return M
