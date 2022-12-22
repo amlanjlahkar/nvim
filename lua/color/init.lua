@@ -19,10 +19,8 @@ function M.try_colorscheme(colorscheme)
     hl_override(colorscheme, custom_hl)
   end
   if not pcall(vim.cmd, "colorscheme " .. colorscheme) then
-    vim.cmd([[
-      set bg=dark scl=no ls=0 nonu nornu nocul
-      colorscheme quiet
-    ]])
+    vim.cmd([[ set bg=dark scl=no ls=0 nonu nornu nocul ]])
+    vim.cmd.colorscheme(M.default)
   end
 end
 
