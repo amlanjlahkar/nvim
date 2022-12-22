@@ -1,7 +1,10 @@
 {
-  "lazy.nvim": { "branch": "main", "commit": "7a57ea28d30698abed15f22f71f34dfb4dc36c88" },
-  "null-ls.nvim": { "branch": "main", "commit": "db1c7cb5f6d6f6036b7f8433bb3cfcbe985cb3d1" },
-  "nvim-lspconfig": { "branch": "master", "commit": "5292d60976b3084a987bf5634150f6201830ac18" },
+  "lazy.nvim": { "branch": "main", "commit": "dc150df4560ee381072f69e5931a050329869c31" },
+  "mason-lspconfig": { "branch": "main", "commit": "5bea0e851b8f48479d2cb927cd26733b4058b2b3" },
+  "mason.nvim": { "branch": "main", "commit": "ba8f01835cdcf512d5ab1abb1dcedfaf7c07b99e" },
+  "null-ls.nvim": { "branch": "main", "commit": "ef9010b2ac11e2068a8e1d5a4eff576289a1f9a4" },
+  "nvim-lspconfig": { "branch": "master", "commit": "25f0c65bd8fddadbafd0048a68560bf160ceb98c" },
   "plenary.nvim": { "branch": "master", "commit": "4b7e52044bbb84242158d977a50c4cbcd85070c7" },
-  "trouble.nvim": { "branch": "main", "commit": "897542f90050c3230856bc6e45de58b94c700bbf" }
+  "trouble.nvim": { "branch": "main", "commit": "897542f90050c3230856bc6e45de58b94c700bbf" },
+  "vim-fugitive": { "branch": "master", "commit": "5b0b138483de17a8fd8dfcec0b491782c8fbf102" }
 }
