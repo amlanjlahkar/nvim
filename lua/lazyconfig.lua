@@ -36,3 +36,12 @@ require("lazy").setup("plugin", {
   },
   install = { colorscheme = { require("color").default } },
 })
+
+local key = require("core.keymap.maputil")
+local cmd, opts = key.cmd, key.new_opts
+
+key.nmap({
+  { "<leader>ps", cmd("Lazy"), opts("Lazy: Home") },
+  { "<leader>py", cmd("Lazy sync"), opts("Lazy: Sync") },
+  { "<leader>pi", cmd("Lazy install"), opts("Lazy: Install missing plugins") },
+})
