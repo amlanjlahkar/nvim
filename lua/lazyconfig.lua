@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+require("lazy").setup("plugin", {
   defaults = { lazy = true },
   lockfile = vim.fn.stdpath("config") .. "/package_lock.json",
   checker = {

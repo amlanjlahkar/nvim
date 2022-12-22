@@ -17,7 +17,7 @@ function M.keymaps(bufnr)
     { "gr",           cmd("TroubleToggle lsp_references"),                opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
-    { "<leader>f",    function() require("plugins.null-ls").format() end, opts("Lsp/Null-ls: Format buffer") },
+    { "<leader>f",    function() require("plugin.null-ls").format() end, opts("Lsp/Null-ls: Format buffer") },
   })
   key.imap({ "<C-k>", lsp.signature_help, })
 end

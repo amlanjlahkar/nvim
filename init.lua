@@ -1,3 +1,3 @@
 require("core")
-require("color")
-require("config.lazy")
+require("lazyconfig")
+require("color").try_colorscheme("boo")

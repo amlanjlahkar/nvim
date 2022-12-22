@@ -69,6 +69,7 @@ opt.spellsuggest = { "best", 5 }
 opt.grepprg = "rg --hidden --vimgrep --smart-case --"
 opt.clipboard = ""
 opt.mouse = "nv" -- nervous laughter
+opt.termguicolors = true
 -- }}}
 
 -- disable unnecessary nvim services {{{

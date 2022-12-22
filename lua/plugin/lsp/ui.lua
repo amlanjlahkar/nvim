@@ -18,11 +18,11 @@ function M:setup()
     update_in_insert = true,
     underline = false,
     severity_sort = true,
-    virtual_text = true,
+    virtual_text = false,
     --[[ virtual_text = {
-    prefix = self.signs.Diagnostic,
-    source = "if_many",
-    severity = { max = vim.diagnostic.severity.WARN }
+      prefix = self.signs.Diagnostic,
+      source = "if_many",
+      severity = { max = vim.diagnostic.severity.WARN }
     }, ]]
     float = {
       focusable = false,

@@ -104,7 +104,8 @@ function M.config()
       return vim.tbl_keys(bufs)
     end,
   })
-  require("plugins.completion.luasnip").setup()
+  ---@diagnostic disable:different-requires
+  require("plugin.completion.luasnip").setup()
 end
 
 return M

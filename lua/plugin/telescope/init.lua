@@ -47,7 +47,7 @@ function M.config()
       },
     },
   })
-  require("plugins.telescope.mapping").setup()
+  require("plugin.telescope.mapping").setup()
   require("telescope").load_extension("fzf")
 end
 
