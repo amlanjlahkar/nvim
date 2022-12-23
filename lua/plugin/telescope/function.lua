@@ -51,6 +51,14 @@ function M:set_bg()
   local opts = self.opts({
     prompt_title = "Wallpaper",
     cwd = path,
+    attach_mappings = function(_, map)
+      map("i", "<CR>", function()
+        local e = require("telescope.actions.state").get_selected_entry()
+        vim.fn.system("xwallpaper --zoom " .. path .. "/" .. e.value)
+        -- vim.fn.system(string.format('wal -q -i %s/%s && xwallpaper --zoom "$(< $HOME/.cache/wal/wal)"', path, e.value))
+      end)
+      return true
+    end,
   })
   if path == "" then
     vim.notify("Wallpaper directory not found!", vim.log.levels.ERROR)
