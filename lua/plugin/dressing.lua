@@ -12,13 +12,14 @@ function M.config()
       winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
     },
     select = {
+      builtin = { border = "single" },
+      telescope = { layout_strategy = "vertical" },
       get_config = function(opts)
-        if opts.kind == "codeaction" then
+        -- JdtWipeDataAndRestart
+        if string.match(opts.prompt, "wipe the data folder") then
           return {
-            backend = "telescope",
-            telescope = {
-              layout_strategy = "vertical",
-            },
+            backend = "builtin",
+            builtin = { width = 0.8, height = 0.3 },
           }
         end
       end,

@@ -1,36 +1,44 @@
 local fn = vim.fn
 local api = vim.api
 local tb = require("telescope.builtin")
+local default = require("plugin.telescope").default
 
-local M = { layout_strategy = "vertical" }
+local M = {}
+
+function M.opts(options)
+  local opts = { layout_strategy = default.layout_strategy }
+  if options then
+    for k, v in pairs(options) do
+      opts[k] = v
+    end
+  end
+  return opts
+end
 
 function M:get_nvim_conf()
-  local opts = {
+  local opts = self.opts({
     prompt_title = "Neovim conf",
     cwd = fn.stdpath("config"),
-    layout_strategy = self.layout_strategy,
-  }
+  })
   tb.find_files(opts)
 end
 
 function M:get_relative_file()
-  local opts = {
+  local opts = self.opts({
     prompt_title = "Files",
     cwd = fn.expand("%:p:h"),
-    layout_strategy = self.layout_strategy,
-  }
+  })
   tb.find_files(opts)
 end
 
 function M:get_dwots()
   local dothome = fn.finddir("~/dwots/")
-  local opts = {
+  local opts = self.opts({
     prompt_title = "Dotfiles",
     cwd = dothome,
     hidden = true,
     find_command = { "fd", "--exclude", ".git/", "--type", "file" },
-    layout_strategy = self.layout_strategy,
-  }
+  })
   if dothome == "" then
     vim.notify("Direcetory dwots not found!", vim.log.levels.ERROR)
   else
@@ -40,20 +48,10 @@ end
 
 function M:set_bg()
   local path = fn.finddir("~/media/pictures/wallpapers/")
-  local opts = {
+  local opts = self.opts({
     prompt_title = "Wallpaper",
     cwd = path,
-    layout_strategy = self.layout_strategy,
-
-    attach_mappings = function(_, map)
-      map("i", "<CR>", function()
-        local e = require("telescope.actions.state").get_selected_entry()
-        vim.fn.system("xwallpaper --zoom " .. path .. "/" .. e.value)
-        -- vim.fn.system(string.format('wal -q -i %s/%s && xwallpaper --zoom "$(< $HOME/.cache/wal/wal)"', path, e.value))
-      end)
-      return true
-    end,
-  }
+  })
   if path == "" then
     vim.notify("Wallpaper directory not found!", vim.log.levels.ERROR)
   else
@@ -69,10 +67,9 @@ function M:reload_module()
     return mod:gsub("%.init", "")
   end
 
-  local opts = {
+  local opts = self.opts({
     prompt_title = "Nvim Modules",
     cwd = path,
-    layout_strategy = self.layout_strategy,
 
     attach_mappings = function(_, map)
       map("i", "<C-r>", function()
@@ -84,7 +81,7 @@ function M:reload_module()
       end)
       return true
     end,
-  }
+  })
   tb.find_files(opts)
 end
 

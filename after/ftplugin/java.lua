@@ -3,11 +3,8 @@ vim.cmd([[
   hi javaError2 guibg=NONE guifg=NONE
 ]])
 
-local is_available, jdtls = pcall(require, "jdtls")
-if not is_available then
-  return
-end
 
+local jdtls = require("jdtls")
 local home = os.getenv("HOME")
 local launcher_path = vim.fn.glob(home .. "/tools/lang/Java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
 local config_path = home .. "/tools/lang/Java/jdtls/config_linux/"
@@ -43,8 +40,8 @@ local config = {
   },
   root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "build.gradle", "pom.xml" }),
 
-  on_attach = require("config.lsp.handler").on_attach,
-  capabilities = require("config.lsp.handler").capabilities,
+  on_attach = require("plugin.lsp.handler").on_attach,
+  capabilities = require("plugin.lsp.handler").capabilities,
 
   -- eclipse.jdt.ls specific settings
   -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request

@@ -5,6 +5,7 @@ local M = {
 
 M.pkgs = {
   "black",
+  "stylua",
   "shfmt",
   "shellcheck",
   "jsonlint",

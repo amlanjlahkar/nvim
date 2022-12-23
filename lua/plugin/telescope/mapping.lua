@@ -3,6 +3,7 @@ local M = {}
 function M.setup()
   local builtin = require("telescope.builtin")
   local fn = require("plugin.telescope.function")
+  local default = require("plugin.telescope").default
 
   local key = require("core.keymap.maputil")
   local cmd, opts = key.cmd, key.new_opts
@@ -11,19 +12,19 @@ function M.setup()
   key.nmap({
     {
       "<leader>tt", function()
-        builtin.find_files({ layout_strategy = "vertical" })
+        builtin.find_files({ layout_strategy = default.layout_strategy })
       end, opts("Telescope: Find files"),
     },
 
     {
       "<leader>tb", function()
-        builtin.buffers({ layout_strategy = "vertical" })
+        builtin.buffers({ layout_strategy = default.layout_strategy })
       end, opts("Telescope: Loaded buffers"),
     },
 
     {
       "<leader>tc", function()
-        builtin.colorscheme({ layout_strategy = "vertical" })
+        builtin.colorscheme({ layout_strategy = default.layout_strategy })
       end, opts("Telescope: Colorschemes"),
     },
 
