@@ -9,7 +9,6 @@ local function netrw_maps()
     silent = true,
     remap = true,
   }
-  map("n", ".", "gh", opts)
   map("n", "l", "<CR>", opts)
   map("n", "<TAB>", "mf", opts)
   map("n", "<S-TAB>", "mF", opts)
