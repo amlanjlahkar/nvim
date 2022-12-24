@@ -1,7 +1,7 @@
 local fn = vim.fn
 local api = vim.api
 
-local util = {}
+local M = {}
 
 --- Get window width.
 -- @param window Table with a single field.
@@ -78,4 +78,4 @@ util.test_code = function(filetype)
   return is_defined < 1 and nil
 end
 
-return util
+return M
