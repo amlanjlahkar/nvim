@@ -11,9 +11,7 @@ function M.setup()
     sources = {
       formatting.stylua,
       formatting.black,
-      formatting.prettier.with({
-        prefer_local = "node_modules/.bin",
-      }),
+      formatting.prettierd,
       formatting.shfmt.with({
         extra_args = { "-i", "2", "-ci", "-bn" },
         extra_filetypes = { "bash" },

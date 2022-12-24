@@ -9,6 +9,7 @@ M.pkgs = {
   "shfmt",
   "shellcheck",
   "jsonlint",
+  "prettierd",
 }
 
 function M.query()
