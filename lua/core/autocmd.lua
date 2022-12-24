@@ -1,25 +1,24 @@
 local api = vim.api
 local fn = vim.fn
 
-local autocmd_definitions = {
-  {
-    "BufWritePre",
-    {
+local M = {}
+
+-- stylua: ignore
+M.autocmd_definitions = {
+  { "BufWritePre", {
       desc = "Remove trailing whitespaces on writing a buffer",
       pattern = "*",
       callback = function()
         if vim.bo.filetype ~= "diff" then
           local view = fn.winsaveview()
-          vim.cmd [[keeppatterns %s/\s\+$//e]]
+          vim.cmd([[keeppatterns %s/\s\+$//e]])
           fn.winrestview(view)
         end
       end,
     },
   },
 
-  {
-    "TextYankPost",
-    {
+  { "TextYankPost", {
       desc = "Highlight text on yank",
       pattern = "*",
       callback = function()
@@ -28,9 +27,7 @@ local autocmd_definitions = {
     },
   },
 
-  {
-    "TermOpen",
-    {
+  { "TermOpen", {
       desc = "Open terminal directly in insert mode",
       pattern = "*",
       callback = function()
@@ -44,9 +41,7 @@ local autocmd_definitions = {
     },
   },
 
-  {
-    "FileType",
-    {
+  { "FileType", {
       desc = "Create Ex command to run compiled/interpreted code",
       pattern = { "python", "c", "cpp" },
       callback = function()
@@ -63,13 +58,17 @@ local autocmd_definitions = {
   },
 }
 
-for _, entry in ipairs(autocmd_definitions) do
-  local event = entry[1]
-  local opts = entry[2]
-  opts.group = "_core"
-  local exists, _ = pcall(api.nvim_get_autocmds, { group = opts.group })
-  if not exists then
-    api.nvim_create_augroup(opts.group, { clear = true })
+function M.setup()
+  for _, entry in pairs(M.autocmd_definitions) do
+    local event = entry[1]
+    local opts = entry[2]
+    opts.group = "_core"
+    local exists, _ = pcall(api.nvim_get_autocmds, { group = opts.group })
+    if not exists then
+      api.nvim_create_augroup(opts.group, { clear = true })
+    end
+    api.nvim_create_autocmd(event, opts)
   end
-  api.nvim_create_autocmd(event, opts)
 end
+
+return M.setup()

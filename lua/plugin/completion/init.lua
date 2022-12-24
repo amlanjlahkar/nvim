@@ -41,13 +41,6 @@ function M.config()
         end
       end, { "i", "s" }),
 
-      -- ["<TAB>"] = cmp.mapping(function(fallback)
-      --   if cmp.visible() then
-      --     return cmp.complete_common_string()
-      --   end
-      --   fallback()
-      -- end, { "i", "s" }),
-
       ["<C-j>"] = cmp.mapping(cmp.mapping.scroll_docs(2), { "i", "s" }),
       ["<C-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-2), { "i", "s" }),
       ["<C-e>"] = cmp.mapping({
@@ -57,7 +50,7 @@ function M.config()
 
       ["<C-l>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
+        select = true,
       }),
     },
     sources = {

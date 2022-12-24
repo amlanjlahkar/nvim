@@ -5,7 +5,8 @@ local BgShadeLighter = "#211c1d"
 local Fg = "#726464"
 local FgShadeDark = "#849da2"
 local FgShadeDarker = "#51494a"
-local Black = "#131314"
+local Black = "#000000"
+local BlackAlt = "#131314"
 local Red = "#d19299"
 local Green = "#63b0b0"
 local Blue = "#a9d1df"
@@ -18,33 +19,34 @@ local DiffDelete = "#2a080f"
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = Black, fg = none } },
-  { "StatusLine",                 { bg = Black, fg = FgShadeDarker } },
-  { "StatusLineImp",              { bg = Black, fg = Fg } },
-  { "StatusLineInd",              { bg = Black, fg = Red } },
-  { "StatusLineDiagnosticError",  { bg = Black, fg = "#fe697d" } },
-  { "StatusLineDiagnosticWarn",   { bg = Black, fg = "#dfb8bc" } },
-  { "StatusLineDiagnosticHint",   { bg = Black, fg = "#694347" } },
-  { "StatusLineDiagnosticInfo",   { bg = Black, fg = "#e4dcec" } },
+  { "StatusLineNC",               { bg = BlackAlt, fg = none } },
+  { "StatusLine",                 { bg = BlackAlt, fg = FgShadeDarker } },
+  { "StatusLineImp",              { bg = BlackAlt, fg = Fg } },
+  { "StatusLineInd",              { bg = BlackAlt, fg = Red } },
+  { "StatusLineDiagnosticError",  { bg = BlackAlt, fg = "#fe697d" } },
+  { "StatusLineDiagnosticWarn",   { bg = BlackAlt, fg = "#dfb8bc" } },
+  { "StatusLineDiagnosticHint",   { bg = BlackAlt, fg = "#694347" } },
+  { "StatusLineDiagnosticInfo",   { bg = BlackAlt, fg = "#e4dcec" } },
   { "CursorLineNr",               { bg = Bg, fg = White, bold = false } },
   { "VertSplit",                  { fg = BgShadeLighter } },
-  { "Pmenu",                      { bg = BgShadeLight , fg = Fg } },
+  { "Pmenu",                      { bg = Black , fg = Fg } },
   { "PmenuSel",                   { bg = BgShadeLighter, fg = Red } },
-  { "PmenuSbar",                  { bg = Bg  } },
+  { "PmenuSbar",                  { bg = BlackAlt  } },
   { "PmenuThumb",                 { bg = BgShadeLighter } },
-  { "TabLineFill",                { bg = Black } },
-  { "TabLine",                    { bg = Black, fg = FgShadeDarker } },
+  { "TabLineFill",                { bg = BlackAlt } },
+  { "TabLine",                    { bg = BlackAlt, fg = FgShadeDarker } },
   { "TabLineSel",                 { bg = BgShadeLight, fg = Fg, bold = false } },
-  { "TelescopeNormal",            { bg = BgShadeLight, fg = Fg } },
-  { "TelescopeBorder",            { bg = BgShadeLight, fg = BgShadeLight } },
-  { "TelescopePromptTitle",       { bg = BgShadeLight, fg = Fg } },
+  { "TelescopeNormal",            { bg = Black, fg = Fg } },
+  { "TelescopeBorder",            { bg = Black, fg = Black } },
+  { "TelescopePromptTitle",       { bg = Black, fg = Fg } },
   { "TelescopePromptCounter",     { fg = Fg } },
+  { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },
   { "TelescopeMatching",          { fg = "#e15774" } },
-  { "FloatTitle",                 { bg = Bg, fg = White } },
-  { "NormalFloat",                { bg = Bg, fg = Fg } },
-  { "FloatBorder",                { bg = Bg, fg = FgShadeDarker } },
-  { "NormalFloatAlt",             { bg = BgShadeLight, fg = Fg } },
-  { "FloatBorderAlt",             { bg = BgShadeLight, fg = BgShadeLight } },
+  { "FloatTitle",                 { bg = Black, fg = White } },
+  { "NormalFloat",                { bg = Black, fg = Fg } },
+  { "FloatBorder",                { bg = Black, fg = Black } },
+  { "NormalFloatAlt",             { bg = Black, fg = Fg } },
+  { "FloatBorderAlt",             { bg = Black, fg = Black } },
   { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
   { "VimModeNormal",              { bg = BgShadeLighter, fg = Red } },
   { "VimModeInsert",              { bg = BgShadeLighter, fg = Red } },
