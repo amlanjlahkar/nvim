@@ -3,11 +3,13 @@ local api = vim.api
 
 local M = {}
 
---- Get window width.
--- @param window Table with a single field.
--- @field window.combined  Boolean to decide whether to return combined or current window width.
--- @return Width of all the visible windows combined(current view) if window.combined is true, else width of the current window.
-util.get_width = function(window)
+---@class Window
+---@field combined boolean Decide whether to return combined or current window width
+---@param window Window
+---@return number
+---Get width of all the visible windows combined(which is equivalent to the width
+---of the opened neovim instance) if window.combined is true, else width of the current window
+function M.get_width(window)
   local width = 0
   if window == nil or window.combined then
     for i = 1, fn.winnr("$") do
@@ -25,19 +27,19 @@ util.get_width = function(window)
   return width
 end
 
---- Get attribute value of given highlight group.
--- @param group Highlight group ID.
--- @param attr Attribute name
--- @return Attribute value
-util.get_hl_attr = function(group, attr)
+---@param group string Highlight group ID
+---@param attr string Attribute name
+---@return string
+---Get attribute value of given highlight group
+function M.get_hl_attr(group, attr)
   local color = fn.synIDattr(fn.hlID(group), attr)
   return color == "" and nil or color
 end
 
---- Small set of functions to compile/interprete code for certain langs.
--- @param filetype Language filetype.
--- @return Function for given filetype if it's present, else nil.
-util.test_code = function(filetype)
+---@param filetype string Language filetype
+---@return function | nil
+---Small set of functions to compile/interprete code for certain langs
+function M.test_code(filetype)
   local function gcc_compile()
     local fpath = fn.expand("%:p")
     local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
