@@ -72,8 +72,8 @@ function keymap.cu(str)
   return "<C-u><cmd>" .. str .. "<CR>"
 end
 
---@private
-local keymap_set = function(mode, tbl)
+---@private
+local function keymap_set(mode, tbl)
   vim.validate({
     tbl = { tbl, "table" },
   })
