@@ -1,3 +1,6 @@
+-- Originally written by elianiva
+-- https://elianiva.my.id/post/neovim-lua-statusline/#result
+
 local fn = vim.fn
 local api = vim.api
 

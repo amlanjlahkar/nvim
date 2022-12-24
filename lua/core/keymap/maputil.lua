@@ -1,3 +1,6 @@
+-- Originally written by glepnir
+-- https://github.com/glepnir/cosynvim/blob/main/lua/core/keymap.lua
+
 local keymap = {}
 local opts = {}
 
