@@ -8,6 +8,7 @@ local FgShadeDarker = "#51494a"
 local Black = "#000000"
 local BlackAlt = "#131314"
 local Red = "#d19299"
+local RedAlt = "#81363f"
 local Green = "#63b0b0"
 local Blue = "#a9d1df"
 local Magenta = "#d5a8e3"
@@ -60,9 +61,9 @@ M.custom = {
   { "TroubleIndent",              { bg = none, fg = FgShadeDark } },
   { "TroubleLocation",            { bg = none, fg = FgShadeDark } },
   { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
-  { "DiffDelete",                 { bg = DiffDelete, fg = Red } },
+  { "DiffDelete",                 { bg = DiffDelete, fg = RedAlt } },
   { "diffAdded",                  { bg = DiffAdd, fg = Green } },
-  { "diffRemoved",                { bg = DiffDelete, fg = Red } },
+  { "diffRemoved",                { bg = DiffDelete, fg = RedAlt } },
   { "GitGutterAdd",               { fg = Green } },
   { "GitGutterChange",            { fg = Blue } },
   { "GitGutterChangeDelete",      { fg = Magenta } },
@@ -72,6 +73,7 @@ M.custom = {
   { "Visual",                     { bg = BgShadeLighter, fg = White } },
   { "CmpItemKind",                { fg = FgShadeDark } },
   { "CmpItemMenu",                { fg = FgShadeDarker } },
+  { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
 }

@@ -20,6 +20,7 @@ function M.keymaps(bufnr)
     { "<leader>f",    function() require("plugin.null-ls").format() end, opts("Lsp/Null-ls: Format buffer") },
   })
   key.imap({ "<C-k>", lsp.signature_help, })
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()

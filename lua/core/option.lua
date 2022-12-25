@@ -55,6 +55,7 @@ opt.splitbelow = true
 opt.splitright = true
 opt.fillchars:append({
   eob = " ",
+  diff = "╱",
   horiz = "━",
   horizup = "┻",
   horizdown = "┳",

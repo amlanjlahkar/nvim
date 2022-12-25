@@ -26,6 +26,7 @@ function M.config()
       "rasi",
       "norg",
       "markdown",
+      "help",
     },
     ignore_install = {},
     highlight = {
