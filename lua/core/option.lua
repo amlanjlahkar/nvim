@@ -1,59 +1,59 @@
-local opt = vim.opt
+local o = vim.opt
 local gvar = vim.g
 
 -- options {{{
 -- file handling
-opt.shada = "!,'0,<0,/0,:20,f0"
-opt.hidden = true
-opt.confirm = true
-opt.autowrite = true
-opt.swapfile = false
-opt.backup = false
-opt.undofile = true
-opt.undodir = vim.fn.stdpath("data") .. "/undodir"
-opt.updatetime = 100
+o.shada = "!,'0,<0,/0,:20,f0"
+o.hidden = true
+o.confirm = true
+o.autowrite = true
+o.swapfile = false
+o.backup = false
+o.undofile = true
+o.undodir = vim.fn.stdpath("data") .. "/undodir"
+o.updatetime = 100
 
 -- indenting and wrapping
-opt.autoindent = true
-opt.smartindent = true
-opt.shiftwidth = 2
-opt.expandtab = true
-opt.tabstop = 2
-opt.wrap = false
-opt.breakindent = true
-opt.linebreak = true
-opt.backspace = "indent,eol,nostop"
+o.autoindent = true
+o.smartindent = true
+o.shiftwidth = 2
+o.expandtab = true
+o.tabstop = 2
+o.wrap = false
+o.breakindent = true
+o.linebreak = true
+o.backspace = "indent,eol,nostop"
 
 -- editor preference
-opt.ttimeoutlen = 200
-opt.number = true
-opt.relativenumber = true
-opt.numberwidth = 4
-opt.ignorecase = true
-opt.smartcase = true
-opt.incsearch = true
-opt.hlsearch = false
-opt.scrolloff = 8
-opt.sidescrolloff = 8
-opt.list = true
-opt.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
-opt.virtualedit = "block"
-opt.browsedir = "buffer"
-opt.foldmethod = "marker"
-opt.completeopt = { "menu", "menuone", "noselect" }
+o.ttimeoutlen = 200
+o.number = true
+o.relativenumber = true
+o.numberwidth = 4
+o.ignorecase = true
+o.smartcase = true
+o.incsearch = true
+o.hlsearch = false
+o.scrolloff = 8
+o.sidescrolloff = 8
+o.list = true
+o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
+o.virtualedit = "block"
+o.browsedir = "buffer"
+o.foldmethod = "marker"
+o.completeopt = { "menu", "menuone", "noselect" }
 
-opt.showmode = false
-opt.cursorline = true
-opt.showtabline = 1
-opt.cmdheight = 1
-opt.laststatus = 3
-opt.signcolumn = "yes"
-opt.pumheight = 20
-opt.pumblend = 0
-opt.winblend = 0
-opt.splitbelow = true
-opt.splitright = true
-opt.fillchars:append({
+o.showmode = false
+o.cursorline = true
+o.showtabline = 1
+o.cmdheight = 1
+o.laststatus = 3
+o.signcolumn = "yes"
+o.pumheight = 20
+o.pumblend = 0
+o.winblend = 0
+o.splitbelow = true
+o.splitright = true
+o.fillchars:append({
   eob = " ",
   diff = "╱",
   horiz = "━",
@@ -65,12 +65,12 @@ opt.fillchars:append({
   verthoriz = "╋",
 })
 
-opt.spelllang = "en_us"
-opt.spellsuggest = { "best", 5 }
-opt.grepprg = "rg --hidden --vimgrep --smart-case --"
-opt.clipboard = ""
-opt.mouse = "nv" -- nervous laughter
-opt.termguicolors = true
+o.spelllang = "en_us"
+o.spellsuggest = { "best", 5 }
+o.grepprg = "rg --hidden --vimgrep --smart-case --"
+o.clipboard = ""
+o.mouse = "nv" -- nervous laughter
+o.termguicolors = true
 -- }}}
 
 -- disable unnecessary nvim services {{{

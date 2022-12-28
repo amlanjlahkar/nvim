@@ -20,6 +20,9 @@ function M.setup()
         extra_filetypes = { "sh" },
       }),
       diagnostics.jsonlint,
+      diagnostics.eslint.with({
+        prefer_local = "node_modules/.bin",
+      }),
     },
   })
 end

@@ -14,6 +14,7 @@ function M:setup()
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
+  require("lspconfig.ui.windows").default_options.border = self.border
 end
 
 return M

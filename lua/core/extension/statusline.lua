@@ -144,6 +144,22 @@ function M.lsp_progress()
   return ""
 end
 
+function M.get_attached_servers()
+  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+
+  local client_names = {}
+  for i = 1, #clients do
+    if clients[i].name == 'null-ls' then
+      client_names[i] = nil
+    else
+      client_names[i] = clients[i].name
+    end
+  end
+
+  local servers = table.concat(client_names, ", ")
+  return #servers > 0 and string.format(" ls: { %s } ", servers) or ""
+end
+
 function M.get_lsp_diagnostic()
   local count = {}
   local levels = {
@@ -203,6 +219,7 @@ function M.set_active(self)
     "%#StatusLine#",
     self.lsp_progress(),
     self:get_filetype(),
+    self.get_attached_servers(),
     "%#StatusLineInd#",
     self.treesitter_status(),
     "%#StatusLine#",

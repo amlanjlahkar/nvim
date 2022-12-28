@@ -4,10 +4,10 @@ local lsp = vim.lsp
 local M = {}
 
 function M.setup()
-  require("lspconfig.ui.windows").default_options.border = ui.border
   lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = ui.border })
   lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = ui.border })
-  lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+
+  vim.diagnostic.config({
     signs = false,
     update_in_insert = true,
     underline = false,
