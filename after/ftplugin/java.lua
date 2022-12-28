@@ -3,7 +3,6 @@ vim.cmd([[
   hi javaError2 guibg=NONE guifg=NONE
 ]])
 
-
 local jdtls = require("jdtls")
 local home = os.getenv("HOME")
 local launcher_path = vim.fn.glob(home .. "/tools/lang/Java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")

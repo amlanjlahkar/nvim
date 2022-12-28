@@ -16,6 +16,9 @@ M.trunc_width = setmetatable({
   end,
 })
 
+---@param width number Width to match against
+---@param is_statusglobal boolean | nil If true(i.e 'laststatus' is set to 3) then width is matched against
+--all the windows' width combined, else width of the current window
 function M.is_truncated(_, width, is_statusglobal)
   is_statusglobal = is_statusglobal or true
   local current_width = require("core.util").get_width({ combined = is_statusglobal })
@@ -60,10 +63,11 @@ end
 -- FileInfo {{{2
 function M:get_filepath()
   local filepath = fn.fnamemodify(fn.expand("%"), ":.:h")
+  local _, dircount = filepath:gsub("/", "")
 
   if filepath == "" or filepath == "." then
     return " "
-  elseif self:is_truncated(self.trunc_width.filepath, false) then
+  elseif self:is_truncated(self.trunc_width.filepath, true) or dircount > 7 then
     return string.format(" %s/", fn.pathshorten(filepath, 2))
   end
 
