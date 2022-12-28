@@ -22,13 +22,12 @@ local M = {
 }
 
 function M.config()
-  require("plugin.lsp.ui"):setup()
   local s = require("plugin.lsp.server"):setup()
   if s.installed then
     for _, server in pairs(s.servers) do
       local opts = {
-        on_attach = require("plugin.lsp.handler").on_attach,
-        capabilities = require("plugin.lsp.handler").capabilities,
+        on_attach = require("plugin.lsp.config").on_attach,
+        capabilities = require("plugin.lsp.config").capabilities,
       }
       local has_custom_opts, server_custom_opts = pcall(require, "plugin.lsp.server_config." .. server)
       if has_custom_opts then
@@ -37,6 +36,8 @@ function M.config()
       require("lspconfig")[server].setup(opts)
     end
   end
+  require("plugin.lsp.handler").setup()
+  require("plugin.lsp.ui"):setup()
   require("plugin.null-ls").setup()
 end
 
