@@ -11,6 +11,7 @@ return {
 
   {
     "folke/trouble.nvim",
+    module = false,
     cmd = { "TroubleToggle", "Trouble" },
     config = function()
       require("trouble").setup({
@@ -51,6 +52,7 @@ return {
           "WinBar",
           "WinBarNC",
           "CursorLine",
+          "TabLineFill",
           "GitGutterAdd",
           "GitGutterChange",
           "GitGutterDelete",
