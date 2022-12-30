@@ -147,15 +147,16 @@ end
 function M.get_attached_servers()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
 
-  local client_names = {}
+  local client_names, index = {}, 1
   for i = 1, #clients do
-    if clients[i].name == 'null-ls' then
-      client_names[i] = nil
-    else
-      client_names[i] = clients[i].name
+    if clients[i].name == "null-ls" then
+      index = i
     end
+    client_names[i] = clients[i].name
   end
 
+  client_names[#client_names], client_names[index] = client_names[index], client_names[#client_names]
+  client_names[#client_names] = nil
   local servers = table.concat(client_names, ", ")
   return #servers > 0 and string.format(" ls: { %s } ", servers) or ""
 end
