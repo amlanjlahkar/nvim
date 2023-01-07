@@ -20,7 +20,7 @@ local DiffDelete = "#2a080f"
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = BlackAlt, fg = none } },
+  { "StatusLineNC",               { bg = BlackAlt, fg = Fg } },
   { "StatusLine",                 { bg = BlackAlt, fg = FgShadeDarker } },
   { "StatusLineImp",              { bg = BlackAlt, fg = Fg } },
   { "StatusLineInd",              { bg = BlackAlt, fg = Red } },

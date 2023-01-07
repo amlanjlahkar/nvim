@@ -24,7 +24,6 @@ function M.config()
       "vim",
       "yaml",
       "rasi",
-      "norg",
       "markdown",
       "help",
     },

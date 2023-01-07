@@ -147,17 +147,19 @@ end
 function M.get_attached_servers()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
 
-  local client_names, index = {}, 1
+  local active, index = {}, nil
   for i = 1, #clients do
     if clients[i].name == "null-ls" then
       index = i
     end
-    client_names[i] = clients[i].name
+    active[i] = clients[i].name
   end
 
-  client_names[#client_names], client_names[index] = client_names[index], client_names[#client_names]
-  client_names[#client_names] = nil
-  local servers = table.concat(client_names, ", ")
+  if index ~= nil then
+    active[#active], active[index] = active[index], active[#active]
+    active[#active] = nil
+  end
+  local servers = table.concat(active, ", ")
   return #servers > 0 and string.format(" ls: { %s } ", servers) or ""
 end
 
@@ -231,11 +233,11 @@ function M.set_active(self)
 end
 
 function M.set_inactive()
-  return "%#StatusLineNC#" .. "%= %F %="
+  return "%#StatusLineNC#"
 end
 
 function M.set_explorer()
-  return "%#StatusLineNC#"
+  return "%#StatusLineNC#" .. "%= %F %="
 end
 -- 1}}}
 
@@ -245,29 +247,23 @@ function M.setup()
       return self["set_" .. mode](self)
     end,
   })
-
-  local mode_listen = {
-    { "active", { "WinEnter", "BufEnter" } },
-    { "inactive", { "WinLeave", "BufLeave" } },
-    { "explorer", { "netrw" } },
-  }
-
-  for _, v in pairs(mode_listen) do
-    local mode = v[1]
-    local event = v[2]
-    local pattern = "*"
-    if mode == "explorer" then
-      pattern = event[2]
-      event = { "FileType" }
-    end
-
-    local augroup = api.nvim_create_augroup("_ext", { clear = false })
-    api.nvim_create_autocmd(event, {
-      group = augroup,
-      pattern = pattern,
-      command = string.format("setlocal statusline=%%!v:lua.Statusline('%s')", mode),
-    })
-  end
+  local au = vim.api.nvim_create_autocmd
+  local augroup = api.nvim_create_augroup("_ext", { clear = true })
+  au({ "WinEnter", "BufEnter" }, {
+    group = augroup,
+    pattern = "*",
+    command = "setlocal statusline=%!v:lua.Statusline('active')",
+  })
+  au({ "WinLeave", "BufLeave" }, {
+    group = augroup,
+    pattern = "*",
+    command = "setlocal statusline=%!v:lua.Statusline('inactive')",
+  })
+  au("FileType", {
+    group = augroup,
+    pattern = "netrw",
+    command = "setlocal statusline=%!v:lua.Statusline('explorer')",
+  })
 end
 
 return M.setup()
