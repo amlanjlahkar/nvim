@@ -2,7 +2,6 @@ return {
   "nvim-lua/plenary.nvim",
   "mfussenegger/nvim-jdtls",
   { "tpope/vim-fugitive", cmd = "Git" },
-  { "tpope/vim-vinegar", keys = "-" },
 
   {
     "L3MON4D3/LuaSnip",
