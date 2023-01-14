@@ -2,6 +2,7 @@ local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "dharmx/telescope-media.nvim",
   },
   cmd = "Telescope",
   keys = "<leader>t",
@@ -48,10 +49,14 @@ function M.config()
         override_file_sorter = true,
         case_mode = "smart_case",
       },
+      media = {
+        backend = "ueberzug",
+      },
     },
   })
   require("plugin.telescope.mapping").setup()
   require("telescope").load_extension("fzf")
+  require("telescope").load_extension("media")
 end
 
 return M

@@ -1,6 +1,6 @@
 local M = {
   "ThePrimeagen/harpoon",
-  keys = "<leader>h",
+  keys = { "<leader>h", "[;", "];" },
 }
 
 function M.config()
@@ -11,8 +11,8 @@ function M.config()
   key.nmap({
     { "<leader>ha", cmd("lua require('harpoon.mark').add_file()"), opts("Harpoon: Add to marked queue") },
     { "<leader>hm", cmd("lua require('harpoon.ui').toggle_quick_menu()"), opts("Harpoon: Toggle quick menu") },
-    { "]h", cmd("lua require('harpoon.ui').nav_next()"), opts("Harpoon: Jump to next mark") },
-    { "[h", cmd("lua require('harpoon.ui').nav_prev()"), opts("Harpoon: Jump to previous mark") },
+    { "];", cmd("lua require('harpoon.ui').nav_next()"), opts("Harpoon: Jump to next mark") },
+    { "[;", cmd("lua require('harpoon.ui').nav_prev()"), opts("Harpoon: Jump to previous mark") },
   })
 end
 

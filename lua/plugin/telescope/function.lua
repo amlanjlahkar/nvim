@@ -49,8 +49,9 @@ end
 function M:set_bg()
   local path = fn.finddir("~/media/pictures/wallpapers/")
   local opts = self.opts({
-    prompt_title = "Wallpaper",
+    prompt_title = "Choose Wallpaper",
     cwd = path,
+    layout_strategy = "horizontal",
     attach_mappings = function(_, map)
       map("i", "<CR>", function()
         local e = require("telescope.actions.state").get_selected_entry()
@@ -63,7 +64,7 @@ function M:set_bg()
   if path == "" then
     vim.notify("Wallpaper directory not found!", vim.log.levels.ERROR)
   else
-    tb.find_files(opts)
+    require("telescope").extensions.media.media(opts)
   end
 end
 
