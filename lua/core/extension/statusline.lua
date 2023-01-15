@@ -130,7 +130,7 @@ end
 -- 2}}}
 
 -- LSP {{{2
-function M.lsp_progress()
+--[[ function M.lsp_progress()
   local lsp = vim.lsp.util.get_progress_messages()[1]
 
   if lsp then
@@ -142,7 +142,7 @@ function M.lsp_progress()
   end
 
   return ""
-end
+end ]]
 
 function M.get_attached_servers()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
@@ -220,7 +220,7 @@ function M.set_active(self)
     self.get_lsp_diagnostic(),
     "%=",
     "%#StatusLine#",
-    self.lsp_progress(),
+    -- self.lsp_progress(),
     self:get_filetype(),
     self.get_attached_servers(),
     "%#StatusLineInd#",

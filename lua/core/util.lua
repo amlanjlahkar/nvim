@@ -70,14 +70,12 @@ function M.test_code(filetype)
     cpp = function() gcc_run() end,
   }
 
-  local is_defined = 0
   for lang, cmd in pairs(def) do
     if filetype == lang then
-      is_defined = 1
       return cmd
     end
   end
-  return is_defined < 1 and nil
+  return nil
 end
 
 return M

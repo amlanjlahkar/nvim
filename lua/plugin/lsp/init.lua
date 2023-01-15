@@ -2,6 +2,7 @@ local M = {
   "neovim/nvim-lspconfig",
   dependencies = {
     "williamboman/mason-lspconfig",
+    "j-hui/fidget.nvim",
   },
   ft = {
     "c",

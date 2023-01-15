@@ -38,6 +38,7 @@ key.nmap({
   -- external {{{
   { "<leader>v", cmd("tab Git"), opts("Open vcs interface") },
   { "<leader>ld", cmd("TroubleToggle document_diagnostics"), opts("Trouble: List document diagnostics") },
+  { "<leader>f", function() require("plugin.null-ls").format() end,  opts("Lsp/Null-ls: Format buffer") },
   -- }}}
 
   -- misc {{{

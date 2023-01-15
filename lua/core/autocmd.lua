@@ -43,7 +43,7 @@ M.autocmd_definitions = {
 
   { "FileType", {
       desc = "Create Ex command to run compiled/interpreted code",
-      pattern = { "python", "c", "cpp" },
+      pattern = { "python", "c", "cpp", "lua" },
       callback = function()
         local cmd = require("core.util").test_code(vim.bo.filetype)
         vim.keymap.set("n", "<leader>x", function()

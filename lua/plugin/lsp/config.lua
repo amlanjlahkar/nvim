@@ -19,7 +19,7 @@ function M.keymaps(bufnr)
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
     { "<leader>ls",   cmd("Telescope lsp_dynamic_workspace_symbols"),     opts(bufnr, "LSP/Telescope: Search for workspace symbols") },
-    { "<leader>f",    function() require("plugin.null-ls").format() end,  opts("Lsp/Null-ls: Format buffer") },
+    { "<leader>f",    function() require("plugin.null-ls").format() end,  opts(bufnr, "Lsp/Null-ls: Format buffer") },
   })
   -- stylua: ignore end
   key.imap({ "<C-k>", lsp.signature_help })

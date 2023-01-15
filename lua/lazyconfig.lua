@@ -30,7 +30,16 @@ require("lazy").setup("plugin", {
     },
   },
   ui = {
-    icons = { loaded = "● ", not_loaded = "○ " },
+    icons = {
+      loaded = "● ",
+      not_loaded = "○ ",
+      list = {
+        "● ",
+        "➜ ",
+        "★ ",
+        "- ",
+      },
+    },
     size = { width = 0.75, height = 0.8 },
     border = "single",
     throttle = 20,
