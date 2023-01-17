@@ -40,34 +40,33 @@ end
 ---@return function | nil
 ---Small set of functions to compile/interprete code for certain langs
 function M.test_code(filetype)
-  local function gcc_compile()
+  local function gcc_exec()
     local fpath = fn.expand("%:p")
     local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
+    local logfile = outfile .. "_error.log"
     local exit_code
     require("plenary.job"):new({
       command = "gcc",
       args = { "-lm", "-lstdc++", "-o", outfile, fpath },
-      on_stderr = function()
+      on_stderr = function(_, data)
+        local file = assert(io.open(logfile, "a"))
+        file:write(data, "\n")
+        file:close()
         exit_code = 2
       end,
     }):sync()
-    return exit_code and exit_code or outfile
-  end
-
-  local function gcc_run()
-    local out = gcc_compile()
-    if type(out) == "number" then
-      vim.notify("Compilation error!", vim.log.levels.ERROR)
+    if exit_code then
+      vim.cmd("view + " .. logfile)
     else
-      vim.cmd.terminal(out)
+      vim.cmd.terminal(outfile)
     end
   end
 
   local def = {
     lua = function() vim.cmd.terminal("lua %") end,
     python = function() vim.cmd.terminal("python %") end,
-    c = function() gcc_run() end,
-    cpp = function() gcc_run() end,
+    c = function() gcc_exec() end,
+    cpp = function() gcc_exec() end,
   }
 
   for lang, cmd in pairs(def) do
