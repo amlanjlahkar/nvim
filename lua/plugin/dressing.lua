@@ -7,6 +7,13 @@ function M.config()
   require("dressing").setup({
     input = {
       border = "single",
+      get_config = function(opts)
+        if string.match(opts.prompt, "Arguments to pass: ") then
+          return {
+            relative = "win",
+          }
+        end
+      end
     },
     win_options = {
       winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",

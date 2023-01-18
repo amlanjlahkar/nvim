@@ -40,14 +40,18 @@ end
 ---@return function | nil
 ---Small set of functions to compile/interprete code for certain langs
 function M.test_code(filetype)
-  local function gcc_exec()
-    local fpath = fn.expand("%:p")
-    local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
-    local logfile = outfile .. "_error.log"
-    local exit_code
+  local function compile_and_run(cmd, args, outfile)
+    local logfile, exit_code = nil, 0
+    if outfile == nil then outfile = args[#args] end
+    if outfile:match("/tmp/") then
+      logfile = outfile .. "_error.log"
+    else
+      logfile = "/tmp/" .. outfile .. "_error.log"
+    end
+    table.insert(args, fn.expand("%:p"))
     require("plenary.job"):new({
-      command = "gcc",
-      args = { "-lm", "-lstdc++", "-o", outfile, fpath },
+      command = cmd,
+      args = args,
       on_stderr = function(_, data)
         local file = assert(io.open(logfile, "a"))
         file:write(data, "\n")
@@ -55,8 +59,12 @@ function M.test_code(filetype)
         exit_code = 2
       end,
     }):sync()
-    if exit_code then
+    if exit_code > 0 then
       vim.cmd("view + " .. logfile)
+    elseif cmd == "javac" then
+      vim.ui.input({ prompt = "Arguments to pass: " }, function(input)
+        vim.cmd.terminal(string.format("java %s %s", outfile, input))
+      end)
     else
       vim.cmd.terminal(outfile)
     end
@@ -65,13 +73,23 @@ function M.test_code(filetype)
   local def = {
     lua = function() vim.cmd.terminal("lua %") end,
     python = function() vim.cmd.terminal("python %") end,
-    c = function() gcc_exec() end,
-    cpp = function() gcc_exec() end,
+    c = function()
+      local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
+      compile_and_run("gcc", { "-lm", "-o", outfile })
+    end,
+    cpp = function()
+      local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
+      compile_and_run("g++", { "-o", outfile })
+    end,
+    java = function()
+      local outfile = fn.expand("%:t:r")
+      compile_and_run("javac", {}, outfile)
+    end,
   }
 
-  for lang, cmd in pairs(def) do
+  for lang, func in pairs(def) do
     if filetype == lang then
-      return cmd
+      return func
     end
   end
   return nil
