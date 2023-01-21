@@ -15,10 +15,10 @@ o.updatetime = 100
 
 -- indenting and wrapping
 o.autoindent = true
-o.smartindent = true
+o.tabstop = 8
+o.softtabstop = 2
 o.shiftwidth = 2
 o.expandtab = true
-o.tabstop = 2
 o.wrap = false
 o.breakindent = true
 o.linebreak = true
