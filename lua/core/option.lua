@@ -1,7 +1,5 @@
 local o = vim.opt
-local gvar = vim.g
 
--- options {{{
 -- file handling
 o.shada = "!,'0,<0,/0,:20,f0"
 o.hidden = true
@@ -14,7 +12,7 @@ o.undodir = vim.fn.stdpath("data") .. "/undodir"
 o.updatetime = 100
 
 -- indenting and wrapping
-o.autoindent = true
+o.autoindent = false
 o.tabstop = 8
 o.softtabstop = 2
 o.shiftwidth = 2
@@ -71,31 +69,3 @@ o.grepprg = "rg --hidden --vimgrep --smart-case --"
 o.clipboard = ""
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
--- }}}
-
--- disable unnecessary nvim services {{{
-gvar.loaded_gzip = 1
-gvar.loaded_tar = 1
-gvar.loaded_zip = 1
-gvar.loaded_getscript = 1
-gvar.loaded_vimball = 1
-gvar.loaded_tarPlugin = 1
-gvar.loaded_zipPlugin = 1
-gvar.loaded_getscriptPlugin = 1
-gvar.loaded_vimballPlugin = 1
-gvar.loaded_2html_plugin = 1
-gvar.loaded_matchit = 1
-gvar.loaded_matchparen = 1
-gvar.loaded_spec = 1
-gvar.loaded_logiPat = 1
-gvar.loaded_rrhelper = 1
-
-gvar.loaded_netrw = 1
-gvar.loaded_netrwPlugin = 1
-gvar.loaded_netrwSettings = 1
-
-gvar.loaded_ruby_provider = 0
-gvar.loaded_node_provider = 0
-gvar.loaded_perl_provider = 0
-gvar.loaded_python3_provider = 0
--- }}}
