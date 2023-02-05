@@ -61,4 +61,7 @@ key.nmap({
   { "<C-y>", '"+y$', opts("Yank(eol) to system clipboard") },
   { "<C-p>", '"+p', opts("Paste from system clipboard") },
 })
-key.xmap({ "<C-y>", '"+y', opts("Yank line to system clipboard") })
+key.xmap({
+  { "<C-y>", '"+y', opts("Yank line to system clipboard") },
+  { "<C-p>", '"+p', opts("Paste from system clipboard") },
+})

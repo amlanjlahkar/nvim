@@ -37,7 +37,6 @@ function M.config()
         "vendor/*",
         "node_modules/*",
         "spell/*",
-        "**/*.bin",
         "**/*.class",
         "**/*.jar",
       },

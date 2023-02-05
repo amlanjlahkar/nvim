@@ -36,8 +36,7 @@ function M:get_dwots()
   local opts = self.opts({
     prompt_title = "Dotfiles",
     cwd = dothome,
-    hidden = true,
-    find_command = { "fd", "--exclude", ".git/", "--type", "file" },
+    find_command = { "fd", "--hidden", "--exclude", ".git", "--type", "file" },
   })
   if dothome == "" then
     vim.notify("Direcetory dwots not found!", vim.log.levels.ERROR)

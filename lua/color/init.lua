@@ -11,7 +11,7 @@ local function hl_override(colorscheme, custom_hl)
   })
 end
 
-local M = { default = "quiet" }
+local M = { default = "lunaperche" }
 
 function M.try_colorscheme(colorscheme)
   local is_defined, custom_hl = pcall(require, "color.custom." .. colorscheme)
@@ -19,8 +19,8 @@ function M.try_colorscheme(colorscheme)
     hl_override(colorscheme, custom_hl)
   end
   if not pcall(vim.cmd, "colorscheme " .. colorscheme) then
-    vim.cmd([[ set bg=dark scl=no ls=0 nonu nornu nocul ]])
     vim.cmd.colorscheme(M.default)
+    vim.cmd([[ set bg=dark scl=no ls=0 nonu nornu nocul noru | hi NormalFloat guibg=NONE | hi FloatBorder guibg=NONE ]])
   end
 end
 

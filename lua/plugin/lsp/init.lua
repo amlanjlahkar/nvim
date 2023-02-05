@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     "williamboman/mason-lspconfig",
     "j-hui/fidget.nvim",
+    "folke/neodev.nvim",
   },
   ft = {
     "c",
@@ -33,6 +34,9 @@ function M.config()
       local has_custom_opts, server_custom_opts = pcall(require, "plugin.lsp.server_config." .. server)
       if has_custom_opts then
         opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
+      end
+      if server == "sumneko_lua" then
+        require("neodev").setup()
       end
       require("lspconfig")[server].setup(opts)
     end

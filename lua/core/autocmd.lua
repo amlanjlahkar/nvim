@@ -3,9 +3,10 @@ local fn = vim.fn
 
 local M = {}
 
--- stylua: ignore
 M.autocmd_definitions = {
-  { "BufWritePre", {
+  {
+    "BufWritePre",
+    {
       desc = "Remove trailing whitespaces on writing a buffer",
       pattern = "*",
       callback = function()
@@ -18,7 +19,9 @@ M.autocmd_definitions = {
     },
   },
 
-  { "TextYankPost", {
+  {
+    "TextYankPost",
+    {
       desc = "Highlight text on yank",
       pattern = "*",
       callback = function()
@@ -28,20 +31,13 @@ M.autocmd_definitions = {
   },
 
   { "TermOpen", {
-      desc = "Open terminal directly in insert mode",
-      pattern = "*",
-      callback = function()
-        vim.cmd([[
-          setlocal norelativenumber
-          setlocal nonumber
-          setlocal scl=no
-          startinsert
-        ]])
-      end,
-    },
-  },
+    desc = "Open terminal directly in insert mode",
+    command = "setl nornu nonu scl=no | startinsert",
+  } },
 
-  { "FileType", {
+  {
+    "FileType",
+    {
       desc = "Create Ex command to run compiled/interpreted code",
       pattern = { "python", "c", "cpp", "lua", "java" },
       callback = function()

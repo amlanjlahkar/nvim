@@ -75,6 +75,7 @@ M.custom = {
   { "CmpItemMenu",                { fg = FgShadeDarker } },
   { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
+  { "MatchParen",                 { bg = none, fg = "#e15774", bold = true } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 

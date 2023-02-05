@@ -60,13 +60,11 @@ function M.test_code(filetype)
       end,
     }):sync()
     if exit_code > 0 then
-      vim.cmd("view + " .. logfile)
-    elseif cmd == "javac" then
-      vim.ui.input({ prompt = "Arguments to pass: " }, function(input)
-        vim.cmd.terminal(string.format("java %s %s", outfile, input))
-      end)
+      vim.cmd("view +setl\\ nomodifiable " .. logfile)
     else
-      vim.cmd.terminal(outfile)
+      vim.ui.input({ prompt = "Arguments to pass: " }, function(input)
+        vim.cmd.terminal(string.format("%s %s %s", cmd, outfile, input))
+      end)
     end
   end
 
