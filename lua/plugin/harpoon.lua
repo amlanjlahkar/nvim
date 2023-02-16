@@ -1,6 +1,6 @@
 local M = {
   "ThePrimeagen/harpoon",
-  keys = { "<leader>h", "[;", "];" },
+  keys = { "<leader>hm", "[;", "];" },
 }
 
 function M.config()

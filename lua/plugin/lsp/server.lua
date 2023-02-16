@@ -4,7 +4,7 @@ local M = {
     "html",
     "cssls",
     "tsserver",
-    "sumneko_lua",
+    "lua_ls",
     "pyright",
   },
 }

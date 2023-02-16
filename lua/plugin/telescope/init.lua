@@ -8,7 +8,7 @@ local M = {
   keys = "<leader>t",
 }
 
-M.default = { layout_strategy = "vertical" }
+M.default = { layout_strategy = "vertical", previewer = false }
 
 function M.config()
   require("telescope").setup({

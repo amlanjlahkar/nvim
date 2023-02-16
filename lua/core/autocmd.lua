@@ -30,10 +30,13 @@ M.autocmd_definitions = {
     },
   },
 
-  { "TermOpen", {
-    desc = "Open terminal directly in insert mode",
-    command = "setl nornu nonu scl=no | startinsert",
-  } },
+  {
+    "TermOpen",
+    {
+      desc = "Open terminal directly in insert mode",
+      command = "setl nornu nonu scl=no | startinsert",
+    },
+  },
 
   {
     "FileType",

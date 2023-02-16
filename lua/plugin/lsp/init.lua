@@ -20,6 +20,8 @@ local M = {
     "bash",
     "json",
     "yaml",
+    "typescript",
+    "typescriptreact",
   },
 }
 
@@ -35,7 +37,7 @@ function M.config()
       if has_custom_opts then
         opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
       end
-      if server == "sumneko_lua" then
+      if server == "lua_ls" then
         require("neodev").setup()
       end
       require("lspconfig")[server].setup(opts)

@@ -14,6 +14,9 @@ function M.config()
       rnu = false,
       nu = false,
     },
+    view_options = {
+      show_hidden = true,
+    },
   })
 
   vim.keymap.set("n", "-", require("oil").open, { desc = "Oil: Open parent directory" })

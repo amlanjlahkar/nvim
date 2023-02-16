@@ -78,12 +78,14 @@ function M.config()
       completion = {
         border = "single",
         winhighlight = "Normal:NormalFloatAlt,CmpItemAbbr:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
+        zindex = 80,
       },
       documentation = {
         border = "single",
         winhighlight = "Normal:NormalFloatAlt,CmpItemAbbr:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
-        max_width = 60,
-        max_height = 25,
+        max_width = 80,
+        max_height = 30,
+        zindex = 50,
       },
     },
     experimental = {

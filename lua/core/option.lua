@@ -1,7 +1,7 @@
 local o = vim.opt
 
 -- file handling
-o.shada = "!,'0,<0,/0,:20,f0"
+o.shada = "!,'15,<0,/0,:20,f0"
 o.hidden = true
 o.confirm = true
 o.autowrite = true
@@ -45,7 +45,7 @@ o.cursorline = true
 o.showtabline = 1
 o.cmdheight = 1
 o.laststatus = 3
-o.signcolumn = "yes"
+o.signcolumn = "auto:1-4"
 o.pumheight = 20
 o.pumblend = 0
 o.winblend = 0
@@ -66,6 +66,7 @@ o.fillchars:append({
 o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
 o.grepprg = "rg --hidden --vimgrep --smart-case --"
-o.clipboard = ""
+o.clipboard = "unnamed"
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
+o.shell="/usr/local/bin/bash"

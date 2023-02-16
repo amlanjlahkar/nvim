@@ -6,7 +6,7 @@ local default = require("plugin.telescope").default
 local M = {}
 
 function M.opts(options)
-  local opts = { layout_strategy = default.layout_strategy }
+  local opts = { layout_strategy = default.layout_strategy, previewer = default.previewer }
   if options then
     for k, v in pairs(options) do
       opts[k] = v
