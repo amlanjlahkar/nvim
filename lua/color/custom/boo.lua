@@ -76,6 +76,9 @@ M.custom = {
   { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
   { "MatchParen",                 { bg = none, fg = "#e15774", bold = true } },
+  { "HopNextKey",                 { bg = none, fg = "#e15774", bold = true } },
+  { "HopNextKey1",                { bg = none, fg = Blue, bold = true } },
+  { "HopNextKey2",                { bg = none, fg = "#3e86a3", bold = true } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 
