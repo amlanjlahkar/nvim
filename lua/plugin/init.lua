@@ -25,7 +25,7 @@ return {
 
   {
     "numToStr/Comment.nvim",
-    keys = { "gc", "gb", { "gc", mode = "v" }, { "gb", mode = "v" } },
+    keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = "x" } },
     config = function()
       require("Comment").setup()
     end,

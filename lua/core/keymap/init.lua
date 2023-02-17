@@ -23,8 +23,6 @@ key.nmap({
   -- movements and editing {{{
   { "<leader>j", "<cmd>m .+1<CR>==", opts("Move current line down") },
   { "<leader>k", "<cmd>m .-2<CR>==", opts("Move current line up") },
-  { "L", "$" },
-  { "H", "_" },
   { "n", "nzzzv" },
   { "N", "Nzzzv" },
   { "J", "mzJ`z" },

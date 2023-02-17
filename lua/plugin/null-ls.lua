@@ -34,9 +34,11 @@ function M.config()
       }),
     },
   })
-  require("plugin.lsp.handler").setup()
-  require("plugin.lsp.ui"):setup()
-  require("plugin.lsp.config").keymaps(0)
+  if not package.loaded["lsp"] then
+    require("plugin.lsp.handler").setup()
+    require("plugin.lsp.ui"):setup()
+    require("plugin.lsp.config").keymaps(0)
+  end
 end
 
 function M.format()

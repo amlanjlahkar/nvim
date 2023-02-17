@@ -19,11 +19,11 @@ function M.keymaps(bufnr)
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
     { "<leader>ls",   cmd("Telescope lsp_dynamic_workspace_symbols"),     opts(bufnr, "LSP/Telescope: Search for workspace symbols") },
-    { "<leader>f",    function() require("plugin.null-ls").format() end,  opts(bufnr, "Lsp/Null-ls: Format buffer") },
   })
-  -- stylua: ignore end
   key.imap({ "<C-k>", lsp.signature_help })
+  key.nxmap({ "<leader>f", function() require("plugin.null-ls").format() end,  opts(bufnr, "Lsp/Null-ls: Format buffer") })
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- stylua: ignore end
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
