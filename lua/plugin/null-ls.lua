@@ -1,8 +1,14 @@
+local ft = { "sh", "bash", "json", "yaml", "typescriptreact", "javascriptreact" }
+for _, f in pairs(require("plugin.lsp").ft) do
+  table.insert(ft, f)
+end
+
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
+  ft = ft,
 }
 
-function M.setup()
+function M.config()
   local null_ls = require("null-ls")
   local formatting = null_ls.builtins.formatting
   local diagnostics = null_ls.builtins.diagnostics
@@ -22,9 +28,15 @@ function M.setup()
       diagnostics.jsonlint,
       diagnostics.eslint.with({
         prefer_local = "node_modules/.bin",
+        condition = function(utils)
+          return utils.root_has_file({ ".eslintrc.json", ".eslintrc.js" })
+        end,
       }),
     },
   })
+  require("plugin.lsp.handler").setup()
+  require("plugin.lsp.ui"):setup()
+  require("plugin.lsp.config").keymaps(0)
 end
 
 function M.format()

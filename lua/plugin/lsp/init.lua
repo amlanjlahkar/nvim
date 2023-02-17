@@ -7,21 +7,16 @@ local M = {
   },
   ft = {
     "c",
-    "objc",
     "cpp",
+    "objc",
     "objcpp",
     "lua",
     "html",
     "css",
     "javascript",
+    "typescript",
     "java",
     "python",
-    "sh",
-    "bash",
-    "json",
-    "yaml",
-    "typescript",
-    "typescriptreact",
   },
 }
 
@@ -37,7 +32,7 @@ function M.config()
       if has_custom_opts then
         opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
       end
-      if server == "lua_ls" then
+      if vim.bo.filetype == "lua" then
         require("neodev").setup()
       end
       require("lspconfig")[server].setup(opts)
@@ -45,7 +40,6 @@ function M.config()
   end
   require("plugin.lsp.handler").setup()
   require("plugin.lsp.ui"):setup()
-  require("plugin.null-ls").setup()
 end
 
 return M

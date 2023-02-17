@@ -1,6 +1,6 @@
 local M = {
   "williamboman/mason.nvim",
-  cmd = "Mason",
+  ft = require("plugin.null-ls").ft
 }
 
 M.pkgs = {
