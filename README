@@ -1,4 +1,4 @@
-Personal configuration files for Neovim(v8.0.0).
-Dependencies:
-  - npm, pip (mason)
+Personal configuration files for Neovim(v0.8.3)
+Optional dependencies:
+  - npm (mason)
   - fd, ripgrep (telescope)
