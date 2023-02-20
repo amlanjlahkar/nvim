@@ -171,6 +171,13 @@ function M.get_lsp_diagnostic()
     info = "Info",
     hints = "Hint",
   }
+  local signs = require("plugin.lsp.ui").signs
+  local icons = {
+    errors = signs.Error,
+    warnings = signs.Warn,
+    info = signs.Info,
+    hints = signs.Hint,
+  }
 
   for k, level in pairs(levels) do
     count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
@@ -182,16 +189,16 @@ function M.get_lsp_diagnostic()
   local info = ""
 
   if count["errors"] ~= 0 then
-    errors = " %#StatusLineDiagnosticError# " .. count["errors"]
+    errors = " %#StatusLineDiagnosticError#" .. icons["errors"] .. count["errors"]
   end
   if count["warnings"] ~= 0 then
-    warnings = " %#StatusLineDiagnosticWarn# " .. count["warnings"]
+    warnings = " %#StatusLineDiagnosticWarn#" .. icons["warnings"] .. count["warnings"]
   end
   if count["hints"] ~= 0 then
-    hints = " %#StatusLineDiagnosticHint# " .. count["hints"]
+    hints = " %#StatusLineDiagnosticHint#" .. icons["hints"] .. count["hints"]
   end
   if count["info"] ~= 0 then
-    info = " %#StatusLineDiagnosticInfo# " .. count["info"]
+    info = " %#StatusLineDiagnosticInfo#" .. icons["info"] .. count["info"]
   end
 
   return errors .. warnings .. hints .. info .. "%#StatusLineNC#"

@@ -37,12 +37,12 @@ function M.config()
       },
       { "<leader>gR", gs.reset_buffer, opts("Gitsigns: reset buffer") },
       { "<leader>gp", gs.preview_hunk, opts("Gitsigns: preview_hunk") },
-      { "<leader>gr", cmd("Gitsigns reset_hunk"), opts("Gitsigns: reset hunk") },
-      { "<leader>gs", cmd("Gitsigns stage_hunk"), opts("Gitsigns: stage hunk") },
+      { "<leader>gr", gs.reset_hunk, opts("Gitsigns: reset hunk") },
+      { "<leader>gs", gs.stage_hunk, opts("Gitsigns: stage hunk") },
     })
-    key.xmap({
-      { "<leader>gr", cmd("Gitsigns reset_hunk"), opts("Gitsigns: reset hunk") },
-      { "<leader>gs", cmd("Gitsigns stage_hunk"), opts("Gitsigns: stage hunk") },
+    key.vmap({
+      { "<leader>gr", gs.reset_hunk, opts("Gitsigns: reset hunk") },
+      { "<leader>gs", gs.stage_hunk, opts("Gitsigns: stage hunk") },
     })
     -- stylua: ignore end
     end,

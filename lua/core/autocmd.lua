@@ -23,9 +23,8 @@ M.autocmd_definitions = {
     "TextYankPost",
     {
       desc = "Highlight text on yank",
-      pattern = "*",
       callback = function()
-        require("vim.highlight").on_yank({ higroup = "IncSearch", timeout = 50 })
+        vim.highlight.on_yank({ higroup = "IncSearch", timeout = 80 })
       end,
     },
   },

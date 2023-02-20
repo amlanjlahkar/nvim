@@ -66,7 +66,7 @@ o.fillchars:append({
 o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
 o.grepprg = "rg --hidden --vimgrep --smart-case --"
-o.clipboard = "unnamed"
+o.clipboard = ""
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
 o.shell="/usr/local/bin/bash"

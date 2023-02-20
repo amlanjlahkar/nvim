@@ -1,11 +1,11 @@
 local M = {
   border = "single",
   signs = {
-    Error = "",
-    Warn = "",
-    Hint = "",
-    Info = "",
-    virt_text = "",
+    Error = " ",
+    Warn = " ",
+    Hint = " ",
+    Info = " ",
+    virt_text = " ",
   },
 }
 
