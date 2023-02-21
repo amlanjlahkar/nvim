@@ -1,6 +1,7 @@
 local M = {
   "phaazon/hop.nvim",
   keys = { "<M-z>", { "<M-z>", mode = "x" } },
+  enabled = false,
 }
 
 function M.config()

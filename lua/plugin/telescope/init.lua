@@ -8,7 +8,7 @@ local M = {
   keys = "<leader>t",
 }
 
-M.default = { layout_strategy = "vertical", previewer = false }
+M.default = { layout_strategy = "vertical" }
 
 function M.config()
   require("telescope").setup({
@@ -16,6 +16,7 @@ function M.config()
       prompt_prefix = "   ",
       selection_caret = "  ",
       multi_icon = " + ",
+      preview = false,
       layout_config = {
         vertical = {
           anchor = "S",

@@ -30,7 +30,7 @@ function M.setup()
 
     {
       "<leader>tg", function()
-        builtin.live_grep()
+        builtin.live_grep({ preview = true })
       end, opts("Telescope: Live grep"),
     },
 

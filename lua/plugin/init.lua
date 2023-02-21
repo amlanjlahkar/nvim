@@ -9,65 +9,67 @@ return {
   },
 
   {
-    "folke/trouble.nvim",
-    module = false,
-    cmd = { "TroubleToggle", "Trouble" },
-    config = function()
-      require("trouble").setup({
-        icons = false,
-        fold_open = "",
-        fold_closed = "",
-        indent_lines = false,
-        use_diagnostic_signs = true,
-      })
-    end,
+    "tummetott/reticle.nvim",
+    event = "VeryLazy",
+    opts = {
+      ignore = { cursorline = { "lazy", "lspinfo" } },
+    },
   },
 
   {
     "numToStr/Comment.nvim",
     keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = "x" } },
-    config = function()
-      require("Comment").setup()
-    end,
+    config = true,
   },
 
   {
     "kylechui/nvim-surround",
     lazy = false,
-    config = function()
-      require("nvim-surround").setup()
-    end,
+    config = true,
+  },
+
+  {
+    "folke/trouble.nvim",
+    module = false,
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = {
+      icons = false,
+      fold_open = "",
+      fold_closed = "",
+      indent_lines = false,
+      use_diagnostic_signs = true,
+    },
   },
 
   {
     "xiyaowong/nvim-transparent",
+    -- lazy = false,
     cmd = "TransparentToggle",
-    config = function()
-      require("transparent").setup({
-        enable = false,
-        extra_groups = {
-          "NormalFloat",
-          "FloatBorder",
-          "WinBar",
-          "WinBarNC",
-          "CursorLine",
-          "TabLineFill",
-          "GitGutterAdd",
-          "GitGutterChange",
-          "GitGutterDelete",
-          "DiffLine",
-          "CmpItemAbbr",
-          "StatusLine",
-          "StatusLineNC",
-          "StatusLineImp",
-          "StatusLineInd",
-          "StatusLineDiagnosticError",
-          "StatusLineDiagnosticWarn",
-          "StatusLineDiagnosticHint",
-          "StatusLineDiagnosticInfo",
-        },
-      })
-    end,
+    opts = {
+      enable = false,
+      extra_groups = {
+        "NormalFloat",
+        "FloatBorder",
+        "WinBar",
+        "WinBarNC",
+        "CursorLine",
+        "VertSplit",
+        "TabLineFill",
+        "GitGutterAdd",
+        "GitGutterChange",
+        "GitGutterDelete",
+        "DiffLine",
+        "CmpItemAbbr",
+        "StatusLine",
+        "StatusLineNC",
+        "StatusLineImp",
+        "StatusLineInd",
+        "StatusLineDiagnosticError",
+        "StatusLineDiagnosticWarn",
+        "StatusLineDiagnosticHint",
+        "StatusLineDiagnosticInfo",
+      },
+    },
   },
 
   {

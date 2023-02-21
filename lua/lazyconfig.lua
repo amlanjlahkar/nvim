@@ -54,4 +54,5 @@ key.nmap({
   { "<leader>ps", cmd("Lazy"), opts("Lazy: Home") },
   { "<leader>py", cmd("Lazy sync"), opts("Lazy: Sync") },
   { "<leader>pi", cmd("Lazy install"), opts("Lazy: Install missing plugins") },
+  { "<leader>pp", cmd("Lazy profile"), opts("Lazy: Show profiling info") },
 })
