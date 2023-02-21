@@ -14,7 +14,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("plugin", {
   defaults = { lazy = true },
-  lockfile = vim.fn.stdpath("config") .. "/package_lock.json",
+  lockfile = vim.fn.stdpath("config") .. "/lazylock.json",
   checker = {
     enabled = false,
     concurrency = nil,
