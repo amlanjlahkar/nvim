@@ -8,7 +8,8 @@ local FgShadeDarker = "#51494a"
 local Black = "#000000"
 local BlackAlt = "#131314"
 local Red = "#d19299"
-local RedAlt = "#81363f"
+local RedDim = "#6c494d"
+local RedBright = "#81363f"
 local Green = "#63b0b0"
 local Blue = "#a9d1df"
 local Magenta = "#d5a8e3"
@@ -45,9 +46,9 @@ M.custom = {
   { "TelescopeMatching",          { fg = "#e15774" } },
   { "FloatTitle",                 { bg = Black, fg = White } },
   { "NormalFloat",                { bg = Black, fg = Fg } },
-  { "FloatBorder",                { bg = Black, fg = Black } },
+  { "FloatBorder",                { bg = Black, fg = RedDim } },
   { "NormalFloatAlt",             { bg = Black, fg = Fg } },
-  { "FloatBorderAlt",             { bg = Black, fg = Black } },
+  { "FloatBorderAlt",                { bg = Black, fg = RedDim } },
   { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
   { "VimModeNormal",              { bg = BgShadeLighter, fg = Red } },
   { "VimModeInsert",              { bg = BgShadeLighter, fg = Red } },
@@ -61,9 +62,9 @@ M.custom = {
   { "TroubleIndent",              { bg = none, fg = FgShadeDark } },
   { "TroubleLocation",            { bg = none, fg = FgShadeDark } },
   { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
-  { "DiffDelete",                 { bg = DiffDelete, fg = RedAlt } },
+  { "DiffDelete",                 { bg = DiffDelete, fg = RedBright } },
   { "diffAdded",                  { bg = DiffAdd, fg = Green } },
-  { "diffRemoved",                { bg = DiffDelete, fg = RedAlt } },
+  { "diffRemoved",                { bg = DiffDelete, fg = RedBright } },
   { "GitGutterAdd",               { fg = Green } },
   { "GitGutterChange",            { fg = Blue } },
   { "GitGutterChangeDelete",      { fg = Magenta } },

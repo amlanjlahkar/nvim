@@ -11,16 +11,16 @@ M.pkgs = {
   "prettierd",
 }
 
-function M.query()
-  for _, pkg in ipairs(M.pkgs) do
-    local p = require("mason-registry").get_package(pkg)
-    if not p:is_installed() then
-      p:install()
+function M.query(pkg_list)
+  for _, p in pairs(pkg_list) do
+    local pkg = require("mason-registry").get_package(p)
+    if not pkg:is_installed() then
+      pkg:install()
     end
   end
 end
 
-function M.config()
+function M:config()
   require("mason").setup({
     ui = {
       border = "single",
@@ -31,7 +31,7 @@ function M.config()
       },
     },
   })
-  M.query()
+  self.query(self.pkgs)
 end
 
 return M

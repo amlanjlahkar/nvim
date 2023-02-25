@@ -44,7 +44,7 @@ require("lazy").setup("plugin", {
     border = "single",
     throttle = 20,
   },
-  install = { colorscheme = { require("color").default } },
+  install = { colorscheme = { require("color").custom, require("color").default } },
 })
 
 local key = require("core.keymap.maputil")

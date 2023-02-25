@@ -11,9 +11,10 @@ local function hl_override(colorscheme, custom_hl)
   })
 end
 
-local M = { default = "lunaperche" }
+local M = { default = "lunaperche", custom = "boo" }
 
-function M.try_colorscheme(colorscheme)
+function M:try_colorscheme(colorscheme)
+  colorscheme = colorscheme or self.custom
   local is_defined, custom_hl = pcall(require, "color.custom." .. colorscheme)
   if is_defined then
     hl_override(colorscheme, custom_hl)
