@@ -3,8 +3,8 @@ local M = {
   event = "VeryLazy",
 }
 
-function M.config()
-  require("dressing").setup({
+function M.opts()
+  return {
     input = {
       border = "single",
       get_config = function(opts)
@@ -13,7 +13,7 @@ function M.config()
             relative = "win",
           }
         end
-      end
+      end,
     },
     win_options = {
       winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
@@ -31,7 +31,7 @@ function M.config()
         end
       end,
     },
-  })
+  }
 end
 
 return M

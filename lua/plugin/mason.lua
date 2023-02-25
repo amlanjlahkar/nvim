@@ -1,6 +1,5 @@
 local M = {
   "williamboman/mason.nvim",
-  ft = require("plugin.null-ls").ft
 }
 
 M.pkgs = {

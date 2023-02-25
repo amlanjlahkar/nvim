@@ -3,12 +3,12 @@ local M = {
   lazy = false,
 }
 
-function M.config()
+function M.opts()
   local key = require("core.keymap.maputil")
   local cmd, opts, expr = key.cmd, key.new_opts, key.expr
 
-  require("gitsigns").setup({
-    on_attach = function(bufnr)
+  return {
+      on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
     -- stylua: ignore start
@@ -40,13 +40,13 @@ function M.config()
       { "<leader>gr", gs.reset_hunk, opts("Gitsigns: reset hunk") },
       { "<leader>gs", gs.stage_hunk, opts("Gitsigns: stage hunk") },
     })
-    key.vmap({
+    key.xmap({
       { "<leader>gr", gs.reset_hunk, opts("Gitsigns: reset hunk") },
       { "<leader>gs", gs.stage_hunk, opts("Gitsigns: stage hunk") },
     })
-    -- stylua: ignore end
+      -- stylua: ignore end
     end,
-  })
+  }
 end
 
 return M

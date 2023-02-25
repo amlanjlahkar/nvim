@@ -1,6 +1,6 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
-  dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
+  dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "windwp/nvim-ts-autotag" },
   build = function()
     local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
     ts_update()
@@ -94,6 +94,9 @@ function M.config()
       },
     },
     indent = {
+      enable = true,
+    },
+    autotag = {
       enable = true,
     },
   })
