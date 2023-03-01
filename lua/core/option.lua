@@ -8,7 +8,7 @@ o.autowrite = true
 o.swapfile = false
 o.backup = false
 o.undofile = true
-o.undodir = vim.fn.stdpath("data") .. "/undodir"
+o.undodir = vim.fn.stdpath("state") .. "/undo"
 o.updatetime = 100
 
 -- indenting and wrapping
