@@ -8,23 +8,13 @@ local M = {
   keys = "<leader>t",
 }
 
-M.default = { layout_strategy = "vertical" }
-
 function M.config()
   require("telescope").setup({
     defaults = {
       prompt_prefix = "   ",
-      selection_caret = "  ",
-      multi_icon = " + ",
+      selection_caret = "  ",
+      multi_icon = "  ",
       preview = false,
-      layout_config = {
-        vertical = {
-          anchor = "S",
-          height = 0.7,
-          width = 0.4,
-          prompt_position = "bottom",
-        },
-      },
       vimgrep_arguments = {
         "rg",
         "--color=never",

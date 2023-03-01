@@ -1,56 +1,68 @@
 local fn = vim.fn
 local api = vim.api
-local tb = require("telescope.builtin")
-local default = require("plugin.telescope").default
 
 local M = {}
 
-function M.opts(options)
-  local opts = { layout_strategy = default.layout_strategy }
-  if options then
-    for k, v in pairs(options) do
+function M.use_theme(picker_opts)
+  local theme = "dropdown"
+  local opts = {}
+  if picker_opts then
+    for k, v in pairs(picker_opts) do
       opts[k] = v
     end
   end
-  return opts
+  return require("telescope.themes")["get_" .. theme](opts)
 end
 
-function M:get_nvim_conf()
-  local opts = self.opts({
-    prompt_title = "Neovim conf",
+function M.pick(type)
+  local t = setmetatable({}, {
+    __index = function(_, picker)
+      return function(use, opts)
+        local picker_opts = use == false and opts or M.use_theme(opts)
+        require(type)[picker](picker_opts)
+      end
+    end,
+  })
+  return t
+end
+
+local tb = M.pick("telescope.builtin")
+
+function M.get_nvim_conf()
+  local opts = {
+    prompt_title = "Neovim Config",
     cwd = fn.stdpath("config"),
-  })
-  tb.find_files(opts)
+  }
+  tb.find_files(_, opts)
 end
 
-function M:get_relative_file()
-  local opts = self.opts({
-    prompt_title = "Files",
+function M.get_relative_file()
+  local opts = {
+    prompt_title = "Relative Files",
     cwd = fn.expand("%:p:h"),
-  })
-  tb.find_files(opts)
+  }
+  tb.find_files(_, opts)
 end
 
-function M:get_dwots()
+function M.get_dwots()
   local dothome = fn.finddir("~/dwots/")
-  local opts = self.opts({
+  local opts = {
     prompt_title = "Dotfiles",
     cwd = dothome,
     find_command = { "fd", "--hidden", "--exclude", ".git", "--type", "file" },
-  })
+  }
   if dothome == "" then
     vim.notify("Direcetory dwots not found!", vim.log.levels.ERROR)
   else
-    tb.find_files(opts)
+    tb.find_files(_, opts)
   end
 end
 
-function M:set_bg()
+function M.set_bg()
   local path = fn.finddir("~/media/pictures/wallpapers/")
-  local opts = self.opts({
+  local opts = {
     prompt_title = "Choose Wallpaper",
     cwd = path,
-    layout_strategy = "horizontal",
     attach_mappings = function(_, map)
       map("i", "<CR>", function()
         local e = require("telescope.actions.state").get_selected_entry()
@@ -59,7 +71,7 @@ function M:set_bg()
       end)
       return true
     end,
-  })
+  }
   if path == "" then
     vim.notify("Wallpaper directory not found!", vim.log.levels.ERROR)
   else
@@ -67,7 +79,7 @@ function M:set_bg()
   end
 end
 
-function M:reload_module()
+function M.reload_module()
   local path = vim.fn.stdpath("config") .. "/lua"
   local function parse_entry(e)
     local mod = e:gsub("%.lua", "")
@@ -75,7 +87,7 @@ function M:reload_module()
     return mod:gsub("%.init", "")
   end
 
-  local opts = self.opts({
+  local opts = {
     prompt_title = "Nvim Modules",
     cwd = path,
 
@@ -89,8 +101,8 @@ function M:reload_module()
       end)
       return true
     end,
-  })
-  tb.find_files(opts)
+  }
+  tb.find_files(_, opts)
 end
 
 return M
