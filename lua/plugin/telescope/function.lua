@@ -3,9 +3,33 @@ local api = vim.api
 
 local M = {}
 
+function M.buf_preview_maker(filepath, bufnr, opts)
+  filepath = vim.fn.expand(filepath)
+  require("plenary.job"):new({
+    command = "file",
+    args = { "--mime-type", "-b", filepath },
+    on_exit = function(j)
+      local mime_type = vim.split(j:result()[1], "/")[1]
+      if mime_type == "text" then
+        require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
+      else
+        vim.schedule(function()
+          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
+        end)
+      end
+    end
+  }):sync()
+end
+
 function M.use_theme(picker_opts)
   local theme = "dropdown"
-  local opts = {}
+  local opts = {
+    layout_config = {
+      anchor = "CENTER",
+      width = 0.4,
+      height = 0.8,
+    },
+  }
   if picker_opts then
     for k, v in pairs(picker_opts) do
       opts[k] = v

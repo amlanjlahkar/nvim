@@ -7,21 +7,18 @@ local key = require("core.keymap.maputil")
 local cmd, opts = key.cmd, key.new_opts
 
 function M.setup()
+  -- stylua: ignore start
   key.nmap({
     {
-      "<leader>tt",
-      function()
+      "<leader>tt", function()
         tb.find_files()
-      end,
-      opts("Telescope: Find files"),
+      end, opts("Telescope: Find files"),
     },
 
     {
-      "<leader>tb",
-      function()
+      "<leader>tb", function()
         tb.buffers()
-      end,
-      opts("Telescope: Loaded buffers"),
+      end, opts("Telescope: Loaded buffers"),
     },
 
     {
@@ -33,61 +30,48 @@ function M.setup()
     },
 
     {
-      "<leader>tg",
-      function()
+      "<leader>tg", function()
         tb.live_grep(false, { layout_strategy = "horizontal", preview = true })
-      end,
-      opts("Telescope: Live grep"),
+      end, opts("Telescope: Live grep"),
     },
 
     {
-      "<leader>th",
-      function()
+      "<leader>th", function()
         tb.help_tags()
-      end,
-      opts("Telescope: Help tags"),
+      end, opts("Telescope: Help tags"),
     },
 
     {
-      "<leader>tn",
-      function()
+      "<leader>tn", function()
         fn.get_nvim_conf()
-      end,
-      opts("Telescope: Nvim config"),
+      end, opts("Telescope: Nvim config"),
     },
 
     {
-      "<leader>tf",
-      function()
+      "<leader>tf", function()
         fn.get_relative_file()
-      end,
-      opts("Telescope: Buffer relative files"),
+      end, opts("Telescope: Buffer relative files"),
     },
 
     {
-      "<leader>td",
-      function()
+      "<leader>td", function()
         fn.get_dwots()
-      end,
-      opts("Telescope: Dwots"),
+      end, opts("Telescope: Dwots"),
     },
 
     {
-      "<leader>tw",
-      function()
+      "<leader>tw", function()
         fn.set_bg()
-      end,
-      opts("Telescope: Set wallpaper"),
+      end, opts("Telescope: Set wallpaper"),
     },
 
     {
-      "<leader>tr",
-      function()
+      "<leader>tr", function()
         fn.reload_module()
-      end,
-      opts("Telescope: Reload lua module"),
+      end, opts("Telescope: Reload lua module"),
     },
   })
+  -- stylua: ignore end
 end
 
 return M

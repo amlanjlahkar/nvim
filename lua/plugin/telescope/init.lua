@@ -15,6 +15,8 @@ function M.config()
       selection_caret = "  ",
       multi_icon = "  ",
       preview = false,
+      buffer_previewer_maker = require("plugin.telescope.function").buf_preview_maker,
+      history = { path = vim.fn.stdpath("state") .. "/telescope_history.log" },
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -44,9 +46,10 @@ function M.config()
       },
     },
   })
-  require("plugin.telescope.mapping").setup()
   require("telescope").load_extension("fzf")
   require("telescope").load_extension("media")
+
+  require("plugin.telescope.mapping").setup()
 end
 
 return M
