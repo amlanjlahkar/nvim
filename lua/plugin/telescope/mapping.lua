@@ -16,6 +16,12 @@ function M.setup()
     },
 
     {
+      "<leader>to", function()
+        tb.oldfiles(_, { layout_config = { width = 0.6 } })
+      end, opts("Telescope: Oldfiles"),
+    },
+
+    {
       "<leader>tb", function()
         tb.buffers()
       end, opts("Telescope: Loaded buffers"),

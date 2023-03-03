@@ -17,6 +17,7 @@ function M.config()
       preview = false,
       buffer_previewer_maker = require("plugin.telescope.function").buf_preview_maker,
       history = { path = vim.fn.stdpath("state") .. "/telescope_history.log" },
+      mappings = { i = { ["<C-u>"] = false } },
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -46,8 +47,11 @@ function M.config()
       },
     },
   })
-  require("telescope").load_extension("fzf")
-  require("telescope").load_extension("media")
+
+  local extensions = { "fzf", "media" }
+  for _, ext in pairs(extensions) do
+    require("telescope").load_extension(ext)
+  end
 
   require("plugin.telescope.mapping").setup()
 end

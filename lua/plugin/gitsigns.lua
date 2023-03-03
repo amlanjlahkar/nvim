@@ -39,10 +39,11 @@ function M.opts()
       { "<leader>gp", gs.preview_hunk, opts("Gitsigns: preview_hunk") },
       { "<leader>gr", gs.reset_hunk, opts("Gitsigns: reset hunk") },
       { "<leader>gs", gs.stage_hunk, opts("Gitsigns: stage hunk") },
+      { "<leader>gv", gs.select_hunk, opts("Gitsigns: stage hunk") },
     })
     key.xmap({
-      { "<leader>gr", gs.reset_hunk, opts("Gitsigns: reset hunk") },
-      { "<leader>gs", gs.stage_hunk, opts("Gitsigns: stage hunk") },
+      { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts("Gitsigns: reset hunk") },
+      { "<leader>gs", ":Gitsigns stage_hunk<CR>", opts("Gitsigns: stage hunk") },
     })
       -- stylua: ignore end
     end,

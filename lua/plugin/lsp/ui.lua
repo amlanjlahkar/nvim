@@ -17,7 +17,7 @@ function M:setup()
   require("lspconfig.ui.windows").default_options.border = self.border
 
   require("fidget").setup({
-    text = { spinner = "moon" },
+    text = { spinner = "moon", done = "󰄬" },
   })
 end
 

@@ -43,10 +43,7 @@ return {
 
   {
     "xiyaowong/nvim-transparent",
-    -- lazy = false,
-    cmd = "TransparentToggle",
     opts = {
-      enable = false,
       extra_groups = {
         "NormalFloat",
         "FloatBorder",

@@ -35,6 +35,13 @@ key.nmap({
 
   -- external {{{
   { "<leader><leader>v", cmd("tab Git"), opts("Open vcs interface") },
+  {
+    "<leader><leader>o",
+    function()
+      require("transparent").toggle_transparent()
+    end,
+    opts("Toggle transparency"),
+  },
   -- }}}
 
   -- misc {{{
