@@ -17,6 +17,7 @@ local M = {
     "typescript",
     "java",
     "python",
+    "zig",
   },
 }
 

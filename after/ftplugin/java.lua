@@ -5,11 +5,11 @@ vim.cmd([[
 
 local jdtls = require("jdtls")
 local home = os.getenv("HOME")
-local launcher_path = vim.fn.glob(home .. "/tools/lang/Java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
-local config_path = home .. "/tools/lang/Java/jdtls/config_linux/"
+local launcher_path = vim.fn.glob(home .. "/.local/share/lang/java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
+local config_path = home .. "/.local/share/lang/java/jdtls/config_linux/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/documents/projects/code/java/workspaces/" .. project_name
-local jol_path = home .. "/tools/lang/Java/jol-cli-0.9-full.jar"
+local jol_path = home .. "/.local/share/lang/java/jol-cli-0.9-full.jar"
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true

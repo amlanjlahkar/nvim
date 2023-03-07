@@ -6,6 +6,7 @@ local M = {
     "tsserver",
     "lua_ls",
     "pyright",
+    "zls",
   },
 }
 
