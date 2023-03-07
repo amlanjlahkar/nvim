@@ -1,6 +1,7 @@
 local M = {
   "ThePrimeagen/harpoon",
   keys = { "<leader>hm", "[;", "];" },
+  enabled = false,
 }
 
 function M.config()
