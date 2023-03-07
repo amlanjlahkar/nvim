@@ -119,7 +119,7 @@ function M:get_git_status()
   -- stylua: ignore
   return is_head_empty
       and string.format(
-        "(#%s) [+%s ~%s -%s]",
+        "(#%s)[+%s ~%s -%s]",
         signs.head,
         signs.added,
         signs.changed,
@@ -144,8 +144,9 @@ function M.lsp_progress()
   return ""
 end
 
-function M.get_attached_servers()
+function M.get_attached_sources()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local null_sources = require("null-ls.sources").get_available(vim.bo.filetype)
 
   local active, index = {}, nil
   for i = 1, #clients do
@@ -154,13 +155,16 @@ function M.get_attached_servers()
     end
     active[i] = clients[i].name
   end
+  for i = 1, #null_sources do
+    active[#clients+i] = null_sources[i].name
+  end
 
   if index ~= nil then
     active[#active], active[index] = active[index], active[#active]
     active[#active] = nil
   end
-  local servers = table.concat(active, ", ")
-  return #servers > 0 and string.format(" ls: { %s } ", servers) or ""
+  local attched = table.concat(active, ", ")
+  return #attched > 0 and string.format(" 󰴽 { %s } ", attched) or ""
 end
 
 function M.get_lsp_diagnostic()
@@ -212,6 +216,14 @@ function M.treesitter_status()
   return hl.active[buf] and "   " or ""
 end
 -- 2}}}
+
+-- Grapple {{{2
+function M.grapple_tags()
+  local avail, g = pcall(require, "grapple")
+  if not avail then return end
+  return g.exists() and " " .. g.key() .. " " or ""
+end
+-- 2}}}
 -- 1}}}
 
 -- Modes {{{1
@@ -228,12 +240,15 @@ function M.set_active(self)
     "%=",
     "%#StatusLine#",
     -- self.lsp_progress(),
+    "%#StatusLineInd#",
+    self:grapple_tags(),
+    "%#StatusLine#",
     self:get_filetype(),
-    self.get_attached_servers(),
+    self.get_attached_sources(),
     "%#StatusLineInd#",
     self.treesitter_status(),
     "%#StatusLine#",
-    self.get_fileformat(),
+    -- self.get_fileformat(),
     self.get_line_col(),
     "%#StatusLine#",
   })
