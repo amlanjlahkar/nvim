@@ -12,7 +12,7 @@ M.trunc_width = setmetatable({
   filepath = 100,
 }, {
   __index = function()
-    return 80
+    return 130
   end,
 })
 
@@ -20,6 +20,7 @@ M.trunc_width = setmetatable({
 ---@param is_statusglobal boolean | nil If true(i.e 'laststatus' is set to 3) then width is matched against
 --all the windows' width combined, else width of the current window
 function M.is_truncated(_, width, is_statusglobal)
+  width = width or M.trunc_width.default
   is_statusglobal = is_statusglobal or true
   local current_width = require("core.util").get_width({ combined = is_statusglobal })
   return current_width < width
@@ -82,9 +83,7 @@ end
 function M:get_filetype()
   local filetype = vim.bo.filetype
   local is_icons_available, icons = pcall(require, "nvim-web-devicons")
-  if self:is_truncated(self.trunc_width.filetype) then
-    return ""
-  elseif not is_icons_available then
+  if not is_icons_available then
     return filetype == "" and " No FT " or string.format(" ft: %s ", filetype):lower()
   end
   local ft_icon = icons.get_icon_by_filetype(filetype)
@@ -146,7 +145,7 @@ end
 
 function M.get_attached_sources()
   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-  local null_sources = require("null-ls.sources").get_available(vim.bo.filetype)
+  local null_sources = package.loaded["null-ls"] and require("null-ls.sources").get_available(vim.bo.filetype) or {}
 
   local active, index = {}, nil
   for i = 1, #clients do
@@ -156,7 +155,7 @@ function M.get_attached_sources()
     active[i] = clients[i].name
   end
   for i = 1, #null_sources do
-    active[#clients+i] = null_sources[i].name
+    active[#clients + i] = null_sources[i].name
   end
 
   if index ~= nil then
@@ -164,7 +163,7 @@ function M.get_attached_sources()
     active[#active] = nil
   end
   local attched = table.concat(active, ", ")
-  return #attched > 0 and string.format(" 󰴽 { %s } ", attched) or ""
+  return (#attched == 0 or M:is_truncated()) and "" or string.format(" 󰴽 { %s } ", attched)
 end
 
 function M.get_lsp_diagnostic()
@@ -205,7 +204,7 @@ function M.get_lsp_diagnostic()
     info = " %#StatusLineDiagnosticInfo#" .. icons["info"] .. count["info"]
   end
 
-  return errors .. warnings .. hints .. info .. "%#StatusLineNC#"
+  return M:is_truncated(M.trunc_width.filepath) and "" or errors .. warnings .. hints .. info .. "%#StatusLineNC#"
 end
 -- 2}}}
 
