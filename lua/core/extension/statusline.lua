@@ -219,9 +219,14 @@ end
 
 -- Grapple {{{2
 function M.grapple_tags()
-  local avail, g = pcall(require, "grapple")
-  if not avail then return end
-  return g.exists() and " " .. g.key() .. " " or ""
+  local cwd = string.match(vim.loop.cwd(), "/([%w]+)$")
+  local grapple_data = vim.fn.stdpath("data") .. "/grapple"
+  for file in io.popen(string.format("ls -pa %s | grep -v /", grapple_data)):lines() do
+    if string.match(file, cwd) then
+      return require("grapple").exists() and " " .. require("grapple").key() .. " " or ""
+    end
+  end
+  return ""
 end
 -- 2}}}
 -- 1}}}

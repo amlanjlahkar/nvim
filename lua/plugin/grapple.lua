@@ -1,5 +1,6 @@
 local M = {
   "cbochs/grapple.nvim",
+  keys = "<leader>mm",
 }
 
 function M.config()

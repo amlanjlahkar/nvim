@@ -1,6 +1,7 @@
+-- alias nv="nvim +lua require('oil').open()"
 local M = {
   "stevearc/oil.nvim",
-  lazy = false,
+  keys = "-",
 }
 
 function M.config()

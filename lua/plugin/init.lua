@@ -9,6 +9,16 @@ return {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "CursorMoved",
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+  },
+
+  {
     "tummetott/reticle.nvim",
     event = "VeryLazy",
     opts = {
@@ -24,7 +34,7 @@ return {
 
   {
     "kylechui/nvim-surround",
-    lazy = false,
+    keys = { "ys", "ds", { "S", mode = "x" } },
     config = true,
   },
 

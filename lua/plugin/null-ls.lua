@@ -1,11 +1,6 @@
-local ft = { "sh", "bash", "json", "yaml", "typescriptreact", "javascriptreact" }
-for _, f in pairs(require("plugin.lsp").ft) do
-  table.insert(ft, f)
-end
-
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
-  ft = ft,
+  event = "LspAttach",
 }
 
 function M.config()

@@ -5,20 +5,7 @@ local M = {
     "j-hui/fidget.nvim",
     "folke/neodev.nvim",
   },
-  ft = {
-    "c",
-    "cpp",
-    "objc",
-    "objcpp",
-    "lua",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "java",
-    "python",
-    "zig",
-  },
+  cmd = "LspStart",
 }
 
 function M.config()
