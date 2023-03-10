@@ -1,6 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.notify("Installing lazy, please wait...", vim.log.levels.INFO)
+  vim.notify("Installing lazy and corresponding plugins, please wait...", vim.log.levels.INFO)
   vim.fn.system({
     "git",
     "clone",
@@ -41,7 +41,7 @@ require("lazy").setup("plugin", {
       },
     },
     wrap = false,
-    size = { width = 0.65, height = 0.9 },
+    size = { width = 0.65, height = 0.85 },
     border = "none",
     throttle = 20,
   },

@@ -34,7 +34,7 @@ return {
 
   {
     "kylechui/nvim-surround",
-    keys = { "ys", "ds", { "S", mode = "x" } },
+    keys = { "ys", "ds", "cs", { "S", mode = "x" } },
     config = true,
   },
 

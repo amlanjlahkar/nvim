@@ -218,7 +218,7 @@ end
 
 -- Grapple {{{2
 function M.grapple_tags()
-  local cwd = string.match(vim.loop.cwd(), "/([%w]+)$")
+  local cwd = string.match(vim.loop.cwd(), "/([%w_%-]+)$")
   local grapple_data = vim.fn.stdpath("data") .. "/grapple"
   for file in io.popen(string.format("ls -pa %s | grep -v /", grapple_data)):lines() do
     if string.match(file, cwd) then
@@ -273,23 +273,13 @@ function M.setup()
       return self["set_" .. mode](self)
     end,
   })
-  local au = vim.api.nvim_create_autocmd
   local augroup = api.nvim_create_augroup("_ext", { clear = true })
-  au({ "WinEnter", "BufEnter" }, {
-    group = augroup,
-    pattern = "*",
-    command = "setlocal statusline=%!v:lua.Statusline('active')",
-  })
-  au({ "WinLeave", "BufLeave" }, {
-    group = augroup,
-    pattern = "*",
-    command = "setlocal statusline=%!v:lua.Statusline('inactive')",
-  })
-  au("FileType", {
+  api.nvim_create_autocmd("FileType", {
     group = augroup,
     pattern = "netrw",
     command = "setlocal statusline=%!v:lua.Statusline('explorer')",
   })
+  vim.opt.statusline = "%!v:lua.Statusline('active')"
 end
 
 return M.setup()
