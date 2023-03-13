@@ -5,20 +5,22 @@ local M = {}
 
 function M.buf_preview_maker(filepath, bufnr, opts)
   filepath = vim.fn.expand(filepath)
-  require("plenary.job"):new({
-    command = "file",
-    args = { "--mime-type", "-b", filepath },
-    on_exit = function(j)
-      local mime_type = vim.split(j:result()[1], "/")[1]
-      if mime_type == "text" then
-        require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
-      else
-        vim.schedule(function()
-          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
-        end)
-      end
-    end
-  }):sync()
+  require("plenary.job")
+    :new({
+      command = "file",
+      args = { "--mime-type", "-b", filepath },
+      on_exit = function(j)
+        local mime_type = vim.split(j:result()[1], "/")[1]
+        if mime_type == "text" then
+          require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
+        else
+          vim.schedule(function()
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
+          end)
+        end
+      end,
+    })
+    :sync()
 end
 
 function M.use_theme(picker_opts)

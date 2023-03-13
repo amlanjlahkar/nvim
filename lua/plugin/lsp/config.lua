@@ -27,7 +27,8 @@ function M.keymaps(bufnr)
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- using snippets from friendly-snippets instead
+M.capabilities.textDocument.completion.completionItem.snippetSupport = false
 local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
 if is_cmp_available then
   M.capabilities = cmp_nvim.default_capabilities(M.capabilities)

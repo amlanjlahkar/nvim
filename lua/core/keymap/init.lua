@@ -82,6 +82,6 @@ key.nmap({
   { "<leader>v", 'mc"+p`c==', opts("Paste from system clipboard") },
 })
 key.xmap({
-  { "<leader>c", '"+y', opts("Yank to system clipboard") },
+  { "<leader>c", 'mc"+y`c', opts("Yank to system clipboard") },
   { "<leader>v", '"+p==', opts("Paste from system clipboard") },
 })

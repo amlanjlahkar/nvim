@@ -4,6 +4,7 @@ local M = {
     local ts_update = require("nvim-treesitter.install").update({ with_sync = false })
     ts_update()
   end,
+  dependencies = { "windwp/nvim-ts-autotag", "nvim-treesitter/nvim-treesitter-textobjects" },
   event = "BufReadPost",
 }
 

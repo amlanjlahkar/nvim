@@ -17,15 +17,29 @@ function M.setup()
 
     {
       "<leader>to", function()
-        tb.oldfiles(_, { layout_config = { width = 0.6 } })
+        tb.oldfiles(_, { layout_config = { width = 0.6 }, cwd_only = true })
       end, opts("Telescope: Oldfiles"),
     },
 
-    {
-      "<leader>tb", function()
-        tb.buffers()
-      end, opts("Telescope: Loaded buffers"),
-    },
+{
+  "<leader>tb", function()
+    local listed = #vim.fn.getbufinfo({ buflisted = true })
+    if listed == 1 then
+      vim.notify("No other listed buffers found", vim.log.levels.INFO)
+      return
+    end
+    tb.buffers(_, {
+      ignore_current_buffer = true,
+      attach_mappings = function(_, map)
+        map("i", "<C-d>", function()
+          local buf = require("telescope.actions.state").get_selected_entry()
+          vim.cmd.bdelete(buf.bufnr)
+        end)
+        return true
+      end
+    })
+  end, opts("Telescope: Listed buffers"),
+},
 
     {
       "<leader>tc",
