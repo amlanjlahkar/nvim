@@ -79,6 +79,7 @@ M.custom = {
   { "NonText",                    { fg = FgShadeDarker } },
   { "MatchParen",                 { bg = none, fg = "#e15774", bold = true } },
   { "FidgetTask",                 { fg = Black } },
+  { "MiniIndentScopeSymbol",      { fg = RedShadeDark } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
 }
 

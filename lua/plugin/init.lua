@@ -52,6 +52,20 @@ return {
   },
 
   {
+    "echasnovski/mini.indentscope",
+    version = "*",
+    event = "CursorMoved",
+    config = function()
+      require("mini.indentscope").setup({ delay = 50, symbol = "│" })
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("_plug", { clear = true }),
+        pattern = { "help", "lazy", "telescopeprompt", "trouble", "oil", "fugitive" },
+        command = "lua vim.b.miniindentscope_disable = true",
+      })
+    end,
+  },
+
+  {
     "xiyaowong/nvim-transparent",
     opts = {
       extra_groups = {
