@@ -38,7 +38,7 @@ key.nmap({
   {
     "<leader><leader>o",
     function()
-      require("transparent").toggle_transparent()
+      require("transparent").toggle()
     end,
     opts("Toggle transparency"),
   },
@@ -47,7 +47,7 @@ key.nmap({
   -- misc {{{
   { "<F10>", cmd("LspStart") },
   { "<F11>", cmd("setlocal spell!") },
-  { "<F2>", cmd("!$BROWSER %") },
+  { "<F12>", cmd("!$BROWSER %") },
   { "<leader><leader>s", cmd("silent :write | source %"), opts("Save and source lua file") },
   {
     "<leader>d",

@@ -1,7 +1,7 @@
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
   event = "LspAttach",
-  ft = { "sh", "bash" }
+  ft = { "sh", "bash", "yaml", "yml", "json" },
 }
 
 function M.config()

@@ -63,10 +63,11 @@ o.fillchars:append({
   verthoriz = "╋",
 })
 
+o.thesaurus:append(os.getenv("HOME") .. "/.local/share/thesaurus.txt")
 o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
 o.grepprg = "rg --hidden --vimgrep --smart-case --"
 o.clipboard = ""
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
-o.shell="/usr/local/bin/bash"
+
