@@ -80,16 +80,17 @@ function M.config()
         winhighlight = "Normal:NormalFloatAlt,CmpItemAbbr:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
         zindex = 80,
       },
-      documentation = {
+      --[[ documentation = {
         border = "single",
         winhighlight = "Normal:NormalFloatAlt,CmpItemAbbr:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
         max_width = 80,
         max_height = 30,
         zindex = 50,
-      },
+      }, ]]
+      documentation = false,
     },
     experimental = {
-      ghost_text = false,
+      ghost_text = true,
     },
     get_bufnrs = function()
       local bufs = {}

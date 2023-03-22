@@ -21,6 +21,7 @@ function M.opts()
     select = {
       builtin = { border = "single" },
       telescope = { layout_strategy = "vertical" },
+      -- telescope = require("plugin.telescope.function").use_theme(),
       get_config = function(opts)
         -- JdtWipeDataAndRestart
         if string.match(opts.prompt, "wipe the data folder") then

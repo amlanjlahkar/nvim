@@ -27,9 +27,9 @@ function M.use_theme(picker_opts)
   local theme = "dropdown"
   local opts = {
     layout_config = {
-      anchor = "CENTER",
-      width = 0.4,
-      height = 0.8,
+      anchor = "N",
+      width = 0.8,
+      height = 0.6,
     },
   }
   if picker_opts then
@@ -85,24 +85,26 @@ function M.get_dwots()
 end
 
 function M.set_bg()
-  local path = fn.finddir("~/media/pictures/wallpapers/")
-  local opts = {
-    prompt_title = "Choose Wallpaper",
-    cwd = path,
-    attach_mappings = function(_, map)
-      map("i", "<CR>", function()
-        local e = require("telescope.actions.state").get_selected_entry()
-        vim.fn.system("xwallpaper --zoom " .. path .. "/" .. e.value)
-        -- vim.fn.system(string.format('wal -q -i %s/%s && xwallpaper --zoom "$(< $HOME/.cache/wal/wal)"', path, e.value))
-      end)
-      return true
-    end,
-  }
-  if path == "" then
-    vim.notify("Wallpaper directory not found!", vim.log.levels.ERROR)
-  else
-    require("telescope").extensions.media.media(opts)
-  end
+  local path = fn.readdir(fn.finddir("~/media/pictures"))
+  vim.ui.select(path, {
+    prompt = "Select directory:",
+  }, function(choice)
+    if choice then
+      local chosen_dir = fn.finddir("~/media/pictures/" .. choice)
+      local opts = {
+        prompt_title = "Choose Wallpaper",
+        cwd = chosen_dir,
+        attach_mappings = function(_, map)
+          map("i", "<CR>", function()
+            local e = require("telescope.actions.state").get_selected_entry()
+            vim.fn.system("xwallpaper --zoom " .. chosen_dir .. "/" .. e.value)
+          end)
+          return true
+        end,
+      }
+      require("telescope").extensions.media.media(opts)
+    end
+  end)
 end
 
 function M.reload_module()
