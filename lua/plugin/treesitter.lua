@@ -26,7 +26,7 @@ function M.config()
       "rasi",
       "markdown",
       "help",
-      "zig",
+      "rust",
     },
     ignore_install = {},
     highlight = {

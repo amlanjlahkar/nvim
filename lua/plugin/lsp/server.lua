@@ -6,7 +6,7 @@ local M = {
     "tsserver",
     "lua_ls",
     "pyright",
-    "zls",
+    "rust_analyzer",
   },
 }
 

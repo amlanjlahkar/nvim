@@ -18,6 +18,7 @@ function M.config()
         extra_args = { "-i", "2", "-ci", "-bn" },
         extra_filetypes = { "bash" },
       }),
+      formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
       diagnostics.shellcheck.with({
         extra_filetypes = { "sh" },
       }),
