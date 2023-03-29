@@ -81,6 +81,20 @@ M.custom = {
   { "FidgetTask",                 { fg = Black } },
   { "MiniIndentScopeSymbol",      { fg = RedShadeDark } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
+  { "@lsp.type.enum",             { link = "@type" } },
+  { "@lsp.type.enumMember",       { link = "@constant" } },
+  { "@lsp.type.function",         { link = "@function" } },
+  { "@lsp.type.method",           { link = "@method" } },
+  { "@lsp.type.keyword",          { link = "@keyword" } },
+  { "@lsp.type.interface",        { link = "@interface" } },
+  { "@lsp.type.namespace",        { link = "@namespace" } },
+  { "@lsp.type.parameter",        { link = "@parameter" } },
+  { "@lsp.type.property",         { link = "@property" } },
+  { "@lsp.typemode.function.defaultLibrary",  { link = "@function.builtin" } },
+  { "@lsp.typemode.variable.defaultLibrary",  { link = "@variable.builtin" } },
+  { "@lsp.typemode.operator.injected",  { link = "@operator" } },
+  { "@lsp.typemode.string.injected",    { link = "@string" } },
+  { "@lsp.typemode.variable.injected",  { link = "@variable" } },
 }
 
 return M.custom
