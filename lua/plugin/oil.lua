@@ -7,7 +7,7 @@ function M.config()
   require("oil").setup({
     columns = { "permissions", "size", "mtime" },
     keymaps = {
-      ["l"] = "actions.select",
+      -- ["l"] = "actions.select",
       ["gh"] = "actions.toggle_hidden",
     },
     win_options = {

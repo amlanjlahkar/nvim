@@ -9,16 +9,6 @@ return {
   },
 
   {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "CursorMoved",
-  },
-
-  {
-    "windwp/nvim-ts-autotag",
-    event = "InsertEnter",
-  },
-
-  {
     "tummetott/reticle.nvim",
     event = "VeryLazy",
     opts = {
@@ -32,14 +22,14 @@ return {
     config = true,
   },
 
-  {
-    "kylechui/nvim-surround",
-    keys = { "ys", "ds", "cs", { "S", mode = "x" } },
-    config = true,
-  },
+  -- {
+  --   "kylechui/nvim-surround",
+  --   keys = { "ys", "ds", "cs", { "S", mode = "x" } },
+  --   config = true,
+  -- },
 
   {
-    "folke/trouble.nvim",
+    'folke/trouble.nvim',
     module = false,
     cmd = { "TroubleToggle", "Trouble" },
     opts = {
@@ -59,10 +49,24 @@ return {
       require("mini.indentscope").setup({ delay = 50, symbol = "│" })
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("_plug", { clear = true }),
-        pattern = { "help", "lazy", "telescopeprompt", "trouble", "oil", "fugitive" },
+        pattern = { "help", "lazy", "telescopeprompt", "trouble", "^oil*", "fugitive", "checkhealth", "" },
         command = "lua vim.b.miniindentscope_disable = true",
       })
     end,
+  },
+
+  {
+    'echasnovski/mini.surround',
+    version = false,
+    keys = "s",
+    -- keys = { "sa", "sd", "sr", "sf", "sF", "sh" },
+    config = function()
+      require("mini.surround").setup({
+        silent = true,
+        highlight_duration = 100,
+        search_method = "cover_or_nearest",
+      })
+    end
   },
 
   {
@@ -97,6 +101,14 @@ return {
     "rockerBOO/boo-colorscheme-nvim",
     config = function()
       vim.g.boo_colorscheme_theme = "crimson_moonlight"
+    end,
+  },
+
+  {
+    "norcalli/nvim-colorizer.lua",
+    lazy = true,
+    config = function()
+      require("colorizer").setup()
     end,
   },
 }

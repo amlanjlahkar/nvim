@@ -17,7 +17,6 @@ return {
           resolveSupport = {
             properties = { "documentation", "detail", "additionalTextEdits" },
           },
-          snippetSupport = true,
         },
       },
     },

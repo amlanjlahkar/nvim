@@ -8,7 +8,7 @@ function M.opts()
   local cmd, opts, expr = key.cmd, key.new_opts, key.expr
 
   return {
-      on_attach = function(bufnr)
+    on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
     -- stylua: ignore start
@@ -40,6 +40,7 @@ function M.opts()
       { "<leader>gr", gs.reset_hunk, opts("Gitsigns: reset hunk") },
       { "<leader>gs", gs.stage_hunk, opts("Gitsigns: stage hunk") },
       { "<leader>gv", gs.select_hunk, opts("Gitsigns: stage hunk") },
+      { "<leader>gd", gs.diffthis, opts("Gitsigns: diff file with current index") },
     })
     key.xmap({
       { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts("Gitsigns: reset hunk") },

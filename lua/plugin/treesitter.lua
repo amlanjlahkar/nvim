@@ -1,8 +1,9 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
+  -- enabled = false,
+  version = false,
   build = function()
-    local ts_update = require("nvim-treesitter.install").update({ with_sync = false })
-    ts_update()
+    require("nvim-treesitter.install").update({ with_sync = true })
   end,
   dependencies = { "windwp/nvim-ts-autotag", "nvim-treesitter/nvim-treesitter-textobjects" },
   event = "BufReadPost",
@@ -60,29 +61,29 @@ function M.config()
         enable = true,
         set_jumps = true,
         goto_next_start = {
-          ["]m"] = "@function.outer",
-          ["]]"] = "@class.outer",
+          ["]f"] = "@function.outer",
+          ["]c"] = "@class.outer",
         },
         goto_next_end = {
-          ["]M"] = "@function.outer",
-          ["]["] = "@class.outer",
+          ["]F"] = "@function.outer",
+          ["]C"] = "@class.outer",
         },
         goto_previous_start = {
-          ["[m"] = "@function.outer",
-          ["[["] = "@class.outer",
+          ["[f"] = "@function.outer",
+          ["[c"] = "@class.outer",
         },
         goto_previous_end = {
-          ["[M"] = "@function.outer",
-          ["[]"] = "@class.outer",
+          ["[F"] = "@function.outer",
+          ["[C"] = "@class.outer",
         },
       },
       swap = {
-        enable = true,
+        enable = false,
         swap_next = {
-          ["<leader>a"] = "@parameter.inner",
+          ["]]"] = "@parameter.inner",
         },
         swap_previous = {
-          ["<leader>A"] = "@parameter.inner",
+          ["]["] = "@parameter.inner",
         },
       },
       lsp_interop = {
