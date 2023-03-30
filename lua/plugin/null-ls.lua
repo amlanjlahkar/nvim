@@ -9,6 +9,7 @@ function M.config()
   local formatting = null_ls.builtins.formatting
   local diagnostics = null_ls.builtins.diagnostics
 
+  require("plugin.mason").query()
   null_ls.setup({
     sources = {
       formatting.stylua,

@@ -22,12 +22,6 @@ return {
     config = true,
   },
 
-  -- {
-  --   "kylechui/nvim-surround",
-  --   keys = { "ys", "ds", "cs", { "S", mode = "x" } },
-  --   config = true,
-  -- },
-
   {
     'folke/trouble.nvim',
     module = false,
@@ -43,7 +37,7 @@ return {
 
   {
     "echasnovski/mini.indentscope",
-    version = "*",
+    version = false,
     event = "CursorMoved",
     config = function()
       require("mini.indentscope").setup({ delay = 50, symbol = "│" })
@@ -59,13 +53,21 @@ return {
     'echasnovski/mini.surround',
     version = false,
     keys = "s",
-    -- keys = { "sa", "sd", "sr", "sf", "sF", "sh" },
     config = function()
       require("mini.surround").setup({
         silent = true,
         highlight_duration = 100,
         search_method = "cover_or_nearest",
       })
+    end
+  },
+
+  {
+    "echasnovski/mini.pairs",
+    version = false,
+    event = "InsertEnter",
+    config = function()
+      require("mini.pairs").setup()
     end
   },
 

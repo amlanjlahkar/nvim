@@ -1,9 +1,7 @@
-local M = {
-  "williamboman/mason.nvim",
-}
+local M = { "williamboman/mason.nvim" }
 
 M.pkgs = {
-  "black",
+  "blue",
   "stylua",
   "shfmt",
   "shellcheck",
@@ -12,6 +10,7 @@ M.pkgs = {
 }
 
 function M.query(pkg_list)
+  pkg_list = pkg_list or M.pkgs
   for _, p in pairs(pkg_list) do
     local pkg = require("mason-registry").get_package(p)
     if not pkg:is_installed() then
@@ -20,8 +19,8 @@ function M.query(pkg_list)
   end
 end
 
-function M:config()
-  require("mason").setup({
+function M.opts()
+  return {
     ui = {
       border = "single",
       icons = {
@@ -30,8 +29,7 @@ function M:config()
         package_uninstalled = " ",
       },
     },
-  })
-  self.query(self.pkgs)
+  }
 end
 
 return M

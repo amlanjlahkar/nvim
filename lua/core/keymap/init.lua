@@ -76,9 +76,13 @@ key.vmap({
   { "K", ":m '<-2<CR>gv=gv" },
 })
 
+-- insert mode specific
+key.imap({ "<C-l>", "<Right>" })
+
 -- manual use of clipboard register
 key.nmap({
-  { "<leader>c", '"+y$', opts("Yank(eol) to system clipboard") },
+  { "<leader>c", '"+yy', opts("Yank line to system clipboard") },
+  { "<leader>C", '"+y$', opts("Yank(eol) to system clipboard") },
   { "<leader>v", 'mc"+p`c==', opts("Paste from system clipboard") },
 })
 key.xmap({
