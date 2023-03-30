@@ -3,15 +3,17 @@ local M = {
   ---Experimental
   init = function()
     local cwd = string.match(vim.loop.cwd(), "/([%w_%-]+)$")
-    local grapple_data = vim.fn.stdpath("data") .. "/grapple"
-    local file = io.popen(string.format("ls -pa %s | grep -v /", grapple_data), "r")
-    if file then
-      for f in file:lines() do
-        if string.match(f, cwd) then
-          require("lazy").load({ plugins = { "grapple.nvim" } })
+    local grapple_data = vim.fn.finddir(vim.fn.stdpath("data") .. "/grapple")
+    if grapple_data then
+      local file = io.popen(string.format("ls -pa %s | grep -v /", grapple_data), "r")
+      if file then
+        for f in file:lines() do
+          if string.match(f, cwd) then
+            require("lazy").load({ plugins = { "grapple.nvim" } })
+          end
         end
+        file:close()
       end
-      file:close()
     end
   end,
   keys = "<leader>mm",
