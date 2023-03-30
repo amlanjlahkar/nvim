@@ -2,13 +2,11 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     version = false,
-    build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end,
+    lazy = false,
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-    event = "BufReadPost",
 
     config = function()
+      require("nvim-treesitter.install").update({ with_sync = true })
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",
@@ -105,6 +103,6 @@ return {
   {
     "windwp/nvim-ts-autotag",
     ft = { "html", "markdown", "javascriptreact" },
-    config = true
+    config = true,
   },
 }
