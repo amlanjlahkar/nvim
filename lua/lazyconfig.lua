@@ -42,7 +42,7 @@ require("lazy").setup("plugin", {
     },
     wrap = false,
     size = { width = 0.65, height = 0.85 },
-    border = "single",
+    border = "none",
     throttle = 20,
   },
   install = { colorscheme = { require("color").custom, require("color").default } },

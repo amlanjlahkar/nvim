@@ -5,7 +5,7 @@ local M = {
     "j-hui/fidget.nvim",
     "folke/neodev.nvim",
   },
-  cmd = "LspStart",
+  lazy = false,
 }
 
 function M.config()
