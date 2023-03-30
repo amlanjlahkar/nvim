@@ -218,9 +218,10 @@ end
 
 -- Grapple {{{2
 function M.grapple_tags()
-  local is_avail, g = pcall(require, "grapple")
-  if not is_avail then return end
-  return g.exists() and " " .. g.key() .. " " or ""
+  if package.loaded["grapple"] then
+    return require("grapple").exists() and " " .. require("grapple").key() .. " " or ""
+  end
+  return ""
 end
 -- 2}}}
 -- 1}}}

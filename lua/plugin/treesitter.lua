@@ -5,7 +5,7 @@ return {
     build = function()
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
-    dependencies = { "windwp/nvim-ts-autotag", "nvim-treesitter/nvim-treesitter-textobjects" },
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     event = "BufReadPost",
 
     config = function()
@@ -96,12 +96,15 @@ return {
         indent = {
           enable = true,
         },
-        autotag = {
-          enable = true,
-        },
       })
       local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
       parser_config.bash.filetype_to_parsename = "sh"
-    end
+    end,
+  },
+
+  {
+    "windwp/nvim-ts-autotag",
+    ft = { "html", "markdown", "javascriptreact" },
+    config = true
   },
 }
