@@ -10,6 +10,7 @@ local M = {
         for f in file:lines() do
           if string.match(f, cwd) then
             require("lazy").load({ plugins = { "grapple.nvim" } })
+            break
           end
         end
         file:close()

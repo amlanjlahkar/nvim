@@ -163,7 +163,7 @@ function M.get_attached_sources()
     active[#active] = nil
   end
   local attched = table.concat(active, ", ")
-  return (#attched == 0 or M:is_truncated()) and "" or string.format(" 󰴽 { %s } ", attched)
+  return (#attched == 0 or M:is_truncated()) and "" or string.format(" 󱄀 [ %s ] ", attched)
 end
 
 function M.get_lsp_diagnostic()

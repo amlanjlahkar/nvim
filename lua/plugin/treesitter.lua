@@ -45,6 +45,7 @@ return {
             enable = true,
             lookahead = true,
             keymaps = {
+              ["as"] = "@scope",
               ["aa"] = "@parameter.outer",
               ["ia"] = "@parameter.inner",
               ["af"] = "@function.outer",

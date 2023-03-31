@@ -10,7 +10,7 @@ local default_plugins = {
   "vimballPlugin",
   "2htmlPlugin",
   "matchit",
-  -- "matchparen",
+  "matchparen",
   "spec",
   "logiPat",
   "rrhelper",

@@ -23,7 +23,7 @@ return {
   },
 
   {
-    'folke/trouble.nvim',
+    "folke/trouble.nvim",
     module = false,
     cmd = { "TroubleToggle", "Trouble" },
     opts = {
@@ -37,8 +37,9 @@ return {
 
   {
     "echasnovski/mini.indentscope",
+    enabled = false,
     version = false,
-    event = "CursorMoved",
+    event = "VeryLazy",
     config = function()
       require("mini.indentscope").setup({ delay = 50, symbol = "│" })
       vim.api.nvim_create_autocmd("FileType", {
@@ -50,7 +51,7 @@ return {
   },
 
   {
-    'echasnovski/mini.surround',
+    "echasnovski/mini.surround",
     version = false,
     keys = "s",
     config = function()
@@ -59,7 +60,7 @@ return {
         highlight_duration = 100,
         search_method = "cover_or_nearest",
       })
-    end
+    end,
   },
 
   {
@@ -68,7 +69,7 @@ return {
     event = "InsertEnter",
     config = function()
       require("mini.pairs").setup()
-    end
+    end,
   },
 
   {

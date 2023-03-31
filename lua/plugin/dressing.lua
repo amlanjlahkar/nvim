@@ -1,6 +1,6 @@
 local M = {
   "stevearc/dressing.nvim",
-  event = "VeryLazy",
+  event = "LspAttach",
 }
 
 function M.opts()
