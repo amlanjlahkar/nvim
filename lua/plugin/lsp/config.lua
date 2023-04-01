@@ -10,7 +10,7 @@ function M.keymaps(bufnr)
     { "<leader>la",   lsp.code_action,                                    opts(bufnr, "LSP: List available code actions") },
     { "<leader>lh",   lsp.signature_help,                                 opts(bufnr, "LSP: Show signature info for symbol under cursor") },
     { "<leader>lt",   lsp.type_definition,                                opts(bufnr, "LSP: Goto type definition for symbol under cursor") },
-    { "<leader>ll",   vim.diagnostic.open_float,                          opts(bufnr, "LSP: Show line diagnostic") },
+    { "<leader>lf",   vim.diagnostic.open_float,                          opts(bufnr, "LSP: Show line diagnostic") },
     { "]d",           vim.diagnostic.goto_next,                           opts(bufnr, "LSP: Goto next diagnostic occurrence") },
     { "[d",           vim.diagnostic.goto_prev,                           opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
     { "gd",           cmd("TroubleToggle lsp_definitions"),               opts(bufnr, "LSP: Goto definition") },

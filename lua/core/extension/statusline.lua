@@ -77,17 +77,21 @@ end
 
 function M.get_filename()
   local filename = fn.expand("%:t")
-  return filename == "" and "" or filename .. " "
+  return filename and filename or ""
 end
 
 function M:get_filetype()
   local filetype = vim.bo.filetype
   local is_icons_available, icons = pcall(require, "nvim-web-devicons")
   if not is_icons_available then
-    return filetype == "" and " No FT " or string.format(" ft: %s ", filetype):lower()
+    return filetype == "" and " ft: none " or string.format(" ft: %s ", filetype):lower()
   end
   local ft_icon = icons.get_icon_by_filetype(filetype)
-  return filetype == "" and " No FT " or string.format(" %s %s ", ft_icon, filetype):lower()
+  return filetype == "" and " ft: none " or string.format(" %s %s ", ft_icon, filetype):lower()
+end
+
+function M.is_readonly()
+  return vim.bo.readonly and " [RO] " or ""
 end
 
 function M.get_filesize()
@@ -108,6 +112,7 @@ end
 -- GitInfo {{{2
 function M:get_git_status()
   -- use fallback because it doesn't set this variable on the initial `BufEnter`
+  ---@diagnostic disable:undefined-field
   local signs = vim.b.gitsigns_status_dict or { head = "", added = 0, changed = 0, removed = 0 }
   local is_head_empty = signs.head ~= ""
 
@@ -118,7 +123,7 @@ function M:get_git_status()
   -- stylua: ignore
   return is_head_empty
       and string.format(
-        "(#%s)[+%s ~%s -%s]",
+        " (#%s)[+%s ~%s -%s] ",
         signs.head,
         signs.added,
         signs.changed,
@@ -234,6 +239,7 @@ function M.set_active(self)
     "%#StatusLineImp#",
     self:get_filepath(),
     self.get_filename(),
+    self.is_readonly(),
     "%#StatusLine#",
     self:get_git_status(),
     self.get_lsp_diagnostic(),
