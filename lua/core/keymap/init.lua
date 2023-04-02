@@ -79,7 +79,6 @@ key.vmap({
 -- insert mode specific
 key.imap({ "<C-l>", "<Right>" })
 
--- manual use of clipboard register
 key.nmap({
   { "<leader>c", '"+yy', opts("Yank line to system clipboard") },
   { "<leader>C", '"+y$', opts("Yank(eol) to system clipboard") },

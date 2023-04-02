@@ -120,7 +120,7 @@ function M.reload_module()
     cwd = path,
 
     attach_mappings = function(_, map)
-      map("i", "<C-r>", function()
+      map("i", "<CR>", function()
         local e = require("telescope.actions.state").get_selected_entry()
         local mod = parse_entry(e.value)
         require("plenary.reload").reload_module(mod)

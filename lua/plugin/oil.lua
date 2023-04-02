@@ -7,7 +7,6 @@ function M.config()
   require("oil").setup({
     columns = { "permissions", "size", "mtime" },
     keymaps = {
-      -- ["l"] = "actions.select",
       ["gh"] = "actions.toggle_hidden",
     },
     win_options = {
@@ -16,7 +15,17 @@ function M.config()
     },
     view_options = {
       show_hidden = true,
+      is_always_hidden = function (name, _)
+        local pattern = { ".git", "LICENSE" }
+        return vim.tbl_contains(pattern, name) and true or false
+      end
     },
+    preview = {
+      border = "single",
+      win_options = {
+        win_blend = 10,
+      }
+    }
   })
 
   vim.keymap.set("n", "-", require("oil").open, { desc = "Oil: Open parent directory" })

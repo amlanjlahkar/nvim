@@ -66,7 +66,7 @@ function M.config()
         vim_item.kind = string.format("%s", vim_item.kind)
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
-          nvim_lua = "[Lua]",
+          nvim_lua = "[Neo]",
           luasnip = "[LuaSnip]",
           buffer = "[Buffer]",
           path = "[Path]",
@@ -80,17 +80,16 @@ function M.config()
         winhighlight = "Normal:NormalFloatAlt,CmpItemAbbr:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
         zindex = 80,
       },
-      --[[ documentation = {
+      documentation = {
         border = "single",
         winhighlight = "Normal:NormalFloatAlt,CmpItemAbbr:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
         max_width = 80,
         max_height = 30,
         zindex = 50,
-      }, ]]
-      documentation = false,
+      },
     },
     experimental = {
-      ghost_text = true,
+      ghost_text = false,
     },
     get_bufnrs = function()
       local bufs = {}
