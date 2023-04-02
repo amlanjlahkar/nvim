@@ -101,6 +101,16 @@ return {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
+    config = function()
+      require("treesitter-context").setup({
+        max_lines = 3,
+      })
+    end,
+  },
+
+  {
     "windwp/nvim-ts-autotag",
     ft = { "html", "markdown", "javascriptreact" },
     config = true,

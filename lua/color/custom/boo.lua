@@ -80,6 +80,7 @@ M.custom = {
   { "MatchParen",                 { bg = none, fg = "#e15774", bold = true } },
   { "FidgetTask",                 { fg = Black } },
   { "MiniIndentScopeSymbol",      { fg = RedShadeDark } },
+  { "TreesitterContext",          { bg = BlackShadeLight, italic = true } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
   { "@lsp.type.enum",             { link = "@type" } },
   { "@lsp.type.enumMember",       { link = "@constant" } },
