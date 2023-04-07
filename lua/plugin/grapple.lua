@@ -2,7 +2,7 @@ local M = {
   "cbochs/grapple.nvim",
   ---Experimental
   init = function()
-    local cwd = string.match(vim.loop.cwd(), "/([%w_%-]+)$")
+    local cwd = string.match(vim.loop.cwd(), "/([.%w_%-]+)$")
     local grapple_data = vim.fn.finddir(vim.fn.stdpath("data") .. "/grapple")
     if grapple_data then
       local file = io.popen(string.format("ls -pa %s | grep -v /", grapple_data), "r")

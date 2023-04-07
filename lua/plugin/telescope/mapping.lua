@@ -17,7 +17,7 @@ function M.setup()
 
     {
       "<leader>to", function()
-        tb.oldfiles(_, { layout_config = { width = 0.6 }, cwd_only = true })
+        tb.oldfiles(_, { cwd_only = true })
       end, opts("Telescope: Oldfiles"),
     },
 

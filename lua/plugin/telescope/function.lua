@@ -11,7 +11,7 @@ function M.buf_preview_maker(filepath, bufnr, opts)
       args = { "--mime-type", "-b", filepath },
       on_exit = function(j)
         local mime_type = vim.split(j:result()[1], "/")[1]
-        if mime_type == "text" then
+        if mime_type == "text" or mime_type == "application" then
           require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
         else
           vim.schedule(function()
@@ -28,8 +28,8 @@ function M.use_theme(picker_opts)
   local opts = {
     layout_config = {
       anchor = "N",
-      width = 0.8,
-      height = 0.6,
+      width = 0.5,
+      height = 0.5,
     },
   }
   if picker_opts then

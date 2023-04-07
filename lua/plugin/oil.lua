@@ -22,9 +22,6 @@ function M.config()
     },
     preview = {
       border = "single",
-      win_options = {
-        win_blend = 10,
-      }
     }
   })
 

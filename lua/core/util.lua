@@ -98,12 +98,12 @@ end
 ---Recursively load modules(under config) from a specified path
 function M.preq(path, exclude)
   table.insert(exclude, "init.lua")
-  local mods = vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/" .. path, function(m)
+  local mods = fn.readdir(fn.stdpath("config") .. "/lua/" .. path, function(m)
     return vim.tbl_contains(exclude, m) and 0 or 1
   end)
   for _, m in pairs(mods) do
     local m_path = path:gsub(".*/lua/", ""):gsub("/", ".")
-    require(string.format("%s.%s", m_path, vim.fn.fnamemodify(m, ":r")))
+    require(string.format("%s.%s", m_path, fn.fnamemodify(m, ":r")))
   end
 end
 

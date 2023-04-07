@@ -17,6 +17,7 @@ return {
           "javascript",
           "java",
           "lua",
+          "luap",
           "python",
           "vim",
           "yaml",
@@ -95,8 +96,21 @@ return {
           enable = true,
         },
       })
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      local parsers = require("nvim-treesitter.parsers")
+      local parser_config = parsers.get_parser_configs()
+
       parser_config.bash.filetype_to_parsename = "sh"
+      -- local augroup = vim.api.nvim_create_augroup("_plug", { clear = true })
+      -- vim.api.nvim_create_autocmd("FileType", {
+      --   group = augroup,
+      --   pattern = table.concat(
+      --     vim.tbl_map(function(ft)
+      --       return parser_config[ft].filetype or ft
+      --     end, parsers.available_parsers()),
+      --     ","
+      --   ),
+      --   command = "setl fdm=expr fde=nvim_treesitter#foldexpr()",
+      -- })
     end,
   },
 
@@ -105,7 +119,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("treesitter-context").setup({
-        max_lines = 3,
+        max_lines = 5,
       })
     end,
   },

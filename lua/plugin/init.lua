@@ -53,13 +53,14 @@ return {
   {
     "echasnovski/mini.surround",
     version = false,
-    keys = "s",
+    keys = { "s", { "S", mode = "x" } },
     config = function()
       require("mini.surround").setup({
         silent = true,
         highlight_duration = 100,
         search_method = "cover_or_nearest",
       })
+      vim.keymap.set("x", "S", [[:lua MiniSurround.add("visual")<CR>]], { silent = true })
     end,
   },
 
