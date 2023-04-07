@@ -88,3 +88,8 @@ key.xmap({
   { "<leader>c", 'mc"+y`c', opts("Yank to system clipboard") },
   { "<leader>v", '"+p==', opts("Paste from system clipboard") },
 })
+
+-- user commands {{{
+require("core.usrcmd").gh_browse()
+key.nxmap({ "<leader>gb", ":GhBrowse<CR>" })
+-- }}}
