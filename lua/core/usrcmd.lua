@@ -21,7 +21,7 @@ function M.gh_browse()
             end
           else
             fn.setreg("+", job:result()[1])
-            print('copied url to clipboard register "+"')
+            print("url copied")
           end
         end),
       })
