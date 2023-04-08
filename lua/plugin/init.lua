@@ -17,12 +17,6 @@ return {
   },
 
   {
-    "numToStr/Comment.nvim",
-    keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = "x" } },
-    config = true,
-  },
-
-  {
     "folke/trouble.nvim",
     module = false,
     cmd = { "TroubleToggle", "Trouble" },
@@ -70,6 +64,31 @@ return {
     event = "InsertEnter",
     config = function()
       require("mini.pairs").setup()
+    end,
+  },
+
+  {
+    "echasnovski/mini.comment",
+    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+    version = false,
+    keys = { "gc", { "gc", mode = "x" } },
+    config = function()
+      local avail, ts_config = pcall(require, "nvim-treesitter['config']")
+      if avail then
+        ts_config.setup({
+          context_commentstring = {
+            enable = true,
+            enable_autocmd = false,
+          },
+        })
+      end
+      require("mini.comment").setup({
+        hooks = {
+          pre = function()
+            require("ts_context_commentstring.internal").update_commentstring()
+          end,
+        },
+      })
     end,
   },
 
