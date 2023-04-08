@@ -4,6 +4,7 @@ function M.keymaps(bufnr)
   local key = require("core.keymap.maputil")
   local cmd, opts = key.cmd, key.new_opts
   -- stylua: ignore start
+  key.imap({ "<C-k>", lsp.signature_help })
   key.nmap({
     { "K",            lsp.hover,                                          opts(bufnr, "LSP: Show hover information") },
     { "<leader>lr",   lsp.rename,                                         opts(bufnr, "LSP: Rename symbol under cursor") },
@@ -18,13 +19,33 @@ function M.keymaps(bufnr)
     { "gr",           cmd("TroubleToggle lsp_references"),                opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
-    { "<leader>ls",   cmd("Telescope lsp_dynamic_workspace_symbols"),     opts(bufnr, "LSP/Telescope: Search for workspace symbols") },
+    { "<leader>ls", function()
+        require("telescope.builtin").lsp_dynamic_workspace_symbols({ fname_width = 40 })
+      end, opts(bufnr, "LSP/Telescope: Search for workspace symbols") },
   })
-  key.imap({ "<C-k>", lsp.signature_help })
-  key.nxmap({ "<leader>f", function() require("plugin.null-ls").format() end,  opts(bufnr, "Lsp/Null-ls: Format buffer") })
+  key.nxmap({
+    "<leader>f",
+    function()
+      vim.lsp.buf.format({
+        filter = function(client)
+          local use_builtin = { "clangd", "jdtls" }
+          for _, v in pairs(use_builtin) do
+            if client.name == v then
+              return client.name ~= "null-ls"
+            end
+          end
+          return client.name == "null-ls"
+        end,
+        timeout_ms = 5000,
+        async = true,
+      })
+    end,
+    opts(bufnr, "Lsp/Null-ls: Format buffer"),
+  })
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   -- stylua: ignore end
 end
+
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 -- using snippets from friendly-snippets instead

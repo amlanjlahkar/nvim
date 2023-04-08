@@ -15,10 +15,6 @@ function M:setup()
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
   require("lspconfig.ui.windows").default_options.border = self.border
-
-  require("fidget").setup({
-    text = { spinner = "moon", done = "󰄬" },
-  })
 end
 
 return M
