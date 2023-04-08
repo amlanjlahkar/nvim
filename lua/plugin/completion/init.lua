@@ -82,7 +82,7 @@ function M.config()
       },
       documentation = {
         border = "single",
-        winhighlight = "Normal:NormalFloatAlt,CmpItemAbbr:NormalFloatAlt,FloatBorder:FloatBorderAlt,CursorLine:PmenuSel",
+        winhighlight = "Normal:NormalFloat,CmpItemAbbr:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
         max_width = 80,
         max_height = 30,
         zindex = 50,

@@ -2,6 +2,7 @@ return {
   "nvim-lua/plenary.nvim",
   "mfussenegger/nvim-jdtls",
   { "tpope/vim-fugitive", cmd = "Git" },
+  { "utilyre/sentiment.nvim", event = "VeryLazy", config = true },
 
   {
     "L3MON4D3/LuaSnip",
@@ -129,7 +130,8 @@ return {
 
   {
     "norcalli/nvim-colorizer.lua",
-    lazy = true,
+    enabled = false,
+    lazy = false,
     config = function()
       require("colorizer").setup()
     end,

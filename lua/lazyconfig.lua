@@ -56,6 +56,10 @@ require("lazy").setup("plugin", {
     size = { width = 0.65, height = 0.85 },
     border = "none",
     throttle = 20,
+    custom_keys = {
+      ["<localleader>l"] = false,
+      ["<localleader>t"] = false,
+    },
   },
   install = { colorscheme = { require("color").custom, require("color").default } },
 })
