@@ -97,13 +97,14 @@ end
 ---@param exclude table Child modules to exclude
 ---Recursively load modules(under config) from a specified path
 function M.preq(path, exclude)
-  table.insert(exclude, "init.lua")
-  local mods = fn.readdir(fn.stdpath("config") .. "/lua/" .. path, function(m)
-    return vim.tbl_contains(exclude, m) and 0 or 1
+  local modname = function(m) return fn.fnamemodify(m, ":r") end
+  table.insert(exclude, "init")
+  local req = fn.readdir(fn.stdpath("config") .. "/lua/" .. path, function(m)
+    return vim.tbl_contains(exclude, modname(m)) and 0 or 1
   end)
-  for _, m in pairs(mods) do
-    local m_path = path:gsub(".*/lua/", ""):gsub("/", ".")
-    require(string.format("%s.%s", m_path, fn.fnamemodify(m, ":r")))
+  for _, m in ipairs(req) do
+    local modpath = path:gsub(".*/lua/", ""):gsub("/", ".")
+    require(modpath .. "." .. modname(m))
   end
 end
 
