@@ -20,7 +20,7 @@ function M.opts()
     },
     select = {
       builtin = { border = "single" },
-      telescope = { layout_strategy = "vertical" },
+      telescope = { layout_strategy = "horizontal" },
       -- telescope = require("plugin.telescope.function").use_theme(),
       get_config = function(opts)
         -- JdtWipeDataAndRestart

@@ -33,7 +33,7 @@ function M:setup_servers()
     ensure_installed = self.servers,
     automatic_installation = false,
   })
-  return self.servers
+  return require("mason-lspconfig").get_installed_servers()
 end
 
 return M

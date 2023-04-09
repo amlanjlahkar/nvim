@@ -81,9 +81,9 @@ M.custom = {
   { "CmpItemMenu",                { fg = FgShadeDarker } },
   { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
-  { "MatchParen",                 { bg = "#473234", fg = "#e15774", bold = true } },
+  { "MatchParen",                 { bg = RedShadeDarker, fg = "#e15774", bold = true } },
   { "FidgetTask",                 { fg = Black } },
-  { "MiniIndentScopeSymbol",      { fg = RedShadeDark } },
+  { "MiniIndentScopeSymbol",      { fg = RedShadeDarker } },
   -- { "TreesitterContext",          { bg = FgShadeDark, italic = false } }, -- TODO: fix issue with matchparen collison
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
   { "@lsp.type.enum",             { link = "@type" } },
