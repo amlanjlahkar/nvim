@@ -10,6 +10,7 @@ local FgShadeDark = "#849da2"
 local FgShadeDarker = "#51494a"
 local Red = "#d19299"
 local RedShadeDark = "#6c494d"
+local RedShadeDarker = "#473234"
 local RedShadeLight = "#81363f"
 local Green = "#63b0b0"
 local Blue = "#a9d1df"
@@ -30,7 +31,10 @@ M.custom = {
   { "StatusLineDiagnosticWarn",   { bg = BlackShadeLight, fg = "#dfb8bc" } },
   { "StatusLineDiagnosticHint",   { bg = BlackShadeLight, fg = "#694347" } },
   { "StatusLineDiagnosticInfo",   { bg = BlackShadeLight, fg = "#e4dcec" } },
-  { "CursorLineNr",               { bg = Bg, fg = White, bold = false } },
+  { "StatusColSep",               { bg = Black, fg = BgShadeLighter } },
+  { "SignColumn",                 { bg = Black } },
+  { "LineNr",                     { bg = Black, fg = RedShadeDarker } },
+  { "CursorLineNr",               { bg = Black, fg = White, bold = false } },
   { "VertSplit",                  { fg = BgShadeLighter } },
   { "Pmenu",                      { bg = Black , fg = Fg } },
   { "PmenuSel",                   { bg = BgShadeLighter, fg = Red } },
@@ -66,10 +70,10 @@ M.custom = {
   { "DiffDelete",                 { bg = DiffDelete, fg = RedShadeLight } },
   { "diffAdded",                  { bg = DiffAdd, fg = Green } },
   { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLight } },
-  { "GitGutterAdd",               { fg = Green } },
-  { "GitGutterChange",            { fg = Blue } },
-  { "GitGutterChangeDelete",      { fg = Magenta } },
-  { "GitGutterDelete",            { fg = Red } },
+  { "GitGutterAdd",               { bg = Black, fg = Green } },
+  { "GitGutterChange",            { bg = Black, fg = Blue } },
+  { "GitGutterChangeDelete",      { bg = Black, fg = Magenta } },
+  { "GitGutterDelete",            { bg = Black, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = false } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
   { "Visual",                     { bg = BgShadeLighter, fg = White } },
