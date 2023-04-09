@@ -5,11 +5,6 @@ return {
   { "utilyre/sentiment.nvim", event = "VeryLazy", config = true },
 
   {
-    "L3MON4D3/LuaSnip",
-    dependencies = "rafamadriz/friendly-snippets",
-  },
-
-  {
     "tummetott/reticle.nvim",
     event = "VeryLazy",
     opts = {
