@@ -86,8 +86,14 @@ M.custom = {
   { "MiniIndentScopeSymbol",      { fg = RedShadeDarker } },
   -- { "TreesitterContext",          { bg = FgShadeDark, italic = false } }, -- TODO: fix issue with matchparen collison
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
+  { "@lsp.type.variable",         { link = "@variable" } },
+  { "@lsp.type.macro",            { link = "@macro" } },
+  { "@lsp.type.class",            { link = "@type" } },
+  { "@lsp.type.type",             { link = "@type" } },
+  { "@lsp.type.typeParameter",    { link = "@type.definition" } },
   { "@lsp.type.enum",             { link = "@type" } },
   { "@lsp.type.enumMember",       { link = "@constant" } },
+  { "@lsp.type.decorator",        { link = "@function" } },
   { "@lsp.type.function",         { link = "@function" } },
   { "@lsp.type.method",           { link = "@method" } },
   { "@lsp.type.keyword",          { link = "@keyword" } },
