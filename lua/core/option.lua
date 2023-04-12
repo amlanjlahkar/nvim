@@ -49,6 +49,7 @@ o.signcolumn = "auto:1-4"
 o.pumheight = 20
 o.pumblend = 0
 o.winblend = 0
+o.splitkeep = "screen"
 o.splitbelow = true
 o.splitright = true
 o.fillchars:append({
@@ -70,4 +71,6 @@ o.grepprg = "rg --hidden --vimgrep --smart-case --"
 o.clipboard = ""
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
+
+vim.g.editorconfig = false
 
