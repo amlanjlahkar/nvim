@@ -40,48 +40,72 @@ end
 ---@return function | nil
 ---Small set of functions to compile/interprete code for certain langs
 function M.test_code(filetype)
-  local function compile_and_run(cmd, args, outfile)
-    local logfile, exit_code = nil, 0
-    if outfile == nil then outfile = args[#args] end
-    if outfile:match("/tmp/") then
+  ---@class Cmd
+  ---@field cmd string Command to run
+  ---@field iptr boolean|string Interpreter to use for executing byte compiled code or `true` if `cmd` is an interpreter
+
+  ---@param cmd Cmd
+  ---@param args table Arguments to pass to `cmd`
+  ---@param outfile? string Location to use for generated output file
+  local function exec(cmd, args, outfile)
+    if cmd.iptr and type(cmd.iptr) == "boolean" then
+      vim.cmd.terminal(string.format("%s %s", cmd.cmd, fn.expand("%:p")))
+      return
+    end
+
+    local logfile
+    if outfile then
       logfile = outfile .. "_error.log"
-    else
-      logfile = "/tmp/" .. outfile .. "_error.log"
+      if not outfile:match("/tmp/") then
+        logfile = "/tmp/" .. logfile
+      end
     end
+
     table.insert(args, fn.expand("%:p"))
-    require("plenary.job"):new({
-      command = cmd,
-      args = args,
-      on_stderr = function(_, data)
-        local file = assert(io.open(logfile, "a"))
-        file:write(data, "\n")
-        file:close()
-        exit_code = 2
-      end,
-    }):sync()
-    if exit_code > 0 then
-      vim.cmd("view +setl\\ nomodifiable " .. logfile)
-    else
-      vim.ui.input({ prompt = "Arguments to pass: " }, function(input)
-        vim.cmd.terminal(string.format("%s %s", outfile, input))
-      end)
-    end
+    require("plenary.job")
+      :new({
+        command = cmd.cmd,
+        args = args,
+        on_stderr = function(_, data)
+          local file = assert(io.open(logfile, "a"))
+          file:write(data, "\n")
+          file:close()
+        end,
+        on_exit = vim.schedule_wrap(function(_, code)
+          if code > 0 then
+            vim.cmd("view +setl\\ nomodifiable " .. logfile)
+          else
+            vim.ui.input({ prompt = "Arguments to pass: " }, function(input)
+              if cmd.iptr and type(cmd.iptr) == "string" then
+                vim.cmd.terminal(string.format("%s %s %s", cmd.iptr, outfile, input))
+              else
+                vim.cmd.terminal(string.format("%s %s", outfile, input))
+              end
+            end)
+          end
+        end),
+      })
+      :start()
   end
 
   local def = {
-    lua = function() vim.cmd.terminal("lua %") end,
-    python = function() vim.cmd.terminal("python %") end,
+    lua = function()
+      exec({ cmd = "lua", iptr = true }, _)
+    end,
+    python = function()
+      exec({ cmd = "python", iptr = true }, _)
+    end,
     c = function()
       local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
-      compile_and_run("gcc", { "-lm", "-o", outfile })
+      exec({ cmd = "gcc", iptr = false }, { "-lm", "-o", outfile }, outfile)
     end,
     cpp = function()
       local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
-      compile_and_run("g++", { "-o", outfile })
+      exec({ cmd = "g++", iptr = false }, { "-o", outfile }, outfile)
     end,
     java = function()
       local outfile = fn.expand("%:t:r")
-      compile_and_run("javac", {}, outfile)
+      exec({ cmd = "javac", iptr = "java" }, {}, outfile)
     end,
   }
 
