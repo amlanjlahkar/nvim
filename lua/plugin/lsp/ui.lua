@@ -1,5 +1,5 @@
 local M = {
-  border = "single",
+  border = "solid",
   signs = {
     Error = " ",
     Warn = " ",

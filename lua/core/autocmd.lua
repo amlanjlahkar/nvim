@@ -40,7 +40,7 @@ M.autocmd_definitions = {
   {
     "FileType",
     {
-      desc = "Create Ex command to run compiled/interpreted code",
+      desc = "Bind key for quick testing specific source files",
       pattern = { "python", "c", "cpp", "lua", "java" },
       callback = function()
         local cmd = require("core.util").test_code(vim.bo.filetype)

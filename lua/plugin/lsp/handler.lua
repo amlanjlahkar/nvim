@@ -4,8 +4,9 @@ local lsp = vim.lsp
 local M = {}
 
 function M.setup()
-  lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = ui.border })
-  lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = ui.border })
+  lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = ui.border, style = "minimal" })
+  lsp.handlers["textDocument/signatureHelp"] =
+    lsp.with(lsp.handlers.signature_help, { border = ui.border, style = "minimal" })
 
   vim.diagnostic.config({
     signs = false,

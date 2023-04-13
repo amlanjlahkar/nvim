@@ -20,7 +20,7 @@ function M.config()
           height = 0.9,
           width = 0.9,
           preview_width = 0.69,
-        }
+        },
       },
       buffer_previewer_maker = require("plugin.telescope.function").buf_preview_maker,
       history = { path = vim.fn.stdpath("state") .. "/telescope_history.log" },

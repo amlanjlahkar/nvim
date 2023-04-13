@@ -23,8 +23,9 @@ return {
           "yaml",
           "rasi",
           "markdown",
-          "vimdoc",
           "rust",
+          "vimdoc",
+          "comment",
         },
         ignore_install = {},
         highlight = {

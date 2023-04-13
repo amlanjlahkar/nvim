@@ -1,1 +1,1 @@
-require("core.util").preq("core/extension", {})
+require("core.util").req("core/extension", {})

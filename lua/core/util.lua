@@ -120,7 +120,7 @@ end
 ---@param path string Path to parent module
 ---@param exclude table Child modules to exclude
 ---Recursively load modules(under config) from a specified path
-function M.preq(path, exclude)
+function M.req(path, exclude)
   local modname = function(m) return fn.fnamemodify(m, ":r") end
   table.insert(exclude, "init")
   local req = fn.readdir(fn.stdpath("config") .. "/lua/" .. path, function(m)
