@@ -64,7 +64,8 @@ o.fillchars:append({
   verthoriz = "╋",
 })
 
-o.thesaurus:append(os.getenv("HOME") .. "/.local/share/thesaurus.txt")
+o.dictionary:append(vim.fn.stdpath("config") .. "/dict/dictionary_en.txt")
+o.thesaurus:append(vim.fn.stdpath("config") .. "/dict/thesaurus.txt")
 o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
 o.grepprg = "rg --hidden --vimgrep --smart-case --"

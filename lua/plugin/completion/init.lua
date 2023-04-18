@@ -10,6 +10,16 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
+      {
+        "uga-rosa/cmp-dictionary",
+        config = function()
+          require("cmp_dictionary").setup({
+            async = true,
+            exact = -1,
+            max_items = 20,
+          })
+        end,
+      },
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
@@ -67,6 +77,7 @@ return {
           { name = "buffer" },
           { name = "neorg" },
           { name = "path" },
+          { name = "dictionary", keyword_length = 4 },
         },
         formatting = {
           fields = { "abbr", "kind", "menu" },
@@ -78,6 +89,7 @@ return {
               luasnip = "[LuaSnip]",
               buffer = "[Buffer]",
               path = "[Path]",
+              dictionary = "[Dict]",
             })[entry.source.name]
             return vim_item
           end,
