@@ -85,9 +85,9 @@ return {
             vim_item.kind = string.format("%s", vim_item.kind)
             vim_item.menu = ({
               nvim_lsp = "[LSP]",
-              nvim_lua = "[Neo]",
-              luasnip = "[LuaSnip]",
-              buffer = "[Buffer]",
+              neorg = "[Norg]",
+              luasnip = "[Snip]",
+              buffer = "[Buf]",
               path = "[Path]",
               dictionary = "[Dict]",
             })[entry.source.name]

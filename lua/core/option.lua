@@ -69,7 +69,7 @@ o.thesaurus:append(vim.fn.stdpath("config") .. "/dict/thesaurus.txt")
 o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
 o.grepprg = "rg --hidden --vimgrep --smart-case --"
-o.clipboard = ""
+o.clipboard = "unnamed"
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
 
