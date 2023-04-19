@@ -13,9 +13,10 @@ return {
 
   {
     "folke/trouble.nvim",
-    module = false,
-    cmd = { "TroubleToggle", "Trouble" },
+    event = "LspAttach",
     opts = {
+      mode = "document_diagnostics",
+      padding = false,
       icons = false,
       fold_open = "",
       fold_closed = "",

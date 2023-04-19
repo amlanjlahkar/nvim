@@ -1,4 +1,33 @@
 local M = {}
+
+-- Handlers {{{1
+function M.handlers()
+  local ui = require("plugin.lsp.ui")
+  local lsp = vim.lsp
+
+  return {
+    ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = ui.border, style = "minimal" }),
+    ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = ui.border, style = "minimal" }),
+    ["textDocument/publishDiagnostics"] = lsp.with(
+      lsp.diagnostic.on_publish_diagnostics,
+      require("plugin.lsp.ui"):diagnostic_opts()
+    ),
+  }
+end
+-- 1}}}
+
+-- Capabilities {{{1
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+-- using snippets from friendly-snippets instead
+M.capabilities.textDocument.completion.completionItem.snippetSupport = false
+local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
+if is_cmp_available then
+  M.capabilities = cmp_nvim.default_capabilities(M.capabilities)
+end
+-- 1}}}
+
+-- On_attach {{{1
+-- Keymaps {{{2
 function M.keymaps(bufnr)
   local lsp = vim.lsp.buf
   local key = require("core.keymap.maputil")
@@ -45,28 +74,7 @@ function M.keymaps(bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   -- stylua: ignore end
 end
-
-function M.handlers()
-  local ui = require("plugin.lsp.ui")
-  local lsp = vim.lsp
-
-  return {
-    ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = ui.border, style = "minimal" }),
-    ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = ui.border, style = "minimal" }),
-    ["textDocument/publishDiagnostics"] = lsp.with(
-      lsp.diagnostic.on_publish_diagnostics,
-      require("plugin.lsp.ui"):diagnostic_opts()
-    ),
-  }
-end
-
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
--- using snippets from friendly-snippets instead
-M.capabilities.textDocument.completion.completionItem.snippetSupport = false
-local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
-if is_cmp_available then
-  M.capabilities = cmp_nvim.default_capabilities(M.capabilities)
-end
+-- 2}}}
 
 function M.on_attach(client, bufnr)
   -- Highlight references for symbol under cursor
@@ -96,5 +104,6 @@ function M.on_attach(client, bufnr)
   end
   M.keymaps(bufnr)
 end
+-- 1}}}
 
 return M

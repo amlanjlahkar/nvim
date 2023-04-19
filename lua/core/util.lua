@@ -88,24 +88,23 @@ function M.test_code(filetype)
       :start()
   end
 
+  local out = string.format("/tmp/%s", fn.expand("%:t:r"))
   local def = {
     lua = function()
-      exec({ cmd = "lua", iptr = true }, _)
+      exec({ cmd = "luac", iptr = "lua" }, { "-o", out }, out)
     end,
     python = function()
       exec({ cmd = "python", iptr = true }, _)
     end,
     c = function()
-      local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
-      exec({ cmd = "gcc", iptr = false }, { "-lm", "-o", outfile }, outfile)
+      exec({ cmd = "clang", iptr = false }, { "-Wall", "-std=c17", "-lm", "-o", out }, out)
     end,
     cpp = function()
-      local outfile = string.format("/tmp/%s", fn.expand("%:t:r"))
-      exec({ cmd = "g++", iptr = false }, { "-o", outfile }, outfile)
+      exec({ cmd = "clang++", iptr = false }, { "-Wall", "-std=c++20", "-o", out }, out)
     end,
     java = function()
-      local outfile = fn.expand("%:t:r")
-      exec({ cmd = "javac", iptr = "java" }, {}, outfile)
+      local _out = fn.expand("%:t:r")
+      exec({ cmd = "javac", iptr = "java" }, {}, _out)
     end,
   }
 
