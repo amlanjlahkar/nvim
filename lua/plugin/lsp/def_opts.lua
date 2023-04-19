@@ -46,6 +46,19 @@ function M.keymaps(bufnr)
   -- stylua: ignore end
 end
 
+function M.handlers()
+  local ui = require("plugin.lsp.ui")
+  local lsp = vim.lsp
+
+  return {
+    ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = ui.border, style = "minimal" }),
+    ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = ui.border, style = "minimal" }),
+    ["textDocument/publishDiagnostics"] = lsp.with(
+      lsp.diagnostic.on_publish_diagnostics,
+      require("plugin.lsp.ui"):diagnostic_opts()
+    ),
+  }
+end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 -- using snippets from friendly-snippets instead

@@ -24,19 +24,11 @@ return {
     },
     config = function()
       require("neodev").setup()
-      local installed = require("plugin.lsp.mason"):setup_servers()
-      for _, server in pairs(installed) do
-        local opts = {
-          on_attach = require("plugin.lsp.config").on_attach,
-          capabilities = require("plugin.lsp.config").capabilities,
-        }
-        local has_custom_opts, server_custom_opts = pcall(require, "plugin.lsp.server_config." .. server)
-        if has_custom_opts then
-          opts = vim.tbl_deep_extend("force", opts, server_custom_opts)
-        end
+      local servers = require("plugin.lsp.mason"):setup_servers()
+      for _, server in pairs(servers) do
+        local opts = require("plugin.lsp.equip_opts").setup(server)
         require("lspconfig")[server].setup(opts)
       end
-      require("plugin.lsp.handler").setup()
       require("plugin.lsp.ui"):setup()
     end,
   },
@@ -72,12 +64,33 @@ return {
             end,
           }),
         },
+        on_attach = function(_, bufnr)
+          local default = require("plugin.lsp.def_opts")
+          local ui = require("plugin.lsp.ui")
+          if not package.loaded["lsp"] then
+            default.handlers()
+            default.keymaps(bufnr)
+            ui:setup()
+            vim.diagnostic.config(ui:diagnostic_opts())
+          end
+        end,
       })
-      if not package.loaded["lsp"] then
-        require("plugin.lsp.handler").setup()
-        require("plugin.lsp.ui"):setup()
-        require("plugin.lsp.config").keymaps(0)
-      end
     end,
   },
+
+  {
+    "p00f/clangd_extensions.nvim",
+    ft = { "c", "cpp" },
+    opts = {
+      server = require("plugin.lsp.equip_opts").setup("clangd"),
+    },
+  },
+
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+    config = function()
+      require("plugin.lsp.server_settings.jdtls")
+    end,
+  }
 }

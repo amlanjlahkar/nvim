@@ -1,6 +1,5 @@
 return {
   "nvim-lua/plenary.nvim",
-  "mfussenegger/nvim-jdtls",
   { "tpope/vim-fugitive", cmd = "Git" },
   { "utilyre/sentiment.nvim", event = "VeryLazy", config = true },
 
