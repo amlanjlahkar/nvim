@@ -12,6 +12,7 @@ local Red = "#d19299"
 local RedShadeDark = "#6c494d"
 local RedShadeDarker = "#473234"
 local RedShadeLight = "#81363f"
+local RedShadeLighter = "#e4627e"
 local Green = "#63b0b0"
 local Blue = "#a9d1df"
 local Magenta = "#d5a8e3"
@@ -48,10 +49,10 @@ M.custom = {
   { "TelescopePromptTitle",       { bg = Bg, fg = FgShadeDarker } },
   { "TelescopePromptCounter",     { fg = FgShadeDarker } },
   { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },
-  { "TelescopeMatching",          { fg = "#e15774" } },
-  { "FloatTitle",                 { bg = BlackShadeLight, fg = White } },
-  { "NormalFloat",                { bg = BlackShadeLight, fg = Fg } },
-  { "FloatBorder",                { bg = BlackShadeLight, fg = BlackShadeLight } },
+  { "TelescopeMatching",          { fg = RedShadeLighter } },
+  { "FloatTitle",                 { bg = Bg, fg = White } },
+  { "NormalFloat",                { bg = Bg, fg = Fg } },
+  { "FloatBorder",                { fg = FgShadeDarker } },
   { "NormalFloatAlt",             { bg = Black, fg = Fg } },
   { "FloatBorderAlt",             { bg = Black, fg = Black } },
   { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
@@ -69,7 +70,7 @@ M.custom = {
   { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
   { "DiffDelete",                 { bg = DiffDelete, fg = RedShadeLight } },
   { "diffAdded",                  { bg = DiffAdd, fg = Green } },
-  { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLight } },
+  { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLighter } },
   { "GitGutterAdd",               { bg = BlackShadeLight, fg = Green } },
   { "GitGutterChange",            { bg = BlackShadeLight, fg = Blue } },
   { "GitGutterChangeDelete",      { bg = BlackShadeLight, fg = Magenta } },
@@ -79,13 +80,21 @@ M.custom = {
   { "Visual",                     { bg = BgShadeLighter, fg = White } },
   { "CmpItemKind",                { fg = FgShadeDark } },
   { "CmpItemMenu",                { fg = FgShadeDarker } },
+  { "CmpDocNormal",               { bg = BlackShadeLight, fg = Fg } },
+  { "CmpDocBorder",               { bg = BlackShadeLight, fg = BlackShadeLight } },
   { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
-  { "MatchParen",                 { bg = RedShadeDarker, fg = "#e15774", bold = true } },
+  { "MatchParen",                 { bg = RedShadeDarker, fg = RedShadeLighter, bold = true } },
   { "FidgetTask",                 { fg = Black } },
   { "MiniIndentScopeSymbol",      { fg = RedShadeDarker } },
   { "TreesitterContext",          { bg = BlackShadeLight, italic = false } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
+  { "healthSuccess",              { fg = Green } },
+  { "healthWarning",              { fg = RedShadeLight } },
+  { "healthError",                { fg = RedShadeLighter } },
+  { "MasonHeader",                { bg = White, fg = Black } },
+  { "MasonHighlightBlockBold",    { bg = BgShadeLighter, fg = White } },
+  { "MasonMutedBlock",            { bg = BgShadeLighter, fg = Fg } },
   { "@lsp.type.variable",         { link = "@variable" } },
   { "@lsp.type.macro",            { link = "@macro" } },
   { "@lsp.type.class",            { link = "@type" } },

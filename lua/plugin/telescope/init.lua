@@ -17,9 +17,8 @@ function M.config()
       preview = false,
       layout_config = {
         horizontal = {
-          height = 0.9,
           width = 0.9,
-          preview_width = 0.69,
+          height = 0.9,
         },
       },
       buffer_previewer_maker = require("plugin.telescope.function").buf_preview_maker,
@@ -35,6 +34,7 @@ function M.config()
         "--trim",
       },
       file_ignore_patterns = {
+        "dict/*",
         "vendor/*",
         "node_modules/*",
         "spell/*",

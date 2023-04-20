@@ -15,17 +15,21 @@ function M.config()
     },
     view_options = {
       show_hidden = true,
-      is_always_hidden = function (name, _)
+      is_always_hidden = function(name, _)
         local pattern = { ".git", "LICENSE" }
         return vim.tbl_contains(pattern, name) and true or false
-      end
+      end,
     },
     preview = {
       border = "single",
-    }
+    },
   })
 
-  vim.keymap.set("n", "-", require("oil").open, { desc = "Oil: Open parent directory" })
+  vim.keymap.set("n", "-", function()
+    if vim.bo.filetype ~= "fugitive" then
+      require("oil").open()
+    end
+  end, { desc = "Oil: Open parent directory" })
   vim.keymap.set("n", "<leader>ob", function()
     local entry_name = require("oil").get_cursor_entry()["name"]
     local current_dir = require("oil").get_current_dir()

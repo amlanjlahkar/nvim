@@ -10,7 +10,9 @@ return {
         "williamboman/mason.nvim",
         opts = {
           ui = {
-            border = "single",
+            border = "none",
+            width = 0.6,
+            height = 0.8,
             icons = {
               package_installed = "",
               package_pending = "",
@@ -29,7 +31,8 @@ return {
         local opts = require("plugin.lsp.equip_opts").setup(server)
         require("lspconfig")[server].setup(opts)
       end
-      require("plugin.lsp.ui"):setup()
+      require("plugin.lsp.diagnostics"):setup_signs()
+      require("lspconfig.ui.windows").default_options.border = "single"
     end,
   },
 
@@ -66,12 +69,12 @@ return {
         },
         on_attach = function(_, bufnr)
           local default = require("plugin.lsp.def_opts")
-          local ui = require("plugin.lsp.ui")
+          local diagnostics = require("plugin.lsp.diagnostics")
           if not package.loaded["lsp"] then
             default.handlers()
             default.keymaps(bufnr)
-            ui:setup()
-            vim.diagnostic.config(ui:diagnostic_opts())
+            diagnostics:setup_signs()
+            vim.diagnostic.config(diagnostics:default_opts())
           end
         end,
       })

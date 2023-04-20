@@ -179,7 +179,7 @@ function M.get_lsp_diagnostic()
     info = "Info",
     hints = "Hint",
   }
-  local signs = require("plugin.lsp.ui").signs
+  local signs = require("plugin.lsp.diagnostics").signs
   local icons = {
     errors = signs.Error,
     warnings = signs.Warn,
@@ -217,7 +217,7 @@ end
 function M.treesitter_status()
   local buf = api.nvim_get_current_buf()
   local hl = require("vim.treesitter.highlighter")
-  return hl.active[buf] and "   " or ""
+  return hl.active[buf] and "   " or ""
 end
 -- 2}}}
 

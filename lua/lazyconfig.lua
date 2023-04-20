@@ -53,7 +53,7 @@ require("lazy").setup("plugin", {
       },
     },
     wrap = false,
-    size = { width = 0.65, height = 0.85 },
+    size = { width = 0.6, height = 0.8 },
     border = "none",
     throttle = 20,
     custom_keys = {

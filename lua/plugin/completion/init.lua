@@ -1,4 +1,5 @@
 return {
+
   {
     "L3MON4D3/LuaSnip",
     dependencies = "rafamadriz/friendly-snippets",
@@ -102,7 +103,7 @@ return {
           },
           documentation = {
             border = "single",
-            winhighlight = "Normal:NormalFloat,CmpItemAbbr:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+            winhighlight = "Normal:CmpDocNormal,CmpItemAbbr:CmpDocNormal,FloatBorder:CmpDocBorder",
             max_width = 80,
             max_height = 30,
             zindex = 50,

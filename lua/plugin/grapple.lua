@@ -17,7 +17,7 @@ local M = {
       end
     end
   end,
-  keys = "<leader>mm",
+  keys = { "<leader>mm", "<leader>ma" },
 }
 
 function M.config()

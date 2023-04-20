@@ -13,7 +13,8 @@ return {
 
   {
     "folke/trouble.nvim",
-    event = "LspAttach",
+    module = false,
+    cmd = { "Trouble", "TroubleToggle" },
     opts = {
       mode = "document_diagnostics",
       padding = false,
@@ -27,14 +28,14 @@ return {
 
   {
     "echasnovski/mini.indentscope",
-    enabled = true,
+    enabled = false,
     version = false,
     event = "VeryLazy",
     config = function()
       require("mini.indentscope").setup({ delay = 50, symbol = "│" })
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("_plug", { clear = true }),
-        pattern = { "help", "lazy", "telescopeprompt", "trouble", "^oil*", "fugitive", "checkhealth", "" },
+        pattern = { "help", "lazy", "telescopeprompt", "trouble", "^oil*", "^clangd*", "fugitive", "checkhealth", "" },
         command = "lua vim.b.miniindentscope_disable = true",
       })
     end,
@@ -121,6 +122,8 @@ return {
 
   {
     "rockerBOO/boo-colorscheme-nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
       vim.g.boo_colorscheme_theme = "crimson_moonlight"
     end,
