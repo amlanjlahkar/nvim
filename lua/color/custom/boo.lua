@@ -1,22 +1,22 @@
-local none = "NONE"
-local Black = "#000000"
-local BlackShadeLight = "#131314"
-local BlackShadeLighter = "#171313"
 local Bg = "#0f0f10"
 local BgShadeLight = "#201c1c"
 local BgShadeLighter = "#211c1d"
+local Black = "#000000"
+local BlackShadeLight = "#131314"
+local BlackShadeLighter = "#171313"
+local Blue = "#a9d1df"
+local BlueShadeDark = "#849da2"
 local Fg = "#726464"
-local FgShadeDark = "#849da2"
 local FgShadeDarker = "#51494a"
+local Green = "#63b0b0"
+local Magenta = "#d5a8e3"
 local Red = "#d19299"
 local RedShadeDark = "#6c494d"
 local RedShadeDarker = "#473234"
 local RedShadeLight = "#81363f"
 local RedShadeLighter = "#e4627e"
-local Green = "#63b0b0"
-local Blue = "#a9d1df"
-local Magenta = "#d5a8e3"
 local White = "#ffffff"
+local none = "NONE"
 
 local DiffAdd = "#0c1d0e"
 local DiffDelete = "#2a080f"
@@ -24,97 +24,119 @@ local DiffDelete = "#2a080f"
 local M = {}
 -- stylua: ignore
 M.custom = {
-  { "StatusLineNC",               { bg = BlackShadeLight, fg = Fg } },
+  -- statusline {{{1
   { "StatusLine",                 { bg = BlackShadeLight, fg = FgShadeDarker } },
-  { "StatusLineImp",              { bg = BlackShadeLight, fg = Fg } },
-  { "StatusLineInd",              { bg = BlackShadeLight, fg = Red } },
   { "StatusLineDiagnosticError",  { bg = BlackShadeLight, fg = "#fe697d" } },
-  { "StatusLineDiagnosticWarn",   { bg = BlackShadeLight, fg = "#dfb8bc" } },
   { "StatusLineDiagnosticHint",   { bg = BlackShadeLight, fg = "#694347" } },
   { "StatusLineDiagnosticInfo",   { bg = BlackShadeLight, fg = "#e4dcec" } },
-  { "StatusColSep",               { bg = BlackShadeLight, fg = BgShadeLighter } },
-  { "SignColumn",                 { bg = BlackShadeLight } },
-  { "LineNr",                     { bg = BlackShadeLight, fg = RedShadeDarker } },
-  { "CursorLineNr",               { bg = BlackShadeLight, fg = White, bold = false } },
-  { "VertSplit",                  { fg = BgShadeLighter } },
-  { "Pmenu",                      { bg = Black , fg = Fg } },
-  { "PmenuSel",                   { bg = BgShadeLighter, fg = Red } },
-  { "PmenuSbar",                  { bg = BlackShadeLight  } },
-  { "PmenuThumb",                 { bg = BgShadeLighter } },
-  { "TabLineFill",                { bg = BlackShadeLight } },
-  { "TabLine",                    { bg = BlackShadeLight, fg = FgShadeDarker } },
-  { "TabLineSel",                 { bg = BgShadeLight, fg = Fg, bold = false } },
-  { "TelescopeNormal",            { bg = Bg, fg = Fg } },
-  { "TelescopeBorder",            { bg = Bg, fg = FgShadeDarker } },
-  { "TelescopePromptTitle",       { bg = Bg, fg = FgShadeDarker } },
-  { "TelescopePromptCounter",     { fg = FgShadeDarker } },
-  { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },
-  { "TelescopeMatching",          { fg = RedShadeLighter } },
-  { "FloatTitle",                 { bg = Bg, fg = White } },
-  { "NormalFloat",                { bg = Bg, fg = Fg } },
-  { "FloatBorder",                { fg = FgShadeDarker } },
-  { "NormalFloatAlt",             { bg = Black, fg = Fg } },
-  { "FloatBorderAlt",             { bg = Black, fg = Black } },
-  { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
-  { "VimModeNormal",              { bg = BgShadeLighter, fg = Red } },
-  { "VimModeInsert",              { bg = BgShadeLighter, fg = Red } },
-  { "VimModeVisual",              { bg = BgShadeLighter, fg = Red } },
+  { "StatusLineDiagnosticWarn",   { bg = BlackShadeLight, fg = "#dfb8bc" } },
+  { "StatusLineImp",              { bg = BlackShadeLight, fg = Fg } },
+  { "StatusLineInd",              { bg = BlackShadeLight, fg = Red } },
+  { "StatusLineNC",               { bg = BlackShadeLight, fg = Fg } },
   { "VimModeCommand",             { bg = BgShadeLighter, fg = Red } },
   { "VimModeExtra",               { bg = BgShadeLighter, fg = Red } },
-  { "SnipChoiceNode",             { bg = BgShadeLight, fg = Blue } },
-  { "SnipInsertNode",             { bg = BgShadeLight, fg = Green } },
-  { "TroubleText",                { bg = none, fg = Fg } },
-  { "TroubleFoldIcon",            { bg = none, fg = Fg } },
-  { "TroubleIndent",              { bg = none, fg = FgShadeDark } },
-  { "TroubleLocation",            { bg = none, fg = FgShadeDark } },
+  { "VimModeInsert",              { bg = BgShadeLighter, fg = Red } },
+  { "VimModeNormal",              { bg = BgShadeLighter, fg = Red } },
+  { "VimModeVisual",              { bg = BgShadeLighter, fg = Red } },
+  -- 1}}}
+  -- native {{{1
+  { "LineNr",                     { bg = BlackShadeLight, fg = RedShadeDarker } },
+  { "CursorLineNr",               { bg = BlackShadeLight, fg = White, bold = false } },
+  { "SignColumn",                 { bg = BlackShadeLight } },
+  { "NormalFloat",                { bg = Bg, fg = Fg } },
+  { "FloatBorder",                { fg = FgShadeDarker } },
+  { "FloatTitle",                 { bg = Bg, fg = White } },
+  { "Pmenu",                      { bg = Black , fg = Fg } },
+  { "PmenuSbar",                  { bg = BlackShadeLight  } },
+  { "PmenuSel",                   { bg = BgShadeLighter, fg = Red } },
+  { "PmenuThumb",                 { bg = BgShadeLighter } },
+  { "TabLine",                    { bg = BlackShadeLight, fg = FgShadeDarker } },
+  { "TabLineFill",                { bg = BlackShadeLight } },
+  { "TabLineSel",                 { bg = BgShadeLight, fg = Fg, bold = false } },
+  { "VertSplit",                  { fg = BgShadeLighter } },
+  { "Visual",                     { bg = BgShadeLighter, fg = White } },
+  { "MatchParen",                 { bg = RedShadeDarker, fg = RedShadeLighter, bold = true } },
+  { "QuickFixLine",               { bg = BgShadeLighter } },
+  { "NonText",                    { fg = FgShadeDarker } },
+  { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
+  -- health {{{2
+  { "healthError",                { fg = RedShadeLighter } },
+  { "healthSuccess",              { fg = Green } },
+  { "healthWarning",              { fg = RedShadeLight } },
+  -- 2}}}
+  -- treesitter/lsp semantic tokens {{{2
+  { "@lsp.type.class",            { link = "@type" } },
+  { "@lsp.type.decorator",        { link = "@function" } },
+  { "@lsp.type.enum",             { link = "@type" } },
+  { "@lsp.type.enumMember",       { link = "@constant" } },
+  { "@lsp.type.function",         { link = "@function" } },
+  { "@lsp.type.interface",        { link = "@interface" } },
+  { "@lsp.type.keyword",          { link = "@keyword" } },
+  { "@lsp.type.macro",            { link = "@macro" } },
+  { "@lsp.type.method",           { link = "@method" } },
+  { "@lsp.type.namespace",        { link = "@namespace" } },
+  { "@lsp.type.parameter",        { link = "@parameter" } },
+  { "@lsp.type.property",         { link = "@property" } },
+  { "@lsp.type.type",             { link = "@type" } },
+  { "@lsp.type.typeParameter",    { link = "@type.definition" } },
+  { "@lsp.type.variable",         { link = "@variable" } },
+  { "@lsp.typemode.function.defaultLibrary",  { link = "@function.builtin" } },
+  { "@lsp.typemode.operator.injected",  { link = "@operator" } },
+  { "@lsp.typemode.string.injected",    { link = "@string" } },
+  { "@lsp.typemode.variable.defaultLibrary",  { link = "@variable.builtin" } },
+  { "@lsp.typemode.variable.injected",  { link = "@variable" } },
+  -- 2}}}
+  -- 1}}}
+  -- plugins {{{1
+  -- cmp {{{2
+  { "CmpDocBorder",               { bg = BlackShadeLight, fg = BlackShadeLight } },
+  { "CmpDocNormal",               { bg = BlackShadeLight, fg = Fg } },
+  { "CmpItemKind",                { fg = BlueShadeDark } },
+  { "CmpItemMenu",                { fg = FgShadeDarker } },
+  { "FloatBorderAlt",             { bg = Black, fg = Black } },
+  { "NormalFloatAlt",             { bg = Black, fg = Fg } },
+  -- 2}}}
+  -- gitsigns/fugitive {{{2
   { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
   { "DiffDelete",                 { bg = DiffDelete, fg = RedShadeLight } },
-  { "diffAdded",                  { bg = DiffAdd, fg = Green } },
-  { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLighter } },
   { "GitGutterAdd",               { bg = BlackShadeLight, fg = Green } },
   { "GitGutterChange",            { bg = BlackShadeLight, fg = Blue } },
   { "GitGutterChangeDelete",      { bg = BlackShadeLight, fg = Magenta } },
   { "GitGutterDelete",            { bg = BlackShadeLight, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = false } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
-  { "Visual",                     { bg = BgShadeLighter, fg = White } },
-  { "CmpItemKind",                { fg = FgShadeDark } },
-  { "CmpItemMenu",                { fg = FgShadeDarker } },
-  { "CmpDocNormal",               { bg = BlackShadeLight, fg = Fg } },
-  { "CmpDocBorder",               { bg = BlackShadeLight, fg = BlackShadeLight } },
-  { "QuickFixLine",               { bg = BgShadeLighter } },
-  { "NonText",                    { fg = FgShadeDarker } },
-  { "MatchParen",                 { bg = RedShadeDarker, fg = RedShadeLighter, bold = true } },
-  { "FidgetTask",                 { fg = Black } },
-  { "MiniIndentScopeSymbol",      { fg = RedShadeDarker } },
-  { "TreesitterContext",          { bg = BlackShadeLight, italic = false } },
-  { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
-  { "healthSuccess",              { fg = Green } },
-  { "healthWarning",              { fg = RedShadeLight } },
-  { "healthError",                { fg = RedShadeLighter } },
+  { "diffAdded",                  { bg = DiffAdd, fg = Green } },
+  { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLighter } },
+  -- 2}}}
+  -- mason {{{2
   { "MasonHeader",                { bg = White, fg = Black } },
   { "MasonHighlightBlockBold",    { bg = BgShadeLighter, fg = White } },
   { "MasonMutedBlock",            { bg = BgShadeLighter, fg = Fg } },
-  { "@lsp.type.variable",         { link = "@variable" } },
-  { "@lsp.type.macro",            { link = "@macro" } },
-  { "@lsp.type.class",            { link = "@type" } },
-  { "@lsp.type.type",             { link = "@type" } },
-  { "@lsp.type.typeParameter",    { link = "@type.definition" } },
-  { "@lsp.type.enum",             { link = "@type" } },
-  { "@lsp.type.enumMember",       { link = "@constant" } },
-  { "@lsp.type.decorator",        { link = "@function" } },
-  { "@lsp.type.function",         { link = "@function" } },
-  { "@lsp.type.method",           { link = "@method" } },
-  { "@lsp.type.keyword",          { link = "@keyword" } },
-  { "@lsp.type.interface",        { link = "@interface" } },
-  { "@lsp.type.namespace",        { link = "@namespace" } },
-  { "@lsp.type.parameter",        { link = "@parameter" } },
-  { "@lsp.type.property",         { link = "@property" } },
-  { "@lsp.typemode.function.defaultLibrary",  { link = "@function.builtin" } },
-  { "@lsp.typemode.variable.defaultLibrary",  { link = "@variable.builtin" } },
-  { "@lsp.typemode.operator.injected",  { link = "@operator" } },
-  { "@lsp.typemode.string.injected",    { link = "@string" } },
-  { "@lsp.typemode.variable.injected",  { link = "@variable" } },
+  -- 2}}}
+  -- telescope {{{2
+  { "TelescopeBorder",            { bg = Bg, fg = FgShadeDarker } },
+  { "TelescopeMatching",          { fg = RedShadeLighter } },
+  { "TelescopeNormal",            { bg = Bg, fg = Fg } },
+  { "TelescopePromptCounter",     { fg = FgShadeDarker } },
+  { "TelescopePromptTitle",       { bg = Bg, fg = FgShadeDarker } },
+  { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },
+  -- 2}}}
+  -- trouble {{{2
+  { "TroubleFoldIcon",            { bg = none, fg = Fg } },
+  { "TroubleIndent",              { bg = none, fg = BlueShadeDark } },
+  { "TroubleLocation",            { bg = none, fg = BlueShadeDark } },
+  { "TroubleText",                { bg = none, fg = Fg } },
+  -- 2}}}
+  -- other {{{2
+  { "FidgetTask",                 { fg = Black } },
+  { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
+  { "MiniIndentScopeSymbol",      { fg = RedShadeDarker } },
+  { "SnipChoiceNode",             { bg = BgShadeLight, fg = Blue } },
+  { "SnipInsertNode",             { bg = BgShadeLight, fg = Green } },
+  { "StatusColSep",               { bg = BlackShadeLight, fg = BgShadeLighter } },
+  { "TreesitterContext",          { bg = BlackShadeLight, italic = false } },
+  -- 2}}}
+  -- 1}}}
 }
 
 return M.custom
