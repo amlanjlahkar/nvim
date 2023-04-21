@@ -50,10 +50,7 @@ function M.setup()
     },
   })
   require("luasnip.loaders.from_lua").lazy_load({
-    paths = vim.fn.stdpath("config") .. "/lua/plugin/completion/luasnip/lang",
-  })
-  require("luasnip.loaders.from_vscode").lazy_load({
-    paths = vim.fn.stdpath("data") .. "/lazy/friendly-snippets",
+    paths = vim.fn.stdpath("config") .. "/lua/plugin/completion/luasnip/snippets",
   })
   M.setup_mappings()
 end
