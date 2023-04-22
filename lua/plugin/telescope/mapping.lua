@@ -22,6 +22,22 @@ function M.setup()
     },
 
     {
+      "<leader>tc", function()
+        tb.git_status(_, {
+          git_icons = {
+            added = "+",
+            changed = "~",
+            copied = ">",
+            deleted = "x",
+            renamed = "^",
+            unmerged = "<->",
+            untracked = "?",
+          },
+        })
+      end, opts("Telescope: Git status"),
+    },
+
+    {
       "<leader>tb", function()
         local listed = #vim.fn.getbufinfo({ buflisted = true })
         if listed == 1 then
@@ -36,14 +52,6 @@ function M.setup()
           end
         })
       end, opts("Telescope: Listed buffers"),
-    },
-
-    {
-      "<leader>tc",
-      function()
-        tb.colorscheme()
-      end,
-      opts("Telescope: Colorschemes"),
     },
 
     {

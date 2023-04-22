@@ -98,13 +98,13 @@ M.custom = {
   -- 2}}}
   -- gitsigns/fugitive {{{2
   { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
-  { "DiffDelete",                 { bg = DiffDelete, fg = RedShadeLight } },
+  { "DiffDelete",                 { bg = DiffDelete, fg = RedShadeLighter } },
   { "GitGutterAdd",               { bg = BlackShadeLight, fg = Green } },
   { "GitGutterChange",            { bg = BlackShadeLight, fg = Blue } },
   { "GitGutterChangeDelete",      { bg = BlackShadeLight, fg = Magenta } },
   { "GitGutterDelete",            { bg = BlackShadeLight, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = false } },
-  { "GitSignsDeleteInline",       { bg = DiffDelete, fg = Red, italic = false } },
+  { "GitSignsDeleteInline",       { bg = DiffDelete, fg = RedShadeLighter, italic = false } },
   { "diffAdded",                  { bg = DiffAdd, fg = Green } },
   { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLighter } },
   -- 2}}}

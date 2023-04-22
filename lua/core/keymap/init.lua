@@ -44,8 +44,11 @@ key.nmap({
   },
   -- }}}
 
+  -- ex commands {{{
+  { "<leader>r", ":reg<CR>" },
+  -- }}}
+
   -- misc {{{
-  { "<F10>", cmd("LspStart") },
   { "<F11>", cmd("setlocal spell!") },
   { "<F12>", cmd("!$BROWSER %") },
   { "<leader><leader>s", cmd("silent :write | source %"), opts("Save and source lua file") },

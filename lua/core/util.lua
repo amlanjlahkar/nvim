@@ -76,7 +76,7 @@ function M.test_code(filetype)
             vim.cmd("view +setl\\ nomodifiable " .. logfile)
           else
             vim.ui.input({ prompt = "Arguments to pass: " }, function(input)
-              if cmd.iptr and type(cmd.iptr) == "string" then
+              if type(cmd.iptr) == "string" and cmd.iptr then
                 vim.cmd.terminal(string.format("%s %s %s", cmd.iptr, outfile, input))
               else
                 vim.cmd.terminal(string.format("%s %s", outfile, input))
