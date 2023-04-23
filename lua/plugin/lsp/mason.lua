@@ -1,11 +1,11 @@
 local server_spec = {
-  "html",
   "cssls",
-  "tsserver",
+  "html",
   "lua_ls",
   "pyright",
   { "clangd", skip_setup = true },
   { "rust_analyzer", skip_mason = true },
+  { "tsserver", skip_setup = true },
 }
 
 local utils = {

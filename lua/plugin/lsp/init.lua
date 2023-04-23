@@ -48,9 +48,9 @@ return {
       require("plugin.lsp.mason").query_utils()
       null_ls.setup({
         sources = {
-          formatting.stylua,
           formatting.black,
           formatting.prettierd,
+          formatting.stylua,
           formatting.shfmt.with({
             extra_args = { "-i", "2", "-ci", "-bn" },
             extra_filetypes = { "bash" },
@@ -86,6 +86,14 @@ return {
     ft = { "c", "cpp" },
     opts = {
       server = require("plugin.lsp.equip_opts").setup("clangd"),
+    },
+  },
+
+  {
+    "jose-elias-alvarez/typescript.nvim",
+    ft = { "javascript", "typescript" },
+    opts = {
+      server = require("plugin.lsp.equip_opts").setup("tsserver"),
     },
   },
 
