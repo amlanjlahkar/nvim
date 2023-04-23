@@ -103,7 +103,7 @@ return {
         group = vim.api.nvim_create_augroup("cmdbuf_setting", { clear = true }),
         pattern = "CmdbufNew",
         callback = function(self)
-          vim.o.bufhidden = true
+          vim.o.bufhidden = "wipe"
           vim.keymap.set("n", "q", ":bwipe<CR>", { silent = true, nowait = true, buffer = self.buf })
           vim.keymap.set("n", "dd", [[<cmd>lua require('cmdbuf').delete()<CR>]], { silent = true, buffer = self.buf })
         end,

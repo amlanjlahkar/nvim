@@ -80,7 +80,7 @@ key.vmap({
 })
 
 -- insert mode specific
-key.imap({ "<C-l>", "<Right>" })
+-- key.imap({ "<C-l>", "<Right>" })
 
 key.nmap({
   { "<leader>c", '"+yy', opts("Yank line to system clipboard") },
@@ -93,6 +93,5 @@ key.xmap({
 })
 
 -- user commands {{{
-require("core.usrcmd").gh_browse()
 key.nxmap({ "<leader>gb", ":GhBrowse<CR>" })
 -- }}}

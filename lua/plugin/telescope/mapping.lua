@@ -56,7 +56,7 @@ function M.setup()
 
     {
       "<leader>tg", function()
-        tb.live_grep(false, { layout_strategy = "horizontal", preview = true })
+        tb.live_grep(false, { layout_strategy = "horizontal", path_display = { shorten = 3 }, preview = true })
       end, opts("Telescope: Live grep"),
     },
 
