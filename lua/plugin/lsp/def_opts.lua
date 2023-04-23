@@ -6,10 +6,10 @@ function M.handlers()
   return {
     ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single", style = "minimal" }),
     ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single", style = "minimal" }),
-    ["textDocument/publishDiagnostics"] = lsp.with(
-      lsp.diagnostic.on_publish_diagnostics,
-      require("plugin.lsp.diagnostics"):default_opts()
-    ),
+    -- ["textDocument/publishDiagnostics"] = lsp.with(
+    --   lsp.diagnostic.on_publish_diagnostics,
+    --   require("plugin.lsp.diagnostics"):default_opts()
+    -- ),
   }
 end
 -- 1}}}
@@ -25,7 +25,7 @@ end
 
 -- On_attach {{{1
 -- Keymaps {{{2
-function M.keymaps(bufnr)
+function M.setup_keymaps(bufnr)
   local lsp = vim.lsp.buf
   local key = require("core.keymap.maputil")
   local cmd, opts = key.cmd, key.new_opts
@@ -74,32 +74,33 @@ end
 -- 2}}}
 
 function M.on_attach(client, bufnr)
-  -- Highlight references for symbol under cursor
+  local api = vim.api
   if client.server_capabilities.documentHighlightProvider then
     local is_defined, _ = pcall(vim.cmd, "silent hi LspReference")
     if is_defined then
-      vim.api.nvim_set_hl(0, "LspReferenceRead", { link = "LspReference" })
-      vim.api.nvim_set_hl(0, "LspReferenceText", { link = "LspReference" })
-      vim.api.nvim_set_hl(0, "LspReferenceWrite", { link = "LspReference" })
+      for _, ref in pairs({ "Text", "Read", "Write" }) do
+        api.nvim_set_hl(0, "LspReference" .. ref, { link = "LspReference" })
+      end
     end
 
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-    vim.api.nvim_clear_autocmds({
-      buffer = bufnr,
-      group = "lsp_document_highlight",
-    })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = "lsp_document_highlight",
+    local au = api.nvim_create_autocmd
+    local id = api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+    au("CursorHold", {
+      group = id,
       buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
-    vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
-      group = "lsp_document_highlight",
+    au({ "CursorMoved", "InsertEnter" }, {
+      group = id,
       buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
     })
   end
-  M.keymaps(bufnr)
+
+  local diagnostics = require("plugin.lsp.diagnostics")
+  diagnostics:setup_signs()
+  vim.diagnostic.config(diagnostics:default_opts())
+  M.setup_keymaps(bufnr)
 end
 -- 1}}}
 

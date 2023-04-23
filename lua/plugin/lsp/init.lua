@@ -31,7 +31,6 @@ return {
         local opts = require("plugin.lsp.equip_opts").setup(server)
         require("lspconfig")[server].setup(opts)
       end
-      require("plugin.lsp.diagnostics"):setup_signs()
       require("lspconfig.ui.windows").default_options.border = "single"
     end,
   },
@@ -67,14 +66,11 @@ return {
             end,
           }),
         },
-        on_attach = function(_, bufnr)
+        on_attach = function(client, bufnr)
           local default = require("plugin.lsp.def_opts")
-          local diagnostics = require("plugin.lsp.diagnostics")
           if not package.loaded["lsp"] then
             default.handlers()
-            default.keymaps(bufnr)
-            diagnostics:setup_signs()
-            vim.diagnostic.config(diagnostics:default_opts())
+            default.on_attach(client, bufnr)
           end
         end,
       })
