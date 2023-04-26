@@ -4,8 +4,8 @@ local server_spec = {
   "lua_ls",
   "pyright",
   { "clangd", skip_setup = true },
-  { "rust_analyzer", skip_mason = true },
   { "tsserver", skip_setup = true },
+  { "rust_analyzer", skip_mason = false },
 }
 
 local utils = {
@@ -33,18 +33,22 @@ function M.query_utils(pkg_list)
 end
 
 function M:setup_servers()
+  local ensured, servers = self.ensured, self.servers
+  local insert = table.insert
   for _, v in pairs(server_spec) do
     if type(v) == "string" then
-      table.insert(M.ensured, v)
-      table.insert(M.servers, v)
-    elseif v["skip_mason"] and not v["skip_setup"] then
-      table.insert(M.servers, v[1])
-    elseif v["skip_setup"] and not v["skip_mason"] then
-      table.insert(M.ensured, v[1])
+      insert(ensured, v)
+      insert(servers, v)
+    end
+    if not v["skip_mason"] then
+      insert(ensured, v[1])
+    end
+    if not v["skip_setup"] then
+      insert(servers, v[1])
     end
   end
   require("mason-lspconfig").setup({
-    ensure_installed = M.ensured,
+    ensure_installed = ensured,
     automatic_installation = false,
   })
   return M.servers

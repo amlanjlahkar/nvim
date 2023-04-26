@@ -59,9 +59,9 @@ M.autocmd_definitions = {
     "FileType",
     {
       desc = "Enable q for quit",
-      pattern = { "help", "git", "checkhealth" },
+      pattern = { "help", "fugitive", "git", "checkhealth" },
       callback = function(self)
-        vim.keymap.set("n", "q", ":bd<CR>", { buffer = self.buf, silent = true, nowait = true, remap = false })
+        vim.keymap.set("n", "q", ":bd<CR>", { buffer = self.buf, silent = true, nowait = true })
       end,
     },
   },

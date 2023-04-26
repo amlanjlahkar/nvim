@@ -14,7 +14,7 @@ return {
         "uga-rosa/cmp-dictionary",
         config = function()
           require("cmp_dictionary").setup({
-            async = true,
+            async = false,
             exact = -1,
             max_items = 20,
           })

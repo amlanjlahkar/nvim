@@ -1,7 +1,7 @@
 local o = vim.opt
 
 -- file handling
-o.shada = "!,'15,<0,/0,:20,f0"
+o.shada = "!,'5,<0,/0,:20,f0"
 o.hidden = true
 o.confirm = true
 o.autowrite = true

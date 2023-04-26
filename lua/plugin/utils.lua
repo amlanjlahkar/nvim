@@ -2,7 +2,7 @@ return {
   "nvim-lua/plenary.nvim",
   {
     "cbochs/grapple.nvim",
-    ---Experimental
+    --NOTE: experimental
     init = function()
       local cwd = string.match(vim.loop.cwd(), "/([.%w_%-]+)$")
       local grapple_data = vim.fn.finddir(vim.fn.stdpath("data") .. "/grapple")
@@ -89,7 +89,7 @@ return {
         { "q:", function() cb.split_open(cwh) end },
         { "q/", function() cb.split_open(cwh, { type = "vim/search/forward" }) end },
         { "q?", function() cb.split_open(cwh, { type = "vim/search/backward" }) end },
-        { "ql", function() cb.split_open(cwh, { type = "lua/cmd" }) end },
+        { "ql", function() cb.split_open(cwh, { type = "lua/cmd" }) end, key.new_opts(key.nowait) },
       })
       key.cmap({
         "<C-f>", function()

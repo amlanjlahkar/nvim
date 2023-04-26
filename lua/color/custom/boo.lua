@@ -43,9 +43,9 @@ M.custom = {
   { "LineNr",                     { bg = BlackShadeLight, fg = RedShadeDarker } },
   { "CursorLineNr",               { bg = BlackShadeLight, fg = White, bold = false } },
   { "SignColumn",                 { bg = BlackShadeLight } },
-  { "NormalFloat",                { bg = Bg, fg = Fg } },
-  { "FloatBorder",                { fg = FgShadeDarker } },
-  { "FloatTitle",                 { bg = Bg, fg = White } },
+  { "NormalFloat",                { bg = Black, fg = Fg } },
+  { "FloatBorder",                { bg = Black, fg = Black } },
+  { "FloatTitle",                 { bg = BlackShadeLight, fg = Fg, underline = true } },
   { "Pmenu",                      { bg = Black , fg = Fg } },
   { "PmenuSbar",                  { bg = BlackShadeLight  } },
   { "PmenuSel",                   { bg = BgShadeLighter, fg = Red } },
@@ -108,17 +108,20 @@ M.custom = {
   { "diffAdded",                  { bg = DiffAdd, fg = Green } },
   { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLighter } },
   -- 2}}}
+  -- lazy {{{2
+  { "LazyProgressTodo",           { fg = Black } },
+  -- 2}}}
   -- mason {{{2
   { "MasonHeader",                { bg = White, fg = Black } },
   { "MasonHighlightBlockBold",    { bg = BgShadeLighter, fg = White } },
   { "MasonMutedBlock",            { bg = BgShadeLighter, fg = Fg } },
   -- 2}}}
   -- telescope {{{2
-  { "TelescopeBorder",            { bg = Bg, fg = FgShadeDarker } },
+  { "TelescopeBorder",            { bg = Black, fg = Black } },
   { "TelescopeMatching",          { fg = RedShadeLighter } },
-  { "TelescopeNormal",            { bg = Bg, fg = Fg } },
+  { "TelescopeNormal",            { bg = Black, fg = Fg } },
   { "TelescopePromptCounter",     { fg = FgShadeDarker } },
-  { "TelescopePromptTitle",       { bg = Bg, fg = FgShadeDarker } },
+  { "TelescopePromptTitle",       { bg = BlackShadeLight, fg = Fg } },
   { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },
   -- 2}}}
   -- trouble {{{2

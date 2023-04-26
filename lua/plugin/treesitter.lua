@@ -6,7 +6,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 
     config = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
+      require("nvim-treesitter.install").update({ with_sync = false })
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",

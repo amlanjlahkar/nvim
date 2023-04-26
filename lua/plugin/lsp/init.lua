@@ -25,6 +25,7 @@ return {
       "folke/neodev.nvim",
     },
     config = function()
+      vim.lsp.set_log_level("DEBUG")
       require("neodev").setup()
       local servers = require("plugin.lsp.mason"):setup_servers()
       for _, server in pairs(servers) do
@@ -95,6 +96,7 @@ return {
 
   {
     "mfussenegger/nvim-jdtls",
+    enabled = false,
     ft = "java",
     config = function()
       require("plugin.lsp.server_settings.jdtls")
