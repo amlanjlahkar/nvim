@@ -131,7 +131,7 @@ M.custom = {
   { "TroubleText",                { bg = none, fg = Fg } },
   -- 2}}}
   -- other {{{2
-  { "FidgetTask",                 { fg = Black } },
+  { "FidgetTask",                 { fg = FgShadeDarker, blend = 10 } },
   { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
   { "MiniIndentScopeSymbol",      { fg = RedShadeDarker } },
   { "SnipChoiceNode",             { bg = BgShadeLight, fg = Blue } },
