@@ -84,29 +84,6 @@ function M.get_dwots()
   end
 end
 
-function M.set_bg()
-  local path = fn.readdir(fn.finddir("~/media/pictures"))
-  vim.ui.select(path, {
-    prompt = "Select directory:",
-  }, function(choice)
-    if choice then
-      local chosen_dir = fn.finddir("~/media/pictures/" .. choice)
-      local opts = {
-        prompt_title = "Choose Wallpaper",
-        cwd = chosen_dir,
-        attach_mappings = function(_, map)
-          map("i", "<CR>", function()
-            local e = require("telescope.actions.state").get_selected_entry()
-            vim.fn.system("xwallpaper --zoom " .. chosen_dir .. "/" .. e.value)
-          end)
-          return true
-        end,
-      }
-      require("telescope").extensions.media.media(opts)
-    end
-  end)
-end
-
 function M.reload_module()
   local path = vim.fn.stdpath("config") .. "/lua"
   local function parse_entry(e)
