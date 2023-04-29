@@ -56,7 +56,7 @@ return {
         -- telescope = require("plugin.telescope.function").use_theme(),
         get_config = function(opts)
           -- JdtWipeDataAndRestart
-          if string.match(opts.prompt, "wipe the data folder") then
+          if opts.prompt and string.match(opts.prompt, "wipe the data folder") then
             return {
               backend = "builtin",
               builtin = { width = 0.8, height = 0.3 },

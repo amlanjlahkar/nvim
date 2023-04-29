@@ -55,7 +55,7 @@ M.custom = {
   { "TabLineSel",                 { bg = BgShadeLight, fg = Fg, bold = false } },
   { "VertSplit",                  { fg = BgShadeLighter } },
   { "Visual",                     { bg = BgShadeLighter, fg = White } },
-  { "MatchParen",                 { bg = RedShadeDarker, fg = RedShadeLighter, bold = true } },
+  { "MatchParen",                 { bg = "#270f2e", fg = Magenta, bold = true } },
   { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default

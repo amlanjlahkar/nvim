@@ -42,7 +42,7 @@ return {
     "echasnovski/mini.comment",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     version = false,
-    keys = { "gc", { "gc", mode = "x" } },
+    keys = { "gc", { "gc", mode = "x" }, { "x", mode = "o" } },
     config = function()
       local avail, ts_config = pcall(require, "nvim-treesitter['config']")
       if avail then
@@ -69,7 +69,7 @@ return {
   {
     "echasnovski/mini.ai",
     version = false,
-    keys = { "vi", "va" },
+    lazy = false,
     dependencies = "nvim-treesitter-textobjects",
     opts = function()
       local ai = require("mini.ai")
