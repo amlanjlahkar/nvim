@@ -4,7 +4,7 @@ return {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     opts = function()
-      local key = require("core.keymap.maputil")
+      local key = require("core.utils.map")
       local opts = key.new_opts
 
       return {

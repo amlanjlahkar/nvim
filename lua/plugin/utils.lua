@@ -22,7 +22,7 @@ return {
     keys = { "<leader>mm", "<leader>ma" },
     config = function()
       local g = require("grapple")
-      local key = require("core.keymap.maputil")
+      local key = require("core.utils.map")
       local opts = key.new_opts
 
       key.nmap({
@@ -82,7 +82,7 @@ return {
     config = function()
       local cwh = vim.o.cmdwinheight
       local cb = require("cmdbuf")
-      local key = require("core.keymap.maputil")
+      local key = require("core.utils.map")
 
       --stylua: ignore start
       key.nmap({

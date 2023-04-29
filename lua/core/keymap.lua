@@ -1,7 +1,4 @@
--- leader key
-vim.g.mapleader = " "
-
-local key = require("core.keymap.maputil")
+local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 
 key.nmap({

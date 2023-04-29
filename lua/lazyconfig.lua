@@ -64,7 +64,7 @@ require("lazy").setup("plugin", {
   install = { colorscheme = { require("color").custom, require("color").default } },
 })
 
-local key = require("core.keymap.maputil")
+local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 
 key.nmap({

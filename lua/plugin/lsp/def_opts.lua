@@ -27,7 +27,7 @@ end
 -- Keymaps {{{2
 function M.setup_keymaps(bufnr)
   local lsp = vim.lsp.buf
-  local key = require("core.keymap.maputil")
+  local key = require("core.utils.map")
   local cmd, opts = key.cmd, key.new_opts
   -- stylua: ignore start
   key.imap({ "<C-k>", lsp.signature_help })

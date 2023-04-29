@@ -43,7 +43,7 @@ M.autocmd_definitions = {
       desc = "Bind key for quick testing specific source files",
       pattern = { "python", "c", "cpp", "lua", "java" },
       callback = function()
-        local cmd = require("core.util").test_code(vim.bo.filetype)
+        local cmd = require("core.utils").test_code(vim.bo.filetype)
         vim.keymap.set("n", "<leader>x", function()
           if cmd then
             cmd()

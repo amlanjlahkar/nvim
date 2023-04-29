@@ -106,7 +106,7 @@ jdtls.jol_path = jol_path
 jdtls.start_or_attach(config)
 
 -- Keymaps
-local key = require("core.keymap.maputil")
+local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 local nowait = key.nowait
 

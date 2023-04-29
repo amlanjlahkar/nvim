@@ -22,7 +22,7 @@ M.trunc_width = setmetatable({
 function M.is_truncated(_, width, is_statusglobal)
   width = width or M.trunc_width.default
   is_statusglobal = is_statusglobal or true
-  local current_width = require("core.util").get_width({ combined = is_statusglobal })
+  local current_width = require("core.utils").get_width({ combined = is_statusglobal })
   return current_width < width
 end
 

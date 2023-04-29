@@ -3,7 +3,7 @@ local ls = require("luasnip")
 local M = {}
 
 function M.setup_mappings()
-  local key = require("core.keymap.maputil")
+  local key = require("core.utils.map")
   local tab = vim.api.nvim_replace_termcodes("<TAB>", true, false, true)
 
   key.ismap({
