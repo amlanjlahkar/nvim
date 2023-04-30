@@ -2,18 +2,19 @@ local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    "dharmx/telescope-media.nvim",
   },
   cmd = "Telescope",
   keys = "<leader>t",
 }
 
-function M.config()
-  require("telescope").setup({
+M.opts = function()
+  local actions = require("telescope.actions")
+  local actions_layout = require("telescope.actions.layout")
+  return {
     defaults = {
-      prompt_prefix = "   ",
-      selection_caret = "  ",
-      multi_icon = "  ",
+      prompt_prefix = "  ",
+      selection_caret = " ",
+      multi_icon = " ",
       preview = false,
       layout_config = {
         horizontal = {
@@ -23,7 +24,15 @@ function M.config()
       },
       buffer_previewer_maker = require("plugin.telescope.function").buf_preview_maker,
       history = { path = vim.fn.stdpath("state") .. "/telescope_history.log" },
-      mappings = { i = { ["<C-u>"] = false } },
+      --stylua: ignore
+      mappings = {
+        i = {
+          ["<C-u>"] = false,
+          ["<C-w>"] = function() vim.api.nvim_input("<C-S-w>") end,
+          ["<C-s>"] = actions.toggle_selection,
+          ["<M-p>"] = actions_layout.toggle_preview,
+        },
+      },
       vimgrep_arguments = {
         "rg",
         "--color=never",
@@ -49,17 +58,16 @@ function M.config()
         override_file_sorter = true,
         case_mode = "smart_case",
       },
-      media = {
-        backend = "ueberzug",
-      },
     },
-  })
+  }
+end
 
-  local extensions = { "fzf", "media" }
+function M.config(_, opts)
+  require("telescope").setup(opts)
+  local extensions = { "fzf" }
   for _, ext in pairs(extensions) do
     require("telescope").load_extension(ext)
   end
-
   require("plugin.telescope.mapping").setup()
 end
 

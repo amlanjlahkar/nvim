@@ -84,30 +84,4 @@ function M.get_dwots()
   end
 end
 
-function M.reload_module()
-  local path = vim.fn.stdpath("config") .. "/lua"
-  local function parse_entry(e)
-    local mod = e:gsub("%.lua", "")
-    mod = mod:gsub("/", ".")
-    return mod:gsub("%.init", "")
-  end
-
-  local opts = {
-    prompt_title = "Nvim Modules",
-    cwd = path,
-
-    attach_mappings = function(_, map)
-      map("i", "<CR>", function()
-        local e = require("telescope.actions.state").get_selected_entry()
-        local mod = parse_entry(e.value)
-        require("plenary.reload").reload_module(mod)
-        require(mod)
-        vim.notify("Reloaded " .. mod, vim.log.levels.INFO)
-      end)
-      return true
-    end,
-  }
-  tb.find_files(_, opts)
-end
-
 return M

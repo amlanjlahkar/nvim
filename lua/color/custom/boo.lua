@@ -22,7 +22,7 @@ local DiffAdd = "#0c1d0e"
 local DiffDelete = "#2a080f"
 
 local M = {}
--- stylua: ignore
+--stylua: ignore
 M.custom = {
   -- statusline {{{1
   { "StatusLine",                 { bg = BlackShadeLight, fg = FgShadeDarker } },

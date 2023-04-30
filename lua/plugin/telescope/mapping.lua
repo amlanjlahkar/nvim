@@ -1,20 +1,57 @@
-local M = {}
-
-local extra = require("plugin.telescope.extra")
 local fn = require("plugin.telescope.function")
 local tb = fn.pick("telescope.builtin")
+local extra = require("plugin.telescope.extra")
 
 local key = require("core.utils.map")
-local cmd, opts = key.cmd, key.new_opts
+local opts = key.new_opts
+
+local M = {}
 
 function M.setup()
   key.nmap({
-    { "<leader>tn", fn.get_nvim_conf, opts("Telescope: Nvim config") },
-    { "<leader>tf", fn.get_relative_file, opts("Telescope: Buffer relative files") },
-    { "<leader>td", fn.get_dwots, opts("Telescope: Dwots") },
-    { "<leader>tr", fn.reload_module, opts("Telescope: Reload lua module") },
-    { "<leader>tt", tb.find_files, opts("Telescope: Find files") },
-    { "<leader>th", tb.help_tags, opts("Telescope: Help tags") },
+    {
+      "<leader>tn",
+      function()
+        fn.get_nvim_conf()
+      end,
+      opts("Telescope: Nvim config"),
+    },
+    {
+      "<leader>tf",
+      function()
+        fn.get_relative_file()
+      end,
+      opts("Telescope: Buffer relative files"),
+    },
+    {
+      "<leader>td",
+      function()
+        fn.get_dwots()
+      end,
+      opts("Telescope: Dwots"),
+    },
+    {
+      "<leader>tr",
+      function()
+        fn.reload_module()
+      end,
+      opts("Telescope: Reload lua module"),
+    },
+    {
+      "<leader>th",
+      function()
+        tb.help_tags()
+      end,
+      opts("Telescope: Help tags"),
+    },
+
+    {
+      "<leader>tt",
+      function()
+        tb.find_files(_, { no_ignore = true })
+      end,
+      opts("Telescope: Find files"),
+    },
 
     {
       "<leader>to",

@@ -98,7 +98,7 @@ local config = {
   -- Extend `bundles` with paths to jar files
   -- for additional eclipse.jdt.ls plugins i.e. for debugging
   init_options = {
-    -- stylua: ignore
+    --stylua: ignore
     --[[ bundles = {
       vim.fn.glob(home .. "/tools/language_specific/debug-extensions/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
       vim.fn.glob(home .. "/tools/language_specific/Java/debug-extensions/vscode-java-test/server/*.jar"),
@@ -118,7 +118,7 @@ local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 local nowait = key.nowait
 
--- stylua: ignore start
+--stylua: ignore start
 key.nmap({
   { "<leader>eo", cmd("lua require('jdtls').organize_imports()"),       opts(nowait, "Jdtls: Organize imports") },
   { "<leader>ev", cmd("lua require('jdtls').extract_variable()"),       opts(nowait, "Jdtls: Extract variable") },
@@ -132,4 +132,4 @@ key.vmap({
   { "<leader>ec", cmd("lua require('jdtls').organize_constant(true)"),  opts(nowait, "Jdtls: Extract constant") },
   { "<leader>em", cmd("lua require('jdtls').extract_method(true)"),     opts(nowait, "Jdtls: Extract method") },
 })
--- stylua: ignore end
+--stylua: ignore end

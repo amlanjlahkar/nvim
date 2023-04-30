@@ -120,7 +120,7 @@ function M:get_git_status()
     return is_head_empty and string.format(" #%s ", signs.head or "") or ""
   end
 
-  -- stylua: ignore
+  --stylua: ignore
   return is_head_empty
       and string.format(
         " (#%s)[+%s ~%s -%s] ",

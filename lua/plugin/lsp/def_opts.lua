@@ -27,9 +27,10 @@ end
 -- Keymaps {{{2
 function M.setup_keymaps(bufnr)
   local lsp = vim.lsp.buf
+  local tb = require("telescope.builtin")
   local key = require("core.utils.map")
   local cmd, opts = key.cmd, key.new_opts
-  -- stylua: ignore start
+  --stylua: ignore start
   key.imap({ "<C-k>", lsp.signature_help })
   key.nmap({
     { "K",            lsp.hover,                                          opts(bufnr, "LSP: Show hover information") },
@@ -40,14 +41,16 @@ function M.setup_keymaps(bufnr)
     { "<leader>lf",   vim.diagnostic.open_float,                          opts(bufnr, "LSP: Show line diagnostic") },
     { "]d",           vim.diagnostic.goto_next,                           opts(bufnr, "LSP: Goto next diagnostic occurrence") },
     { "[d",           vim.diagnostic.goto_prev,                           opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
-    { "gd",           cmd("TroubleToggle lsp_definitions"),               opts(bufnr, "LSP: Goto definition") },
-    { "gi",           cmd("TroubleToggle lsp_implementations"),           opts(bufnr, "LSP: Goto implementation") },
-    { "gr",           cmd("TroubleToggle lsp_references"),                opts(bufnr, "LSP/Trouble: List references for symbol under cursor") },
     { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "LSP/Trouble: List document diagnostics") },
     { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
-    { "<leader>ls", function()
-        require("telescope.builtin").lsp_dynamic_workspace_symbols({ fname_width = 40 })
-      end, opts(bufnr, "LSP/Telescope: Search for workspace symbols") },
+    { "gd",           function() tb.lsp_definitions() end,                opts(bufnr, "LSP/Telescope: Goto definition") },
+    { "gi",           function() tb.lsp_implementations() end,            opts(bufnr, "LSP/Telescope: Goto implementation(s)") },
+    { "gr",           function() tb.lsp_references() end,                 opts(bufnr, "LSP/Telescope: List references") },
+    {
+      "<leader>ls", function()
+        tb.lsp_dynamic_workspace_symbols({ fname_width = 40 })
+      end, opts(bufnr, "LSP/Telescope: Search for workspace symbols")
+    },
   })
   key.nxmap({
     "<leader>f",
@@ -69,7 +72,7 @@ function M.setup_keymaps(bufnr)
     opts(bufnr, "Lsp/Null-ls: Format buffer"),
   })
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  -- stylua: ignore end
+  --stylua: ignore end
 end
 -- 2}}}
 

@@ -10,7 +10,7 @@ return {
       return {
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
-          -- stylua: ignore start
+          --stylua: ignore start
           key.nmap({
             { "]c", gs.next_hunk, opts(bufnr, "Gitsigns: next hunk") },
             { "[c", gs.prev_hunk, opts(bufnr, "Gitsigns: previous hunk") },
@@ -25,7 +25,7 @@ return {
             { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts(bufnr, "Gitsigns: reset hunk") },
             { "<leader>gs", ":Gitsigns stage_hunk<CR>", opts(bufnr, "Gitsigns: stage hunk") },
           })
-          -- stylua: ignore end
+          --stylua: ignore end
         end,
       }
     end,
