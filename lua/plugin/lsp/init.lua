@@ -94,12 +94,5 @@ return {
     },
   },
 
-  {
-    "mfussenegger/nvim-jdtls",
-    enabled = false,
-    ft = "java",
-    config = function()
-      require("plugin.lsp.server_settings.jdtls")
-    end,
-  }
+  { "mfussenegger/nvim-jdtls", enabled = false },
 }
