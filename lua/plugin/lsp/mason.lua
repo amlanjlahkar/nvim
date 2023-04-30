@@ -1,30 +1,25 @@
-local server_spec = {
-  "cssls",
-  "html",
-  "lua_ls",
-  "pyright",
-  { "clangd", skip_setup = true },
-  { "tsserver", skip_setup = true },
-  { "rust_analyzer", skip_mason = false },
+local M = {}
+
+M.server_spec = {
+  { "clangd", require_node = false, hook_lspconfig = false, auto_install = true },
+  { "html", require_node = true, hook_lspconfig = true, auto_install = true },
+  { "cssls", require_node = true, hook_lspconfig = true, auto_install = true },
+  { "lua_ls", require_node = false, hook_lspconfig = true, auto_install = true },
+  { "pyright", require_node = true, hook_lspconfig = true, auto_install = true },
+  { "rust_analyzer", require_node = false, hook_lspconfig = true, auto_install = false },
+  { "tsserver", require_node = true, hook_lspconfig = false, auto_install = true },
 }
 
-local utils = {
-  "blue",
-  "stylua",
-  "shfmt",
-  "shellcheck",
-  "jsonlint",
-  "prettierd",
-}
-
-local M = {
-  servers = {},
-  ensured = {},
-}
-
-function M.query_utils(pkg_list)
-  pkg_list = pkg_list or utils
-  for _, p in pairs(pkg_list) do
+function M.install_utils()
+  local utils = {
+    "blue",
+    "stylua",
+    "shfmt",
+    "shellcheck",
+    "jsonlint",
+    "prettierd",
+  }
+  for _, p in pairs(utils) do
     local pkg = require("mason-registry").get_package(p)
     if not pkg:is_installed() then
       pkg:install()
@@ -32,26 +27,27 @@ function M.query_utils(pkg_list)
   end
 end
 
-function M:setup_servers()
-  local ensured, servers = self.ensured, self.servers
-  local insert = table.insert
-  for _, v in pairs(server_spec) do
-    if type(v) == "string" then
-      insert(ensured, v)
-      insert(servers, v)
-    end
-    if not v["skip_mason"] then
-      insert(ensured, v[1])
-    end
-    if not v["skip_setup"] then
-      insert(servers, v[1])
+function M:setup()
+  local ensured = {}
+  for _, server in pairs(self.server_spec) do
+    if server.auto_install then
+      table.insert(ensured, server[1])
     end
   end
   require("mason-lspconfig").setup({
     ensure_installed = ensured,
     automatic_installation = false,
   })
-  return M.servers
+  self.install_utils()
 end
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  desc = "Install missing mason packages",
+  group = vim.api.nvim_create_augroup("_mason", { clear = true }),
+  pattern = vim.fn.stdpath("config") .. "/lua/plugin/lsp/mason.lua",
+  callback = function()
+    M:setup()
+  end,
+})
 
 return M

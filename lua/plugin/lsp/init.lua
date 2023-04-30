@@ -25,12 +25,19 @@ return {
       "folke/neodev.nvim",
     },
     config = function()
+      local node_loaded = vim.fn.executable("node") == 1
       vim.lsp.set_log_level("DEBUG")
       require("neodev").setup()
-      local servers = require("plugin.lsp.mason"):setup_servers()
-      for _, server in pairs(servers) do
-        local opts = require("plugin.lsp.equip_opts").setup(server)
-        require("lspconfig")[server].setup(opts)
+      local spec = require("plugin.lsp.mason").server_spec
+      for _, server in pairs(spec) do
+        if server.hook_lspconfig then
+          if not node_loaded and server.require_node then
+            goto continue
+          end
+          local opts = require("plugin.lsp.equip_opts").setup(server[1])
+          require("lspconfig")[server[1]].setup(opts)
+          ::continue::
+        end
       end
       require("lspconfig.ui.windows").default_options.border = "single"
     end,
@@ -45,7 +52,6 @@ return {
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
 
-      require("plugin.lsp.mason").query_utils()
       null_ls.setup({
         sources = {
           formatting.black,
