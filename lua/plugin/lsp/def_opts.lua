@@ -26,8 +26,13 @@ end
 -- On_attach {{{1
 -- Keymaps {{{2
 function M.setup_keymaps(bufnr)
+  local function check(action, fallback, opts)
+    fallback = fallback or action
+    opts = opts or {}
+    local is_avail, tb = pcall(require, "telescope.builtin")
+    return is_avail and tb["lsp_" .. action](opts) or vim.lsp.buf[fallback]()
+  end
   local lsp = vim.lsp.buf
-  local tb = require("telescope.builtin")
   local key = require("core.utils.map")
   local cmd, opts = key.cmd, key.new_opts
   --stylua: ignore start
@@ -41,14 +46,26 @@ function M.setup_keymaps(bufnr)
     { "<leader>lf",   vim.diagnostic.open_float,                          opts(bufnr, "LSP: Show line diagnostic") },
     { "]d",           vim.diagnostic.goto_next,                           opts(bufnr, "LSP: Goto next diagnostic occurrence") },
     { "[d",           vim.diagnostic.goto_prev,                           opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
-    { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "LSP/Trouble: List document diagnostics") },
-    { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "LSP/Trouble: List workspace diagnostics") },
-    { "gd",           function() tb.lsp_definitions() end,                opts(bufnr, "LSP/Telescope: Goto definition") },
-    { "gi",           function() tb.lsp_implementations() end,            opts(bufnr, "LSP/Telescope: Goto implementation(s)") },
-    { "gr",           function() tb.lsp_references() end,                 opts(bufnr, "LSP/Telescope: List references") },
+    { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "Trouble: List document diagnostics") },
+    { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "Trouble: List workspace diagnostics") },
+    {
+      "gd", function()
+        check("definitions", "definition")
+      end, opts(bufnr, "LSP/Telescope: Goto definition")
+    },
+    {
+      "gi", function()
+        check("implementations", "implementation")
+      end, opts(bufnr, "LSP/Telescope: Goto implementation(s)")
+    },
+    {
+      "gr", function()
+        check("references")
+      end, opts(bufnr, "LSP/Telescope: List references")
+    },
     {
       "<leader>ls", function()
-        tb.lsp_dynamic_workspace_symbols({ fname_width = 40 })
+        check("dynamic_workspace_symbols", "workspace_symbol", { fname_width = 40 })
       end, opts(bufnr, "LSP/Telescope: Search for workspace symbols")
     },
   })
@@ -79,6 +96,7 @@ end
 function M.on_attach(client, bufnr)
   local api = vim.api
   if client.server_capabilities.documentHighlightProvider then
+    ---@diagnostic disable-next-line: param-type-mismatch
     local is_defined, _ = pcall(vim.cmd, "silent hi LspReference")
     if is_defined then
       for _, ref in pairs({ "Text", "Read", "Write" }) do
