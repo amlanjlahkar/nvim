@@ -8,6 +8,10 @@ return {
       local opts = key.new_opts
 
       return {
+        signs = {
+          delete = { text = "" },
+          topdelete = { text = "" },
+        },
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
           --stylua: ignore start

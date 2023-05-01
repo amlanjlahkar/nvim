@@ -275,7 +275,7 @@ function M.setup()
       return self["set_" .. mode](self)
     end,
   })
-  local augroup = api.nvim_create_augroup("_ext", { clear = true })
+  local augroup = api.nvim_create_augroup("_StatusLine", { clear = true })
   api.nvim_create_autocmd("FileType", {
     group = augroup,
     pattern = "netrw",
