@@ -1,35 +1,42 @@
 return {
   {
+    "williamboman/mason.nvim",
+    lazy = false,
+    opts = {
+      ui = {
+        border = "none",
+        width = 0.6,
+        height = 0.8,
+        icons = {
+          package_installed = "",
+          package_pending = "",
+          package_uninstalled = "",
+        },
+      },
+    },
+  },
+
+  {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
       { "j-hui/fidget.nvim", opts = {
         text = { spinner = "dots", done = " " },
       } },
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          ui = {
-            border = "none",
-            width = 0.6,
-            height = 0.8,
-            icons = {
-              package_installed = "",
-              package_pending = "",
-              package_uninstalled = "",
-            },
-          },
-        },
-      },
       "williamboman/mason-lspconfig",
       "folke/neodev.nvim",
     },
     config = function()
-      local node_loaded = vim.fn.executable("node") == 1
       vim.lsp.set_log_level("DEBUG")
+      local mason = require("plugin.lsp.mason")
+      local root = require("mason.settings").current.install_root_dir .. "/packages"
+      if not vim.loop.fs_access(root, "R") then
+        mason:install_ensured()
+        return
+      end
       require("neodev").setup()
-      local spec = require("plugin.lsp.mason").server_spec
-      for _, server in pairs(spec) do
+      local node_loaded = vim.fn.executable("node") == 1
+      for _, server in pairs(mason.server_spec) do
         if server.hook_lspconfig then
           if not node_loaded and server.require_node then
             goto continue
