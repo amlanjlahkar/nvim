@@ -47,12 +47,11 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     ft = { "sh", "bash", "yaml", "yml", "json" },
     event = "LspAttach",
-    config = function()
+    opts = function()
       local null_ls = require("null-ls")
       local formatting = null_ls.builtins.formatting
       local diagnostics = null_ls.builtins.diagnostics
-
-      null_ls.setup({
+      return {
         sources = {
           formatting.black,
           formatting.prettierd,
@@ -80,9 +79,11 @@ return {
             default.on_attach(client, bufnr)
           end
         end,
-      })
+      }
     end,
   },
+
+  { "mfussenegger/nvim-jdtls", enabled = false },
 
   {
     "p00f/clangd_extensions.nvim",
@@ -99,6 +100,4 @@ return {
       server = require("plugin.lsp.equip_opts").setup("tsserver"),
     },
   },
-
-  { "mfussenegger/nvim-jdtls", enabled = false },
 }
