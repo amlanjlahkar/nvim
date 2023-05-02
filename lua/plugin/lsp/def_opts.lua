@@ -30,7 +30,11 @@ function M.setup_keymaps(bufnr)
     fallback = fallback or action
     opts = opts or {}
     local is_avail, tb = pcall(require, "telescope.builtin")
-    return is_avail and tb["lsp_" .. action](opts) or vim.lsp.buf[fallback]()
+    if is_avail then
+      tb["lsp_" .. action](opts)
+    else
+      vim.lsp.buf[fallback]()
+    end
   end
   local lsp = vim.lsp.buf
   local key = require("core.utils.map")
