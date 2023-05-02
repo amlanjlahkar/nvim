@@ -1,3 +1,4 @@
+local schedule_install = require("plugin.lsp.mason").schedule_install
 return {
   {
     "williamboman/mason.nvim",
@@ -14,6 +15,18 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        desc = "Install missing mason packages",
+        group = vim.api.nvim_create_augroup("_Mason", { clear = true }),
+        pattern = vim.fn.stdpath("config") .. "/lua/plugin/lsp/schema.lua",
+        callback = function()
+          require("plenary.reload").reload_module("plugin.lsp.schema")
+          schedule_install()
+        end,
+      })
+    end,
   },
 
   {
@@ -23,21 +36,19 @@ return {
       { "j-hui/fidget.nvim", opts = {
         text = { spinner = "dots", done = " " },
       } },
-      "williamboman/mason-lspconfig",
       "folke/neodev.nvim",
     },
     config = function()
       vim.lsp.set_log_level("DEBUG")
-      local mason = require("plugin.lsp.mason")
       local root = require("mason.settings").current.install_root_dir .. "/packages"
       if not vim.loop.fs_access(root, "R") then
-        mason:install_ensured()
+        schedule_install()
         return
       end
       require("neodev").setup()
       local node_loaded = vim.fn.executable("node") == 1
-      for _, server in pairs(mason.server_spec) do
-        if server.hook_lspconfig then
+      for _, server in pairs(require("plugin.lsp.schema")) do
+        if type(server.hook_lspconfig) == "boolean" and server.hook_lspconfig then
           if not node_loaded and server.require_node then
             goto continue
           end

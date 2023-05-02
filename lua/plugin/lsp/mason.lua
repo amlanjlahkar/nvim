@@ -1,70 +1,42 @@
 local M = {}
 
-M.server_spec = {
-  { "clangd", require_node = false, hook_lspconfig = false, auto_install = true },
-  { "html", require_node = true, hook_lspconfig = true, auto_install = true },
-  { "cssls", require_node = true, hook_lspconfig = true, auto_install = true },
-  { "lua_ls", require_node = false, hook_lspconfig = true, auto_install = true },
-  { "pyright", require_node = true, hook_lspconfig = true, auto_install = true },
-  { "rust_analyzer", require_node = false, hook_lspconfig = true, auto_install = false },
-  { "tsserver", require_node = true, hook_lspconfig = false, auto_install = true },
-}
-
-function M:ensured_servers()
-  local node_loaded = vim.fn.executable("node") == 1
-  local ensured = {}
-  for _, server in pairs(self.server_spec) do
-    if server.auto_install then
-      if not node_loaded and server.require_node then
-        goto continue
-      end
-      table.insert(ensured, server[1])
-      ::continue::
-    end
-  end
-  return ensured
-end
-
-function M.ensured_addons()
-  local addons = {
-    "blue",
-    "jsonlint",
-    "prettierd",
-    "shellcheck",
-    "shfmt",
-    "stylua",
-  }
-  local ensured = {}
+function M.check_registry(pkg_name)
   local registry = require("mason-registry")
-  local is_avail, addon
-  for _, a in pairs(addons) do
-    is_avail, addon = pcall(registry.get_package, a)
-    if is_avail then
-      if not registry.is_installed(a) then
-        table.insert(ensured, addon)
+  local is_avail, pkg = pcall(registry.get_package, pkg_name)
+  if not is_avail then
+    error(string.format('Couldn\'t find package "%s"', pkg_name))
+  end
+  return not registry.is_installed(pkg_name) and pkg
+end
+
+function M:ensure_install()
+  local node_loaded = vim.fn.executable("node") == 1
+  local pkg_name, is_avail, pkg
+  for _, entry in pairs(require("plugin.lsp.schema")) do
+    pkg_name = type(entry.mason_id) == "boolean" and entry[1] or entry.mason_id
+    if entry.auto_install then
+      is_avail, pkg = pcall(self.check_registry, pkg_name)
+      if not is_avail then
+        ---@diagnostic disable-next-line: param-type-mismatch
+        vim.notify(pkg, vim.log.levels.ERROR)
+      elseif not node_loaded and entry.require_node then
+        goto continue
+      elseif pkg then
+        vim.notify_once(string.format('[Mason] Installing "%s"', pkg.name))
+        pkg:install()
       end
     end
+    ::continue::
   end
-  return ensured
 end
 
-function M:install_ensured()
-  for _, addon in pairs(self.ensured_addons()) do
-    addon:install()
+M.schedule_install = vim.schedule_wrap(function()
+  local registry = require("mason-registry")
+  if registry.refresh then
+    registry.refresh(function()
+      M:ensure_install()
+    end)
   end
-  require("mason-lspconfig").setup({
-    ensure_installed = self:ensured_servers(),
-    automatic_installation = false,
-  })
-end
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-  desc = "Install missing mason packages",
-  group = vim.api.nvim_create_augroup("_Mason", { clear = true }),
-  pattern = vim.fn.stdpath("config") .. "/lua/plugin/lsp/mason.lua",
-  callback = function()
-    M:install_ensured()
-  end,
-})
+end)
 
 return M
