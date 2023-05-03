@@ -16,8 +16,8 @@ M.trunc_width = setmetatable({
   end,
 })
 
----@param width number Width to match against
----@param is_statusglobal boolean | nil If true(i.e 'laststatus' is set to 3) then width is matched against
+---@param width number? Width to match against
+---@param is_statusglobal? boolean If true('laststatus' = 3) then width is matched against
 --all the windows' width combined, else width of the current window
 function M.is_truncated(_, width, is_statusglobal)
   width = width or M.trunc_width.default
@@ -168,7 +168,7 @@ function M.get_attached_sources()
     active[#active] = nil
   end
   local attched = table.concat(active, ", ")
-  return (#attched == 0 or M:is_truncated()) and "" or string.format(" lsp: [ %s ] ", attched)
+  return (#attched == 0 or M.is_truncated()) and "" or string.format(" lsp: [ %s ] ", attched)
 end
 
 function M.get_lsp_diagnostic()

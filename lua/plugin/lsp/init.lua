@@ -1,4 +1,7 @@
-local schedule_install = require("plugin.lsp.mason").schedule_install
+local schedule_install = function()
+  return require("plugin.lsp.mason").schedule_install()
+end
+
 return {
   {
     "williamboman/mason.nvim",

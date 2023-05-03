@@ -68,15 +68,14 @@ key.nmap({
   -- }}}
 })
 
--- viusal mode specific
-key.vmap({
+key.xmap({
   { "<", "<gv" },
   { ">", ">gv" },
   { "J", ":m '>+1<CR>gv=gv" },
   { "K", ":m '<-2<CR>gv=gv" },
+  { "v", "yP" },
 })
 
--- insert mode specific
 -- key.imap({ "<C-l>", "<Right>" })
 
 key.nmap({

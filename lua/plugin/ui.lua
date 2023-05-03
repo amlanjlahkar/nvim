@@ -1,6 +1,4 @@
 return {
-  { "utilyre/sentiment.nvim", event = "VeryLazy", config = true },
-
   {
     "norcalli/nvim-colorizer.lua",
     enabled = false,
