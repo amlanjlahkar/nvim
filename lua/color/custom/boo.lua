@@ -40,9 +40,9 @@ M.custom = {
   { "VimModeVisual",              { bg = BgShadeLighter, fg = Red } },
   -- 1}}}
   -- native {{{1
-  { "LineNr",                     { bg = BlackShadeLight, fg = RedShadeDarker } },
-  { "CursorLineNr",               { bg = BlackShadeLight, fg = White, bold = false } },
-  { "SignColumn",                 { bg = BlackShadeLight } },
+  { "LineNr",                     { bg = Bg, fg = RedShadeDarker } },
+  { "CursorLineNr",               { bg = Bg, fg = White, bold = false } },
+  { "SignColumn",                 { bg = Bg } },
   { "NormalFloat",                { bg = Black, fg = Fg } },
   { "FloatBorder",                { bg = Black, fg = Black } },
   { "FloatTitle",                 { bg = BlackShadeLight, fg = Fg, underline = true } },
@@ -99,10 +99,10 @@ M.custom = {
   -- gitsigns/fugitive {{{2
   { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
   { "DiffDelete",                 { bg = DiffDelete, fg = RedShadeLighter } },
-  { "GitGutterAdd",               { bg = BlackShadeLight, fg = Green } },
-  { "GitGutterChange",            { bg = BlackShadeLight, fg = Blue } },
-  { "GitGutterChangeDelete",      { bg = BlackShadeLight, fg = Magenta } },
-  { "GitGutterDelete",            { bg = BlackShadeLight, fg = Red } },
+  { "GitGutterAdd",               { bg = Bg, fg = Green } },
+  { "GitGutterChange",            { bg = Bg, fg = Blue } },
+  { "GitGutterChangeDelete",      { bg = Bg, fg = Magenta } },
+  { "GitGutterDelete",            { bg = Bg, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = false } },
   { "GitSignsDeleteInline",       { bg = DiffDelete, fg = RedShadeLighter, italic = false } },
   { "diffAdded",                  { bg = DiffAdd, fg = Green } },
@@ -131,7 +131,8 @@ M.custom = {
   { "TroubleText",                { bg = none, fg = Fg } },
   -- 2}}}
   -- other {{{2
-  { "FidgetTask",                 { fg = FgShadeDarker, blend = 10 } },
+  { "FidgetTitle",                { fg = Magenta, blend = 0 } },
+  { "FidgetTask",                 { fg = FgShadeDarker, blend = 0 } },
   { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
   { "MiniIndentScopeSymbol",      { fg = RedShadeDarker } },
   { "SnipChoiceNode",             { bg = BgShadeLight, fg = Blue } },

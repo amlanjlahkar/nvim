@@ -31,29 +31,23 @@ end
 
 --stylua: ignore
 ---TODO: previewer support
-function M:pick(path)
-  local default = Path:new(os.getenv("HOME") .. "/media/pictures")
-  path = path and Path:new(path) or default
-  local pathl = path:absolute()
-  if not vim.loop.fs_access(pathl, "R") then
-    vim.notify_once("Unable to access directory " .. pathl, vim.log.levels.ERROR)
-    return
-  end
+function M:pick(group_dirs, opts)
+  opts = opts or {}
+  local cwd = opts.cwd and Path:new(opts.cwd) or Path:new(os.getenv("HOME") .. "/media/pictures")
+  local cwd_path = cwd:absolute()
   local selection = function(opt)
     opt = opt or nil
     return action_state.get_selected_entry()[opt]
   end
-  pickers.new(_, {
+  pickers.new(opts, {
     prompt_title = "Set Wallpaper",
-    finder = self.gen_finder(pathl, function()
-      return pathl == default:absolute() and true or false
-    end),
-    sorter = conf.file_sorter(),
+    finder = self.gen_finder(cwd_path, group_dirs),
+    sorter = conf.file_sorter(opts),
     attach_mappings = function(id, map)
       local current_picker = action_state.get_current_picker(id)
       actions.select_default:replace(function()
         local chosen = selection("value")
-        if path:new(chosen):is_dir() then
+        if cwd:new(chosen):is_dir() then
           current_picker:refresh(self.gen_finder(chosen, false), { reset_prompt = true })
         else
           fn.system("xwallpaper --zoom " .. chosen)
@@ -61,8 +55,8 @@ function M:pick(path)
       end)
       map("i", "<C-o>", function()
         local parents = Path:new(selection("value")):parents()
-        if parents[1] ~= pathl then
-          current_picker:refresh(self.gen_finder(parents[2], true), { reset_prompt = true })
+        if parents[1] ~= cwd_path then
+          current_picker:refresh(self.gen_finder(parents[2], false), { reset_prompt = true })
         end
       end)
       return true

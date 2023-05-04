@@ -1,6 +1,5 @@
 local fn = require("plugin.telescope.function")
 local tb = fn.pick("telescope.builtin")
-local extra = require("plugin.telescope.extra")
 
 local key = require("core.utils.map")
 local opts = key.new_opts
@@ -111,7 +110,8 @@ function M.setup()
     {
       "<leader>tw",
       function()
-        extra.set_bg()
+        local opts = {}
+        require("plugin.telescope.extra.set_bg"):pick(true, fn.use_theme(opts))
       end,
       opts("Telescope: Set wallpaper"),
     },

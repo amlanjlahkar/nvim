@@ -78,11 +78,12 @@ return {
   },
 
   {
-    "xiyaowong/nvim-transparent",
+    "xiyaowong/transparent.nvim",
+    lazy = false,
     opts = {
       extra_groups = {
-        "NormalFloat",
-        "FloatBorder",
+        -- "NormalFloat",
+        -- "FloatBorder",
         "WinBar",
         "WinBarNC",
         "CursorLine",

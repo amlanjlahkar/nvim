@@ -4,12 +4,13 @@ return {
     "cbochs/grapple.nvim",
     --NOTE: experimental
     init = function()
+      ---@diagnostic disable-next-line: param-type-mismatch
       local cwd = string.match(vim.loop.cwd(), "/([.%w_%-]+)$")
       local grapple_data = vim.fn.finddir(vim.fn.stdpath("data") .. "/grapple")
       if grapple_data then
         local file = io.popen(string.format("ls -pa %s | grep -v /", grapple_data), "r")
         if file then
-          for f in file:lines() do
+         for f in file:lines() do
             if string.match(f, cwd) then
               require("lazy").load({ plugins = { "grapple.nvim" } })
               break
@@ -87,12 +88,13 @@ return {
       --stylua: ignore start
       key.nmap({
         { "q:", function() cb.split_open(cwh) end },
+        ---@diagnostic disable: assign-type-mismatch
         { "q/", function() cb.split_open(cwh, { type = "vim/search/forward" }) end },
         { "q?", function() cb.split_open(cwh, { type = "vim/search/backward" }) end },
         { "ql", function() cb.split_open(cwh, { type = "lua/cmd" }) end, key.new_opts(key.nowait) },
       })
       key.cmap({
-        "<C-f>", function()
+        "C-f>", function()
           cb.split_open(cwh, { line = vim.fn.getcmdline(), column = vim.fn.getcmdpos() })
         end,
       })
