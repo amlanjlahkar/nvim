@@ -4,40 +4,38 @@ local tb = fn.pick("telescope.builtin")
 local key = require("core.utils.map")
 local opts = key.new_opts
 
-local M = {}
+local M = {
+  prefix = "<leader>q",
+}
 
-function M.setup()
+function M:setup()
   key.nmap({
     {
-      "<leader>tn",
+      self.prefix .. "n",
       function()
         fn.get_nvim_conf()
       end,
       opts("Telescope: Nvim config"),
     },
+
     {
-      "<leader>tf",
+      self.prefix .. "s",
       function()
         fn.get_relative_file()
       end,
       opts("Telescope: Buffer relative files"),
     },
+
     {
-      "<leader>td",
+      self.prefix .. "d",
       function()
         fn.get_dwots()
       end,
       opts("Telescope: Dwots"),
     },
+
     {
-      "<leader>tr",
-      function()
-        fn.reload_module()
-      end,
-      opts("Telescope: Reload lua module"),
-    },
-    {
-      "<leader>th",
+      self.prefix .. "h",
       function()
         tb.help_tags()
       end,
@@ -45,7 +43,7 @@ function M.setup()
     },
 
     {
-      "<leader>tt",
+      self.prefix .. "p",
       function()
         tb.find_files(_, { no_ignore = true })
       end,
@@ -53,7 +51,7 @@ function M.setup()
     },
 
     {
-      "<leader>to",
+      self.prefix .. "o",
       function()
         tb.oldfiles(_, { cwd_only = true })
       end,
@@ -61,7 +59,7 @@ function M.setup()
     },
 
     {
-      "<leader>tc",
+      self.prefix .. ";",
       function()
         tb.git_status(_, {
           git_icons = {
@@ -79,7 +77,7 @@ function M.setup()
     },
 
     {
-      "<leader>tb",
+      self.prefix .. "b",
       function()
         local listed = #vim.fn.getbufinfo({ buflisted = true })
         if listed == 1 then
@@ -100,7 +98,7 @@ function M.setup()
     },
 
     {
-      "<leader>tg",
+      self.prefix .. "g",
       function()
         tb.live_grep(false, { layout_strategy = "horizontal", path_display = { shorten = 3 }, preview = true })
       end,
@@ -108,10 +106,10 @@ function M.setup()
     },
 
     {
-      "<leader>tw",
+      self.prefix .. "w",
       function()
-        local opts = {}
-        require("plugin.telescope.extra.set_bg"):pick(true, fn.use_theme(opts))
+        local opt = {}
+        require("plugin.telescope.extra.set_bg"):pick(true, fn.use_theme(opt))
       end,
       opts("Telescope: Set wallpaper"),
     },

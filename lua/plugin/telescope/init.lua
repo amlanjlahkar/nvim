@@ -4,7 +4,7 @@ local M = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   cmd = "Telescope",
-  keys = "<leader>t",
+  keys = require("plugin.telescope.mapping").prefix,
 }
 
 M.opts = function()
@@ -47,6 +47,8 @@ M.opts = function()
         "vendor/*",
         "node_modules/*",
         "spell/*",
+        "obj/*",
+        "bin/*",
         "**/*.class",
         "**/*.jar",
       },
@@ -68,7 +70,7 @@ function M.config(_, opts)
   for _, ext in pairs(extensions) do
     require("telescope").load_extension(ext)
   end
-  require("plugin.telescope.mapping").setup()
+  require("plugin.telescope.mapping"):setup()
 end
 
 return M
