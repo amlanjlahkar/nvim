@@ -56,7 +56,7 @@ function M:pick(group_dirs, opts)
       map("i", "<C-o>", function()
         local parents = Path:new(selection("value")):parents()
         if parents[1] ~= cwd_path then
-          current_picker:refresh(self.gen_finder(parents[2], false), { reset_prompt = true })
+          current_picker:refresh(self.gen_finder(parents[2], true), { reset_prompt = true })
         end
       end)
       return true

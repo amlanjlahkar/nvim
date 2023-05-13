@@ -111,6 +111,9 @@ return {
     ft = { "c", "cpp" },
     opts = {
       server = require("plugin.lsp.equip_opts").setup("clangd"),
+      extensions = {
+        autoSetHints = false,
+      },
     },
   },
 

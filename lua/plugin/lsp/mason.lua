@@ -8,7 +8,7 @@ function M.check_registry(pkg_name)
   if not is_avail then
     error(fr('Couldn\'t find package "%s"', pkg_name))
   end
-  return not registry.is_installed(pkg_name) and pkg or {}
+  return not registry.is_installed(pkg_name) and pkg
 end
 
 function M:ensure_install()

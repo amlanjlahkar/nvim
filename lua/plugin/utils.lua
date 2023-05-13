@@ -37,7 +37,7 @@ return {
 
   {
     "stevearc/oil.nvim",
-    keys = "-",
+    lazy = false,
     config = function()
       require("oil").setup({
         columns = { "permissions", "size", "mtime" },

@@ -22,7 +22,7 @@ require("lazy").setup("plugin", {
   },
   change_detection = {
     enabled = true,
-    notify = true,
+    notify = false,
   },
   performance = {
     rtp = {
