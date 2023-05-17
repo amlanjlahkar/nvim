@@ -37,7 +37,12 @@ return {
 
   {
     "stevearc/oil.nvim",
-    lazy = false,
+    init = function()
+      local arg = vim.fn.argv(0)
+      if vim.fn.isdirectory(arg) > 0 then
+        require("lazy").load({ plugins = { "oil.nvim" } })
+      end
+    end,
     config = function()
       require("oil").setup({
         columns = { "permissions", "size", "mtime" },
