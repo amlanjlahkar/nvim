@@ -51,6 +51,14 @@ function M:setup()
     },
 
     {
+      self.prefix .. "v",
+      function()
+        tb.git_files()
+      end,
+      opts("Telescope: Git tracked files"),
+    },
+
+    {
       self.prefix .. "o",
       function()
         tb.oldfiles(_, { cwd_only = true })

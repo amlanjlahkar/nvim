@@ -43,14 +43,7 @@ M.opts = function()
         "--trim",
       },
       file_ignore_patterns = {
-        "dict/*",
-        "vendor/*",
         "node_modules/*",
-        "spell/*",
-        "obj/*",
-        "bin/*",
-        "**/*.class",
-        "**/*.jar",
       },
     },
     extensions = {
