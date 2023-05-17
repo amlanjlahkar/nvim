@@ -11,11 +11,6 @@ return {
         border = "none",
         width = 0.6,
         height = 0.8,
-        icons = {
-          package_installed = "",
-          package_pending = "",
-          package_uninstalled = "",
-        },
       },
     },
     config = function(_, opts)
