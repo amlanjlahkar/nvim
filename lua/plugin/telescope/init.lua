@@ -43,6 +43,8 @@ M.opts = function()
         "--trim",
       },
       file_ignore_patterns = {
+        "dict/*",
+        "spell/*",
         "node_modules/*",
       },
     },
