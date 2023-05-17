@@ -12,7 +12,7 @@ return {
         if file then
          for f in file:lines() do
             if string.match(f, cwd) then
-              require("lazy").load({ plugins = { "grapple.nvim" } })
+              LAZYLOAD("grapple.nvim")
               break
             end
           end
@@ -40,9 +40,10 @@ return {
     init = function()
       local arg = vim.fn.argv(0)
       if vim.fn.isdirectory(arg) > 0 then
-        require("lazy").load({ plugins = { "oil.nvim" } })
+        LAZYLOAD("oil.nvim")
       end
     end,
+    keys = "-",
     config = function()
       require("oil").setup({
         columns = { "permissions", "size", "mtime" },
