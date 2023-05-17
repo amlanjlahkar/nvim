@@ -58,6 +58,12 @@ M.custom = {
   { "MatchParen",                 { bg = "#270f2e", fg = Magenta, bold = true } },
   { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
+  { "markdownH1Delimiter",        { bg = none, fg = none } },
+  { "markdownH2Delimiter",        { bg = none, fg = none } },
+  { "markdownH3Delimiter",        { bg = none, fg = none } },
+  { "markdownH4Delimiter",        { bg = none, fg = none } },
+  { "markdownH5Delimiter",        { bg = none, fg = none } },
+  { "markdownH6Delimiter",        { bg = none, fg = none } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
   -- health {{{2
   { "healthError",                { fg = RedShadeLighter } },

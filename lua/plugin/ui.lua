@@ -82,8 +82,6 @@ return {
     lazy = false,
     opts = {
       extra_groups = {
-        -- "NormalFloat",
-        -- "FloatBorder",
         "WinBar",
         "WinBarNC",
         "CursorLine",

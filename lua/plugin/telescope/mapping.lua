@@ -18,13 +18,13 @@ function M:setup()
       opts("Telescope: Nvim config"),
     },
 
-    {
-      self.prefix .. "s",
-      function()
-        fn.get_relative_file()
-      end,
-      opts("Telescope: Buffer relative files"),
-    },
+    -- {
+    --   self.prefix .. "s",
+    --   function()
+    --     fn.get_relative_file()
+    --   end,
+    --   opts("Telescope: Buffer relative files"),
+    -- },
 
     {
       self.prefix .. "d",
