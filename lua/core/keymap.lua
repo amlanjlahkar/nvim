@@ -30,10 +30,6 @@ key.nmap({
   -- { ",", "@@" },
   -- }}}
 
-  -- external {{{
-  { "<leader><leader>v", cmd("tab Git"), opts("Open vcs interface") },
-  -- }}}
-
   -- ex commands {{{
   { "<leader>r", ":reg<CR>" },
   -- }}}
