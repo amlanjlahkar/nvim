@@ -10,6 +10,7 @@ return {
 
   {
     "tummetott/reticle.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {
       ignore = { cursorline = { "lazy", "lspinfo" } },
@@ -79,6 +80,7 @@ return {
 
   {
     "xiyaowong/transparent.nvim",
+    enabled = false,
     lazy = false,
     opts = {
       extra_groups = {

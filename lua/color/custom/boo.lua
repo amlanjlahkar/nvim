@@ -40,6 +40,7 @@ M.custom = {
   { "VimModeVisual",              { bg = BgShadeLighter, fg = Red } },
   -- 1}}}
   -- native {{{1
+  { "CursorLine",                 { bg = none } },
   { "LineNr",                     { bg = Bg, fg = RedShadeDarker } },
   { "CursorLineNr",               { bg = Bg, fg = White, bold = false } },
   { "SignColumn",                 { bg = Bg } },
