@@ -5,100 +5,91 @@ return {
     lazy = false,
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 
-    config = function()
-      require("nvim-treesitter.install").update({ with_sync = false })
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "bash",
-          "c",
-          "comment",
-          "cpp",
-          "css",
-          "html",
-          "java",
-          "javascript",
-          "lua",
-          "luap",
-          "markdown",
-          "python",
-          "rasi",
-          "rust",
-          "vim",
-          "vimdoc",
-          "yaml",
+    opts = {
+      ensure_installed = {
+        "bash",
+        "c",
+        "comment",
+        "cpp",
+        "css",
+        "html",
+        "java",
+        "javascript",
+        "lua",
+        "luap",
+        "markdown",
+        "python",
+        "rasi",
+        "rust",
+        "vim",
+        "vimdoc",
+        "yaml",
+      },
+      ignore_install = {},
+      indent = {
+        enable = true,
+      },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "<C-n>",
+          node_decremental = "<C-p>",
+          scope_incremental = "<C-s>",
         },
-        ignore_install = {},
-        highlight = {
+      },
+      textobjects = {
+        move = {
+          enable = false,
+          set_jumps = true,
+          goto_next_start = {
+            ["]F"] = "@function.outer",
+            ["]C"] = "@class.outer",
+          },
+          goto_next_end = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@class.outer",
+          },
+          goto_previous_start = {
+            ["[F"] = "@function.outer",
+            ["[C"] = "@class.outer",
+          },
+          goto_previous_end = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@class.outer",
+          },
+        },
+        swap = {
           enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn",
-            node_incremental = "<C-n>",
-            node_decremental = "<C-p>",
-            scope_incremental = "<C-s>",
+          swap_next = {
+            ["]a"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["]A"] = "@parameter.inner",
           },
         },
-        textobjects = {
-          --   select = {
-          --     enable = true,
-          --     lookahead = true,
-          --     keymaps = {
-          --       ["as"] = "@scope",
-          --       ["aa"] = "@parameter.outer",
-          --       ["ia"] = "@parameter.inner",
-          --       ["af"] = "@function.outer",
-          --       ["if"] = "@function.inner",
-          --       ["ac"] = "@class.outer",
-          --       ["ic"] = "@class.inner",
-          --     },
-          --   },
-          move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = {
-              ["]f"] = "@function.outer",
-              ["]c"] = "@class.outer",
-            },
-            goto_next_end = {
-              ["]F"] = "@function.outer",
-              ["]C"] = "@class.outer",
-            },
-            goto_previous_start = {
-              ["[f"] = "@function.outer",
-              ["[c"] = "@class.outer",
-            },
-            goto_previous_end = {
-              ["[F"] = "@function.outer",
-              ["[C"] = "@class.outer",
-            },
-          },
-          swap = {
-            enable = false,
-            swap_next = {
-              ["]]"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["]["] = "@parameter.inner",
-            },
-          },
-          lsp_interop = {
-            enable = true,
-            border = "single",
-            peek_definition_code = {
-              ["<leader>df"] = "@function.outer",
-              ["<leader>dc"] = "@class.outer",
-            },
+        lsp_interop = {
+          enable = false,
+          border = "single",
+          peek_definition_code = {
+            ["<leader>df"] = "@function.outer",
+            ["<leader>dc"] = "@class.outer",
           },
         },
-        indent = {
-          enable = true,
-        },
-      })
+      },
+    },
+
+    config = function(_, opts)
+      local ts_install = require("nvim-treesitter.install")
       local parsers = require("nvim-treesitter.parsers")
       local parser_config = parsers.get_parser_configs()
+
+      ts_install.compilers = { "zig", "clang" }
+      ts_install.update({ with_sync = false })
 
       parser_config.bash.filetype_to_parsename = "sh"
       -- local augroup = vim.api.nvim_create_augroup("_plug", { clear = true })
@@ -112,6 +103,8 @@ return {
       --   ),
       --   command = "setl fdm=expr fde=nvim_treesitter#foldexpr()",
       -- })
+
+      require("nvim-treesitter.configs").setup(opts)
     end,
   },
 
