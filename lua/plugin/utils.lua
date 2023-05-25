@@ -10,7 +10,7 @@ return {
       if grapple_data then
         local file = io.popen(string.format("ls -pa %s | grep -v /", grapple_data), "r")
         if file then
-         for f in file:lines() do
+          for f in file:lines() do
             if string.match(f, cwd) then
               LAZYLOAD("grapple.nvim")
               break
@@ -70,16 +70,23 @@ return {
           require("oil").open()
         end
       end, { desc = "Oil: Open parent directory" })
+
       vim.keymap.set("n", "<leader>ob", function()
         local entry_name = require("oil").get_cursor_entry()["name"]
-        local current_dir = require("oil").get_current_dir()
-        local path = current_dir .. entry_name
+        local cwd = require("oil").get_current_dir()
+        local path = cwd .. entry_name
         if vim.fn.isdirectory(path) < 1 then
           vim.cmd("Git blame " .. path)
         else
           vim.notify(entry_name .. " is a directory!", vim.log.levels.ERROR)
         end
       end, { desc = "Oil: View git blame for file under cursor" })
+
+      vim.keymap.set("n", "<leader>op", function()
+        local entry_name = require("oil").get_cursor_entry()["name"]
+        local cwd = require("oil").get_current_dir()
+        require("core.utils.operate").operate(cwd .. entry_name, string.format("On %s > ", entry_name))
+      end, { silent = true, desc = "Oil: perform shell operation on file under cursor" })
     end,
   },
 
