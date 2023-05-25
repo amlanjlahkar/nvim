@@ -1,5 +1,4 @@
-local api = vim.api
-local ui = vim.ui
+local outfile = "/tmp/op_result"
 
 local M = {}
 
@@ -15,7 +14,7 @@ local function gen_cmdict(cmd, filepath)
   end
   local subst_start, _ = string.find(cmd, "%s%%%s?")
   if subst_start then
-    cmd = string.format("%s %s %s", cmd:sub(1, subst_start -1), filepath, cmd:sub(subst_start + 3))
+    cmd = string.format("%s %s %s", cmd:sub(1, subst_start - 1), filepath, cmd:sub(subst_start + 3))
   else
     cmd = string.format("%s %s", cmd, filepath)
   end
@@ -41,6 +40,11 @@ local function jobstart(cmd, args)
     :new({
       command = cmd,
       args = args,
+      on_stdout = function(_, data)
+        local f = assert(io.open(outfile, "a"))
+        f:write(data, "\n")
+        f:close()
+      end,
       on_exit = vim.schedule_wrap(function(j, code)
         -- TODO: better error output
         if code > 0 then
@@ -50,16 +54,7 @@ local function jobstart(cmd, args)
         if #j:result() < 1 then
           print("Done")
         else
-          local bufname = "op_result"
-          ---@diagnostic disable-next-line: param-type-mismatch
-          local buf = vim.fn.bufnr(bufname)
-          if buf < 0 then
-            buf = api.nvim_create_buf(true, true)
-            api.nvim_buf_set_name(buf, bufname)
-          end
-          api.nvim_buf_set_lines(buf, 0, -1, false, j:result())
-          api.nvim_buf_set_option(buf, "modifiable", false)
-          vim.cmd("sb | buf " .. buf)
+          vim.cmd("10sp +setl\\ noma " .. outfile .. " | winc p")
         end
       end),
     })
@@ -71,18 +66,19 @@ end
 ---@param file string absolute location to file
 ---@param prompt string prompt text for command input
 function M.operate(file, prompt)
-  ui.input({
+  vim.ui.input({
     prompt = prompt,
     completion = "shellcmd",
-  }, function(input)
-    if input then
-      local cmdict = gen_cmdict(input, file)
+  }, function(cmd)
+    if cmd then
+      local cmdict = gen_cmdict(cmd, file)
       local args = {}
       if cmdict and cmdict.args then
         args = cmdict.args
       else
         return
       end
+      io.open(outfile, "w"):close()
       jobstart(cmdict.cmd, args)
     end
   end)
