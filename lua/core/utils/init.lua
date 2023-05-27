@@ -5,10 +5,10 @@ local M = {}
 
 ---@class Window
 ---@field combined boolean Decide whether to return combined or current window width
+---Get width of all the visible windows combined(which is equivalent to the width
+--of the opened neovim instance) if window.combined is true, else width of the current window
 ---@param window Window
 ---@return number
----Get width of all the visible windows combined(which is equivalent to the width
----of the opened neovim instance) if window.combined is true, else width of the current window
 function M.get_width(window)
   local width = 0
   if window == nil or window.combined then
@@ -27,22 +27,22 @@ function M.get_width(window)
   return width
 end
 
+---Get attribute value of specified highlight group
 ---@param group string Highlight group ID
 ---@param attr string Attribute name
 ---@return string
----Get attribute value of given highlight group
 function M.get_hl_attr(group, attr)
   local color = fn.synIDattr(fn.hlID(group), attr)
   return color == "" and nil or color
 end
 
----@param filetype string Language filetype
----@return function | nil
 ---Small set of functions to compile/interprete code for certain langs
+---@param filetype string Language filetype
+---@return function|nil
 function M.test_code(filetype)
   ---@class Cmd
   ---@field cmd string Command to run
-  ---@field iptr boolean|string Interpreter to use for executing byte compiled code or `true` if `cmd` is an interpreter
+  ---@field iptr boolean|string Interpreter to use, if any, for executing byte compiled code or `true` if `cmd` is an interpreter
 
   ---@param cmd Cmd
   ---@param args table Arguments to pass to `cmd`
@@ -76,6 +76,9 @@ function M.test_code(filetype)
             vim.cmd("view +setl\\ nomodifiable " .. logfile)
           else
             vim.ui.input({ prompt = "Arguments to pass: " }, function(input)
+              if not input then
+                return
+              end
               if type(cmd.iptr) == "string" and cmd.iptr then
                 vim.cmd.terminal(string.format("%s %s %s", cmd.iptr, outfile, input))
               else

@@ -41,7 +41,7 @@ o.foldmethod = "marker"
 o.completeopt = { "menu", "menuone", "noselect" }
 
 o.showmode = false
-o.cursorline = true
+o.cursorline = false
 o.showtabline = 1
 o.cmdheight = 1
 o.laststatus = 3

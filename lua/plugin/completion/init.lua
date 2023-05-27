@@ -1,5 +1,4 @@
 return {
-
   {
     "L3MON4D3/LuaSnip",
     config = function()
@@ -35,6 +34,9 @@ return {
 
       local cmp = require("cmp")
       cmp.setup({
+        performance = {
+          max_view_entries = 10,
+        },
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
