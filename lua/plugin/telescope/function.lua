@@ -62,9 +62,19 @@ function M.get_nvim_conf()
 end
 
 function M.get_relative_file()
+  local cwd = fn.expand("%:p:h")
+  local sp_buf = { "oil", "fugitive", "term" }
+  for _, b in pairs(sp_buf) do
+    local _, i = string.find(cwd, string.format("^%s://%%g+", b))
+    if i then
+      cwd = string.sub(cwd, i+1)
+      break
+    end
+  end
   local opts = {
     prompt_title = "Relative Files",
-    cwd = fn.expand("%:p:h"),
+    cwd = cwd,
+    preview = true,
   }
   tb.find_files(_, opts)
 end
