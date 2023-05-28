@@ -65,6 +65,8 @@ return {
           border = "single",
         },
       })
+      local entry = require("oil").get_cursor_entry
+      local cwd = require("oil").get_current_dir
       vim.keymap.set("n", "-", function()
         if vim.bo.filetype ~= "fugitive" then
           require("oil").open()
@@ -72,20 +74,17 @@ return {
       end, { desc = "Oil: Open parent directory" })
 
       vim.keymap.set("n", "<leader>ob", function()
-        local entry_name = require("oil").get_cursor_entry()["name"]
-        local cwd = require("oil").get_current_dir()
-        local path = cwd .. entry_name
-        if vim.fn.isdirectory(path) < 1 then
+        local path = cwd() .. entry().name
+        if entry().type == "file" then
           vim.cmd("Git blame " .. path)
         else
-          vim.notify(entry_name .. " is a directory!", vim.log.levels.ERROR)
+          vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
         end
       end, { desc = "Oil: View git blame for file under cursor" })
 
       vim.keymap.set("n", "<leader>op", function()
-        local entry_name = require("oil").get_cursor_entry()["name"]
-        local cwd = require("oil").get_current_dir()
-        require("core.utils.operate").operate(cwd .. entry_name, string.format("On %s > ", entry_name))
+        local fname = entry().name
+        require("core.utils.operate").operate(cwd() .. fname, cwd(), string.format("On %s > ", fname))
       end, { silent = true, desc = "Oil: perform shell operation on file under cursor" })
     end,
   },

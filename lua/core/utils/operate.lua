@@ -22,7 +22,7 @@ local function gen_cmdict(cmd, filepath)
   local cmdict = { args = {} }
   cmdict.cmd = string.match(cmd, "%S+")
 
-  if vim.tbl_contains({ "rm", "shred" }, cmdict.cmd) then
+  if vim.tbl_contains({ "mv", "rm", "shred" }, cmdict.cmd) then
     vim.notify("Aborted due to potentially dangerous operation!", vim.log.levels.WARN)
     return
   end
@@ -35,10 +35,11 @@ local function gen_cmdict(cmd, filepath)
   return cmdict
 end
 
-local function jobstart(cmd, args)
+local function jobstart(cmd, args, cwd)
   require("plenary.job")
     :new({
       command = cmd,
+      cwd = cwd,
       args = args,
       on_stdout = function(_, data)
         local f = assert(io.open(outfile, "a"))
@@ -48,6 +49,7 @@ local function jobstart(cmd, args)
       on_exit = vim.schedule_wrap(function(j, code)
         -- TODO: better error output
         if code > 0 then
+          vim.print(j:result())
           vim.notify("exited due to error", vim.log.levels.ERROR)
           return
         end
@@ -64,8 +66,9 @@ end
 ---Perform shell operation on specified file.
 --(note: meant to be used with file browser plugins such as oil)
 ---@param file string absolute location to file
+---@param cwd string cwd to set when executing shell command
 ---@param prompt string prompt text for command input
-function M.operate(file, prompt)
+function M.operate(file, cwd, prompt)
   vim.ui.input({
     prompt = prompt,
     completion = "shellcmd",
@@ -79,7 +82,7 @@ function M.operate(file, prompt)
         return
       end
       io.open(outfile, "w"):close()
-      jobstart(cmdict.cmd, args)
+      jobstart(cmdict.cmd, args, cwd)
     end
   end)
 end
