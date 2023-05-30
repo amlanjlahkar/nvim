@@ -50,10 +50,8 @@ return {
         keymaps = {
           ["gh"] = "actions.toggle_hidden",
         },
-        win_options = {
-          rnu = false,
-          nu = false,
-        },
+        buf_options = { buflisted = true, bufhidden = "delete" },
+        win_options = { rnu = false, nu = false },
         view_options = {
           show_hidden = true,
           is_always_hidden = function(name, _)
@@ -67,25 +65,43 @@ return {
       })
       local entry = require("oil").get_cursor_entry
       local cwd = require("oil").get_current_dir
-      vim.keymap.set("n", "-", function()
-        if vim.bo.filetype ~= "fugitive" then
-          require("oil").open()
-        end
-      end, { desc = "Oil: Open parent directory" })
+      local key = require("core.utils.map")
+      local opts = key.new_opts
 
-      vim.keymap.set("n", "<leader>ob", function()
-        local path = cwd() .. entry().name
-        if entry().type == "file" then
-          vim.cmd("Git blame " .. path)
-        else
-          vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
-        end
-      end, { desc = "Oil: View git blame for file under cursor" })
+      key.nmap({
+        --stylua: ignore
+        {
+          "-", function()
+            if vim.bo.filetype ~= "fugitive" then
+              require("oil").open()
+            end
+          end, opts("Oil: Open parent directory"),
+        },
 
-      vim.keymap.set("n", "<leader>op", function()
-        local fname = entry().name
-        require("core.utils.operate").operate(cwd() .. fname, cwd(), string.format("On %s > ", fname))
-      end, { silent = true, desc = "Oil: perform shell operation on file under cursor" })
+        {
+          "<leader>ob", function()
+            local path = cwd() .. entry().name
+            if entry().type == "file" then
+              vim.cmd("Git blame " .. path)
+            else
+              vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
+            end
+          end, opts("Oil: View git blame for file under cursor"),
+        },
+
+        {
+          "<leader>op", function()
+            local fname = entry().name
+            require("core.utils.operate").operate(cwd() .. fname, cwd(), string.format("On %s > ", fname))
+          end, opts("Oil: Perform external operation on file under cursor"),
+        },
+
+        {
+          "<leader>os", function()
+            require("plugin.telescope.extra.oil").switch_dir()
+          end, opts("Oil: Fuzzy search and switch to directory"),
+        },
+      })
     end,
   },
 
