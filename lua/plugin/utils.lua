@@ -98,7 +98,7 @@ return {
 
         {
           "<leader>os", function()
-            require("plugin.telescope.extra.oil").switch_dir()
+            require("plugin.telescope.extra.oil").switch_dir(cwd())
           end, opts("Oil: Fuzzy search and switch to directory"),
         },
       })
