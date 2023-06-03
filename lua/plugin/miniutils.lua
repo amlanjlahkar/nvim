@@ -39,34 +39,6 @@ return {
   },
 
   {
-    "echasnovski/mini.comment",
-    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
-    version = false,
-    keys = { "gc", { "gc", mode = "x" }, { "x", mode = "o" } },
-    config = function()
-      local avail, ts_config = pcall(require, "nvim-treesitter['config']")
-      if avail then
-        ts_config.setup({
-          context_commentstring = {
-            enable = true,
-            enable_autocmd = false,
-          },
-        })
-      end
-      require("mini.comment").setup({
-        mappings = {
-          textobject = "x",
-        },
-        hooks = {
-          pre = function()
-            require("ts_context_commentstring.internal").update_commentstring()
-          end,
-        },
-      })
-    end,
-  },
-
-  {
     "echasnovski/mini.ai",
     version = false,
     lazy = false,

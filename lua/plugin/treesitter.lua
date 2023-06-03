@@ -63,6 +63,13 @@ return {
             ["[c"] = "@class.outer",
           },
         },
+        select = {
+          enable = true,
+          keymaps = {
+            ["ac"] = "@comment.outer",
+            ["ic"] = "@comment.inner",
+          },
+        },
         swap = {
           enable = true,
           swap_next = {

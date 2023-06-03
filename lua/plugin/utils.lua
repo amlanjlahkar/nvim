@@ -1,5 +1,26 @@
 return {
   "nvim-lua/plenary.nvim",
+
+  {
+    "numToStr/Comment.nvim",
+    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+    keys = { "gc", { "gb", mode = "x" } },
+    config = function()
+      local avail, ts_config = pcall(require, "nvim-treesitter['config']")
+      if avail then
+        ts_config.setup({
+          context_commentstring = {
+            enable = true,
+            enable_autocmd = false,
+          },
+        })
+      end
+      require("Comment").setup({
+        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+      })
+    end,
+  },
+
   {
     "cbochs/grapple.nvim",
     --NOTE: experimental
@@ -79,27 +100,33 @@ return {
         },
 
         {
-          "<leader>ob", function()
+          "<leader>ob",
+          function()
             local path = cwd() .. entry().name
             if entry().type == "file" then
               vim.cmd("Git blame " .. path)
             else
               vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
             end
-          end, opts("Oil: View git blame for file under cursor"),
+          end,
+          opts("Oil: View git blame for file under cursor"),
         },
 
         {
-          "<leader>op", function()
+          "<leader>op",
+          function()
             local fname = entry().name
             require("core.utils.operate").operate(cwd() .. fname, cwd(), string.format("On %s > ", fname))
-          end, opts("Oil: Perform external operation on file under cursor"),
+          end,
+          opts("Oil: Perform external operation on file under cursor"),
         },
 
         {
-          "<leader>os", function()
+          "<leader>os",
+          function()
             require("plugin.telescope.extra.oil").switch_dir(cwd())
-          end, opts("Oil: Fuzzy search and switch to directory"),
+          end,
+          opts("Oil: Fuzzy search and switch to directory"),
         },
       })
     end,
