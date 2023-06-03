@@ -5,7 +5,6 @@ end
 return {
   {
     "williamboman/mason.nvim",
-    lazy = false,
     opts = {
       ui = {
         border = "none",
@@ -64,24 +63,26 @@ return {
     ft = { "sh", "bash", "yaml", "yml", "json" },
     event = "LspAttach",
     opts = function()
+      local home = os.getenv("HOME")
       local null_ls = require("null-ls")
-      local formatting = null_ls.builtins.formatting
-      local diagnostics = null_ls.builtins.diagnostics
+      local format = null_ls.builtins.formatting
+      local diagnose = null_ls.builtins.diagnostics
       return {
         sources = {
-          formatting.black,
-          formatting.prettierd,
-          formatting.stylua,
-          formatting.shfmt.with({
+          format.black,
+          format.prettierd,
+          format.stylua,
+          format.shfmt.with({
             extra_args = { "-i", "2", "-ci", "-bn" },
             extra_filetypes = { "bash" },
           }),
-          formatting.rustfmt.with({ extra_args = { "--edition=2021" } }),
-          diagnostics.shellcheck.with({
+          format.rustfmt.with({ extra_args = { "--edition=2021" } }),
+
+          diagnose.shellcheck.with({
             extra_filetypes = { "sh" },
           }),
-          diagnostics.jsonlint,
-          diagnostics.eslint.with({
+          diagnose.jsonlint,
+          diagnose.eslint.with({
             prefer_local = "node_modules/.bin",
             condition = function(utils)
               return utils.root_has_file({ ".eslintrc.json", ".eslintrc.js" })

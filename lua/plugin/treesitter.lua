@@ -88,7 +88,7 @@ return {
       local parsers = require("nvim-treesitter.parsers")
       local parser_config = parsers.get_parser_configs()
 
-      ts_install.compilers = { "zig", "clang" }
+      ts_install.compilers = { "zig", "clang", "gcc" }
       ts_install.update({ with_sync = false })
 
       parser_config.bash.filetype_to_parsename = "sh"

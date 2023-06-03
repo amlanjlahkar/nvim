@@ -23,7 +23,7 @@ function M:default_opts()
       severity = { max = vim.diagnostic.severity.WARN }
     }, ]]
     float = {
-      focusable = false,
+      focusable = true,
       style = "minimal",
       border = self.border,
       source = "if_many",
