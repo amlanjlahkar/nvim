@@ -11,7 +11,7 @@ o.undofile = true
 o.undodir = vim.fn.stdpath("state") .. "/undo"
 o.updatetime = 100
 
--- indenting and wrapping
+-- indention and folds
 o.autoindent = false
 o.tabstop = 8
 o.softtabstop = 2
@@ -21,6 +21,8 @@ o.wrap = false
 o.breakindent = true
 o.linebreak = true
 o.backspace = "indent,eol,nostop"
+o.foldmethod = "marker"
+o.foldcolumn = "3"
 
 -- editor preference
 o.ttimeoutlen = 200
@@ -37,11 +39,10 @@ o.list = true
 o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
 o.virtualedit = "block"
 o.browsedir = "buffer"
-o.foldmethod = "marker"
 o.completeopt = { "menu", "menuone", "noselect" }
 
 o.showmode = false
-o.cursorline = false
+o.cursorline = true
 o.showtabline = 1
 o.cmdheight = 1
 o.laststatus = 3
@@ -62,6 +63,8 @@ o.fillchars:append({
   vertleft = "┨",
   vertright = "┣",
   verthoriz = "╋",
+  -- foldopen = "",
+  -- foldclose = "",
 })
 
 o.dictionary:append(vim.fn.stdpath("config") .. "/dict/dictionary_en.txt")

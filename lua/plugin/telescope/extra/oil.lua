@@ -15,7 +15,7 @@ function M.switch_dir(cwd)
       actions.select_default:replace(function()
         local chosen = action_state.get_selected_entry()["value"]
         actions.close(id)
-        require("oil").open(cwd .. "/" .. chosen)
+        require("oil").open(_cwd .. "/" .. chosen)
       end)
       return true
     end,

@@ -4,7 +4,7 @@ return {
   {
     "numToStr/Comment.nvim",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
-    keys = { "gc", { "gb", mode = "x" } },
+    keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = { "x", "o" } } },
     config = function()
       local avail, ts_config = pcall(require, "nvim-treesitter['config']")
       if avail then

@@ -65,8 +65,6 @@ key.xmap({
   { "v", "yP" },
 })
 
--- key.imap({ "<C-l>", "<Right>" })
-
 key.nmap({
   { "<leader>c", '"+yy', opts("Yank line to system clipboard") },
   { "<leader>C", '"+y$', opts("Yank(eol) to system clipboard") },
