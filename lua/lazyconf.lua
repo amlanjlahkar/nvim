@@ -2,7 +2,23 @@ function _G.LAZYLOAD(plugin_name)
   require("lazy").load({ plugins = plugin_name })
 end
 
-local M = {
+local function init_lazy(path)
+  path = path or vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.loop.fs_stat(path) then
+    vim.notify("Installing lazy and corresponding plugins, please wait...", vim.log.levels.INFO)
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "--branch=stable",
+      "https://github.com/folke/lazy.nvim.git",
+      path,
+    })
+  end
+  vim.opt.rtp:prepend(path)
+end
+
+local conf = {
   lazyopts = {
     defaults = { lazy = true },
     lockfile = vim.fn.stdpath("config") .. "/lazylock.json",
@@ -15,16 +31,9 @@ local M = {
       enabled = true,
       notify = false,
     },
-    performance = {
-      rtp = {
-        reset = true,
-      },
-    },
     ui = {
       wrap = false,
       size = { width = 0.6, height = 0.8 },
-      border = "none",
-      throttle = 20,
       custom_keys = {
         ["<localleader>l"] = false,
         ["<localleader>t"] = false,
@@ -34,7 +43,7 @@ local M = {
   },
 }
 
-function M.lazymaps()
+function conf.lazymaps()
   local key = require("core.utils.map")
   local cmd, opts = key.cmd, key.new_opts
 
@@ -46,9 +55,10 @@ function M.lazymaps()
   })
 end
 
-function M:setup()
-  require("lazy").setup("plugin", self.lazyopts)
+function conf:setup()
+  init_lazy()
   self.lazymaps()
+  require("lazy").setup("plugin", self.lazyopts)
 end
 
-return M
+return conf
