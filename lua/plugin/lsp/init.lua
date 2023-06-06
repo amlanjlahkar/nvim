@@ -60,6 +60,7 @@ return {
 
   {
     "jose-elias-alvarez/null-ls.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
     ft = { "sh", "bash", "yaml", "yml", "json" },
     event = "LspAttach",
     opts = function()

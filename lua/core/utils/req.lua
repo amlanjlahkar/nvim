@@ -8,6 +8,10 @@ local M = {}
 ---@param depth integer? Maximum depth to scan for nested modules
 ---@return table # Formatted file paths
 function M.req(path, exclude, depth)
+  local is_avail, plenary = pcall(require, "plenary")
+  if not is_avail then
+    error("Couldn't load plenary")
+  end
   path = path and fn.stdpath("config") .. "/lua/" .. path or fn.expand("%:h")
   if exclude and type(exclude) == "table" then
     table.insert(exclude, "init")
@@ -22,7 +26,7 @@ function M.req(path, exclude, depth)
     return child:find("init") and fnmod(child, ":h"):gsub("/", ".") or fnmod(child, ":r"):gsub("/", ".")
   end
   local mods = {}
-  require("plenary.scandir").scan_dir(path, {
+  plenary["scandir"].scan_dir(path, {
     depth = depth,
     on_insert = function(m)
       if fnmod(m, ":e") ~= "lua" then
