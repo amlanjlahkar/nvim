@@ -1,34 +1,10 @@
 return {
   {
-    "norcalli/nvim-colorizer.lua",
-    enabled = false,
-    lazy = false,
-    config = function()
-      require("colorizer").setup()
-    end,
-  },
-
-  {
     "tummetott/reticle.nvim",
-    enabled = false,
+    -- enabled = false,
     event = "VeryLazy",
     opts = {
       ignore = { cursorline = { "lazy", "lspinfo" } },
-    },
-  },
-
-  {
-    "folke/trouble.nvim",
-    module = false,
-    cmd = { "Trouble", "TroubleToggle" },
-    opts = {
-      mode = "document_diagnostics",
-      padding = false,
-      icons = false,
-      fold_open = "",
-      fold_closed = "",
-      indent_lines = false,
-      use_diagnostic_signs = true,
     },
   },
 

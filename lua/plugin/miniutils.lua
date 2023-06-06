@@ -1,20 +1,5 @@
 return {
   {
-    "echasnovski/mini.indentscope",
-    enabled = false,
-    version = false,
-    event = "VeryLazy",
-    config = function()
-      require("mini.indentscope").setup({ delay = 50, symbol = "│" })
-      vim.api.nvim_create_autocmd("FileType", {
-        group = vim.api.nvim_create_augroup("_plug", { clear = true }),
-        pattern = { "help", "lazy", "telescopeprompt", "trouble", "^oil*", "^clangd*", "fugitive", "checkhealth", "" },
-        command = "lua vim.b.miniindentscope_disable = true",
-      })
-    end,
-  },
-
-  {
     "echasnovski/mini.surround",
     version = false,
     keys = { "s", { "S", mode = "x" } },
@@ -29,19 +14,9 @@ return {
   },
 
   {
-    "echasnovski/mini.pairs",
-    enabled = false,
-    version = false,
-    event = "InsertEnter",
-    config = function()
-      require("mini.pairs").setup()
-    end,
-  },
-
-  {
     "echasnovski/mini.ai",
     version = false,
-    lazy = false,
+    keys = { "c", "d", "y", "v" },
     dependencies = "nvim-treesitter-textobjects",
     opts = function()
       local ai = require("mini.ai")
