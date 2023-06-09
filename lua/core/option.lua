@@ -22,7 +22,7 @@ o.breakindent = true
 o.linebreak = true
 o.backspace = "indent,eol,nostop"
 o.foldmethod = "marker"
-o.foldcolumn = "3"
+-- o.foldcolumn = "3"
 
 -- editor preference
 o.ttimeoutlen = 200

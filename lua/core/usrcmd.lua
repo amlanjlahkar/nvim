@@ -2,6 +2,8 @@ local api = vim.api
 local fn = vim.fn
 local cmd = api.nvim_create_user_command
 
+cmd("W", "w", {})
+
 cmd("GhBrowse", function(opts)
   local region = function()
     local fpath = fn.fnamemodify(fn.expand("%"), ":.:h") .. "/" .. fn.expand("%:t")

@@ -25,7 +25,6 @@ return {
         "vimdoc",
         "yaml",
       },
-      ignore_install = {},
       indent = {
         enable = true,
       },
@@ -36,33 +35,13 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "gnn",
+          init_selection = "<CR>",
           node_incremental = "<C-n>",
           node_decremental = "<C-p>",
           scope_incremental = "<C-s>",
         },
       },
       textobjects = {
-        move = {
-          enable = false,
-          set_jumps = true,
-          goto_next_start = {
-            ["]F"] = "@function.outer",
-            ["]C"] = "@class.outer",
-          },
-          goto_next_end = {
-            ["]f"] = "@function.outer",
-            ["]c"] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[F"] = "@function.outer",
-            ["[C"] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[f"] = "@function.outer",
-            ["[c"] = "@class.outer",
-          },
-        },
         select = {
           enable = true,
           keymaps = {
@@ -76,15 +55,7 @@ return {
             ["]a"] = "@parameter.inner",
           },
           swap_previous = {
-            ["]A"] = "@parameter.inner",
-          },
-        },
-        lsp_interop = {
-          enable = false,
-          border = "single",
-          peek_definition_code = {
-            ["<leader>df"] = "@function.outer",
-            ["<leader>dc"] = "@class.outer",
+            ["[a"] = "@parameter.inner",
           },
         },
       },
