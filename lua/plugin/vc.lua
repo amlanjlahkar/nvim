@@ -1,9 +1,27 @@
+local key = require("core.utils.map")
+local opts = key.new_opts
+
 return {
   {
     "tpope/vim-fugitive",
-    keys = "<leader><leader>v",
+    keys = "<leader>f",
     config = function()
-      vim.keymap.set("n", "<leader><leader>v", ":tab Git<CR>", { silent = true, desc = "Open git intereface" })
+      local function lcheck(file)
+        file = file or vim.fn.expand("%:p")
+        local def_args = "log --all --stat -p "
+        vim.ui.input({ prompt = "string> " }, function(input)
+          if not input then return end
+          if input == "" then
+            vim.cmd.Git(def_args .. file)
+          else
+            vim.cmd.Git(string.format("%s -S %s %s", def_args, input, file))
+          end
+        end)
+      end
+      key.nmap({
+        { "<leader>fo", ":tab Git<CR>", opts("Open git interface") },
+        { "<leader>fl", lcheck, opts("Check git log") },
+      })
     end,
   },
 
@@ -11,9 +29,6 @@ return {
     "lewis6991/gitsigns.nvim",
     lazy = false,
     opts = function()
-      local key = require("core.utils.map")
-      local opts = key.new_opts
-
       return {
         signs = {
           delete = { text = "" },
