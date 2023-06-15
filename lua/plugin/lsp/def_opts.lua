@@ -2,15 +2,18 @@ local M = {}
 
 -- Handlers {{{1
 function M.handlers()
-  local lsp = vim.lsp
-  return {
-    ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single", style = "minimal" }),
-    ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single", style = "minimal" }),
-    -- ["textDocument/publishDiagnostics"] = lsp.with(
-    --   lsp.diagnostic.on_publish_diagnostics,
-    --   require("plugin.lsp.diagnostics"):default_opts()
-    -- ),
-  }
+    local lsp = vim.lsp
+    return {
+        ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single", style = "minimal" }),
+        ["textDocument/signatureHelp"] = lsp.with(
+            lsp.handlers.signature_help,
+            { border = "single", style = "minimal" }
+        ),
+        -- ["textDocument/publishDiagnostics"] = lsp.with(
+        --   lsp.diagnostic.on_publish_diagnostics,
+        --   require("plugin.lsp.diagnostics"):default_opts()
+        -- ),
+    }
 end
 -- 1}}}
 
@@ -19,26 +22,26 @@ M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
 if is_cmp_available then
-  M.capabilities = cmp_nvim.default_capabilities(M.capabilities)
+    M.capabilities = cmp_nvim.default_capabilities(M.capabilities)
 end
 -- 1}}}
 
 -- On_attach {{{1
 -- Keymaps {{{2
 function M.setup_keymaps(bufnr)
-  local function check(action, fallback, opts)
-    fallback = fallback or action
-    opts = opts or {}
-    local is_avail, tb = pcall(require, "telescope.builtin")
-    if is_avail then
-      tb["lsp_" .. action](opts)
-    else
-      vim.lsp.buf[fallback]()
+    local function check(action, fallback, opts)
+        fallback = fallback or action
+        opts = opts or {}
+        local is_avail, tb = pcall(require, "telescope.builtin")
+        if is_avail then
+            tb["lsp_" .. action](opts)
+        else
+            vim.lsp.buf[fallback]()
+        end
     end
-  end
-  local lsp = vim.lsp.buf
-  local key = require("core.utils.map")
-  local cmd, opts = key.cmd, key.new_opts
+    local lsp = vim.lsp.buf
+    local key = require("core.utils.map")
+    local cmd, opts = key.cmd, key.new_opts
   --stylua: ignore start
   key.imap({ "<C-k>", lsp.signature_help })
   key.nmap({
@@ -93,39 +96,39 @@ function M.setup_keymaps(bufnr)
     opts(bufnr, "Lsp/Null-ls: Format buffer"),
   })
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  --stylua: ignore end
+    --stylua: ignore end
 end
 -- 2}}}
 
 function M.on_attach(client, bufnr)
-  local api = vim.api
-  if client.server_capabilities.documentHighlightProvider then
-    ---@diagnostic disable-next-line: param-type-mismatch
-    local is_defined, _ = pcall(vim.cmd, "silent hi LspReference")
-    if is_defined then
-      for _, ref in pairs({ "Text", "Read", "Write" }) do
-        api.nvim_set_hl(0, "LspReference" .. ref, { link = "LspReference" })
-      end
+    local api = vim.api
+    if client.server_capabilities.documentHighlightProvider then
+        ---@diagnostic disable-next-line: param-type-mismatch
+        local is_defined, _ = pcall(vim.cmd, "silent hi LspReference")
+        if is_defined then
+            for _, ref in pairs({ "Text", "Read", "Write" }) do
+                api.nvim_set_hl(0, "LspReference" .. ref, { link = "LspReference" })
+            end
+        end
+
+        local au = api.nvim_create_autocmd
+        local id = api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+        au("CursorHold", {
+            group = id,
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+        })
+        au({ "CursorMoved", "InsertEnter" }, {
+            group = id,
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+        })
     end
 
-    local au = api.nvim_create_autocmd
-    local id = api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-    au("CursorHold", {
-      group = id,
-      buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    au({ "CursorMoved", "InsertEnter" }, {
-      group = id,
-      buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
-    })
-  end
-
-  local diagnostics = require("plugin.lsp.diagnostics")
-  diagnostics:setup_signs()
-  vim.diagnostic.config(diagnostics:default_opts())
-  M.setup_keymaps(bufnr)
+    local diagnostics = require("plugin.lsp.diagnostics")
+    diagnostics:setup_signs()
+    vim.diagnostic.config(diagnostics:default_opts())
+    M.setup_keymaps(bufnr)
 end
 -- 1}}}
 

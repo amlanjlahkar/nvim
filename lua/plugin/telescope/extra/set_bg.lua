@@ -10,23 +10,23 @@ local Scan = require("plenary.scandir")
 local M = {}
 
 function M.gen_finder(cwd, only_dirs)
-  local arg = {}
-  if type(only_dirs) == "boolean" then
-    arg.only_dirs = only_dirs
-  elseif type(only_dirs) == "function" then
-    arg.only_dirs = only_dirs()
-  end
-  return finders.new_table({
-    results = Scan.scan_dir(cwd, { only_dirs = arg.only_dirs }),
-    entry_maker = function(entry)
-      return {
-        value = entry,
-        ordinal = entry,
-        display = fn.fnamemodify(entry, ":t"),
-        path = cwd,
-      }
-    end,
-  })
+    local arg = {}
+    if type(only_dirs) == "boolean" then
+        arg.only_dirs = only_dirs
+    elseif type(only_dirs) == "function" then
+        arg.only_dirs = only_dirs()
+    end
+    return finders.new_table({
+        results = Scan.scan_dir(cwd, { only_dirs = arg.only_dirs }),
+        entry_maker = function(entry)
+            return {
+                value = entry,
+                ordinal = entry,
+                display = fn.fnamemodify(entry, ":t"),
+                path = cwd,
+            }
+        end,
+    })
 end
 
 --stylua: ignore

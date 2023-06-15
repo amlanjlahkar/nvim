@@ -14,8 +14,8 @@ o.updatetime = 100
 -- indention and folds
 o.autoindent = false
 o.tabstop = 8
-o.softtabstop = 2
-o.shiftwidth = 2
+o.softtabstop = 4
+o.shiftwidth = 4
 o.expandtab = true
 o.wrap = false
 o.breakindent = true
@@ -54,17 +54,17 @@ o.splitkeep = "screen"
 o.splitbelow = true
 o.splitright = true
 o.fillchars:append({
-  eob = " ",
-  diff = "╱",
-  horiz = "━",
-  horizup = "┻",
-  horizdown = "┳",
-  vert = "┃",
-  vertleft = "┨",
-  vertright = "┣",
-  verthoriz = "╋",
-  -- foldopen = "",
-  -- foldclose = "",
+    eob = " ",
+    diff = "╱",
+    horiz = "━",
+    horizup = "┻",
+    horizdown = "┳",
+    vert = "┃",
+    vertleft = "┨",
+    vertright = "┣",
+    verthoriz = "╋",
+    -- foldopen = "",
+    -- foldclose = "",
 })
 
 o.dictionary:append(vim.fn.stdpath("config") .. "/dict/dictionary_en.txt")
@@ -78,4 +78,3 @@ o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
 
 vim.g.editorconfig = false
-
