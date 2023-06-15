@@ -55,7 +55,37 @@ return {
   },
 
   {
+    "xiyaowong/transparent.nvim",
+    lazy = false,
+    opts = {
+      extra_groups = {
+        "WinBar",
+        "WinBarNC",
+        "CursorLine",
+        "VertSplit",
+        "TabLineFill",
+        "GitGutterAdd",
+        "GitGutterChange",
+        "GitGutterDelete",
+        "DiffLine",
+        "CmpItemAbbr",
+        "StatusColSep",
+        "StatusLine",
+        "StatusLineNC",
+        "StatusLineImp",
+        "StatusLineInd",
+        "StatusLineDiagnosticError",
+        "StatusLineDiagnosticWarn",
+        "StatusLineDiagnosticHint",
+        "StatusLineDiagnosticInfo",
+        "TreesitterContext",
+      },
+    },
+  },
+
+  {
     "rockerBOO/boo-colorscheme-nvim",
+    name = "boo",
     config = function()
       vim.g.boo_colorscheme_theme = "crimson_moonlight"
     end,
