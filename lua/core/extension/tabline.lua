@@ -22,6 +22,8 @@ function M.tabline()
       t = t .. "fugitive "
     elseif bufname:match("^term://%g+") then
       t = t .. "terminal "
+    elseif bufname:match("^oil://%g+") then
+      t = t .. "oil "
     elseif bufname ~= "" then
       t = t .. string.format("%s ", fn.fnamemodify(bufname, ":t:r")):lower()
     else

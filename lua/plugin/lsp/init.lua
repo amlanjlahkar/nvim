@@ -30,9 +30,13 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
-      { "j-hui/fidget.nvim", opts = {
-        text = { spinner = "dots", done = " " },
-      } },
+      {
+        "j-hui/fidget.nvim",
+        tag = "legacy",
+        opts = {
+          text = { spinner = "dots", done = " " },
+        },
+      },
       "folke/neodev.nvim",
     },
     config = function()
@@ -61,7 +65,6 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     dependencies = "nvim-lua/plenary.nvim",
-    ft = { "sh", "bash", "yaml", "yml", "json" },
     event = "LspAttach",
     opts = function()
       local home = os.getenv("HOME")

@@ -74,7 +74,7 @@ function M.setup_keymaps(bufnr)
     },
   })
   key.nxmap({
-    "<leader>f",
+    "<C-s>",
     function()
       vim.lsp.buf.format({
         filter = function(client)
