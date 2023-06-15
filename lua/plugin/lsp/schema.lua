@@ -78,10 +78,10 @@ return {
     require_node = false,
     auto_install = true,
   },
-  {
-    "stylua",
-    mason_id = true,
-    require_node = false,
-    auto_install = true,
-  },
+  -- {
+  --   "stylua",
+  --   mason_id = true,
+  --   require_node = false,
+  --   auto_install = true,
+  -- },
 }
