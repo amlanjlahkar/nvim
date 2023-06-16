@@ -1,5 +1,5 @@
 if vim.fn.bufname() == "[Command Line]" then
-  vim.cmd([[
+    vim.cmd([[
     setlocal scl=no
     setlocal norelativenumber nonumber
   ]])

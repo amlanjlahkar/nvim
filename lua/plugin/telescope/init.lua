@@ -25,15 +25,15 @@ M.opts = function()
             },
             buffer_previewer_maker = require("plugin.telescope.function").buf_preview_maker,
             history = { path = vim.fn.stdpath("state") .. "/telescope_history.log" },
-      --stylua: ignore
-      mappings = {
-        i = {
-          ["<C-u>"] = false,
-          ["<C-w>"] = function() vim.api.nvim_input("<C-S-w>") end,
-          ["<C-s>"] = actions.toggle_selection,
-          ["<M-p>"] = actions_layout.toggle_preview,
-        },
-      },
+            mappings = {
+                --stylua: ignore
+                i = {
+                    ["<C-u>"] = false,
+                    ["<C-w>"] = function() vim.api.nvim_input("<C-S-w>") end,
+                    ["<C-s>"] = actions.toggle_selection,
+                    ["<M-p>"] = actions_layout.toggle_preview,
+                },
+            },
             vimgrep_arguments = {
                 "rg",
                 "--color=never",
