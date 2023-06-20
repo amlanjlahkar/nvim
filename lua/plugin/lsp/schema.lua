@@ -6,6 +6,7 @@ return {
         hook_lspconfig = false,
         auto_install = true,
     },
+
     {
         "html",
         mason_id = "html-lsp",
@@ -13,6 +14,7 @@ return {
         hook_lspconfig = true,
         auto_install = true,
     },
+
     {
         "cssls",
         mason_id = "css-lsp",
@@ -20,6 +22,7 @@ return {
         hook_lspconfig = true,
         auto_install = true,
     },
+
     {
         "lua_ls",
         mason_id = "lua-language-server",
@@ -27,6 +30,7 @@ return {
         hook_lspconfig = true,
         auto_install = true,
     },
+
     {
         "pyright",
         mason_id = true,
@@ -34,6 +38,7 @@ return {
         hook_lspconfig = true,
         auto_install = true,
     },
+
     {
         "rust_analyzer",
         mason_id = "rust-analyzer",
@@ -41,6 +46,7 @@ return {
         hook_lspconfig = true,
         auto_install = true,
     },
+
     {
         "tsserver",
         mason_id = "typescript-language-server",
@@ -48,40 +54,47 @@ return {
         hook_lspconfig = false,
         auto_install = true,
     },
+
     {
         "blue",
         mason_id = true,
         require_node = false,
         auto_install = true,
     },
+
     {
         "jsonlint",
         mason_id = true,
         require_node = true,
         auto_install = true,
     },
+
     {
         "prettierd",
         mason_id = true,
         require_node = true,
         auto_install = true,
     },
+
     {
         "shellcheck",
         mason_id = true,
         require_node = false,
         auto_install = true,
     },
+
     {
         "shfmt",
         mason_id = true,
         require_node = false,
         auto_install = true,
     },
-    -- {
-    --   "stylua",
-    --   mason_id = true,
-    --   require_node = false,
-    --   auto_install = true,
-    -- },
+
+    {
+        "stylua",
+        mason_id = true,
+        require_node = false,
+        auto_install = false,
+    },
 }
+

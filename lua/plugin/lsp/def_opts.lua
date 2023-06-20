@@ -53,8 +53,6 @@ function M.setup_keymaps(bufnr)
     { "<leader>lf",   vim.diagnostic.open_float,                          opts(bufnr, "LSP: Show line diagnostic") },
     { "]d",           vim.diagnostic.goto_next,                           opts(bufnr, "LSP: Goto next diagnostic occurrence") },
     { "[d",           vim.diagnostic.goto_prev,                           opts(bufnr, "LSP: Goto previous diagnostic occurrence") },
-    { "<leader>ld",   cmd("TroubleToggle document_diagnostics"),          opts(bufnr, "Trouble: List document diagnostics") },
-    { "<leader>lD",   cmd("TroubleToggle workspace_diagnostics"),         opts(bufnr, "Trouble: List workspace diagnostics") },
     {
       "gd", function()
         check("definitions", "definition")
