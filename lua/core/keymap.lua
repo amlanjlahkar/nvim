@@ -75,6 +75,12 @@ key.xmap({
     { "<leader>v", '"+p==', opts("Paste from system clipboard") },
 })
 
+key.imap({
+    { "<C-]>", "<C-x><C-f>" },
+    { "<C-l>", "<C-x><C-l>" },
+    { "<C-k>", "<C-x><C-k>" },
+})
+
 -- user commands {{{
 key.nxmap({ "<leader>gb", ":GhBrowse<CR>" })
 -- }}}

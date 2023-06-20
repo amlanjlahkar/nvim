@@ -43,7 +43,7 @@ function M.setup_keymaps(bufnr)
     local key = require("core.utils.map")
     local cmd, opts = key.cmd, key.new_opts
   --stylua: ignore start
-  key.imap({ "<C-k>", lsp.signature_help })
+  key.imap({ "<C-h>", lsp.signature_help })
   key.nmap({
     { "K",            lsp.hover,                                          opts(bufnr, "LSP: Show hover information") },
     { "<leader>lr",   lsp.rename,                                         opts(bufnr, "LSP: Rename symbol under cursor") },
