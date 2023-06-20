@@ -51,8 +51,8 @@ return {
             key.nmap({
                 { "<leader>ma", g.toggle, opts("Grapple: Toggle tag") },
                 { "<leader>mm", g.popup_tags, opts("Grapple: Open tags' popup menu") },
-                { "];", g.cycle_forward, opts("Grapple: Forward cycle tags") },
-                { "[;", g.cycle_backward, opts("Grapple: Backward cycle tags") },
+                { "<leader>]", g.cycle_forward, opts("Grapple: Forward cycle tags") },
+                { "<leader>[", g.cycle_backward, opts("Grapple: Backward cycle tags") },
             })
         end,
     },

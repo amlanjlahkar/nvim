@@ -17,6 +17,7 @@ return {
                 "javascript",
                 "lua",
                 "luap",
+                "make",
                 "markdown",
                 "python",
                 "rasi",
@@ -38,7 +39,6 @@ return {
                     init_selection = "<CR>",
                     node_incremental = "<C-n>",
                     node_decremental = "<C-p>",
-                    scope_incremental = "<C-s>",
                 },
             },
             textobjects = {
@@ -66,7 +66,7 @@ return {
             local parsers = require("nvim-treesitter.parsers")
             local parser_config = parsers.get_parser_configs()
 
-            ts_install.compilers = { "zig", "clang", "gcc" }
+            ts_install.compilers = { "zig", "gcc" }
             ts_install.update({ with_sync = false })
 
             parser_config.bash.filetype_to_parsename = "sh"
