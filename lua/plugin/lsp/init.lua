@@ -107,7 +107,8 @@ return {
     { "mfussenegger/nvim-jdtls", enabled = false },
 
     {
-        "p00f/clangd_extensions.nvim",
+        "clangd_extensions.nvim",
+        url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         ft = { "c", "cpp" },
         opts = {
             server = require("plugin.lsp.equip_opts").setup("clangd"),
