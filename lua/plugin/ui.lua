@@ -1,14 +1,5 @@
 return {
     {
-        "tummetott/reticle.nvim",
-        -- enabled = false,
-        event = "VeryLazy",
-        opts = {
-            ignore = { cursorline = { "lazy", "lspinfo" } },
-        },
-    },
-
-    {
         "stevearc/dressing.nvim",
         enabled = false,
         init = function()
@@ -50,35 +41,6 @@ return {
                         }
                     end
                 end,
-            },
-        },
-    },
-
-    {
-        "xiyaowong/transparent.nvim",
-        lazy = false,
-        opts = {
-            extra_groups = {
-                "WinBar",
-                "WinBarNC",
-                "CursorLine",
-                "VertSplit",
-                "TabLineFill",
-                "GitGutterAdd",
-                "GitGutterChange",
-                "GitGutterDelete",
-                "DiffLine",
-                "CmpItemAbbr",
-                "StatusColSep",
-                "StatusLine",
-                "StatusLineNC",
-                "StatusLineImp",
-                "StatusLineInd",
-                "StatusLineDiagnosticError",
-                "StatusLineDiagnosticWarn",
-                "StatusLineDiagnosticHint",
-                "StatusLineDiagnosticInfo",
-                "TreesitterContext",
             },
         },
     },

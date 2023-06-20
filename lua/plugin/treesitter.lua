@@ -3,7 +3,6 @@ return {
         "nvim-treesitter/nvim-treesitter",
         version = false,
         lazy = false,
-        dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 
         opts = {
             ensure_installed = {
@@ -39,24 +38,6 @@ return {
                     init_selection = "<CR>",
                     node_incremental = "<C-n>",
                     node_decremental = "<C-p>",
-                },
-            },
-            textobjects = {
-                select = {
-                    enable = true,
-                    keymaps = {
-                        ["ac"] = "@comment.outer",
-                        ["ic"] = "@comment.inner",
-                    },
-                },
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ["]a"] = "@parameter.inner",
-                    },
-                    swap_previous = {
-                        ["[a"] = "@parameter.inner",
-                    },
                 },
             },
         },

@@ -9,16 +9,6 @@ return {
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
-            {
-                "uga-rosa/cmp-dictionary",
-                config = function()
-                    require("cmp_dictionary").setup({
-                        async = true,
-                        exact = -1,
-                        max_items = 20,
-                    })
-                end,
-            },
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
             { "hrsh7th/cmp-nvim-lsp", module = false },
@@ -36,10 +26,7 @@ return {
                 sources = {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
-                    { name = "buffer" },
-                    { name = "neorg" },
                     { name = "path" },
-                    { name = "dictionary", keyword_length = 4 },
                 },
                 formatting = {
                     expandable_indicator = false,
