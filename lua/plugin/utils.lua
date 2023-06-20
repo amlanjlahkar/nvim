@@ -3,7 +3,6 @@ return {
 
     {
         "numToStr/Comment.nvim",
-        dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
         keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = { "x", "o" } } },
         config = function()
             local avail, ts_config = pcall(require, "nvim-treesitter['config']")
@@ -15,10 +14,8 @@ return {
                     },
                 })
             end
-            require("Comment").setup({
-                pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-            })
             LAZYLOAD("mini.ai")
+            require("Comment").setup()
         end,
     },
 
