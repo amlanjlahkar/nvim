@@ -29,3 +29,14 @@ end, {
     range = true,
     desc = "Copy github url for selected region of current file",
 })
+
+cmd("Msg", function()
+    vim.cmd([[
+        let fpath = "/tmp/nvim_messages"
+        exe "redir >>" fpath
+        silent messages
+        redir END
+        exe "view +" fpath
+    ]])
+end, { desc = "Redirect and open :messages output in a separate readonly buffer" })
+

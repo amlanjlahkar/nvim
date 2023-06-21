@@ -83,4 +83,5 @@ key.imap({
 
 -- user commands {{{
 key.nxmap({ "<leader>gb", ":GhBrowse<CR>" })
+key.nmap({ "<leader><leader>m", ":Msg<CR>" })
 -- }}}
