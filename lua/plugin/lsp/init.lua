@@ -67,7 +67,6 @@ return {
         dependencies = "nvim-lua/plenary.nvim",
         event = "LspAttach",
         opts = function()
-            local home = os.getenv("HOME")
             local null_ls = require("null-ls")
             local format = null_ls.builtins.formatting
             local diagnose = null_ls.builtins.diagnostics
