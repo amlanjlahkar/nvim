@@ -15,7 +15,7 @@ return {
         config = function(_, opts)
             require("mason").setup(opts)
             vim.api.nvim_create_autocmd("BufWritePost", {
-                desc = "Install missing mason packages",
+                desc = "Auto install packages defined in schema",
                 group = vim.api.nvim_create_augroup("_Mason", { clear = true }),
                 pattern = vim.fn.stdpath("config") .. "/lua/plugin/lsp/schema.lua",
                 callback = function()
@@ -30,14 +30,8 @@ return {
         "neovim/nvim-lspconfig",
         lazy = false,
         dependencies = {
-            {
-                "j-hui/fidget.nvim",
-                tag = "legacy",
-                opts = {
-                    text = { spinner = "dots", done = " " },
-                },
-            },
             "folke/neodev.nvim",
+            { "j-hui/fidget.nvim", tag = "legacy", opts = { text = { spinner = "dots", done = " " } } },
         },
         config = function()
             vim.lsp.set_log_level("DEBUG")
@@ -47,15 +41,10 @@ return {
                 return
             end
             require("neodev").setup()
-            local node_loaded = vim.fn.executable("node") == 1
             for _, server in pairs(require("plugin.lsp.schema")) do
                 if type(server.hook_lspconfig) == "boolean" and server.hook_lspconfig then
-                    if not node_loaded and server.require_node then
-                        goto continue
-                    end
                     local opts = require("plugin.lsp.equip_opts").setup(server[1])
                     require("lspconfig")[server[1]].setup(opts)
-                    ::continue::
                 end
             end
             require("lspconfig.ui.windows").default_options.border = "single"

@@ -1,100 +1,74 @@
 return {
     {
         "clangd",
-        mason_id = true,
-        require_node = false,
-        hook_lspconfig = false,
         auto_install = true,
+        mason_id = true,
+        hook_lspconfig = false,
     },
 
     {
         "html",
-        mason_id = "html-lsp",
-        require_node = true,
-        hook_lspconfig = true,
         auto_install = true,
+        mason_id = "html-lsp",
+        hook_lspconfig = true,
     },
 
     {
         "cssls",
-        mason_id = "css-lsp",
-        require_node = true,
-        hook_lspconfig = true,
         auto_install = true,
+        mason_id = "css-lsp",
+        hook_lspconfig = true,
     },
 
     {
         "lua_ls",
+        auto_install = true,
         mason_id = "lua-language-server",
-        require_node = false,
         hook_lspconfig = true,
-        auto_install = true,
-    },
-
-    {
-        "pyright",
-        mason_id = true,
-        require_node = true,
-        hook_lspconfig = true,
-        auto_install = true,
     },
 
     {
         "rust_analyzer",
+        auto_install = false,
         mason_id = "rust-analyzer",
-        require_node = false,
-        hook_lspconfig = true,
-        auto_install = true,
+        hook_lspconfig = false,
     },
 
     {
         "tsserver",
+        auto_install = true,
         mason_id = "typescript-language-server",
-        require_node = true,
         hook_lspconfig = false,
-        auto_install = true,
-    },
-
-    {
-        "blue",
-        mason_id = true,
-        require_node = false,
-        auto_install = true,
     },
 
     {
         "jsonlint",
-        mason_id = true,
-        require_node = true,
         auto_install = true,
+        mason_id = true,
     },
 
     {
         "prettierd",
-        mason_id = true,
-        require_node = true,
         auto_install = true,
+        mason_id = true,
     },
 
     {
         "shellcheck",
-        mason_id = true,
-        require_node = false,
         auto_install = true,
+        mason_id = true,
     },
 
     {
         "shfmt",
-        mason_id = true,
-        require_node = false,
         auto_install = true,
+        mason_id = true,
     },
 
     {
         "stylua",
-        mason_id = true,
-        require_node = false,
         auto_install = false,
+        mason_id = true,
     },
 }
 
