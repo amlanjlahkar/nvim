@@ -43,12 +43,10 @@ return {
                         { "[c", gs.prev_hunk, opts(bufnr, "Gitsigns: previous hunk") },
                         { "<leader>gR", gs.reset_buffer, opts(bufnr, "Gitsigns: reset buffer") },
                         { "<leader>gp", gs.preview_hunk, opts(bufnr, "Gitsigns: preview_hunk") },
-                        { "<leader>gr", gs.reset_hunk, opts(bufnr, "Gitsigns: reset hunk") },
-                        { "<leader>gs", gs.stage_hunk, opts(bufnr, "Gitsigns: stage hunk") },
                         { "<leader>gv", gs.select_hunk, opts(bufnr, "Gitsigns: stage hunk") },
                         { "<leader>gd", gs.diffthis, opts(bufnr, "Gitsigns: diff file with current index") },
                     })
-                    key.xmap({
+                    key.nxmap({
                         { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts(bufnr, "Gitsigns: reset hunk") },
                         { "<leader>gs", ":Gitsigns stage_hunk<CR>", opts(bufnr, "Gitsigns: stage hunk") },
                     })

@@ -88,14 +88,15 @@ return {
             local opts = key.new_opts
 
             key.nmap({
-        --stylua: ignore
-        {
-          "-", function()
-            if vim.bo.filetype ~= "fugitive" then
-              require("oil").open()
-            end
-          end, opts("Oil: Open parent directory"),
-        },
+                {
+                    "-",
+                    function()
+                        if vim.bo.filetype ~= "fugitive" then
+                            require("oil").open()
+                        end
+                    end,
+                    opts("Oil: Open parent directory"),
+                },
 
                 {
                     "<leader>ob",
@@ -138,19 +139,19 @@ return {
             local cb = require("cmdbuf")
             local key = require("core.utils.map")
 
-      --stylua: ignore start
-      key.nmap({
-        { "q:", function() cb.split_open(cwh) end },
-        ---@diagnostic disable: assign-type-mismatch
-        { "q/", function() cb.split_open(cwh, { type = "vim/search/forward" }) end },
-        { "q?", function() cb.split_open(cwh, { type = "vim/search/backward" }) end },
-        { "ql", function() cb.split_open(cwh, { type = "lua/cmd" }) end, key.new_opts(key.nowait) },
-      })
-      key.cmap({
-        "C-f>", function()
-          cb.split_open(cwh, { line = vim.fn.getcmdline(), column = vim.fn.getcmdpos() })
-        end,
-      })
+            --stylua: ignore start
+            key.nmap({
+                { "q:", function() cb.split_open(cwh) end },
+                ---@diagnostic disable: assign-type-mismatch
+                { "q/", function() cb.split_open(cwh, { type = "vim/search/forward" }) end },
+                { "q?", function() cb.split_open(cwh, { type = "vim/search/backward" }) end },
+                { "ql", function() cb.split_open(cwh, { type = "lua/cmd" }) end, key.new_opts(key.nowait) },
+            })
+            key.cmap({
+                "C-f>", function()
+                    cb.split_open(cwh, { line = vim.fn.getcmdline(), column = vim.fn.getcmdpos() })
+                end,
+            })
             --stylua: ignore end
 
             vim.api.nvim_create_autocmd("User", {
