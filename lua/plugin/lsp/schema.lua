@@ -1,74 +1,13 @@
 return {
-    {
-        "clangd",
-        auto_install = true,
-        mason_id = true,
-        hook_lspconfig = false,
-    },
-
-    {
-        "html",
-        auto_install = true,
-        mason_id = "html-lsp",
-        hook_lspconfig = true,
-    },
-
-    {
-        "cssls",
-        auto_install = true,
-        mason_id = "css-lsp",
-        hook_lspconfig = true,
-    },
-
-    {
-        "lua_ls",
-        auto_install = true,
-        mason_id = "lua-language-server",
-        hook_lspconfig = true,
-    },
-
-    {
-        "rust_analyzer",
-        auto_install = false,
-        mason_id = "rust-analyzer",
-        hook_lspconfig = false,
-    },
-
-    {
-        "tsserver",
-        auto_install = true,
-        mason_id = "typescript-language-server",
-        hook_lspconfig = false,
-    },
-
-    {
-        "jsonlint",
-        auto_install = true,
-        mason_id = true,
-    },
-
-    {
-        "prettierd",
-        auto_install = true,
-        mason_id = true,
-    },
-
-    {
-        "shellcheck",
-        auto_install = true,
-        mason_id = true,
-    },
-
-    {
-        "shfmt",
-        auto_install = true,
-        mason_id = true,
-    },
-
-    {
-        "stylua",
-        auto_install = false,
-        mason_id = true,
-    },
+    { "clangd", hook_lspconfig = false },
+    { "cssls", mason_id = "css-lsp" },
+    { "html", mason_id = "html-lsp" },
+    { "jsonlint", hook_lspconfig = false },
+    { "lua_ls", mason_id = "lua-language-server" },
+    { "prettierd", hook_lspconfig = false },
+    { "rust_analyzer", auto_install = false, mason_id = "rust-analyzer", hook_lspconfig = false },
+    { "shellcheck", hook_lspconfig = false },
+    { "shfmt", hook_lspconfig = false },
+    { "stylua", auto_install = false, hook_lspconfig = false },
+    { "tsserver", mason_id = "typescript-language-server", hook_lspconfig = false },
 }
-

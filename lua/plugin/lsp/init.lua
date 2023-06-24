@@ -41,10 +41,19 @@ return {
                 return
             end
             require("neodev").setup()
-            for _, server in pairs(require("plugin.lsp.schema")) do
-                if type(server.hook_lspconfig) == "boolean" and server.hook_lspconfig then
-                    local opts = require("plugin.lsp.equip_opts").setup(server[1])
-                    require("lspconfig")[server[1]].setup(opts)
+
+            local function hook_lspconfig(server)
+                if type(server.hook_lspconfig) == "boolean" then
+                    return server.hook_lspconfig
+                end
+                return true
+            end
+
+            for _, entry in pairs(require("plugin.lsp.schema")) do
+                local server = type(entry) == "table" and entry[1] or entry
+                if hook_lspconfig(entry) then
+                    local opts = require("plugin.lsp.equip_opts").setup(server)
+                    require("lspconfig")[server].setup(opts)
                 end
             end
             require("lspconfig.ui.windows").default_options.border = "single"

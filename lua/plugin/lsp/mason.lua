@@ -1,27 +1,30 @@
-local fr = string.format
 local registry = require("mason-registry")
+
+local function auto_install(entry)
+    if type(entry.auto_install) == "boolean" then
+        return entry.auto_install
+    end
+    return true
+end
+
+local function get_pkgname(entry)
+    if type(entry) == "string" then
+        return entry
+    elseif type(entry) == "table" and entry.mason_id then
+        return entry.mason_id
+    end
+    return entry[1]
+end
 
 local M = {}
 
-function M.check_registry(pkg_name)
-    local is_avail, pkg = pcall(registry.get_package, pkg_name)
-    if not is_avail then
-        error(fr('Couldn\'t find package "%s"', pkg_name))
-    end
-    return not registry.is_installed(pkg_name) and pkg
-end
-
 function M:ensure_install()
-    local pkg_name, is_avail, pkg
     for _, entry in pairs(require("plugin.lsp.schema")) do
-        pkg_name = type(entry.mason_id) == "boolean" and entry[1] or entry.mason_id
-        if entry.auto_install then
-            is_avail, pkg = pcall(self.check_registry, pkg_name)
-            if not is_avail then
-                ---@diagnostic disable-next-line: param-type-mismatch
-                vim.notify(pkg, vim.log.levels.ERROR)
-            elseif pkg then
-                vim.notify_once(fr('[Mason] Installing "%s"', pkg.name))
+        if auto_install(entry) then
+            local pkgname = get_pkgname(entry)
+            local pkg = assert(registry.get_package(pkgname))
+            if not registry.is_installed(pkgname) then
+                vim.notify("Installing " .. pkgname)
                 pkg:install()
             end
         end
