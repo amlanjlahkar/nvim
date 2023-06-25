@@ -2,7 +2,7 @@ local M = {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        "natecraddock/telescope-zf-native.nvim",
     },
     cmd = "Telescope",
     keys = require("plugin.telescope.mapping").prefix,
@@ -62,7 +62,7 @@ end
 
 function M.config(_, opts)
     require("telescope").setup(opts)
-    local extensions = { "fzf" }
+    local extensions = { "zf-native" }
     for _, ext in pairs(extensions) do
         require("telescope").load_extension(ext)
     end
