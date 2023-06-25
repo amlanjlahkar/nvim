@@ -7,9 +7,9 @@ return {
         "williamboman/mason.nvim",
         opts = {
             ui = {
-                border = "none",
                 width = 0.6,
                 height = 0.8,
+                check_outdated_packages_on_open = false,
             },
         },
         config = function(_, opts)
@@ -30,7 +30,7 @@ return {
         "neovim/nvim-lspconfig",
         lazy = false,
         dependencies = {
-            "folke/neodev.nvim",
+            { "folke/neodev.nvim", opts = { setup_jsonls = false } },
             { "j-hui/fidget.nvim", tag = "legacy", opts = { text = { spinner = "dots", done = " " } } },
         },
         config = function()
@@ -40,11 +40,10 @@ return {
                 schedule_install()
                 return
             end
-            require("neodev").setup()
 
-            local function hook_lspconfig(server)
-                if type(server.hook_lspconfig) == "boolean" then
-                    return server.hook_lspconfig
+            local function hook_lspconfig(entry)
+                if type(entry.hook_lspconfig) == "boolean" then
+                    return entry.hook_lspconfig
                 end
                 return true
             end
