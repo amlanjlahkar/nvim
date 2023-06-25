@@ -2,24 +2,24 @@ local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 
 key.nmap({
-    -- handling buffers and windows {{{
-    { "<leader>.", cmd("bn"), opts("Next buffer") },
-    { "<leader>,", cmd("bp"), opts("Previous buffer") },
-    { "<leader>bd", cmd("bd"), opts("Delete current buffer") },
-    { "<leader>bD", cmd("%bd|e#|bd#|normal `"), opts("Delete all except current buffer") },
-    { "<leader><Right>", cmd("vertical resize +7"), opts("Resize pane towards right") },
-    { "<leader><Left>", cmd("vertical resize -7"), opts("Resize pane towards left") },
-    { "<leader><Down>", cmd("resize +7"), opts("Resize pane towards down") },
-    { "<leader><Up>", cmd("resize -7"), opts("Resize pane towards up") },
+    -- buffers and windows {{{
+    { "<leader>.", cmd("bn") },
+    { "<leader>,", cmd("bp") },
+    { "<leader>bd", cmd("bd") },
+    { "<leader>bD", cmd("%bd|e#|bd#|normal `") },
+    { "<leader><Right>", cmd("vertical resize +7") },
+    { "<leader><Left>", cmd("vertical resize -7") },
+    { "<leader><Down>", cmd("resize +7") },
+    { "<leader><Up>", cmd("resize -7") },
     -- }}}
 
-    -- terminal related {{{
-    { "<leader><leader>t", cmd("tabnew term://bash"), opts("Open terminal") },
+    -- terminal {{{
+    { "<leader><leader>t", cmd("tabnew term://bash") },
     -- }}}
 
-    -- movements and editing {{{
-    { "<leader>j", "<cmd>m .+1<CR>==", opts("Move current line down") },
-    { "<leader>k", "<cmd>m .-2<CR>==", opts("Move current line up") },
+    -- movements {{{
+    { "<leader>j", "<cmd>m .+1<CR>==" },
+    { "<leader>k", "<cmd>m .-2<CR>==" },
     { "n", "nzzzv" },
     { "N", "Nzzzv" },
     { "J", "mzJ`z" },
@@ -30,17 +30,15 @@ key.nmap({
     -- { ",", "@@" },
     -- }}}
 
-    -- ex commands {{{
-    { "<leader>r", ":reg<CR>" },
-    -- }}}
-
     -- misc {{{
     { "<F11>", cmd("setlocal spell!") },
     { "<F12>", cmd("!$BROWSER %") },
-    { "<leader><leader>s", cmd("silent :write | source %"), opts("Save and source lua file") },
+    { "<leader>c", '"+yy' },
+    { "<leader>C", '"+y$' },
+    { "<leader>v", 'mc"+p`c==' },
+    --stylua: ignore
     {
-        "<leader>d",
-        function()
+        "<leader>d", function()
             local start = vim.api.nvim_get_current_buf()
             vim.cmd("vnew | set buftype=nofile | read ++edit # | 0d_ | diffthis")
             local scratch = vim.api.nvim_get_current_buf()
@@ -51,10 +49,8 @@ key.nmap({
                     vim.keymap.del("n", "q", { buffer = start })
                 end, { buffer = buf })
             end
-        end,
-        opts("Get relative diff for current file"),
+        end, opts("Get relative diff for current file"),
     },
-    -- }}}
 })
 
 key.xmap({
@@ -63,16 +59,8 @@ key.xmap({
     { "J", ":m '>+1<CR>gv=gv" },
     { "K", ":m '<-2<CR>gv=gv" },
     { "v", "yP" },
-})
-
-key.nmap({
-    { "<leader>c", '"+yy', opts("Yank line to system clipboard") },
-    { "<leader>C", '"+y$', opts("Yank(eol) to system clipboard") },
-    { "<leader>v", 'mc"+p`c==', opts("Paste from system clipboard") },
-})
-key.xmap({
-    { "<leader>c", 'mc"+y`c', opts("Yank to system clipboard") },
-    { "<leader>v", '"+p==', opts("Paste from system clipboard") },
+    { "<leader>c", 'mc"+y`c' },
+    { "<leader>v", '"+p==' },
 })
 
 key.imap({
@@ -81,7 +69,11 @@ key.imap({
     { "<C-k>", "<C-x><C-k>" },
 })
 
--- user commands {{{
-key.nxmap({ "<leader>gb", ":GhBrowse<CR>" })
-key.nmap({ "<leader><leader>m", ":Msg<CR>" })
+--stylua: ignore
+key.cmap({
+    "%%", function()
+        return vim.fn.getcmdtype() == ":" and
+            string.format("%s/", vim.fn.expand("%:h")) or "%%"
+    end, opts(key.expr, "Append to relative path")
+})
 -- }}}
