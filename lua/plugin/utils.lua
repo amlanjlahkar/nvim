@@ -21,13 +21,14 @@ return {
 
     {
         "cbochs/grapple.nvim",
+        enabled = false,
         --NOTE: experimental
         init = function()
             ---@diagnostic disable-next-line: param-type-mismatch
             local cwd = string.match(vim.loop.cwd(), "/([.%w_%-]+)$")
             local grapple_data = vim.fn.finddir(vim.fn.stdpath("data") .. "/grapple")
             if grapple_data then
-                local file = io.popen(string.format("ls -pa %s | grep -v /", grapple_data), "r")
+                local file = io.popen(string.format("ls -pa %s | rg -v /", grapple_data), "r")
                 if file then
                     for f in file:lines() do
                         if string.match(f, cwd) then
@@ -136,6 +137,7 @@ return {
         keys = { "q:", "q/", "q?", "ql", { "<C-f>", mode = "c" } },
         config = function()
             local cwh = vim.o.cmdwinheight
+            local api = vim.api
             local cb = require("cmdbuf")
             local key = require("core.utils.map")
 
@@ -148,15 +150,17 @@ return {
                 { "ql", function() cb.split_open(cwh, { type = "lua/cmd" }) end, key.new_opts(key.nowait) },
             })
             key.cmap({
-                "C-f>", function()
+                "<C-f>", function()
+                    local close_key = api.nvim_replace_termcodes("<C-c>", true, false, true)
                     cb.split_open(cwh, { line = vim.fn.getcmdline(), column = vim.fn.getcmdpos() })
+                    api.nvim_feedkeys(close_key, "n", false)
                 end,
             })
             --stylua: ignore end
 
-            vim.api.nvim_create_autocmd("User", {
+            api.nvim_create_autocmd("User", {
                 desc = "Custom settings for cmdbuf window",
-                group = vim.api.nvim_create_augroup("cmdbuf_setting", { clear = true }),
+                group = api.nvim_create_augroup("cmdbuf_setting", { clear = true }),
                 pattern = "CmdbufNew",
                 callback = function(self)
                     vim.o.bufhidden = "wipe"
