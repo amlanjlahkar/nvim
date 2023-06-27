@@ -41,6 +41,7 @@ o.virtualedit = "block"
 o.browsedir = "buffer"
 o.completeopt = { "menu", "menuone", "noselect" }
 
+o.ruler = false
 o.showmode = false
 o.cursorline = true
 o.showtabline = 1

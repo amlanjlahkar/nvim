@@ -168,7 +168,7 @@ function M.get_attached_sources()
         active[#active] = nil
     end
     local attched = table.concat(active, ", ")
-    return (#attched == 0 or M.is_truncated()) and "" or string.format(" lsp: [ %s ] ", attched)
+    return (#attched == 0 or M.is_truncated()) and "" or string.format(" lsp: [%s] ", attched)
 end
 
 function M.get_lsp_diagnostic()
@@ -217,7 +217,7 @@ end
 function M.treesitter_status()
     local buf = api.nvim_get_current_buf()
     local hl = require("vim.treesitter.highlighter")
-    return hl.active[buf] and "   " or ""
+    return hl.active[buf] and " ts: %#StatusLineInd#󰄬 %#StatusLine#" or ""
 end
 -- 2}}}
 
@@ -235,7 +235,7 @@ end
 function M.set_active(self)
     return table.concat({
         "%#StatusLine#",
-        self:get_current_mode(),
+        -- self:get_current_mode(),
         "%#StatusLineImp#",
         self:get_filepath(),
         self.get_filename(),
@@ -247,21 +247,15 @@ function M.set_active(self)
         "%#StatusLine#",
         -- self.lsp_progress(),
         "%#StatusLineInd#",
-        self:grapple_tags(),
+        -- self:grapple_tags(),
         "%#StatusLine#",
         self:get_filetype(),
         self.get_attached_sources(),
-        "%#StatusLineInd#",
         self.treesitter_status(),
-        "%#StatusLine#",
         -- self.get_fileformat(),
-        self.get_line_col(),
+        -- self.get_line_col(),
         "%#StatusLine#",
     })
-end
-
-function M.set_inactive()
-    return "%#StatusLineNC#"
 end
 
 function M.set_explorer()
@@ -278,7 +272,7 @@ function M.setup()
     local augroup = api.nvim_create_augroup("_StatusLine", { clear = true })
     api.nvim_create_autocmd("FileType", {
         group = augroup,
-        pattern = "netrw",
+        pattern = { "netrw", "oil" },
         command = "setlocal statusline=%!v:lua.Statusline('explorer')",
     })
     vim.opt.statusline = "%!v:lua.Statusline('active')"
