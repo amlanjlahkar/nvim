@@ -1,5 +1,7 @@
-local schedule_install = function()
-    return require("plugin.lsp.mason").schedule_install()
+local pkg_spec_path = vim.fn.stdpath("config") .. "/lua/plugin/lsp/pkg_spec.lua"
+local pkg_spec_module = string.gsub(vim.fn.fnamemodify(pkg_spec_path, ":r"), "%S+lua/", ""):gsub("/", ".")
+local schedule_install = function(pkg_spec)
+    return require("plugin.lsp.installer").schedule_install(pkg_spec)
 end
 
 return {
@@ -15,11 +17,11 @@ return {
         config = function(_, opts)
             require("mason").setup(opts)
             vim.api.nvim_create_autocmd("BufWritePost", {
-                desc = "Auto install packages defined in schema",
+                desc = "Auto install required packages",
                 group = vim.api.nvim_create_augroup("_Mason", { clear = true }),
-                pattern = vim.fn.stdpath("config") .. "/lua/plugin/lsp/schema.lua",
+                pattern = pkg_spec_path,
                 callback = function()
-                    require("plenary.reload").reload_module("plugin.lsp.schema")
+                    require("plenary.reload").reload_module(pkg_spec_module)
                     schedule_install()
                 end,
             })
@@ -40,16 +42,16 @@ return {
                 return
             end
 
-            local function hook_lspconfig(entry)
-                if type(entry.hook_lspconfig) == "boolean" then
-                    return entry.hook_lspconfig
+            local function hook_lspconfig(pkg)
+                if type(pkg.hook_lspconfig) == "boolean" then
+                    return pkg.hook_lspconfig
                 end
                 return true
             end
 
-            for _, entry in pairs(require("plugin.lsp.schema")) do
-                local server = type(entry) == "table" and entry[1] or entry
-                if hook_lspconfig(entry) then
+            for _, pkg in pairs(require(pkg_spec_module)) do
+                local server = type(pkg) == "table" and pkg[1] or pkg
+                if hook_lspconfig(pkg) then
                     local opts = require("plugin.lsp.equip_opts").setup(server)
                     require("lspconfig")[server].setup(opts)
                 end
