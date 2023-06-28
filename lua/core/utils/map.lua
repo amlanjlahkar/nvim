@@ -113,5 +113,6 @@ keymap.tmap = map("t")
 keymap.smap = map("s")
 keymap.ismap = map({ "i", "s" })
 keymap.nxmap = map({ "n", "x" })
+keymap.xomap = map({ "x", "o" })
 
 return keymap

@@ -7,10 +7,10 @@ key.nmap({
     { "<leader>,", cmd("bp") },
     { "<leader>bd", cmd("bd") },
     { "<leader>bD", cmd("%bd|e#|bd#|normal `") },
-    { "<leader><Right>", cmd("vertical resize +7") },
-    { "<leader><Left>", cmd("vertical resize -7") },
-    { "<leader><Down>", cmd("resize +7") },
-    { "<leader><Up>", cmd("resize -7") },
+    { "<Right>", cmd("vertical resize +7") },
+    { "<Left>", cmd("vertical resize -7") },
+    { "<Down>", cmd("resize +7") },
+    { "<Up>", cmd("resize -7") },
     -- }}}
 
     -- terminal {{{

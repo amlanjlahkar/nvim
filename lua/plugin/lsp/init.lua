@@ -63,14 +63,15 @@ return {
     {
         "jose-elias-alvarez/null-ls.nvim",
         dependencies = "nvim-lua/plenary.nvim",
-        event = "LspAttach",
+        lazy = false,
         opts = function()
             local null_ls = require("null-ls")
             local format = null_ls.builtins.formatting
             local diagnose = null_ls.builtins.diagnostics
+            local actions = null_ls.builtins.code_actions
             return {
                 sources = {
-                    format.black,
+                    actions.gitsigns,
                     format.prettierd,
                     format.stylua,
                     format.shfmt.with({

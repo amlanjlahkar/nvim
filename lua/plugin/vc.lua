@@ -4,6 +4,7 @@ local opts = key.new_opts
 return {
     {
         "tpope/vim-fugitive",
+        cmd = "Git",
         keys = "<leader>f",
         config = function()
             local function lcheck(file)
@@ -14,9 +15,9 @@ return {
                         return
                     end
                     if #input < 1 then
-                        vim.cmd.Git(def_args .. file)
+                        vim.cmd("Git! " .. def_args .. file)
                     else
-                        vim.cmd.Git(string.format("%s -S %s %s", def_args, input, file))
+                        vim.cmd(string.format("Git! %s -S %s %s", def_args, input, file))
                     end
                 end)
             end
@@ -39,17 +40,17 @@ return {
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
                     key.nmap({
-                        { "]c", gs.next_hunk, opts(bufnr, "Gitsigns: next hunk") },
-                        { "[c", gs.prev_hunk, opts(bufnr, "Gitsigns: previous hunk") },
-                        { "<leader>gR", gs.reset_buffer, opts(bufnr, "Gitsigns: reset buffer") },
-                        { "<leader>gp", gs.preview_hunk, opts(bufnr, "Gitsigns: preview_hunk") },
-                        { "<leader>gv", gs.select_hunk, opts(bufnr, "Gitsigns: stage hunk") },
-                        { "<leader>gd", gs.diffthis, opts(bufnr, "Gitsigns: diff file with current index") },
+                        { "]c", gs.next_hunk, opts(bufnr) },
+                        { "[c", gs.prev_hunk, opts(bufnr) },
+                        { "<leader>gR", gs.reset_buffer, opts(bufnr) },
+                        { "<leader>gp", gs.preview_hunk, opts(bufnr) },
+                        { "<leader>gt", gs.toggle_deleted, opts(bufnr) }
                     })
                     key.nxmap({
-                        { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts(bufnr, "Gitsigns: reset hunk") },
-                        { "<leader>gs", ":Gitsigns stage_hunk<CR>", opts(bufnr, "Gitsigns: stage hunk") },
+                        { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts(bufnr) },
+                        { "<leader>gs", ":Gitsigns stage_hunk<CR>", opts(bufnr) },
                     })
+                    key.xomap({ "ih", ":<C-U>Gitsigns select_hunk<CR>", opts(bufnr) })
                 end,
             }
         end,
