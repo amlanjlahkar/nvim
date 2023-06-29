@@ -31,11 +31,9 @@ key.nmap({
     -- }}}
 
     -- misc {{{
+    { "<C-s>", ":write | source %<CR>" },
     { "<F11>", cmd("setlocal spell!") },
     { "<F12>", cmd("!$BROWSER %") },
-    { "<leader>c", '"+yy' },
-    { "<leader>C", '"+y$' },
-    { "<leader>v", 'mc"+p`c==' },
     --stylua: ignore
     {
         "<leader>d", function()
@@ -59,8 +57,12 @@ key.xmap({
     { "J", ":m '>+1<CR>gv=gv" },
     { "K", ":m '<-2<CR>gv=gv" },
     { "v", "yP" },
-    { "<leader>c", 'mc"+y`c' },
-    { "<leader>v", '"+p==' },
+})
+
+key.nxmap({
+    { "<C-y>", '"+y' },
+    { "<C-e>", '"+y$' },
+    { "<C-p>", '"+p==' },
 })
 
 key.imap({

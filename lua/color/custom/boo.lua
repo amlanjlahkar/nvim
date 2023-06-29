@@ -31,11 +31,6 @@ M.custom = {
   { "StatusLineImp",              { bg = BlackShadeLight, fg = Fg } },
   { "StatusLineInd",              { bg = BlackShadeLight, fg = Red } },
   { "StatusLineNC",               { bg = BlackShadeLight, fg = Fg } },
-  { "VimModeCommand",             { bg = BgShadeLighter, fg = Red } },
-  { "VimModeExtra",               { bg = BgShadeLighter, fg = Red } },
-  { "VimModeInsert",              { bg = BgShadeLighter, fg = Red } },
-  { "VimModeNormal",              { bg = BgShadeLighter, fg = Red } },
-  { "VimModeVisual",              { bg = BgShadeLighter, fg = Red } },
   -- 1}}}
   -- native {{{1
   { "LineNr",                     { bg = Bg, fg = RedShadeDarker } },
@@ -127,12 +122,6 @@ M.custom = {
   { "TelescopePromptCounter",     { fg = FgShadeDarker } },
   { "TelescopePromptTitle",       { bg = BlackShadeLight, fg = Fg } },
   { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },
-  -- 2}}}
-  -- trouble {{{2
-  { "TroubleFoldIcon",            { bg = none, fg = Fg } },
-  { "TroubleIndent",              { bg = none, fg = BlueShadeDark } },
-  { "TroubleLocation",            { bg = none, fg = BlueShadeDark } },
-  { "TroubleText",                { bg = none, fg = Fg } },
   -- 2}}}
   -- other {{{2
   { "FidgetTitle",                { fg = Magenta, blend = 0 } },

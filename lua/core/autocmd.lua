@@ -77,6 +77,20 @@ M.autocmd_definitions = {
             command = "setl fo-=o",
         },
     },
+
+    {
+        { "BufWritePre", "FileWritePre" },
+        {
+            desc = "Create missing parent directories before save",
+            callback = function(self)
+                local root = fn.fnamemodify(self.file, ":p:h")
+                local is_uri = string.find(root, "%S+://*")
+                if not is_uri then
+                    fn.mkdir(root, "p")
+                end
+            end,
+        },
+    },
 }
 
 function M.setup()

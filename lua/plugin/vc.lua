@@ -5,12 +5,12 @@ return {
     {
         "tpope/vim-fugitive",
         cmd = "Git",
-        keys = "<leader>f",
+        keys = "<leader>g",
         config = function()
             local function lcheck(file)
                 file = file or vim.fn.expand("%:p")
                 local def_args = "log --all --stat --follow -p "
-                vim.ui.input({ prompt = "string> " }, function(input)
+                vim.ui.input({ prompt = "Search string: " }, function(input)
                     if not input then
                         return
                     end
@@ -22,8 +22,8 @@ return {
                 end)
             end
             key.nmap({
-                { "<leader>fo", ":tab Git<CR>", opts("Open git interface") },
-                { "<leader>fl", lcheck, opts("Check git log") },
+                { "<leader>gg", ":tab Git<CR>", opts("Open git interface") },
+                { "<leader>gl", lcheck, opts("Check git log") },
             })
         end,
     },
@@ -44,7 +44,7 @@ return {
                         { "[c", gs.prev_hunk, opts(bufnr) },
                         { "<leader>gR", gs.reset_buffer, opts(bufnr) },
                         { "<leader>gp", gs.preview_hunk, opts(bufnr) },
-                        { "<leader>gt", gs.toggle_deleted, opts(bufnr) }
+                        { "<leader>gd", gs.toggle_deleted, opts(bufnr) }
                     })
                     key.nxmap({
                         { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts(bufnr) },
