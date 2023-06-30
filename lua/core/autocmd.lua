@@ -84,8 +84,7 @@ M.autocmd_definitions = {
             desc = "Create missing parent directories before save",
             callback = function(self)
                 local root = fn.fnamemodify(self.file, ":p:h")
-                local is_uri = string.find(root, "%S+://*")
-                if not is_uri then
+                if not root:find("%S+://*") then
                     fn.mkdir(root, "p")
                 end
             end,

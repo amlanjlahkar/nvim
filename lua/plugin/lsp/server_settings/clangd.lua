@@ -7,6 +7,7 @@ return {
         "--completion-style=detailed",
     },
     capabilities = {
+        offsetEncoding = "utf-16",
         textDocument = {
             completion = {
                 completionItem = {

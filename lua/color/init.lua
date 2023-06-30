@@ -20,7 +20,7 @@ function M:try_colorscheme(colorscheme)
         hl_override(colorscheme, custom_hl)
     end
     if not pcall(vim.cmd, "colorscheme " .. colorscheme) then
-        vim.notify(
+        vim.notify_once(
             string.format("Unable to load colorscheme %s. Reverting to %s", colorscheme, M.default),
             vim.log.levels.ERROR
         )
