@@ -31,10 +31,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         lazy = false,
-        dependencies = {
-            -- { "folke/neodev.nvim", opts = { setup_jsonls = false } },
-            { "j-hui/fidget.nvim", tag = "legacy", opts = { text = { spinner = "dots", done = " " } } },
-        },
         config = function()
             local root = require("mason.settings").current.install_root_dir .. "/packages"
             if not vim.loop.fs_access(root, "R") then
