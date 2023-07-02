@@ -16,12 +16,11 @@ function M:default_opts()
         underline = false,
         severity_sort = true,
         virtual_text = false,
-        --[[ virtual_text = {
-      spacing = 3,
-      prefix = ui.virtual_prefix,
-      source = "if_many",
-      severity = { max = vim.diagnostic.severity.WARN }
-    }, ]]
+        -- virtual_text = {
+        --     spacing = 3,
+        --     prefix = self.virtual_prefix,
+        --     source = "if_many",
+        -- },
         float = {
             focusable = true,
             style = "minimal",

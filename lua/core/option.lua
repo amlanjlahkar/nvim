@@ -9,7 +9,7 @@ o.swapfile = false
 o.backup = false
 o.undofile = true
 o.undodir = vim.fn.stdpath("state") .. "/undo"
-o.updatetime = 100
+o.updatetime = 200
 
 -- indention and folds
 o.autoindent = false
@@ -25,7 +25,8 @@ o.foldmethod = "marker"
 -- o.foldcolumn = "3"
 
 -- editor preference
-o.ttimeoutlen = 200
+o.timeoutlen = 200
+o.ttimeoutlen = 100
 o.number = true
 o.relativenumber = true
 o.numberwidth = 4
@@ -40,6 +41,7 @@ o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", pr
 o.virtualedit = "block"
 o.browsedir = "buffer"
 o.completeopt = { "menu", "menuone", "noselect" }
+o.shortmess:append({ I = true })
 
 o.ruler = false
 o.showmode = false

@@ -72,7 +72,7 @@ return {
                     ["."] = "actions.open_cmdline",
                     ["<C-y>"] = "actions.copy_entry_path",
                 },
-                buf_options = { buflisted = true, bufhidden = "delete" },
+                -- buf_options = { buflisted = true, bufhidden = "delete" },
                 win_options = { rnu = false, nu = false },
                 view_options = {
                     show_hidden = true,

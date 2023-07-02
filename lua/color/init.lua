@@ -21,10 +21,10 @@ function M:try_colorscheme(colorscheme)
     end
     if not pcall(vim.cmd, "colorscheme " .. colorscheme) then
         vim.notify_once(
-            string.format("Unable to load colorscheme %s. Reverting to %s", colorscheme, M.default),
+            string.format("Unable to load colorscheme %s. Reverting to %s", colorscheme, self.default),
             vim.log.levels.ERROR
         )
-        vim.cmd.colorscheme(M.default)
+        vim.cmd.colorscheme(self.default)
         vim.cmd(
             [[ set bg=dark scl=no ls=0 nonu nornu nocul noru | hi NormalFloat guibg=NONE | hi FloatBorder guibg=NONE ]]
         )
