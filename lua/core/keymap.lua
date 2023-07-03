@@ -1,5 +1,6 @@
 local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
+local nosilent = opts(key.nosilent)
 
 key.nmap({
     -- buffers and windows {{{
@@ -71,11 +72,19 @@ key.imap({
     { "<C-k>", "<C-x><C-k>" },
 })
 
---stylua: ignore
 key.cmap({
-    "%%", function()
-        return vim.fn.getcmdtype() == ":" and
-            string.format("%s/", vim.fn.expand("%:h")) or "%%"
-    end, opts(key.expr, "Append to relative path")
+    {
+        "%%",
+        function()
+            return vim.fn.getcmdtype() == ":" and string.format("%s/", vim.fn.expand("%:h")) or "%%"
+        end,
+        opts(key.expr, "Append to relative path"),
+    },
+    { "<C-i>", "<HOME>", nosilent },
+    { "<C-a>", "<END>", nosilent },
+    { "<C-b>", "<S-Left>", nosilent },
+    { "<C-e>", "<S-Right>", nosilent },
+    { "<C-n>", "<Down>", nosilent },
+    { "<C-p>", "<Up>", nosilent },
 })
 -- }}}
