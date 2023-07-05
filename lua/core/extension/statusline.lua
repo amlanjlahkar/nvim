@@ -1,154 +1,76 @@
--- Originally written by elianiva
--- https://elianiva.my.id/post/neovim-lua-statusline/#result
-
 local fn = vim.fn
 local api = vim.api
+local format = string.format
 
-local M = {}
+local stl = {}
 
-M.trunc_width = setmetatable({
-    git_status = 100,
-    filetype = 100,
-    filepath = 100,
-}, {
-    __index = function()
-        return 130
-    end,
-})
-
----@param width number? Width to match against
----@param is_statusglobal? boolean If true('laststatus' = 3) then width is matched against
---all the windows' width combined, else width of the current window
-function M.is_truncated(_, width, is_statusglobal)
-    width = width or M.trunc_width.default
-    is_statusglobal = is_statusglobal or true
-    local current_width = require("core.utils").get_width({ combined = is_statusglobal })
-    return current_width < width
+function stl.is_truncated(fpath_len)
+    fpath_len = fpath_len or string.len(fn.expand("%:p:."))
+    local global_width = require("core.utils").get_width({ combined = true })
+    return fpath_len > global_width / 2.5
 end
 
--- Components {{{1
--- Mode {{{2
-M.modes = setmetatable({
-    ["n"] = "%#VimModeNormal# N %#StatusLine#",
-    ["i"] = "%#VimModeInsert# I %#StatusLine#",
-    ["v"] = "%#VimModeVisual# V %#StatusLine#",
-    ["V"] = "%#VimModeVisual# V·L %#StatusLine#",
-    [""] = "%#VimModeVisual# V·B %#StatusLine#",
-    ["c"] = "%#VimModeCommand# C %#StatusLine#",
-    ["t"] = "%#VimModeExtra# T %#StatusLine#",
-    ["no"] = "N·P",
-    ["s"] = "S",
-    ["S"] = "S·L",
-    [""] = "S·B",
-    ["ic"] = "I",
-    ["R"] = "R",
-    ["Rv"] = "V·R",
-    ["cv"] = "V·E",
-    ["ce"] = "E",
-    ["r"] = "P",
-    ["rm"] = "RM",
-    ["r?"] = "C",
-    ["!"] = "S",
-}, {
-    __index = function()
-        return "%#VimModeExtra# U %#StatusLine#" -- handle edge cases
-    end,
-})
+function stl.get_filepath()
+    local fpath = fn.expand("%:p:.")
 
-function M:get_current_mode()
-    local current_mode = api.nvim_get_mode().mode
-    return string.format("%s", self.modes[current_mode]):upper()
-end
--- 2}}}
-
--- FileInfo {{{2
-function M:get_filepath()
-    local filepath = fn.fnamemodify(fn.expand("%"), ":.:h")
-    local _, dircount = filepath:gsub("/", "")
-
-    if filepath == "" or filepath == "." then
-        return " "
-    elseif self:is_truncated(self.trunc_width.filepath, true) or dircount > 7 then
-        return string.format(" %s/", fn.pathshorten(filepath, 2))
+    if stl.is_truncated() then
+        fpath = format("%s", fn.pathshorten(fpath, 3))
     end
 
-    return string.format(" %%<%s/", filepath)
+    return format("%%<%s ", fpath)
 end
 
-function M.get_filename()
-    local filename = fn.expand("%:t")
-    return filename and filename or ""
+function stl.get_fileperm()
+    return vim.bo.readonly and "[RO] " or ""
 end
 
-function M:get_filetype()
-    local filetype = vim.bo.filetype
-    local is_icons_available, icons = pcall(require, "nvim-web-devicons")
-    if not is_icons_available then
-        return filetype == "" and " ft: none " or string.format(" ft: %s ", filetype):lower()
+function stl.get_filetype()
+    local ftype = vim.bo.filetype
+    return ftype == "" and "ft: none " or format("ft: %s ", ftype)
+end
+
+function stl.get_git_status()
+    local dict = vim.b.gitsigns_status_dict
+    if not dict or stl.is_truncated() then
+        return ""
     end
-    local ft_icon = icons.get_icon_by_filetype(filetype)
-    return filetype == "" and " ft: none " or string.format(" %s %s ", ft_icon, filetype):lower()
+    --stylua: ignore
+    return dict.head ~= "" and
+        format("(#%s)[+%s ~%s -%s] ",
+            dict.head,
+            dict.added,
+            dict.changed,
+            dict.removed)
+        or ""
 end
 
-function M.is_readonly()
-    return vim.bo.readonly and " [RO] " or ""
-end
-
-function M.get_filesize()
-    local wc = fn.wordcount()
-    local size = math.floor(wc.bytes * 0.000977)
-    return string.format(" %s Kb ", size)
-end
-
-function M.get_fileformat()
-    return string.format(" %s ", vim.o.fileformat):lower()
-end
-
-function M.get_line_col()
-    return " %l:%c "
-end
--- 2}}}
-
--- GitInfo {{{2
-function M:get_git_status()
-    -- use fallback because it doesn't set this variable on the initial `BufEnter`
-    ---@diagnostic disable:undefined-field
-    local signs = vim.b.gitsigns_status_dict or { head = "", added = 0, changed = 0, removed = 0 }
-    local is_head_empty = signs.head ~= ""
-
-    if self:is_truncated(self.trunc_width.git_status) then
-        return is_head_empty and string.format(" #%s ", signs.head or "") or ""
+function stl.get_lsp_diagnostic_count()
+    if stl.is_truncated() then
+        return ""
     end
 
-  --stylua: ignore
-  return is_head_empty
-      and string.format(
-        " (#%s)[+%s ~%s -%s] ",
-        signs.head,
-        signs.added,
-        signs.changed,
-        signs.removed
-      )
-      or ""
-end
--- 2}}}
+    local signs = require("plugin.lsp.diagnostics").signs
+    local hl_prefix = "StatusLineDiagnostic"
+    local dict = {
+        { severity = 1, sign = signs.Error, hlgroup = hl_prefix .. "Error" },
+        { severity = 2, sign = signs.Info, hlgroup = hl_prefix .. "Info" },
+        { severity = 3, sign = signs.Warn, hlgroup = hl_prefix .. "Warn" },
+        { severity = 4, sign = signs.Hint, hlgroup = hl_prefix .. "Hint" },
+    }
 
--- LSP {{{2
-function M.lsp_progress()
-    local lsp = vim.lsp.util.get_progress_messages()[1]
+    local diagnostics, count = "", 0
 
-    if lsp then
-        local name = lsp.name or ""
-        local msg = lsp.message or ""
-        local percentage = lsp.percentage or 0
-        local title = lsp.title or ""
-        return string.format(" %%<%s: %s %s (%s%%%%) ", name, title, msg, percentage)
+    for _, d in ipairs(dict) do
+        count = vim.tbl_count(vim.diagnostic.get(0, { severity = d.severity }))
+        if count > 0 then
+            diagnostics = format("%s %%#%s#%s%s", diagnostics, d.hlgroup, d.sign, count)
+        end
     end
 
-    return ""
+    return diagnostics .. "%#StatusLineNC# "
 end
 
-function M.get_attached_sources()
+function stl.get_attached_sources()
     local clients = vim.lsp.get_active_clients({ bufnr = 0 })
     local null_sources = package.loaded["null-ls"] and require("null-ls.sources").get_available(vim.bo.filetype) or {}
 
@@ -163,119 +85,43 @@ function M.get_attached_sources()
         active[#clients + i] = null_sources[i].name
     end
 
-    if index ~= nil then
+    if index then
         active[#active], active[index] = active[index], active[#active]
         active[#active] = nil
     end
+
     local attched = table.concat(active, ", ")
-    return (#attched == 0 or M.is_truncated()) and "" or string.format(" lsp: [%s] ", attched)
+    return (#attched == 0 or stl.is_truncated()) and "" or string.format("lsp: [%s] ", attched)
 end
 
-function M.get_lsp_diagnostic()
-    local count = {}
-    local levels = {
-        errors = "Error",
-        warnings = "Warn",
-        info = "Info",
-        hints = "Hint",
-    }
-    local signs = require("plugin.lsp.diagnostics").signs
-    local icons = {
-        errors = signs.Error,
-        warnings = signs.Warn,
-        info = signs.Info,
-        hints = signs.Hint,
-    }
-
-    for k, level in pairs(levels) do
-        count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
-    end
-
-    local errors = ""
-    local warnings = ""
-    local hints = ""
-    local info = ""
-
-    if count["errors"] ~= 0 then
-        errors = " %#StatusLineDiagnosticError#" .. icons["errors"] .. count["errors"]
-    end
-    if count["warnings"] ~= 0 then
-        warnings = " %#StatusLineDiagnosticWarn#" .. icons["warnings"] .. count["warnings"]
-    end
-    if count["hints"] ~= 0 then
-        hints = " %#StatusLineDiagnosticHint#" .. icons["hints"] .. count["hints"]
-    end
-    if count["info"] ~= 0 then
-        info = " %#StatusLineDiagnosticInfo#" .. icons["info"] .. count["info"]
-    end
-
-    return M:is_truncated(M.trunc_width.filepath) and "" or errors .. warnings .. hints .. info .. "%#StatusLineNC#"
-end
--- 2}}}
-
--- Treesitter {{{2
-function M.treesitter_status()
+function stl.get_tshl_status()
     local buf = api.nvim_get_current_buf()
     local hl = require("vim.treesitter.highlighter")
-    return hl.active[buf] and " ts: %#StatusLineInd#󰄬 %#StatusLine#" or ""
-end
--- 2}}}
-
--- Grapple {{{2
-function M.grapple_tags()
-    if package.loaded["grapple"] then
-        return require("grapple").exists() and " " .. require("grapple").key() .. " " or ""
-    end
-    return ""
-end
--- 2}}}
--- 1}}}
-
--- Modes {{{1
-function M.set_active(self)
-    return table.concat({
-        "%#StatusLine#",
-        -- self:get_current_mode(),
-        "%#StatusLineImp#",
-        self:get_filepath(),
-        self.get_filename(),
-        self.is_readonly(),
-        "%#StatusLine#",
-        self:get_git_status(),
-        self.get_lsp_diagnostic(),
-        "%=",
-        "%#StatusLine#",
-        -- self.lsp_progress(),
-        "%#StatusLineInd#",
-        -- self:grapple_tags(),
-        "%#StatusLine#",
-        self:get_filetype(),
-        self.get_attached_sources(),
-        self.treesitter_status(),
-        -- self.get_fileformat(),
-        -- self.get_line_col(),
-        "%#StatusLine#",
-    })
+    return hl.active[buf] and "󰄬 " or ""
 end
 
-function M.set_explorer()
-    return "%#StatusLineNC#" .. "%= %F %="
-end
--- 1}}}
-
-function M.setup()
-    Statusline = setmetatable(M, {
-        __call = function(self, mode)
-            return self["set_" .. mode](self)
+function stl.setup()
+    StatusLine = setmetatable(stl, {
+        __call = function(self)
+            return table.concat({
+                "%#StatusLineImp#",
+                self.get_filepath(),
+                "%#StatusLine#",
+                self.get_fileperm(),
+                self.get_git_status(),
+                self.get_lsp_diagnostic_count(),
+                "%=",
+                "%#StatusLine#",
+                self.get_filetype(),
+                self.get_attached_sources(),
+                "%#StatusLineInd#",
+                self.get_tshl_status(),
+                "%#StatusLine#",
+            })
         end,
     })
-    local augroup = api.nvim_create_augroup("_StatusLine", { clear = true })
-    api.nvim_create_autocmd("FileType", {
-        group = augroup,
-        pattern = { "netrw", "oil" },
-        command = "setlocal statusline=%!v:lua.Statusline('explorer')",
-    })
-    vim.opt.statusline = "%!v:lua.Statusline('active')"
+    vim.opt.statusline = "%{%v:lua.StatusLine()%}"
 end
 
-return M.setup()
+stl.setup()
+
