@@ -12,11 +12,9 @@ end
 
 function stl.get_filepath()
     local fpath = fn.expand("%:p:.")
-
     if stl.is_truncated() then
         fpath = format("%s", fn.pathshorten(fpath, 3))
     end
-
     return format("%%<%s ", fpath)
 end
 
@@ -26,7 +24,7 @@ end
 
 function stl.get_filetype()
     local ftype = vim.bo.filetype
-    return ftype == "" and "ft: none " or format("ft: %s ", ftype)
+    return ftype == "" and "" or format(" 󰅩 %s ", ftype)
 end
 
 function stl.get_git_status()
@@ -36,7 +34,7 @@ function stl.get_git_status()
     end
     --stylua: ignore
     return dict.head ~= "" and
-        format("(#%s)[+%s ~%s -%s] ",
+        format("(󰘬 %s)[+%s ~%s -%s] ",
             dict.head,
             dict.added,
             dict.changed,
@@ -58,10 +56,9 @@ function stl.get_lsp_diagnostic_count()
         { severity = 4, sign = signs.Hint, hlgroup = hl_prefix .. "Hint" },
     }
 
-    local diagnostics, count = "", 0
-
+    local diagnostics = ""
     for _, d in ipairs(dict) do
-        count = vim.tbl_count(vim.diagnostic.get(0, { severity = d.severity }))
+        local count = vim.tbl_count(vim.diagnostic.get(0, { severity = d.severity }))
         if count > 0 then
             diagnostics = format("%s %%#%s#%s%s", diagnostics, d.hlgroup, d.sign, count)
         end
@@ -91,13 +88,13 @@ function stl.get_attached_sources()
     end
 
     local attched = table.concat(active, ", ")
-    return (#attched == 0 or stl.is_truncated()) and "" or string.format("lsp: [%s] ", attched)
+    return (#attched == 0 or stl.is_truncated()) and "" or string.format(" 󱘖  [%s] ", attched)
 end
 
 function stl.get_tshl_status()
     local buf = api.nvim_get_current_buf()
     local hl = require("vim.treesitter.highlighter")
-    return hl.active[buf] and "󰄬 " or ""
+    return hl.active[buf] and " 󰄬 " or ""
 end
 
 function stl.setup()
