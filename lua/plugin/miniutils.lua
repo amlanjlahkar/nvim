@@ -1,13 +1,12 @@
 return {
     {
         "echasnovski/mini.surround",
-        version = false,
         keys = { "s", { "S", mode = "x" } },
         config = function()
             require("mini.surround").setup({
                 silent = true,
                 highlight_duration = 100,
-                search_method = "cover_or_nearest",
+                search_method = "cover_or_prev",
             })
             vim.keymap.set("x", "S", [[:lua MiniSurround.add("visual")<CR>]], { silent = true })
         end,
@@ -15,7 +14,6 @@ return {
 
     {
         "echasnovski/mini.ai",
-        version = false,
         keys = { "c", "d", "y", "v" },
         dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
         opts = function()
@@ -39,9 +37,6 @@ return {
                     end,
                 },
             }
-        end,
-        config = function(_, opts)
-            require("mini.ai").setup(opts)
         end,
     },
 }

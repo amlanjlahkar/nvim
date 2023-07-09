@@ -1,3 +1,6 @@
+local key = require("core.utils.map")
+local keyopts = key.new_opts
+
 return {
     "nvim-lua/plenary.nvim",
 
@@ -43,14 +46,11 @@ return {
         keys = { "<leader>mm", "<leader>ma" },
         config = function()
             local g = require("grapple")
-            local key = require("core.utils.map")
-            local opts = key.new_opts
-
             key.nmap({
-                { "<leader>ma", g.toggle, opts("Grapple: Toggle tag") },
-                { "<leader>mm", g.popup_tags, opts("Grapple: Open tags' popup menu") },
-                { "<leader>]", g.cycle_forward, opts("Grapple: Forward cycle tags") },
-                { "<leader>[", g.cycle_backward, opts("Grapple: Backward cycle tags") },
+                { "<leader>ma", g.toggle },
+                { "<leader>mm", g.popup_tags },
+                { "<leader>]", g.cycle_forward },
+                { "<leader>[", g.cycle_backward },
             })
         end,
     },
@@ -87,8 +87,6 @@ return {
             })
             local entry = require("oil").get_cursor_entry
             local cwd = require("oil").get_current_dir
-            local key = require("core.utils.map")
-            local opts = key.new_opts
 
             key.nmap({
                 {
@@ -98,7 +96,7 @@ return {
                             require("oil").open()
                         end
                     end,
-                    opts("Oil: Open parent directory"),
+                    keyopts("Oil: Open parent directory"),
                 },
 
                 {
@@ -111,7 +109,7 @@ return {
                             vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
                         end
                     end,
-                    opts("Oil: View git blame for file under cursor"),
+                    keyopts("Oil: View git blame for file under cursor"),
                 },
 
                 {
@@ -120,7 +118,7 @@ return {
                         local fname = entry().name
                         require("core.utils.operate").operate(cwd() .. fname, cwd(), string.format("On %s > ", fname))
                     end,
-                    opts("Oil: Perform external operation on file under cursor"),
+                    keyopts("Oil: Perform external operation on file under cursor"),
                 },
 
                 {
@@ -128,7 +126,7 @@ return {
                     function()
                         require("plugin.telescope.extra.oil").switch_dir(cwd())
                     end,
-                    opts("Oil: Fuzzy search and switch to directory"),
+                    keyopts("Oil: Fuzzy search and switch to directory"),
                 },
             })
         end,
@@ -141,7 +139,6 @@ return {
             local cwh = vim.o.cmdwinheight
             local api = vim.api
             local cb = require("cmdbuf")
-            local key = require("core.utils.map")
 
             --stylua: ignore start
             key.nmap({

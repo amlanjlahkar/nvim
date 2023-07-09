@@ -1,8 +1,8 @@
 local fn = vim.fn
 
-local M = {}
+local tal = {}
 
-function M.tabline()
+function tal.tabline()
     local t = ""
     for index = 1, fn.tabpagenr("$") do
         local winnr = fn.tabpagewinnr(index)
@@ -35,11 +35,11 @@ function M.tabline()
     return t
 end
 
-function M.setup()
+function tal.setup()
     function _G.set_tabline()
-        return M.tabline()
+        return tal.tabline()
     end
     vim.opt.tabline = "%!v:lua.set_tabline()"
 end
 
-return M.setup()
+tal.setup()

@@ -25,7 +25,7 @@ o.foldmethod = "marker"
 -- o.foldcolumn = "3"
 
 -- editor preference
-o.timeoutlen = 200
+o.timeoutlen = 300
 o.ttimeoutlen = 100
 o.number = true
 o.relativenumber = true
