@@ -50,6 +50,31 @@ key.nmap({
             end
         end, opts("Get relative diff for current file"),
     },
+
+    {
+        "<leader>w",
+        function()
+            local session = vim.fs.find("Session.vim", {
+                upward = true,
+                stop = os.getenv("HOME"),
+                path = vim.loop.cwd(),
+            })
+            local mks = true
+            if #session < 1 then
+                vim.ui.input({
+                    prompt = "Create session file? [y/n] ",
+                }, function(input)
+                    if not input or input ~= "y" then
+                        mks = false
+                    end
+                end)
+            end
+            if mks then
+                vim.cmd([[:wall | exe "mksession! " .. v:this_session]])
+                vim.notify("Session saved", vim.log.levels.INFO)
+            end
+        end,
+    },
 })
 
 key.xmap({
@@ -63,7 +88,6 @@ key.xmap({
 key.nxmap({
     { "<C-y>", '"+y' },
     { "<C-e>", '"+y$' },
-    { "<C-p>", '"+p==' },
 })
 
 key.imap({
@@ -78,10 +102,10 @@ key.cmap({
         function()
             return vim.fn.getcmdtype() == ":" and string.format("%s/", vim.fn.expand("%:h")) or "%%"
         end,
-        opts(key.expr, "Append to relative path"),
+        opts(key.expr, key.nosilent, "Append to relative path"),
     },
-    { "<C-i>", "<HOME>", nosilent },
-    { "<C-a>", "<END>", nosilent },
+    { "<C-k>", "<HOME>", nosilent },
+    { "<C-j>", "<END>", nosilent },
     { "<C-b>", "<S-Left>", nosilent },
     { "<C-e>", "<S-Right>", nosilent },
     { "<C-n>", "<Down>", nosilent },

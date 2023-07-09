@@ -1,3 +1,4 @@
 /.netrwhist
 packer_compiled.lua
 lua/scratch/**
+Session.vim
