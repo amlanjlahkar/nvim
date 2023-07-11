@@ -1,4 +1,4 @@
-local registry = require("mason-registry")
+local is_avail, registry = pcall(require, "mason-registry")
 
 local function auto_install(pkg)
     if type(pkg.auto_install) == "boolean" then
@@ -33,7 +33,9 @@ function M:ensure_install(pkg_spec)
 end
 
 M.schedule_install = vim.schedule_wrap(function(pkg_spec)
-    if registry.refresh then
+    if not is_avail then
+        return
+    elseif registry.refresh then
         registry.refresh(function()
             M:ensure_install(pkg_spec)
         end)

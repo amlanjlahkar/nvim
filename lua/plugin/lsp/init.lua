@@ -1,4 +1,4 @@
-local pkg_dir = vim.fn.stdpath("data") .. "/lsp_utils"
+local pkg_bin_dir = vim.fn.stdpath("data") .. "/lsp_utils/bin"
 local pkg_spec_path = vim.fn.stdpath("config") .. "/lua/plugin/lsp/pkg_spec.lua"
 local pkg_spec_module = string.gsub(vim.fn.fnamemodify(pkg_spec_path, ":r"), "%S+lua/", ""):gsub("/", ".")
 
@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
     end,
 })
 
+local is_accessible = vim.loop.fs_access(pkg_bin_dir, "R")
 local schedule_pkg_install = function(pkg_spec)
     return require("plugin.lsp.installer").schedule_install(pkg_spec)
 end
@@ -20,9 +21,15 @@ end
 return {
     {
         "williamboman/mason.nvim",
+        init = function(plugin)
+            if not is_accessible then
+                LAZYLOAD(plugin.name)
+                schedule_pkg_install()
+            end
+        end,
         cmd = "Mason",
         opts = {
-            install_root_dir = pkg_dir,
+            install_root_dir = vim.fn.fnamemodify(pkg_bin_dir, ":h"),
             PATH = "skip",
             ui = {
                 width = 0.6,
@@ -46,13 +53,13 @@ return {
 
     {
         "neovim/nvim-lspconfig",
-        lazy = false,
-        config = function()
-            if not vim.loop.fs_access(pkg_dir, "R") then
-                schedule_pkg_install()
-                return
+        init = function(plugin)
+            if is_accessible then
+                LAZYLOAD(plugin.name)
             end
-
+        end,
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
             local function hook_lspconfig(pkg)
                 if type(pkg.hook_lspconfig) == "boolean" then
                     return pkg.hook_lspconfig
@@ -60,7 +67,7 @@ return {
                 return true
             end
 
-            vim.env.PATH = pkg_dir .. "/bin:" .. vim.env.PATH
+            vim.env.PATH = string.format("%s:%s", pkg_bin_dir, vim.env.PATH)
             for _, pkg in pairs(require(pkg_spec_module)) do
                 local server = type(pkg) == "table" and pkg[1] or pkg
                 if hook_lspconfig(pkg) then
@@ -75,7 +82,7 @@ return {
     {
         "jose-elias-alvarez/null-ls.nvim",
         dependencies = "nvim-lua/plenary.nvim",
-        lazy = false,
+        event = { "BufReadPre", "BufNewFile" },
         opts = function()
             local null_ls = require("null-ls")
             local format = null_ls.builtins.formatting
