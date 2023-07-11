@@ -26,7 +26,7 @@ return {
         "cbochs/grapple.nvim",
         enabled = false,
         --NOTE: experimental
-        init = function()
+        init = function(plugin)
             ---@diagnostic disable-next-line: param-type-mismatch
             local cwd = string.match(vim.loop.cwd(), "/([.%w_%-]+)$")
             local grapple_data = vim.fn.finddir(vim.fn.stdpath("data") .. "/grapple")
@@ -35,7 +35,7 @@ return {
                 if file then
                     for f in file:lines() do
                         if string.match(f, cwd) then
-                            LAZYLOAD("grapple.nvim")
+                            LAZYLOAD(plugin.name)
                             break
                         end
                     end
@@ -57,10 +57,10 @@ return {
 
     {
         "stevearc/oil.nvim",
-        init = function()
+        init = function(plugin)
             local arg = vim.fn.argv(0)
             if vim.fn.isdirectory(arg) > 0 then
-                LAZYLOAD("oil.nvim")
+                LAZYLOAD(plugin.name)
             end
         end,
         keys = "-",

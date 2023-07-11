@@ -5,7 +5,7 @@ end
 local function init_lazy(path)
     path = path or vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
     if not vim.loop.fs_stat(path) then
-        vim.notify("Installing lazy and corresponding plugins, please wait...", vim.log.levels.INFO)
+        vim.notify("Installing lazy and corresponding plugins...", vim.log.levels.INFO)
         vim.fn.system({
             "git",
             "clone",
@@ -45,13 +45,11 @@ local conf = {
 
 function conf.lazymaps()
     local key = require("core.utils.map")
-    local cmd, opts = key.cmd, key.new_opts
-
     key.nmap({
-        { "<leader>ps", cmd("Lazy"), opts("Lazy: Home") },
-        { "<leader>py", cmd("Lazy sync"), opts("Lazy: Sync") },
-        { "<leader>pi", cmd("Lazy install"), opts("Lazy: Install missing plugins") },
-        { "<leader>pp", cmd("Lazy profile"), opts("Lazy: Show profiling info") },
+        { "<leader>ps", ":Lazy<CR>" },
+        { "<leader>py", ":Lazy sync<CR>" },
+        { "<leader>pi", ":Lazy install<CR>" },
+        { "<leader>pp", ":Lazy profile<CR>" },
     })
 end
 

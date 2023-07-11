@@ -74,7 +74,7 @@ M.autocmd_definitions = {
         "FileType",
         {
             desc = "Override formatoptions set by filetype plugins",
-            command = "setl fo-=o",
+            command = "setl fo-=ro",
         },
     },
 
