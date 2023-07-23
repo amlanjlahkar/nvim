@@ -75,6 +75,24 @@ key.nmap({
             end
         end,
     },
+
+    {
+        "<leader>f",
+        function()
+            local client = vim.lsp.get_active_clients()[1]
+            local exclude = { "lua_ls" }
+            if client and not vim.tbl_contains(exclude, client.name) then
+                if client.server_capabilities.documentFormattingProvider then
+                        vim.lsp.buf.format({
+                            timeout_ms = 5000,
+                            async = true,
+                        })
+                end
+            else
+                require("core.utils.formatter").format()
+            end
+        end,
+    },
 })
 
 key.xmap({

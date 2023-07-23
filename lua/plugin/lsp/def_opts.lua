@@ -60,22 +60,22 @@ function M.setup_keymaps(bufnr)
         { "gr", function() check("references") end, opts(bufnr) },
         { "<leader>ls", function() check("dynamic_workspace_symbols", "workspace_symbol", { fname_width = 40 }) end, opts(bufnr) },
     })
-    key.nxmap({ "<leader>f", function()
-        vim.lsp.buf.format({
-            filter = function(client)
-                local use_builtin = { "clangd", "jdtls" }
-                for _, v in pairs(use_builtin) do
-                    if client.name == v then
-                        return client.name ~= "null-ls"
-                    end
-                end
-                return client.name == "null-ls"
-            end,
-            timeout_ms = 5000,
-            async = true,
-        })
-        end, opts(bufnr),
-    })
+    -- key.nxmap({ "<leader>f", function()
+    --     vim.lsp.buf.format({
+    --         filter = function(client)
+    --             local use_builtin = { "clangd", "jdtls" }
+    --             for _, v in pairs(use_builtin) do
+    --                 if client.name == v then
+    --                     return client.name ~= "null-ls"
+    --                 end
+    --             end
+    --             return client.name == "null-ls"
+    --         end,
+    --         timeout_ms = 5000,
+    --         async = true,
+    --     })
+    --     end, opts(bufnr),
+    -- })
     --stylua: ignore end
 end
 -- 2}}}
