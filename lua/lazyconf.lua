@@ -32,6 +32,7 @@ local conf = {
             notify = false,
         },
         ui = {
+            pills = false,
             wrap = false,
             size = { width = 0.6, height = 0.8 },
             custom_keys = {
@@ -43,19 +44,8 @@ local conf = {
     },
 }
 
-function conf.lazymaps()
-    local key = require("core.utils.map")
-    key.nmap({
-        { "<leader>ps", ":Lazy<CR>" },
-        { "<leader>py", ":Lazy sync<CR>" },
-        { "<leader>pi", ":Lazy install<CR>" },
-        { "<leader>pp", ":Lazy profile<CR>" },
-    })
-end
-
 function conf:setup()
     init_lazy()
-    self.lazymaps()
     require("lazy").setup("plugin", self.lazyopts)
 end
 

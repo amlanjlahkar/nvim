@@ -44,7 +44,7 @@ return {
                         { "[c", gs.prev_hunk, opts(bufnr) },
                         { "<leader>gR", gs.reset_buffer, opts(bufnr) },
                         { "<leader>gp", gs.preview_hunk, opts(bufnr) },
-                        { "<leader>gd", gs.toggle_deleted, opts(bufnr) }
+                        { "<leader>gd", gs.toggle_deleted, opts(bufnr) },
                     })
                     key.nxmap({
                         { "<leader>gr", ":Gitsigns reset_hunk<CR>", opts(bufnr) },

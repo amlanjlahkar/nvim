@@ -36,7 +36,7 @@ cmd("Msg", function()
         exe "redir >>" fpath
         silent messages
         redir END
-        exe "view +" fpath
+        exe "split +setl\\ ro" fpath
     ]])
 end, { desc = "Redirect and open :messages output in a separate readonly buffer" })
 
