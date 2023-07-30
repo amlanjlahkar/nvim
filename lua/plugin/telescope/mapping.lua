@@ -78,6 +78,14 @@ function M:setup()
             end,
             opts("Telescope: Set wallpaper"),
         },
+
+        {
+            p .. "l",
+            function()
+                require("plugin.telescope.extra.logsearch").pick_files()
+            end,
+            opts("Telescope: Search git log"),
+        },
     })
 end
 
