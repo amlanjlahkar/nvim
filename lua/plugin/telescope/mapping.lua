@@ -82,7 +82,7 @@ function M:setup()
         {
             p .. "l",
             function()
-                require("plugin.telescope.extra.logsearch").pick_files()
+                require("plugin.telescope.extra.pick_githist").pick_files()
             end,
             opts("Telescope: Search git log"),
         },
