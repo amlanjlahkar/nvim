@@ -75,6 +75,7 @@ function M.get_relative_file()
         prompt_title = "Relative Files",
         cwd = cwd,
         preview = true,
+        no_ignore = true,
     }
     tb.find_files(_, opts)
 end

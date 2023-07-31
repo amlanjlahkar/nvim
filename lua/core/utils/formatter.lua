@@ -3,10 +3,6 @@ if not is_avail then
     return
 end
 
-local function err(msg)
-    return vim.notify(msg, vim.log.levels.ERROR)
-end
-
 local formatprg = {
     stylua = {
         ft = "lua",
@@ -23,19 +19,19 @@ local formatprg = {
 }
 
 local function format(cmd, opts)
-        table.insert(opts.args, vim.fn.expand("%:p"))
-
-        job:new({
-            command = cmd,
-            args = opts.args,
-            on_exit = vim.schedule_wrap(function(data, code)
-                if code > 0 then
-                    err(data["_stderr_results"][1])
-                end
-            end),
-        }):sync()
-
-        vim.cmd("edit!")
+    local view = vim.fn.winsaveview()
+    table.insert(opts.args, vim.fn.expand("%:p"))
+    job:new({
+        command = cmd,
+        args = opts.args,
+        on_exit = vim.schedule_wrap(function(data, code)
+            if code > 0 then
+                error(data["_stderr_results"][1])
+            end
+            vim.cmd("edit!")
+            vim.fn.winrestview(view)
+        end),
+    }):start()
 end
 
 local M = {
@@ -54,8 +50,11 @@ local M = {
                 return
             end
         end
-        local ft = vim.bo.ft ~= "" and vim.bo.ft or "unknown filetype"
-        err(string.format("No formatter defined for %s", ft))
+        if vim.bo.ft then
+            error(string.format("No formatter defined for %s", vim.bo.ft))
+        else
+            error("Couldn't format buffer(unknown filetype)")
+        end
     end,
 }
 

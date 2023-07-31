@@ -40,28 +40,6 @@ M.autocmd_definitions = {
     {
         "FileType",
         {
-            desc = "Bind key for quick testing specific source files",
-            pattern = { "python", "c", "cpp", "lua", "java" },
-            callback = function()
-                local cmd = require("core.utils").test_code(vim.bo.filetype)
-                vim.keymap.set("n", "<leader>x", function()
-                    if cmd then
-                        cmd()
-                    else
-                        print("No definition provided for " .. vim.bo.filetype)
-                    end
-                end, {
-                    silent = true,
-                    noremap = true,
-                    desc = "Compile/interprete current buffer content",
-                })
-            end,
-        },
-    },
-
-    {
-        "FileType",
-        {
             desc = "'q'uick unload of certain filetype buffers",
             pattern = { "help", "fugitive", "git", "checkhealth", "oil", "query" },
             callback = function(self)

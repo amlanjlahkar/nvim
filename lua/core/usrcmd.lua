@@ -31,12 +31,13 @@ end, {
 })
 
 cmd("Msg", function()
-    vim.cmd([[
-        let fpath = "/tmp/nvim_messages"
-        exe "redir >>" fpath
-        silent messages
-        redir END
-        exe "split +setl\\ ro" fpath
-    ]])
+    local bufnr = api.nvim_create_buf(false, true)
+    api.nvim_buf_call(bufnr, function()
+        vim.cmd([[
+            put =execute('messages')
+        ]])
+    end)
+    vim.cmd("sbuf + " .. bufnr)
+
 end, { desc = "Redirect and open :messages output in a separate readonly buffer" })
 

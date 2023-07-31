@@ -12,18 +12,12 @@ return {
                 "cpp",
                 "css",
                 "html",
-                "java",
                 "javascript",
                 "lua",
                 "luap",
                 "make",
                 "markdown",
-                "python",
-                "rasi",
-                "rust",
-                "vim",
                 "vimdoc",
-                "yaml",
             },
             indent = {
                 enable = true,
@@ -35,7 +29,7 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = "<CR>",
+                    init_selection = "gnn",
                     node_incremental = "<C-n>",
                     node_decremental = "<C-p>",
                 },

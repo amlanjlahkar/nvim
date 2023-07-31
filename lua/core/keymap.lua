@@ -2,6 +2,8 @@ local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 local nosilent = opts(key.nosilent)
 
+local ap = require("core.utils.autopair").autopair
+
 key.nmap({
     -- buffers and windows {{{
     { "<leader>.", cmd("bn") },
@@ -35,6 +37,7 @@ key.nmap({
     { "<C-s>", ":write | source %<CR>" },
     { "<F11>", cmd("setlocal spell!") },
     { "<F12>", cmd("!$BROWSER %") },
+    { "gV", "`[v`]" },
     --stylua: ignore
     {
         "<leader>d", function()
@@ -83,10 +86,10 @@ key.nmap({
             local exclude = { "lua_ls" }
             if client and not vim.tbl_contains(exclude, client.name) then
                 if client.server_capabilities.documentFormattingProvider then
-                        vim.lsp.buf.format({
-                            timeout_ms = 5000,
-                            async = true,
-                        })
+                    vim.lsp.buf.format({
+                        timeout_ms = 5000,
+                        async = true,
+                    })
                 end
             else
                 require("core.utils.formatter").format()
@@ -110,8 +113,9 @@ key.nxmap({
 
 key.imap({
     { "<C-]>", "<C-x><C-f>" },
-    { "<C-l>", "<C-x><C-l>" },
-    { "<C-k>", "<C-x><C-k>" },
+    -- { "{", function() ap("{") end },
+    -- { "[", function() ap("[") end },
+    -- { "(", function() ap("(") end },
 })
 
 key.cmap({

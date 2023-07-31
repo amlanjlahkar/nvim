@@ -48,11 +48,12 @@ function stl.get_lsp_diagnostic_count()
     end
 
     local signs = require("plugin.lsp.diagnostics").signs
+    local hl = "StatusLineDiagnostic"
     local dict = {
-        { severity = 1, sign = signs.Error, hlgroup = "DiagnosticError" },
-        { severity = 2, sign = signs.Info, hlgroup = "DiagnosticInfo" },
-        { severity = 3, sign = signs.Warn, hlgroup = "DiagnosticWarn" },
-        { severity = 4, sign = signs.Hint, hlgroup = "DiagnosticHint" },
+        { severity = 1, sign = signs.Error, hlgroup = hl .. "Error" },
+        { severity = 2, sign = signs.Info, hlgroup = hl .. "Info" },
+        { severity = 3, sign = signs.Warn, hlgroup = hl .. "Warn" },
+        { severity = 4, sign = signs.Hint, hlgroup = hl .. "Hint" },
     }
 
     local diagnostics = ""

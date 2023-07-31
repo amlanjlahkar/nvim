@@ -1,13 +1,17 @@
 return {
     settings = {
         Lua = {
+            runtime = {
+                version = "Lua 5.1",
+                -- path = "/usr/bin/lua",
+            },
             completion = {
                 enable = true,
                 workspaceWord = true,
                 callSnippet = "Replace",
             },
             diagnostics = {
-                globals = { "vim" },
+                globals = { "vim", "_" },
             },
             format = {
                 enable = false,

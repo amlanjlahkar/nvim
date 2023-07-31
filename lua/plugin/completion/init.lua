@@ -35,11 +35,7 @@ return {
                         kind.kind = string.format("%s", kind.kind)
                         kind.menu = ({
                             nvim_lsp = "[LSP]",
-                            neorg = "[Norg]",
                             luasnip = "[Snip]",
-                            buffer = "[Buf]",
-                            path = "[Path]",
-                            dictionary = "[Dict]",
                         })[entry.source.name]
                         return kind
                     end,
