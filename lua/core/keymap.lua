@@ -28,9 +28,8 @@ key.nmap({
     { "J", "mzJ`z" },
     { "]q", cmd("cnext") },
     { "[q", cmd("cprev") },
-    { "<C-k>", 'd$O<Esc>""p==j$' },
-    { "<C-j>", 'd$o<Esc>""p==k$' },
-    -- { ",", "@@" },
+    -- { "<C-k>", 'd$O<Esc>""p==j$' },
+    -- { "<C-j>", 'd$o<Esc>""p==k$' },
     -- }}}
 
     -- misc {{{
@@ -111,12 +110,10 @@ key.nxmap({
     { "<C-e>", '"+y$' },
 })
 
-key.imap({
-    { "<C-]>", "<C-x><C-f>" },
-    -- { "{", function() ap("{") end },
-    -- { "[", function() ap("[") end },
-    -- { "(", function() ap("(") end },
-})
+key.imap({ "<C-]>", "<C-x><C-f>" })
+-- { "{", function() ap("{") end },
+-- { "[", function() ap("[") end },
+-- { "(", function() ap("(") end },
 
 key.cmap({
     {

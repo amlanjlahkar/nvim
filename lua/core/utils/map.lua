@@ -78,10 +78,8 @@ local function keymap_set(mode, tbl)
         tbl = { tbl, "table" },
     })
     local len = #tbl
-    if len < 2 then
-        vim.notify("keymap must have rhs")
-        return
-    end
+
+    assert(len >= 2, "Keymap must have rhs")
 
     local options = len == 3 and tbl[3] or keymap.new_opts()
 

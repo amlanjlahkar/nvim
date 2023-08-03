@@ -7,9 +7,7 @@ return {
         cmd = "Git",
         keys = "<leader>g",
         config = function()
-            key.nmap({
-                { "<leader>gg", ":tab Git<CR>", opts("Open git interface") },
-            })
+            key.nmap({ "<leader>gg", ":tab Git<CR>", opts("Open git interface") })
         end,
     },
 
@@ -22,6 +20,9 @@ return {
                     delete = { text = "" },
                     topdelete = { text = "" },
                 },
+
+                attach_to_untracked = false,
+
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
                     key.nmap({

@@ -80,51 +80,6 @@ return {
     },
 
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        enabled = false,
-        dependencies = "nvim-lua/plenary.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        opts = function()
-            local null_ls = require("null-ls")
-            local format = null_ls.builtins.formatting
-            local diagnose = null_ls.builtins.diagnostics
-            local actions = null_ls.builtins.code_actions
-            return {
-                sources = {
-                    actions.gitsigns,
-                    format.prettierd,
-                    format.stylua,
-                    format.shfmt.with({
-                        extra_args = { "-i", "2", "-ci", "-bn" },
-                        extra_filetypes = { "bash" },
-                    }),
-                    format.rustfmt.with({ extra_args = { "--edition=2021" } }),
-
-                    diagnose.shellcheck.with({
-                        extra_filetypes = { "sh" },
-                    }),
-                    diagnose.jsonlint,
-                    diagnose.eslint.with({
-                        prefer_local = "node_modules/.bin",
-                        condition = function(utils)
-                            return utils.root_has_file({ ".eslintrc.json", ".eslintrc.js" })
-                        end,
-                    }),
-                },
-                on_attach = function(client, bufnr)
-                    local default = require("plugin.lsp.def_opts")
-                    if not package.loaded["lsp"] then
-                        default.handlers()
-                        default.on_attach(client, bufnr)
-                    end
-                end,
-            }
-        end,
-    },
-
-    { "mfussenegger/nvim-jdtls", enabled = false },
-
-    {
         "clangd_extensions.nvim",
         url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         ft = { "c", "cpp" },

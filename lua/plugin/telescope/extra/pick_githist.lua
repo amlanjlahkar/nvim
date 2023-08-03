@@ -1,9 +1,3 @@
---[[
-    Search for regex pattern in file history belonging to git repository.
-    -   Use telescope for picking file(s)
-    -   Load results into quickfix list on success
---]]
-
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local builtin = require("plugin.telescope.function").pick("telescope.builtin")

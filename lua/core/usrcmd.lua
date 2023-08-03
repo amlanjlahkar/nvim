@@ -34,10 +34,10 @@ cmd("Msg", function()
     local bufnr = api.nvim_create_buf(false, true)
     api.nvim_buf_call(bufnr, function()
         vim.cmd([[
-            put =execute('messages')
+            put =execute('messages') |
+            %s:\n:\r:g
         ]])
     end)
     vim.cmd("sbuf + " .. bufnr)
-
 end, { desc = "Redirect and open :messages output in a separate readonly buffer" })
 

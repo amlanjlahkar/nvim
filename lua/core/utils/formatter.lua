@@ -13,7 +13,7 @@ local formatprg = {
         args = { "-i", "2", "-ci", "-bn" },
     },
     prettier = {
-        ft = { "javascript", "css", "html" },
+        ft = { "javascript", "css", "html", "json" },
         args = { "--write" },
     },
 }
