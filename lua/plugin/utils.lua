@@ -98,4 +98,44 @@ return {
             })
         end,
     },
+
+    {
+        "ThePrimeagen/harpoon",
+        dependencies = "nvim-lua/plenary.nvim",
+        init = function(plugin)
+            local schema = vim.fs.find("harpoon.json", {
+                type = "file",
+                upward = true,
+                stop = vim.fs.normalize("~/.local"),
+                path = vim.fn.stdpath("data"),
+            })
+
+            if #schema < 1 then
+                return
+            end
+
+            local sys = vim.fn.system
+            local cwd = vim.loop.cwd()
+
+            --stylua: ignore start
+            assert(vim.fn.executable("jq") > 0, plugin.name .. " didn't load(jq isn't installed)")
+            if sys(string.format("jq '.projects.\"%s\"' %s", cwd, schema[1])) ~= "null\n" and
+                sys(string.format("jq '.projects.\"%s\".mark.marks == []' %s", cwd, schema[1])) == "false\n" then
+                    LAZYLOAD(plugin.name)
+            end
+            --stylua: ignore end
+        end,
+        config = function()
+            local ui = require("harpoon.ui")
+            --stylua: ignore
+            key.nmap({
+                { "<leader>ma", ':lua require("harpoon.mark").add_file()<CR>' },
+                { "<leader>mm", ui.toggle_quick_menu },
+                { "<C-j>", function() ui.nav_file(1) end },
+                { "<C-k>", function() ui.nav_file(2) end },
+                { "<C-l>", function() ui.nav_file(3) end },
+                { "<C-h>", function() ui.nav_file(4) end },
+            })
+        end,
+    },
 }
