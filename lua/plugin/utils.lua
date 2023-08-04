@@ -102,6 +102,7 @@ return {
     {
         "ThePrimeagen/harpoon",
         dependencies = "nvim-lua/plenary.nvim",
+        keys = "<leader>m",
         init = function(plugin)
             local schema = vim.fs.find("harpoon.json", {
                 type = "file",

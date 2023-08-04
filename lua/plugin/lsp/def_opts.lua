@@ -41,7 +41,7 @@ function M.setup_keymaps(bufnr)
     end
     local lsp = vim.lsp.buf
     local key = require("core.utils.map")
-    local cmd, opts = key.cmd, key.new_opts
+    local opts = key.new_opts
 
     --stylua: ignore start
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -53,6 +53,7 @@ function M.setup_keymaps(bufnr)
         { "<leader>lh", lsp.signature_help, opts(bufnr) },
         { "<leader>lt", lsp.type_definition, opts(bufnr) },
         { "<leader>lf", vim.diagnostic.open_float, opts(bufnr) },
+        { "<leader>ld", vim.diagnostic.setqflist, opts(bufnr) },
         { "]d", vim.diagnostic.goto_next, opts(bufnr) },
         { "[d", vim.diagnostic.goto_prev, opts(bufnr) },
         { "gd", function() check("definitions", "definition") end, opts(bufnr) },
@@ -60,22 +61,6 @@ function M.setup_keymaps(bufnr)
         { "gr", function() check("references") end, opts(bufnr) },
         { "<leader>ls", function() check("dynamic_workspace_symbols", "workspace_symbol", { fname_width = 40 }) end, opts(bufnr) },
     })
-    -- key.nxmap({ "<leader>f", function()
-    --     vim.lsp.buf.format({
-    --         filter = function(client)
-    --             local use_builtin = { "clangd", "jdtls" }
-    --             for _, v in pairs(use_builtin) do
-    --                 if client.name == v then
-    --                     return client.name ~= "null-ls"
-    --                 end
-    --             end
-    --             return client.name == "null-ls"
-    --         end,
-    --         timeout_ms = 5000,
-    --         async = true,
-    --     })
-    --     end, opts(bufnr),
-    -- })
     --stylua: ignore end
 end
 -- 2}}}
@@ -92,7 +77,7 @@ function M.on_attach(client, bufnr)
         end
 
         local au = api.nvim_create_autocmd
-        local id = api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+        local id = api.nvim_create_augroup("_lsp.on_attach", { clear = false })
         au("CursorHold", {
             group = id,
             buffer = bufnr,

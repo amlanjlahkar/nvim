@@ -75,8 +75,7 @@ function M.setup()
         local event = entry[1]
         local opts = entry[2]
         opts.group = "_core"
-        local exists, _ = pcall(api.nvim_get_autocmds, { group = opts.group })
-        if not exists then
+        if not pcall(api.nvim_get_autocmds, { group = opts.group }) then
             api.nvim_create_augroup(opts.group, { clear = true })
         end
         api.nvim_create_autocmd(event, opts)

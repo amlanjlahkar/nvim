@@ -78,16 +78,4 @@ return {
             require("lspconfig.ui.windows").default_options.border = "single"
         end,
     },
-
-    {
-        "clangd_extensions.nvim",
-        url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
-        ft = { "c", "cpp" },
-        opts = {
-            server = require("plugin.lsp.equip_opts").setup("clangd"),
-            extensions = {
-                autoSetHints = false,
-            },
-        },
-    },
 }

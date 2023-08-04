@@ -33,7 +33,7 @@ return {
                         kind.kind = string.format("%s", kind.kind)
                         kind.menu = ({
                             nvim_lsp = "[LSP]",
-                            luasnip = "[Snip]",
+                            luasnip = "[LuaSnip]",
                         })[entry.source.name]
                         return kind
                     end,
