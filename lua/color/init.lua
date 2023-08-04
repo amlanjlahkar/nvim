@@ -1,6 +1,6 @@
 local function hl_override(colorscheme, custom_hl)
     vim.api.nvim_create_autocmd("ColorScheme", {
-        group = vim.api.nvim_create_augroup("_color", { clear = true }),
+        group = vim.api.nvim_create_augroup("_core.color", { clear = true }),
         pattern = colorscheme,
         callback = function()
             for _, def in ipairs(custom_hl) do

@@ -45,7 +45,7 @@ return {
             ts_install.update({ with_sync = false })
 
             parser_config.bash.filetype_to_parsename = "sh"
-            -- local augroup = vim.api.nvim_create_augroup("_plug", { clear = true })
+            -- local augroup = vim.api.nvim_create_augroup("_plug.treesitter", { clear = true })
             -- vim.api.nvim_create_autocmd("FileType", {
             --   group = augroup,
             --   pattern = table.concat(
