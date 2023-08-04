@@ -90,12 +90,4 @@ return {
             },
         },
     },
-
-    {
-        "jose-elias-alvarez/typescript.nvim",
-        ft = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-        opts = {
-            server = require("plugin.lsp.equip_opts").setup("tsserver"),
-        },
-    },
 }

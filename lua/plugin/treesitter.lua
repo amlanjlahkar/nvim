@@ -62,6 +62,38 @@ return {
     },
 
     {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        keys = { "c", "d", "v", "y" },
+        opts = {
+            select = {
+                enable = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@conditional.outer",
+                    ["ic"] = "@conditional.inner",
+                    ["ao"] = "@loop.outer",
+                    ["io"] = "@loop.inner",
+                },
+                include_surrounding_whitespace = true,
+            },
+            lsp_interop = {
+                enable = true,
+                border = "single",
+                floating_preview_opts = {},
+                peek_definition_code = {
+                    ["<leader>df"] = "@function.outer",
+                },
+            },
+        },
+        config = function(_, opts)
+            if package.loaded["nvim-treesitter"] then
+                require("nvim-treesitter.configs").setup({ textobjects = opts })
+            end
+        end,
+    },
+
+    {
         "windwp/nvim-ts-autotag",
         ft = { "html", "markdown", "javascriptreact" },
         config = true,
