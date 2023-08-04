@@ -3,18 +3,34 @@ if not is_avail then
     return
 end
 
+local function use_config(local_conf, global_conf)
+    global_conf = vim.fs.normalize(global_conf)
+    assert(vim.loop.fs_access(global_conf, "R"), "configuration file " .. global_conf .. " not found")
+
+    local fpath = vim.fs.find(local_conf, {
+        type = "file",
+        path = vim.loop.cwd(),
+    })
+
+    return #fpath > 0 and fpath[1] or global_conf
+end
+
 local formatprg = {
-    stylua = {
+    ["stylua"] = {
         ft = "lua",
         args = { "--verify" },
     },
-    shfmt = {
+    ["shfmt"] = {
         ft = { "sh", "bash" },
-        args = { "-i", "2", "-ci", "-bn" },
+        args = { "-i", "2", "-ci", "-bn", "--write" },
     },
-    prettier = {
+    ["prettier"] = {
         ft = { "javascript", "css", "html", "json" },
         args = { "--write" },
+    },
+    ["clang-format"] = {
+        ft = "c",
+        args = { "--style", "file:" .. use_config(".clang-format", "~/.config/clangd/clang-format"), "-i" },
     },
 }
 
@@ -44,7 +60,7 @@ local M = {
             if vim.tbl_contains(opts.ft, vim.bo.ft) then
                 assert(
                     vim.fn.executable(prg) == 1,
-                    string.format('Couldn\'t format buffer(executable "%s" not found!)', opts.cmd)
+                    string.format('Couldn\'t format buffer: executable "%s" not found', prg)
                 )
                 format(prg, opts)
                 return

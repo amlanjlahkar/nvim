@@ -82,7 +82,7 @@ key.nmap({
         "<leader>f",
         function()
             local client = vim.lsp.get_active_clients()[1]
-            local exclude = { "lua_ls" }
+            local exclude = { "lua_ls", "clangd" }
             if client and not vim.tbl_contains(exclude, client.name) then
                 if client.server_capabilities.documentFormattingProvider then
                     vim.lsp.buf.format({
