@@ -62,6 +62,20 @@ function M.setup_keymaps(bufnr)
         { "<leader>ls", function() check("dynamic_workspace_symbols", "workspace_symbol", { fname_width = 40 }) end, opts(bufnr) },
     })
     --stylua: ignore end
+    key.nxmap({
+        "<leader>f",
+        function()
+            vim.lsp.buf.format({
+                filter = function(client)
+                    local exclude = { "lua_ls" }
+                    return not vim.tbl_contains(exclude, client.name)
+                end,
+                timeout_ms = 5000,
+                async = true,
+            })
+        end,
+        opts(bufnr),
+    })
 end
 -- 2}}}
 

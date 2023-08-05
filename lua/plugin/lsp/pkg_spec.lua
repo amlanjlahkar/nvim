@@ -1,6 +1,7 @@
 return {
     { "clangd", hook_lspconfig = true },
     { "cssls", mason_id = "css-lsp" },
+    { "efm", hook_lspconfig = true },
     { "html", mason_id = "html-lsp" },
     { "jsonlint", hook_lspconfig = false },
     { "lua_ls", mason_id = "lua-language-server" },
