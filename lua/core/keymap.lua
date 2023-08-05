@@ -2,8 +2,6 @@ local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 local nosilent = opts(key.nosilent)
 
-local ap = require("core.utils.autopair").autopair
-
 key.nmap({
     -- buffers and windows {{{
     { "<leader>.", cmd("bn") },
@@ -95,6 +93,9 @@ key.nmap({
             end
         end,
     },
+
+    --stylua: ignore
+    { "<leader>s", function() require("core.utils.tmux_send").send() end },
 })
 
 key.xmap({
