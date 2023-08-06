@@ -4,6 +4,20 @@ local keyopts = key.new_opts
 return {
     "nvim-lua/plenary.nvim",
 
+
+    {
+        "echasnovski/mini.surround",
+        keys = { "s", { "S", mode = "x" } },
+        config = function(plugin)
+            require(plugin.name).setup({
+                silent = true,
+                highlight_duration = 100,
+                search_method = "cover_or_prev",
+            })
+            vim.keymap.set("x", "S", [[:lua MiniSurround.add("visual")<CR>]], { silent = true })
+        end,
+    },
+
     {
         "numToStr/Comment.nvim",
         keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = { "x", "o" } } },
@@ -30,7 +44,7 @@ return {
                 LAZYLOAD(plugin.name)
             end
         end,
-        keys = "-",
+        keys = { "-", "<leader>o" },
         config = function()
             require("oil").setup({
                 columns = { "permissions", "size", "mtime" },
