@@ -1,7 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        version = false,
+        build = ":TSUpdate",
         lazy = false,
 
         opts = {
@@ -19,6 +19,9 @@ return {
                 "markdown",
                 "vimdoc",
             },
+
+            auto_install = false,
+
             indent = {
                 enable = true,
             },
@@ -45,17 +48,6 @@ return {
             ts_install.update({ with_sync = false })
 
             parser_config.bash.filetype_to_parsename = "sh"
-            -- local augroup = vim.api.nvim_create_augroup("_plug.treesitter", { clear = true })
-            -- vim.api.nvim_create_autocmd("FileType", {
-            --   group = augroup,
-            --   pattern = table.concat(
-            --     vim.tbl_map(function(ft)
-            --       return parser_config[ft].filetype or ft
-            --     end, parsers.available_parsers()),
-            --     ","
-            --   ),
-            --   command = "setl fdm=expr fde=nvim_treesitter#foldexpr()",
-            -- })
 
             require("nvim-treesitter.configs").setup(opts)
         end,

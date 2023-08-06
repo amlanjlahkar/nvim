@@ -41,3 +41,22 @@ cmd("Msg", function()
     vim.cmd("sbuf + " .. bufnr)
 end, { desc = "Redirect and open :messages output in a separate readonly buffer" })
 
+cmd("Transparent", function()
+    local groups = {
+        "StatusLine",
+        "StatusLineNC",
+        "StatusLineImp",
+        "StatusLineInd",
+        "LineNr",
+        "CursorLineNr",
+        "CursorLine",
+        "SignColumn",
+        "GitGutterAdd",
+        "GitGutterChange",
+        "GitGutterDelete",
+        "Normal",
+    }
+    for _, hlg in ipairs(groups) do
+        vim.cmd.highlight(hlg .. " guibg=NONE")
+    end
+end, { desc = "Disable background color for certain hlgroups" })
