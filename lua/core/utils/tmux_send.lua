@@ -1,7 +1,5 @@
 --[[
     Unresolved caveats:
-        - window with specified name already exists
-        - foreground process currently being executed in target window
         - missing optimal shell completion while reading input
 --]]
 
@@ -48,15 +46,20 @@ end
 
 function M.get_validated_input()
     local input
-
-    vim.ui.input({ prompt = "Command: ", completion = "shellcmd" }, function(query)
+    vim.ui.input({ prompt = "Command: ", completion = "file" }, function(query)
         input = M.validate(query)
     end)
-
     return input
 end
 
-function M.send(query, win_name)
+function M.get_child_pid(winid)
+    local paren_pid = call("tmux lsw -F '#{window_id} #{pane_pid}' | awk '$1==\"" .. winid .. "\" { print $2 }'")
+    local child_pid = call("pgrep -P " .. paren_pid)
+
+    return child_pid ~= "" and child_pid:sub(1, -2) or nil
+end
+
+function M.send(query)
     if not vim.env.TMUX then
         clrscr("Not inside tmux session", 4)
         return
@@ -70,9 +73,10 @@ function M.send(query, win_name)
         return
     end
 
-    win_name = win_name or "_console"
-
+    local curr_win_name = string.sub(call("tmux display -p '#W'"), 1, -2)
     local session = string.sub(call("tmux display -p '#S'"), 1, -2)
+
+    local win_name = "_console"
 
     local winid = call(format(
         --stylua: ignore
@@ -84,12 +88,17 @@ function M.send(query, win_name)
     ))
 
     if vim.v.shell_error > 0 then
-        call(format("tmux new-window -d -c %s -a -t 'nvim' -n %s", vim.loop.cwd(), win_name))
-        winid = call(format([[ tmux lsw -F '#I "#W"' | awk '$2 ~ /"%s"/ { print $1 }']], win_name))
+        call(format("tmux new-window -d -c %s -a -t '%s' -n %s", vim.loop.cwd(), curr_win_name, win_name))
+        winid = string.sub(call(format([[ tmux lsw -F '#I "#W"' | awk '$2 ~ /"%s"/ { print $1 }']], win_name)), 1, -2)
+    end
+
+    local child_pid = M.get_child_pid(winid)
+    if child_pid then
+        call("kill -SIGTSTP " .. child_pid)
     end
 
     vim.defer_fn(function()
-        assert(M.tmux_send(session, winid:sub(1, -2), query) == 0)
+        assert(M.tmux_send(session, winid, query) == 0)
     end, 500)
 end
 
