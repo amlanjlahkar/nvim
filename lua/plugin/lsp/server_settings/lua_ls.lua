@@ -2,8 +2,7 @@ return {
     settings = {
         Lua = {
             runtime = {
-                version = "Lua 5.4",
-                -- path = "/usr/bin/lua",
+                version = "LuaJIT",
             },
             completion = {
                 enable = true,
