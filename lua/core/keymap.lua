@@ -2,8 +2,9 @@ local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 local nosilent = opts(key.nosilent)
 
+-- normal {{{1
 key.nmap({
-    -- buffers and windows {{{
+    -- buffers and windows {{{2
     { "<leader>.", cmd("bn") },
     { "<leader>,", cmd("bp") },
     { "<leader>bd", cmd("bd") },
@@ -12,13 +13,9 @@ key.nmap({
     { "<Left>", cmd("vertical resize -7") },
     { "<Down>", cmd("resize +7") },
     { "<Up>", cmd("resize -7") },
-    -- }}}
+    -- 2}}}
 
-    -- terminal {{{
-    { "<leader><leader>t", cmd("tabnew term://bash") },
-    -- }}}
-
-    -- movements {{{
+    -- movements {{{2
     { "<leader>j", "<cmd>m .+1<CR>==" },
     { "<leader>k", "<cmd>m .-2<CR>==" },
     { "n", "nzzzv" },
@@ -28,10 +25,9 @@ key.nmap({
     { "[q", cmd("cprev") },
     -- { "<C-k>", 'd$O<Esc>""p==j$' },
     -- { "<C-j>", 'd$o<Esc>""p==k$' },
-    -- }}}
+    -- 2}}}
 
-    -- misc {{{
-    { "<C-s>", ":write | source %<CR>" },
+    -- misc {{{2
     { "<F11>", cmd("setlocal spell!") },
     { "<F12>", cmd("!$BROWSER %") },
     { "gV", "`[v`]" },
@@ -79,7 +75,10 @@ key.nmap({
     --stylua: ignore
     { "<leader>s", function() require("core.utils.tmux_send").send() end },
 })
+-- 2}}}
+-- 1}}}
 
+-- visual {{{1
 key.xmap({
     { "<", "<gv" },
     { ">", ">gv" },
@@ -93,11 +92,13 @@ key.nxmap({
     { "<C-e>", '"+y$' },
 })
 
-key.imap({ "<C-]>", "<C-x><C-f>" })
--- { "{", function() ap("{") end },
--- { "[", function() ap("[") end },
--- { "(", function() ap("(") end },
+-- 1}}}
 
+-- insert {{{1
+key.imap({ "<C-]>", "<C-x><C-f>" })
+-- 1}}}
+
+-- command {{{1
 key.cmap({
     {
         "%%",
@@ -113,4 +114,9 @@ key.cmap({
     { "<C-n>", "<Down>", nosilent },
     { "<C-p>", "<Up>", nosilent },
 })
--- }}}
+-- 1}}}
+
+-- terminal {{{1
+    key.nmap({ "<leader><leader>t", cmd("tabnew term://bash") })
+    key.tmap({ "<C-N>", "<C-\\><C-N>" })
+-- 1}}}
