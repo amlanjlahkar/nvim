@@ -12,6 +12,7 @@ return {
                 "cpp",
                 "css",
                 "html",
+                "java",
                 "javascript",
                 "lua",
                 "luap",

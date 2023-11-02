@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
     end,
 })
 
-local is_accessible = vim.loop.fs_access(pkg_bin_dir, "R")
+local pkgs_exist = vim.loop.fs_access(pkg_bin_dir, "R")
 local schedule_pkg_install = function(pkg_spec)
     return require("plugin.lsp.installer").schedule_install(pkg_spec)
 end
@@ -22,7 +22,7 @@ return {
     {
         "williamboman/mason.nvim",
         init = function(plugin)
-            if not is_accessible then
+            if not pkgs_exist then
                 LAZYLOAD(plugin.name)
                 schedule_pkg_install()
             end
@@ -32,13 +32,40 @@ return {
             install_root_dir = vim.fn.fnamemodify(pkg_bin_dir, ":h"),
             PATH = "skip",
             ui = {
+                border = "single",
                 width = 0.6,
                 height = 0.8,
                 check_outdated_packages_on_open = false,
             },
         },
-        config = function(_, opts)
-            require("mason").setup(opts)
+    },
+
+    {
+        "neovim/nvim-lspconfig",
+        enabled = function()
+            if pkgs_exist then
+                vim.env.PATH = string.format("%s:%s", pkg_bin_dir, vim.env.PATH)
+                return true
+            end
+        end,
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local function hook_lspconfig(pkg)
+                if type(pkg.hook_lspconfig) == "boolean" then
+                    return pkg.hook_lspconfig
+                end
+                return true
+            end
+
+            for _, pkg in pairs(require(pkg_spec_module)) do
+                local server = type(pkg) == "table" and pkg[1] or pkg
+                if hook_lspconfig(pkg) then
+                    local opts = require("plugin.lsp.equip_opts").setup(server)
+                    require("lspconfig")[server].setup(opts)
+                end
+            end
+            require("lspconfig.ui.windows").default_options.border = "single"
+
             vim.api.nvim_create_autocmd("BufWritePost", {
                 desc = "Auto install required packages",
                 group = augroup,
@@ -51,31 +78,5 @@ return {
         end,
     },
 
-    {
-        "neovim/nvim-lspconfig",
-        init = function(plugin)
-            if is_accessible then
-                LAZYLOAD(plugin.name)
-            end
-        end,
-        event = { "BufReadPre", "BufNewFile" },
-        config = function()
-            local function hook_lspconfig(pkg)
-                if type(pkg.hook_lspconfig) == "boolean" then
-                    return pkg.hook_lspconfig
-                end
-                return true
-            end
-
-            vim.env.PATH = string.format("%s:%s", pkg_bin_dir, vim.env.PATH)
-            for _, pkg in pairs(require(pkg_spec_module)) do
-                local server = type(pkg) == "table" and pkg[1] or pkg
-                if hook_lspconfig(pkg) then
-                    local opts = require("plugin.lsp.equip_opts").setup(server)
-                    require("lspconfig")[server].setup(opts)
-                end
-            end
-            require("lspconfig.ui.windows").default_options.border = "single"
-        end,
-    },
+    "mfussenegger/nvim-jdtls"
 }

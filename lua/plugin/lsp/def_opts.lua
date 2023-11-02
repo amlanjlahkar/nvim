@@ -45,7 +45,7 @@ function M.setup_keymaps(bufnr)
 
     --stylua: ignore start
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    -- key.imap({ "<C-h>", lsp.signature_help })
+    key.imap({ "<C-s>", lsp.signature_help })
     key.nmap({
         { "K", lsp.hover, opts(bufnr) },
         { "<leader>lr", lsp.rename, opts(bufnr) },

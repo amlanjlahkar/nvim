@@ -7,6 +7,7 @@ return {
     { "prettier", hook_lspconfig = false },
     { "rust_analyzer", auto_install = false, hook_lspconfig = false },
     { "shellcheck", hook_lspconfig = false },
+    { "ruff", hook_lspconfig = false },
     { "shfmt", hook_lspconfig = false },
     { "stylua", auto_install = false, hook_lspconfig = false },
     { "tsserver", mason_id = "typescript-language-server", hook_lspconfig = false },

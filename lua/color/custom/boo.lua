@@ -36,8 +36,8 @@ M.custom = {
   { "LineNr",                     { bg = Bg, fg = RedShadeDarker } },
   { "CursorLineNr",               { bg = Bg, fg = White, bold = false } },
   { "SignColumn",                 { bg = Bg } },
-  { "NormalFloat",                { bg = Black, fg = Fg } },
-  { "FloatBorder",                { bg = Black, fg = Black } },
+  { "NormalFloat",                { bg = Bg, fg = Fg } },
+  { "FloatBorder",                { bg = Bg, fg = BgShadeLighter } },
   { "FloatTitle",                 { bg = BlackShadeLight, fg = Fg, underline = true } },
   { "Pmenu",                      { bg = Black , fg = Fg } },
   { "PmenuSbar",                  { bg = BlackShadeLight  } },
@@ -116,9 +116,9 @@ M.custom = {
   { "MasonMutedBlock",            { bg = BgShadeLighter, fg = Fg } },
   -- 2}}}
   -- telescope {{{2
-  { "TelescopeBorder",            { bg = Black, fg = Black } },
+  { "TelescopeBorder",            { bg = Bg, fg = BgShadeLighter } },
   { "TelescopeMatching",          { fg = RedShadeLighter } },
-  { "TelescopeNormal",            { bg = Black, fg = Fg } },
+  { "TelescopeNormal",            { bg = Bg, fg = Fg } },
   { "TelescopePromptCounter",     { fg = FgShadeDarker } },
   { "TelescopePromptTitle",       { bg = BlackShadeLight, fg = Fg } },
   { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },

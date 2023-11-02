@@ -5,13 +5,18 @@ vim.cmd([[
 
 vim.cmd("compiler javac")
 vim.opt_local.makeprg = "javac"
+vim.opt_local.spell = true
 
-local jdtls = require("jdtls")
+local is_avail, jdtls = pcall(require,"jdtls")
+if not is_avail then
+    return
+end
+
 local home = os.getenv("HOME")
-local launcher_path = vim.fn.glob(home .. "/.local/lang/java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
-local config_path = home .. "/.local/lang/java/jdtls/config_linux/"
+local launcher_path = vim.fn.glob(home .. "/.local/share/lang/java/jdtls/plugins/org.eclipse.equinox.launcher_*.jar")
+local config_path = home .. "/.local/share/lang/java/jdtls/config_linux/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = home .. "/projects/code/java/workspaces/" .. project_name
+local workspace_dir = home .. "/.cache/java/workspaces/" .. project_name
 local jol_path = home .. "/.local/lang/java/jol-cli-0.9-full.jar"
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities

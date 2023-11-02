@@ -32,6 +32,7 @@ local conf = {
             notify = false,
         },
         ui = {
+            border = "single",
             pills = false,
             wrap = false,
             size = { width = 0.6, height = 0.8 },
