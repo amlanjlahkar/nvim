@@ -17,14 +17,22 @@ local tools = {
         lintStdin = true,
         lintFormats = { "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" },
     },
+    ["ruff"] = {
+        prefix = "ruff",
+        lintCommand = "ruff check -",
+        formatCommand = "ruff format -",
+        lintStdin = true,
+        formatStdin = true,
+    }
 }
 
 local languages = {
     lua = { tools["StyLua"] },
     sh = { tools["shfmt"], tools["ShellCheck"] },
+    python = { tools["ruff"] },
 }
 
-local filetypes = { "lua", "sh" }
+local filetypes = { "lua", "sh", "python" }
 
 return {
     init_options = {
