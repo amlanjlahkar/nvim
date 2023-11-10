@@ -4,6 +4,16 @@ local keyopts = key.new_opts
 return {
     "nvim-lua/plenary.nvim",
 
+    {
+        "zbirenbaum/copilot.lua",
+        dependencies = { "zbirenbaum/copilot-cmp", main = "copilot_cmp", config = true },
+        cmd = "Copilot",
+        event = "InsertEnter",
+        opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+        },
+    },
 
     {
         "echasnovski/mini.surround",
@@ -52,6 +62,7 @@ return {
                     ["gh"] = "actions.toggle_hidden",
                     ["."] = "actions.open_cmdline",
                     ["<C-y>"] = "actions.copy_entry_path",
+                    ["<C-j>"] = "actions.select",
                 },
                 -- buf_options = { buflisted = true, bufhidden = "delete" },
                 win_options = { rnu = false, nu = false },
@@ -105,6 +116,7 @@ return {
                 {
                     "<leader>os",
                     function()
+                        ---@diagnostic disable-next-line: different-requires
                         require("plugin.telescope.extra.oil").switch_dir(cwd())
                     end,
                     keyopts("Oil: Fuzzy search and switch to directory"),

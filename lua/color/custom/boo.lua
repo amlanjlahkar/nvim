@@ -92,6 +92,7 @@ M.custom = {
   { "CmpDocNormal",               { bg = BlackShadeLight, fg = Fg } },
   { "CmpItemKind",                { fg = BlueShadeDark } },
   { "CmpItemMenu",                { fg = FgShadeDarker } },
+  { "CmpItemKindCopilot",         { fg = Magenta } },
   { "FloatBorderAlt",             { bg = Black, fg = Black } },
   { "NormalFloatAlt",             { bg = Black, fg = Fg } },
   -- 2}}}
