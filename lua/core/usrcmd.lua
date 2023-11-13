@@ -47,6 +47,10 @@ cmd("Transparent", function()
         "StatusLineNC",
         "StatusLineImp",
         "StatusLineInd",
+        "StatusLineDiagnosticError",
+        "StatusLineDiagnosticHint",
+        "StatusLineDiagnosticInfo",
+        "StatusLineDiagnosticWarn",
         "LineNr",
         "CursorLineNr",
         "CursorLine",
@@ -55,6 +59,8 @@ cmd("Transparent", function()
         "GitGutterChange",
         "GitGutterDelete",
         "Normal",
+        "NormalFloat",
+        "FloatBorder",
     }
     for _, hlg in ipairs(groups) do
         vim.cmd.highlight(hlg .. " guibg=NONE")

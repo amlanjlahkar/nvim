@@ -7,7 +7,7 @@ return {
     { "stylua", auto_install = false, hook_lspconfig = false },
 
     -- python
-    { "pylsp", mason_id = "python-lsp-server" },
+    { "pylsp", mason_id = "python-lsp-server", auto_install = false },
     { "ruff", hook_lspconfig = false },
 
     -- rust

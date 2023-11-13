@@ -44,7 +44,7 @@ o.completeopt = { "menu", "menuone", "noselect" }
 o.shortmess:append({ I = true })
 
 o.ruler = false
-o.showmode = false
+o.showmode = true
 o.cursorline = true
 o.showtabline = 1
 o.cmdheight = 1

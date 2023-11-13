@@ -23,7 +23,7 @@ local tools = {
         formatCommand = "ruff format -",
         lintStdin = true,
         formatStdin = true,
-    }
+    },
 }
 
 local languages = {
