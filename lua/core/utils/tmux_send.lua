@@ -73,23 +73,21 @@ function M.send(query)
         return
     end
 
-    local curr_win_name = string.sub(call("tmux display -p '#W'"), 1, -2)
-    local session = string.sub(call("tmux display -p '#S'"), 1, -2)
-
     local win_name = "_console"
 
-    local winid = call(format(
-        --stylua: ignore
+    --stylua: ignore
+    local winid = string.sub(call(format(
         [[
-            tmux lsw | rg %s |
+            tmux lsw | rg '%s' |
             awk 'BEGIN { getline; if (length == 0) { exit 1 } else { print $NF } }'
         ]],
         win_name
-    ))
+    )), 1, -2)
 
     if vim.v.shell_error > 0 then
-        call(format("tmux new-window -d -c %s -a -t '%s' -n %s", vim.loop.cwd(), curr_win_name, win_name))
-        winid = string.sub(call(format([[ tmux lsw -F '#I "#W"' | awk '$2 ~ /"%s"/ { print $1 }']], win_name)), 1, -2)
+        local curr_winid = string.sub(call("tmux display -p '#{window_id}'"), 1, -2)
+        call(format("tmux new-window -d -c %s -a -t '%s' -n %s", vim.loop.cwd(), curr_winid, win_name))
+        winid = string.sub(call(format([[tmux lsw -F '#{window_id} "#W"' | awk '$2 ~ /"%s"/ { print $1 }']], win_name)), 1, -2)
     end
 
     local child_pid = M.get_child_pid(winid)
@@ -98,6 +96,7 @@ function M.send(query)
     end
 
     vim.defer_fn(function()
+        local session = string.sub(call("tmux display -p '#S'"), 1, -2)
         assert(M.tmux_send(session, winid, query) == 0)
     end, 500)
 end
