@@ -47,6 +47,7 @@ return {
                 vim.env.PATH = string.format("%s:%s", pkg_bin_dir, vim.env.PATH)
                 return true
             end
+            return false
         end,
         event = { "BufReadPre", "BufNewFile" },
         config = function()
