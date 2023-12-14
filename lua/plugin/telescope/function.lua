@@ -81,14 +81,19 @@ function M.get_relative_file()
 end
 
 function M.get_dwots()
-    local dothome = fn.finddir("~/dwots/")
+    local dothome = function()
+        if vim.loop.os_uname().sysname == "Darwin" then
+            return fn.finddir("~/dwots_mac/")
+        end
+        return fn.finddir("~/dwots/")
+    end
     local opts = {
         prompt_title = "Dotfiles",
-        cwd = dothome,
+        cwd = dothome(),
         find_command = { "fd", "--hidden", "--exclude", ".git", "--type", "file" },
     }
-    if dothome == "" then
-        vim.notify("Direcetory dwots not found!", vim.log.levels.ERROR)
+    if dothome() == "" then
+        vim.notify("Dotfile directory not found!", vim.log.levels.ERROR)
     else
         tb.find_files(_, opts)
     end

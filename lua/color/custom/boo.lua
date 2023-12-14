@@ -16,8 +16,10 @@ local RedShadeLighter = "#e4627e"
 local White = "#f3dadc"
 local none = "NONE"
 
-local DiffAdd = "#0c1d0e"
-local DiffDelete = "#2a080f"
+local DiffAddBg = "#0c1d0e"
+local DiffDeleteBg = "#2a080f"
+local DiffAddFg = "#2f7373"
+local DiffDeleteFg = "#a6334c"
 
 local M = {}
 --stylua: ignore
@@ -48,15 +50,10 @@ M.custom = {
   { "TabLineSel",                 { bg = BgShadeLight, fg = Fg, bold = false } },
   { "VertSplit",                  { fg = BgShadeLighter } },
   { "Visual",                     { bg = BgShadeLighter, fg = White } },
-  { "MatchParen",                 { bg = "#270f2e", fg = Magenta, bold = true } },
+  { "MatchParen",                 { bg = "#351a3d", fg = Magenta, bold = true } },
   { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDarker } },
-  { "markdownH1Delimiter",        { bg = none, fg = none } },
-  { "markdownH2Delimiter",        { bg = none, fg = none } },
-  { "markdownH3Delimiter",        { bg = none, fg = none } },
-  { "markdownH4Delimiter",        { bg = none, fg = none } },
-  { "markdownH5Delimiter",        { bg = none, fg = none } },
-  { "markdownH6Delimiter",        { bg = none, fg = none } },
+  { "Comment",                    { bg = none, fg = "#9a666d", italic = true } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
   -- health {{{2
   { "healthError",                { fg = RedShadeLighter } },
@@ -85,6 +82,15 @@ M.custom = {
   { "@lsp.typemode.variable.defaultLibrary",  { link = "@variable.builtin" } },
   { "@lsp.typemode.variable.injected",  { link = "@variable" } },
   -- 2}}}
+    -- markdown {{{2
+  { "markdownH1Delimiter",        { bg = none, fg = none } },
+  { "markdownH2Delimiter",        { bg = none, fg = none } },
+  { "markdownH3Delimiter",        { bg = none, fg = none } },
+  { "markdownH4Delimiter",        { bg = none, fg = none } },
+  { "markdownH5Delimiter",        { bg = none, fg = none } },
+  { "markdownh3",                 { bg = none, fg = "#e9bfc4", bold = true } },
+  { "markdownCode",               { bg = none, fg = "#714e75", bold = true, italic = true } },
+    -- 2}}}
   -- 1}}}
   -- plugins {{{1
   -- cmp {{{2
@@ -97,16 +103,16 @@ M.custom = {
   { "NormalFloatAlt",             { bg = Black, fg = Fg } },
   -- 2}}}
   -- gitsigns/fugitive {{{2
-  { "DiffAdd",                    { bg = DiffAdd, fg = Green } },
-  { "DiffDelete",                 { bg = DiffDelete, fg = RedShadeLighter } },
+  { "DiffAdd",                    { bg = DiffAddBg, fg = DiffAddFg } },
+  { "DiffDelete",                 { bg = DiffDeleteBg, fg = DiffDeleteFg } },
   { "GitGutterAdd",               { bg = Bg, fg = Green } },
   { "GitGutterChange",            { bg = Bg, fg = Blue } },
   { "GitGutterChangeDelete",      { bg = Bg, fg = Magenta } },
   { "GitGutterDelete",            { bg = Bg, fg = Red } },
-  { "GitSignsAddInline",          { bg = DiffAdd, fg = Green, bold = false } },
-  { "GitSignsDeleteInline",       { bg = DiffDelete, fg = RedShadeLighter, italic = false } },
-  { "diffAdded",                  { bg = DiffAdd, fg = Green } },
-  { "diffRemoved",                { bg = DiffDelete, fg = RedShadeLighter } },
+  { "GitSignsAddInline",          { bg = DiffAddBg, fg = Green, bold = true } },
+  { "GitSignsDeleteInline",       { bg = DiffDeleteBg, fg = RedShadeLighter, bold = true } },
+  { "diffAdded",                  { bg = DiffAddBg, fg = Green } },
+  { "diffRemoved",                { bg = DiffDeleteBg, fg = RedShadeLighter } },
   -- 2}}}
   -- lazy {{{2
   { "LazyProgressTodo",           { fg = Black } },

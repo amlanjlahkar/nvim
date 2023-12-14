@@ -2,14 +2,13 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        lazy = false,
+        event = { "BufReadPre", "BufNewFile" },
 
         opts = {
             ensure_installed = {
                 "bash",
                 "c",
                 "comment",
-                "cpp",
                 "css",
                 "html",
                 "java",
@@ -26,6 +25,7 @@ return {
 
             indent = {
                 enable = true,
+                disable = { "python" },
             },
             highlight = {
                 enable = true,

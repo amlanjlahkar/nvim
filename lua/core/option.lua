@@ -22,7 +22,7 @@ o.breakindent = true
 o.linebreak = true
 o.backspace = "indent,eol,nostop"
 o.foldmethod = "marker"
--- o.foldcolumn = "3"
+o.foldcolumn = "1"
 
 -- editor preference
 o.timeoutlen = 300
@@ -37,7 +37,7 @@ o.hlsearch = false
 o.scrolloff = 8
 o.sidescrolloff = 8
 o.list = true
-o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
+o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
 o.virtualedit = "block"
 o.browsedir = "buffer"
 o.completeopt = { "menu", "menuone", "noselect" }
@@ -66,8 +66,8 @@ o.fillchars:append({
     vertleft = "┨",
     vertright = "┣",
     verthoriz = "╋",
-    -- foldopen = "",
-    -- foldclose = "",
+    foldopen = "",
+    foldclose = "",
 })
 
 o.dictionary:append(vim.fn.stdpath("config") .. "/dict/dictionary_en.txt")
@@ -76,7 +76,7 @@ o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
 o.grepprg = "rg --hidden --vimgrep --smart-case --"
 o.dip:append("algorithm:minimal")
-o.clipboard = "unnamed"
+o.clipboard = ""
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
 

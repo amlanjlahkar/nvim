@@ -1,5 +1,6 @@
 local M = {
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -13,7 +14,7 @@ M.opts = function()
     local actions_layout = require("telescope.actions.layout")
     return {
         defaults = {
-            prompt_prefix = "  ",
+            prompt_prefix = "   ",
             selection_caret = " ",
             multi_icon = " ",
             preview = false,

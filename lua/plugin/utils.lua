@@ -127,6 +127,7 @@ return {
 
     {
         "ThePrimeagen/harpoon",
+        -- branch = "harpoon2",
         dependencies = "nvim-lua/plenary.nvim",
         keys = "<leader>m",
         init = function(plugin)

@@ -26,7 +26,7 @@ function M:try_colorscheme(colorscheme)
         )
         vim.cmd.colorscheme(self.default)
         vim.cmd(
-            [[ set bg=dark scl=no ls=0 nonu nornu nocul noru | hi NormalFloat guibg=NONE | hi FloatBorder guibg=NONE ]]
+            [[ set bg=light scl=no ls=0 nonu nornu nocul noru | hi NormalFloat guibg=NONE | hi FloatBorder guibg=NONE ]]
         )
     end
 end

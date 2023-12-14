@@ -5,15 +5,11 @@ local nosilent = opts(key.nosilent)
 -- normal {{{1
 key.nmap({
     -- buffers and windows {{{2
-    { "<leader>.", cmd("bn") },
-    { "<leader>,", cmd("bp") },
+    { "];", cmd("bn") },
+    { "[;", cmd("bp") },
+    { "<leader>;", "<cmd>buffers<CR>:buf<Space>", nosilent },
     { "<leader>bd", cmd("bd") },
     { "<leader>bD", cmd("%bd|e#|bd#|normal `") },
-    { "<leader>bb", "<cmd>buffers<CR>:buf<Space>", nosilent },
-    { "<Right>", cmd("vertical resize +7") },
-    { "<Left>", cmd("vertical resize -7") },
-    { "<Down>", cmd("resize +7") },
-    { "<Up>", cmd("resize -7") },
     -- 2}}}
 
     -- movements {{{2
@@ -96,9 +92,6 @@ key.nxmap({
 -- 1}}}
 
 -- insert {{{1
-key.imap({ "<C-]>", "<C-x><C-f>" })
--- because 'h' stopped working on my laptop :(
-key.imap({ "<M-j>", "h" })
 -- 1}}}
 
 -- command {{{1
