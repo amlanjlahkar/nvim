@@ -1,4 +1,4 @@
-local outfile = "/tmp/op_result"
+local api = vim.api
 
 local M = {}
 
@@ -6,7 +6,7 @@ local M = {}
 --(note: if provided, the first single occurence of the '%' symbol in `cmd` is replaced with `filepath`,
 --otherwise `filepath` is appeneded to `cmd`)
 ---@param cmd string shell command to execute
----@param filepath string absolute location to file on which `cmd` to be performed
+---@param filepath string filepath location
 ---@return table|nil #table with two properties: cmd and args
 local function gen_cmdict(cmd, filepath)
     if #cmd < 2 then
@@ -35,40 +35,50 @@ local function gen_cmdict(cmd, filepath)
     return cmdict
 end
 
-local function jobstart(cmd, args, cwd)
+---@param cmd string
+---@param args table
+---@param cwd string
+function M.jobstart(cmd, args, cwd)
+    local buf = api.nvim_create_buf(false, true)
+    local lnum = 0
     require("plenary.job")
         :new({
             command = cmd,
             cwd = cwd,
             args = args,
             on_stdout = function(_, data)
-                local f = assert(io.open(outfile, "a"))
-                f:write(data, "\n")
-                f:close()
+                local d = { data }
+                lnum = lnum + 1
+                vim.schedule(function()
+                    api.nvim_buf_set_lines(buf, lnum, lnum, false, d)
+                end)
             end,
             on_exit = vim.schedule_wrap(function(j, code)
                 -- TODO: better error output
                 if code > 0 then
                     vim.print(j:result())
-                    vim.notify("exited due to error", vim.log.levels.ERROR)
                     return
                 end
                 if #j:result() < 1 then
+                    api.nvim_buf_delete(buf)
                     print("Done")
-                else
-                    vim.cmd("10sp +setl\\ noma " .. outfile .. " | winc p")
                 end
             end),
         })
-        :start()
+        :sync()
+    return api.nvim_buf_is_valid(buf) and buf or nil
 end
 
 ---Perform shell operation on specified file.
 --(note: meant to be used with file browser plugins such as oil)
----@param file string absolute location to file
----@param cwd string cwd to set when executing shell command
----@param prompt string prompt text for command input
-function M.operate(file, cwd, prompt)
+---@param file string location to file
+---@param cwd string
+---@param prompt string? input prompt
+---@param sp string? sp[lit] direction for output window(default is "sp")
+function M:operate(file, cwd, prompt, sp)
+    prompt = prompt or "input > "
+    sp = sp or "sp"
+    local bufnr = nil
     vim.ui.input({
         prompt = prompt,
         completion = "shellcmd",
@@ -81,10 +91,16 @@ function M.operate(file, cwd, prompt)
             else
                 return
             end
-            io.open(outfile, "w"):close()
-            jobstart(cmdict.cmd, args, cwd)
+            bufnr = self.jobstart(cmdict.cmd, args, cwd)
         end
     end)
+    if bufnr then
+        vim.schedule(function()
+            api.nvim_buf_set_name(bufnr, "operation_output")
+            api.nvim_buf_set_option(bufnr, "ma", false)
+        end)
+        vim.cmd(string.format("%s | buf %s", sp, bufnr))
+    end
 end
 
 return M

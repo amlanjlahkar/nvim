@@ -66,3 +66,7 @@ cmd("Transparent", function()
         vim.cmd.highlight(hlg .. " guibg=NONE")
     end
 end, { desc = "Disable background color for certain hlgroups" })
+
+cmd("Splitree", function()
+    vim.cmd("vsp | lua require('core.utils.showtree').showtree()")
+end, { desc = "Hierarchically display files under cwd relative to current file" })
