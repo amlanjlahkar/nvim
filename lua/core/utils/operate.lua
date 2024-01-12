@@ -47,6 +47,7 @@ function M.jobstart(cmd, args, cwd)
             cwd = cwd,
             args = args,
             on_stdout = function(_, data)
+                data = string.gsub(data, " ", " ")
                 local d = { data }
                 lnum = lnum + 1
                 vim.schedule(function()

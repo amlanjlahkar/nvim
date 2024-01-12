@@ -1,13 +1,14 @@
 local key = require("core.utils.map")
 local cmd, opts = key.cmd, key.new_opts
 local nosilent = opts(key.nosilent)
+local api = vim.api
 
 -- normal {{{1
 key.nmap({
     -- buffers and windows {{{2
     { "];", cmd("bn") },
     { "[;", cmd("bp") },
-    { "<leader>;", "<cmd>buffers<CR>:buf<Space>", nosilent },
+    { "<leader>;", "<cmd>ls!<CR>:buf<Space>", nosilent },
     { "<leader>bd", cmd("bd") },
     { "<leader>bD", cmd("%bd|e#|bd#|normal `") },
     -- 2}}}
@@ -31,13 +32,13 @@ key.nmap({
     --stylua: ignore
     {
         "<leader>d", function()
-            local start = vim.api.nvim_get_current_buf()
+            local start = api.nvim_get_current_buf()
             vim.cmd("vnew | set buftype=nofile | read ++edit # | 0d_ | diffthis")
-            local scratch = vim.api.nvim_get_current_buf()
+            local scratch = api.nvim_get_current_buf()
             vim.cmd("wincmd p | diffthis")
             for _, buf in ipairs({ scratch, start }) do
                 vim.keymap.set("n", "q", function()
-                    vim.api.nvim_buf_delete(scratch, { force = true })
+                    api.nvim_buf_delete(scratch, { force = true })
                     vim.keymap.del("n", "q", { buffer = start })
                 end, { buffer = buf })
             end
@@ -92,6 +93,7 @@ key.nxmap({
 -- 1}}}
 
 -- insert {{{1
+key.imap({ "<C-g>j", "<esc>o" })
 -- 1}}}
 
 -- command {{{1
@@ -113,6 +115,6 @@ key.cmap({
 -- 1}}}
 
 -- terminal {{{1
-    key.nmap({ "<leader><leader>t", cmd("tabnew term://bash") })
-    key.tmap({ "<C-N>", "<C-\\><C-N>" })
+key.nmap({ "<leader><leader>t", cmd("tabnew term://bash") })
+key.tmap({ "<C-N>", "<C-\\><C-N>" })
 -- 1}}}
