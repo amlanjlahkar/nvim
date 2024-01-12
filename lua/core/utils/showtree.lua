@@ -19,14 +19,22 @@ function M.showtree()
     local function view_buf(buf)
         local winnr = fn.bufwinnr(buf)
         if winnr < 0 then
-            vim.cmd(string.format("buf %s | call search('%s', 'cW') | exec 'norm zz'", buf, fname))
+            vim.cmd("buf " .. buf)
+
+            local subdir, _ = string.gsub(fpath, vim.loop.cwd() .. "/", "")
+            for s in string.gmatch(subdir, "[%a%s_%.%-]+%/") do
+                vim.cmd(string.format("call search('%s', 'zW')", s))
+            end
+
+            vim.cmd(string.format("call search('%s', 'zW') | exec 'norm zz'", fname))
         else
             vim.cmd(string.format("exec '%s wincmd w'", winnr))
         end
     end
 
     local create_buf = vim.schedule_wrap(function()
-        local buf = require("core.utils.operate").jobstart("tree", { "-nF" }, vim.loop.cwd())
+        local buf =
+            require("core.utils.operate").jobstart("tree", { "-naF", "--gitignore", "-I", ".git" }, vim.loop.cwd())
         vim.schedule(function()
             view_buf(buf)
             local pos = fn.getpos(".")
