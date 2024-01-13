@@ -79,6 +79,9 @@ return {
             })
             local entry = require("oil").get_cursor_entry
             local cwd = require("oil").get_current_dir
+            local bufnr = function()
+                return vim.bo.filetype == "oil" and vim.fn.bufnr() or nil
+            end
 
             key.nmap({
                 {
@@ -94,23 +97,32 @@ return {
                 {
                     "<leader>ob",
                     function()
-                        local path = cwd() .. entry().name
-                        if entry().type == "file" then
-                            vim.cmd("Git blame " .. path)
-                        else
-                            vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
+                        if type(bufnr()) == "number" then
+                            local path = cwd() .. entry().name
+                            if entry().type == "file" then
+                                vim.cmd("Git blame " .. path)
+                            else
+                                vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
+                            end
                         end
                     end,
-                    keyopts("Oil: View git blame for file under cursor"),
+                    keyopts(bufnr(), "Oil: View git blame for file under cursor"),
                 },
 
                 {
                     "<leader>op",
                     function()
-                        local fname = entry().name
-                        require("core.utils.operate").operate(cwd() .. fname, cwd(), string.format("On %s > ", fname))
+                        if type(bufnr()) == "number" then
+                            local fname = entry().name
+                            require("core.utils.operate"):operate(
+                                cwd() .. fname,
+                                cwd(),
+                                string.format("On %s > ", fname),
+                                "vsp"
+                            )
+                        end
                     end,
-                    keyopts("Oil: Perform external operation on file under cursor"),
+                    keyopts(bufnr(), "Oil: Perform external operation on file under cursor"),
                 },
 
                 {
