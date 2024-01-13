@@ -1,13 +1,14 @@
 local api = vim.api
+local fn = vim.fn
 
 local M = {}
 
----Parse specified arguments
+---Generate a table by parsing argument strings
 --(note: if provided, the first single occurence of the '%' symbol in `cmd` is replaced with `filepath`,
 --otherwise `filepath` is appeneded to `cmd`)
----@param cmd string shell command to execute
----@param filepath string filepath location
----@return table|nil #table with two properties: cmd and args
+---@param cmd string Shell command to execute
+---@param filepath string Filepath location
+---@return table|nil #table with two properties - cmd and args
 local function gen_cmdict(cmd, filepath)
     if #cmd < 2 then
         return
@@ -35,50 +36,31 @@ local function gen_cmdict(cmd, filepath)
     return cmdict
 end
 
----@param cmd string
----@param args table
----@param cwd string
-function M.jobstart(cmd, args, cwd)
-    local buf = api.nvim_create_buf(false, true)
-    local lnum = 0
-    require("plenary.job")
-        :new({
-            command = cmd,
-            cwd = cwd,
-            args = args,
-            on_stdout = function(_, data)
-                local d = { (data:gsub(" ", " ")) }
-                lnum = lnum + 1
-                vim.schedule(function()
-                    api.nvim_buf_set_lines(buf, lnum, lnum, false, d)
-                end)
-            end,
-            on_exit = vim.schedule_wrap(function(j, code)
-                -- TODO: better error output
-                if code > 0 then
-                    vim.print(j:result())
-                    return
-                end
-                if #j:result() < 1 then
-                    api.nvim_buf_delete(buf)
-                    print("Done")
-                end
-            end),
-        })
-        :sync()
-    return api.nvim_buf_is_valid(buf) and buf or nil
-end
-
----Perform shell operation on specified file.
+---Interactively perform shell operation on specified file.
 --(note: meant to be used with file browser plugins such as oil)
----@param file string location to file
----@param cwd string
----@param prompt string? input prompt
+---@param file string Filepath location
+---@param cwd string Current working directory to set for `cmd`
+---@param prompt string? Input prompt
 ---@param sp string? sp[lit] direction for output window(default is "sp")
 function M:operate(file, cwd, prompt, sp)
     prompt = prompt or "input > "
     sp = sp or "sp"
-    local bufnr = nil
+
+    local viewfunc = function(bufnr)
+        vim.cmd(string.format("%s | buf %s", sp, bufnr))
+    end
+
+    local createfunc = vim.schedule_wrap(function(cmdict, args, url)
+        local bufnr = require("core.utils.jobwrite").jobstart(cmdict.cmd, args, cwd)
+        if bufnr then
+            vim.schedule(function()
+                require("core.utils.display").view_buf(bufnr, viewfunc)
+                api.nvim_buf_set_option(bufnr, "ma", false)
+                api.nvim_buf_set_name(bufnr, url)
+            end)
+        end
+    end)
+
     vim.ui.input({
         prompt = prompt,
         completion = "shellcmd",
@@ -91,16 +73,19 @@ function M:operate(file, cwd, prompt, sp)
             else
                 return
             end
-            bufnr = self.jobstart(cmdict.cmd, args, cwd)
+
+            local url = string.format(
+                "op://%s/%s/%s",
+                cwd:gsub("/$", ""),
+                fn.fnamemodify(file, ":t"),
+                cmd:gsub("[%s%-]+", "%%")
+            )
+
+            require("core.utils.display"):init(url, viewfunc, function()
+                createfunc(cmdict, args, url)
+            end)
         end
     end)
-    if bufnr then
-        vim.schedule(function()
-            api.nvim_buf_set_name(bufnr, "operation_output")
-            api.nvim_buf_set_option(bufnr, "ma", false)
-        end)
-        vim.cmd(string.format("%s | buf %s", sp, bufnr))
-    end
 end
 
 return M
