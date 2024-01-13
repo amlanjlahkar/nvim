@@ -47,8 +47,7 @@ function M.jobstart(cmd, args, cwd)
             cwd = cwd,
             args = args,
             on_stdout = function(_, data)
-                data = string.gsub(data, " ", " ")
-                local d = { data }
+                local d = { (data:gsub(" ", " ")) }
                 lnum = lnum + 1
                 vim.schedule(function()
                     api.nvim_buf_set_lines(buf, lnum, lnum, false, d)
