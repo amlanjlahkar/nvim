@@ -33,12 +33,17 @@ function M.showtree()
     end
 
     local create_buf = vim.schedule_wrap(function()
-        local buf =
-            require("core.utils.operate").jobstart("tree", { "-naF", "--gitignore", "-I", ".git" }, vim.loop.cwd())
+        local buf = require("core.utils.operate").jobstart("tree", {
+            "-naF",
+            "--gitignore",
+            "-I",
+            ".git",
+        }, vim.loop.cwd())
         vim.schedule(function()
             view_buf(buf)
             local pos = fn.getpos(".")
             api.nvim_buf_add_highlight(buf, ns_id, "PmenuSel", pos[2] - 1, pos[3] - 1, -1)
+            api.nvim_buf_set_option(buf, "ft", "filetree")
             api.nvim_buf_set_option(buf, "ma", false)
             api.nvim_buf_set_name(buf, url)
         end)
