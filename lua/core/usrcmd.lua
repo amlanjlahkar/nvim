@@ -1,5 +1,6 @@
 local api = vim.api
 local fn = vim.fn
+local uv = vim.loop
 local cmd = api.nvim_create_user_command
 
 cmd("W", "w", {})
@@ -68,47 +69,91 @@ cmd("Transparent", function()
 end, { desc = "Disable background color for certain hlgroups" })
 
 cmd("Splitree", function()
-    local fpath = vim.fn.expand("%:p")
-    local f = vim.loop.fs_statfs(fpath)
+    local fpath = fn.expand("%:p")
+    local f = uv.fs_statfs(fpath)
 
     if not f or f.type ~= 26 then
         vim.notify("Not a valid file", 4)
         return
     end
 
+    local markname = "f"
     local url = "ft://" .. fpath
-    local fname = fn.fnamemodify(fpath, ":t")
     local ns_id = api.nvim_create_namespace("core.usrcmd.splitree")
 
-    local viewfunc = function(bufnr)
+    local draw_win = function(bufnr, mark)
+        api.nvim_buf_add_highlight(bufnr, ns_id, "PmenuSel", mark[1] - 1, mark[2], -1)
+        api.nvim_buf_set_option(bufnr, "ma", false)
         vim.cmd("vsp | buf " .. bufnr)
+        api.nvim_win_set_option(0, "stc", "")
+        api.nvim_win_set_option(0, "nu", false)
+        api.nvim_win_set_option(0, "rnu", false)
+        api.nvim_win_set_cursor(0, mark)
+        vim.cmd("wincmd p")
+    end
 
-        --TODO: Look for better optimized way to do this
-        local subdir, _ = string.gsub(fpath, vim.loop.cwd() .. "/", "")
-        for dir in string.gmatch(subdir, "[%a%s_%.%-]+%/") do
-            vim.cmd(string.format("call search('%s', 'zW')", dir))
+    local viewfunc = function(bufnr)
+        local mark = api.nvim_buf_get_mark(bufnr, markname)
+
+        if mark[1] > 0 and mark[2] > 0 then
+            draw_win(bufnr, mark)
+        else
+            require("core.utils").clrscr("Loading filetree...", 2)
+            vim.defer_fn(function()
+                draw_win(bufnr, api.nvim_buf_get_mark(bufnr, markname))
+            end, 5000)
         end
-
-        vim.cmd(string.format("call search('%s', 'zW') | exec 'norm zz'", fname))
     end
 
     local createfunc = vim.schedule_wrap(function()
         local bufnr = require("core.utils.jobwrite").jobstart("tree", {
-            "-naF",
+            "-anlF",
+            "--dirsfirst",
             "--gitignore",
             "-I",
             ".git",
-        }, vim.loop.cwd())
+        }, uv.cwd())
 
         if bufnr then
             vim.schedule(function()
-                require("core.utils.display").view_buf(bufnr, viewfunc)
-                local pos = fn.getpos(".")
-                api.nvim_buf_add_highlight(bufnr, ns_id, "PmenuSel", pos[2] - 1, pos[3] - 1, -1)
-                api.nvim_buf_set_option(bufnr, "ft", "filetree")
-                api.nvim_buf_set_option(bufnr, "ma", false)
-                api.nvim_buf_set_name(bufnr, url)
+                local subdirs = vim.split(fn.fnamemodify(fn.resolve(fpath), ":."), "/", { plain = true })
+
+                local idx = 1
+
+                api.nvim_buf_attach(bufnr, false, {
+                    on_lines = function(_, _, _, _, cfline)
+                        local line = api.nvim_buf_get_lines(bufnr, cfline, cfline + 1, false)[1]
+
+                        local cfname_idx = (line:find("[%w%.%_]"))
+
+                        local cfname = line:sub(cfname_idx)
+
+                        local is_same = (cfname:find(string.format("^%s[/=|%%*]?$", subdirs[idx])))
+
+                        if cfname == subdirs[idx] or is_same then
+                            if idx == #subdirs then
+                                local depth = cfname_idx and math.floor(((cfname_idx - 1) / 5) - 1) or -1
+
+                                if depth ~= #subdirs then
+                                    idx = 0
+                                else
+                                    api.nvim_buf_set_mark(bufnr, markname, cfline + 1, cfname_idx - 1, {})
+                                    return true
+                                end
+                            end
+
+                            idx = idx + 1
+                        end
+                    end,
+                })
             end)
+
+            api.nvim_buf_set_name(bufnr, url)
+            api.nvim_buf_set_option(bufnr, "ft", "filetree")
+
+            vim.defer_fn(function()
+                viewfunc(bufnr)
+            end, 300)
         end
     end)
 
