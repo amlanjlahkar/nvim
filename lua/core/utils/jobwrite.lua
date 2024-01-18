@@ -40,7 +40,7 @@ function M.jobstart(cmd, args, cwd)
                 end
             end),
         })
-        :sync()
+        :start()
     return api.nvim_buf_is_valid(buf) and buf or nil
 end
 

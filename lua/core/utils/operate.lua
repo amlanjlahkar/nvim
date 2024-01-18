@@ -55,7 +55,6 @@ function M:operate(file, cwd, prompt, sp)
         if bufnr then
             vim.schedule(function()
                 require("core.utils.display").view_buf(bufnr, viewfunc)
-                api.nvim_buf_set_option(bufnr, "ma", false)
                 api.nvim_buf_set_name(bufnr, url)
             end)
         end
