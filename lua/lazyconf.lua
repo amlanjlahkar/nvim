@@ -31,6 +31,10 @@ local conf = {
             enabled = true,
             notify = false,
         },
+        dev = {
+            path = "~/projects/nvim_plugins/",
+            fallback = false,
+        },
         ui = {
             border = "single",
             pills = false,
