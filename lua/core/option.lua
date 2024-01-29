@@ -39,7 +39,6 @@ o.sidescrolloff = 8
 o.list = true
 o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
 o.virtualedit = "block"
-o.browsedir = "buffer"
 o.completeopt = { "menu", "menuone", "noselect" }
 o.shortmess:append({ I = true })
 
@@ -49,6 +48,7 @@ o.cursorline = true
 o.showtabline = 1
 o.cmdheight = 1
 o.laststatus = 3
+o.winbar = " "
 o.signcolumn = "auto:1-4"
 o.pumheight = 20
 o.pumblend = 0
@@ -80,4 +80,4 @@ o.clipboard = ""
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
 
-vim.g.editorconfig = false
+vim.g.editorconfig = true

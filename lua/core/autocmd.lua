@@ -33,7 +33,7 @@ M.autocmd_definitions = {
         "TermOpen",
         {
             desc = "Open terminal directly in insert mode",
-            command = "setl nornu nonu scl=no | startinsert",
+            command = "setl nornu nonu stc= scl=no | startinsert",
         },
     },
 
