@@ -24,15 +24,32 @@ local tools = {
         lintStdin = true,
         formatStdin = true,
     },
+    ["rustfmt"] = {
+        prefix = "rustfmt",
+        formatCommand = "rustfmt --emit=stdout",
+        formatStdin = true,
+    },
+    ["prettier"] = {
+        prefix = "prettierd",
+        formatCommand = "prettierd --stdin-filepath ${INPUT}",
+        formatStdin = true,
+        env = {
+            string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn.expand("~/.config/tools/prettier/.prettierrc.toml")),
+        },
+    },
 }
 
 local languages = {
     lua = { tools["StyLua"] },
     sh = { tools["shfmt"], tools["ShellCheck"] },
     python = { tools["ruff"] },
+    rust = { tools["rustfmt"] },
+    html = { tools["prettier"] },
+    javascript = { tools["prettier"] },
+    json = { tools["prettier"] },
 }
 
-local filetypes = { "lua", "sh", "python" }
+local filetypes = { "lua", "sh", "python", "json", "rust", "javascript", "html" }
 
 return {
     init_options = {

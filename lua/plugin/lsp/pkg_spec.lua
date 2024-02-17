@@ -11,15 +11,15 @@ return {
     { "ruff", hook_lspconfig = false },
 
     -- rust
-    { "rust_analyzer", auto_install = false, hook_lspconfig = false },
+    { "rust_analyzer", auto_install = false, hook_lspconfig = true },
 
     -- shell
     { "shellcheck", hook_lspconfig = false },
     { "shfmt", hook_lspconfig = false },
 
     -- web
-    { "prettier", auto_install = false, hook_lspconfig = false },
-    { "cssls", auto_install = false, mason_id = "css-lsp", hook_lspconfig = false },
-    { "html", auto_install = false, mason_id = "html-lsp", hook_lspconfig = false },
-    { "tsserver", auto_install = false, mason_id = "typescript-language-server", hook_lspconfig = false },
+    { "prettierd", auto_install = true, hook_lspconfig = false },
+    { "cssls", auto_install = true, mason_id = "css-lsp", hook_lspconfig = true },
+    { "html", auto_install = true, mason_id = "html-lsp", hook_lspconfig = true },
+    { "tsserver", auto_install = true, mason_id = "typescript-language-server", hook_lspconfig = true },
 }
