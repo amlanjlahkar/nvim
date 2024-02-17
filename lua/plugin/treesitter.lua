@@ -10,14 +10,15 @@ return {
                 "c",
                 "comment",
                 "css",
+                "go",
                 "html",
-                "java",
                 "javascript",
                 "lua",
                 "luap",
                 "make",
                 "markdown",
                 "python",
+                "rust",
                 "vimdoc",
             },
 
@@ -46,7 +47,7 @@ return {
             local parsers = require("nvim-treesitter.parsers")
             local parser_config = parsers.get_parser_configs()
 
-            ts_install.compilers = { "zig", "gcc" }
+            ts_install.compilers = { "clang", "zig", "gcc" }
             ts_install.update({ with_sync = false })
 
             parser_config.bash.filetype_to_parsename = "sh"

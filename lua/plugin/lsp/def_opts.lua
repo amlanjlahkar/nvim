@@ -73,7 +73,7 @@ function M.setup_keymaps(bufnr)
         function()
             vim.lsp.buf.format({
                 filter = function(client)
-                    local exclude = { "lua_ls" }
+                    local exclude = { "lua_ls", "html" }
                     return not vim.tbl_contains(exclude, client.name)
                 end,
                 timeout_ms = 5000,

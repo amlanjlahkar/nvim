@@ -16,6 +16,8 @@ key.nmap({
     -- movements {{{2
     { "<leader>j", "<cmd>m .+1<CR>==" },
     { "<leader>k", "<cmd>m .-2<CR>==" },
+    { "gl", "$" },
+    { "gh", "^" },
     { "n", "nzzzv" },
     { "N", "Nzzzv" },
     { "J", "mzJ`z" },
@@ -93,7 +95,6 @@ key.nxmap({
 -- 1}}}
 
 -- insert {{{1
-key.imap({ "<C-g>j", "<esc>o" })
 -- 1}}}
 
 -- command {{{1

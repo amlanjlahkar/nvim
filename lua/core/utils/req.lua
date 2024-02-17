@@ -13,7 +13,7 @@ end
 local M = {}
 ---Recursively search for files under path
 ---@param path string? Namespace path(defaults to current file's parent path)
----@param exclude table|function? Modules to exclude
+---@param exclude table? Modules to exclude
 ---@return table # Formatted file paths
 function M.req(path, exclude)
     local apath = path and fn.stdpath("config") .. "/lua/" .. path or fn.expand("%:h")
@@ -59,4 +59,4 @@ function M.req(path, exclude)
     return submodules
 end
 
-return M.req
+return M
