@@ -74,10 +74,14 @@ M.custom = {
   { "TabLineSel",                 { bg = Bg, fg = FgShadeLight, bold = true } },
   { "Visual",                     { bg = BgShadeLighter, fg = FgShadeLight } },
   { "MatchParen",                 { bg = "#351a3d", fg = Magenta, bold = true } },
-  { "QuickFixLine",               { bg = BgShadeLighter } },
   { "NonText",                    { fg = FgShadeDark } },
   { "Comment",                    { bg = none, fg = "#9a666d", italic = true } },
+  { "MoreMsg",                    { fg = Green, bold = true } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
+    -- quickfix list {{{2
+  { "QuickFixLine",               { bg = BgShadeLighter } },
+  { "qfLineNr",                   { fg = FgShadeLight } },
+    -- }}}
   -- health {{{2
   { "healthError",                { fg = RedShadeLight } },
   { "healthSuccess",              { fg = Green } },
@@ -151,7 +155,9 @@ M.custom = {
   { "TelescopeNormal",            { bg = BgShadeDark, fg = Fg } },
   { "TelescopePromptCounter",     { fg = FgShadeDark } },
   { "TelescopePromptTitle",       { bg = BgShadeLighter, fg = Fg } },
+  { "TelescopePromptPrefix",      { fg = Fg } },
   { "TelescopeSelection",         { bg = BgShadeLighter, fg = Red } },
+  { "TelescopeSelectionCaret",    { fg = BgShadeDark } },
   -- 2}}}
   -- other {{{2
   { "FidgetTitle",                { fg = Magenta, blend = 0 } },

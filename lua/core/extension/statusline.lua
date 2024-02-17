@@ -15,7 +15,7 @@ function stl.get_filepath()
     if stl.is_truncated() then
         fpath = format("%s", fn.pathshorten(fpath, 3))
     end
-    return format(" %%<%s ", fpath)
+    return format("%%<%s ", fpath)
 end
 
 function stl.get_fileperm()
