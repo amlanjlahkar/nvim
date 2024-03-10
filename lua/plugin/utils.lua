@@ -54,7 +54,7 @@ return {
                 LAZYLOAD(plugin.name)
             end
         end,
-        keys = { "-", "<leader>o" },
+        keys = { "-", "\\", "<leader>o" },
         config = function()
             require("oil").setup({
                 columns = { "permissions", "size", "mtime" },
@@ -89,6 +89,17 @@ return {
                     function()
                         if vim.bo.filetype ~= "fugitive" then
                             require("oil").open()
+                        end
+                    end,
+                    keyopts("Oil: Open parent directory"),
+                },
+
+                {
+                    "\\",
+                    function()
+                        if vim.bo.filetype ~= "fugitive" then
+                            local ssize = math.floor(vim.opt.co:get() / 2.3)
+                            vim.cmd(ssize .. 'vsp | lua require("oil").open()')
                         end
                     end,
                     keyopts("Oil: Open parent directory"),

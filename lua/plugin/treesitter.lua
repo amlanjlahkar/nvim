@@ -19,6 +19,7 @@ return {
                 "markdown",
                 "python",
                 "rust",
+                "typst",
                 "vimdoc",
             },
 
@@ -51,6 +52,7 @@ return {
             ts_install.update({ with_sync = false })
 
             parser_config.bash.filetype_to_parsename = "sh"
+            parser_config.typst.filetype_to_parsename = "typ"
 
             require("nvim-treesitter.configs").setup(opts)
         end,
@@ -90,7 +92,7 @@ return {
 
     {
         "windwp/nvim-ts-autotag",
-        ft = { "html", "markdown", "javascriptreact" },
+        ft = { "html", "xml", "markdown", "javascriptreact" },
         config = true,
     },
 }

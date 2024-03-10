@@ -55,7 +55,7 @@ o.pumblend = 0
 o.winblend = 0
 o.splitkeep = "screen"
 o.splitbelow = true
-o.splitright = true
+-- o.splitright = true
 o.fillchars:append({
     eob = " ",
     diff = "╱",

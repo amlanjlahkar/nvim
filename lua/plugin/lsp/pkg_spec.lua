@@ -1,6 +1,7 @@
 return {
     "clangd",
     "efm",
+    { "typst_lsp", mason_id = "typst-lsp" },
 
     -- lua
     { "lua_ls", mason_id = "lua-language-server" },
