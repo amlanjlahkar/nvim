@@ -60,6 +60,7 @@ M.custom = {
   -- 1}}}
   -- native {{{1
   { "LineNr",                     { bg = Bg, fg = RedShadeDark } },
+  { "CursorLine",                 { bg = BgShadeLight } },
   { "CursorLineNr",               { bg = Bg, fg = FgShadeLight, bold = false } },
   { "SignColumn",                 { bg = Bg } },
   { "NormalFloat",                { bg = BgShadeDark, fg = Fg } },

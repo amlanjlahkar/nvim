@@ -37,7 +37,7 @@ o.hlsearch = false
 o.scrolloff = 8
 o.sidescrolloff = 8
 o.list = true
-o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
+o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
 o.virtualedit = "block"
 o.completeopt = { "menu", "menuone", "noselect" }
 o.shortmess:append({ I = true })
@@ -45,6 +45,7 @@ o.shortmess:append({ I = true })
 o.ruler = false
 o.showmode = true
 o.cursorline = true
+o.culopt = "both"
 o.showtabline = 1
 o.cmdheight = 1
 o.laststatus = 3

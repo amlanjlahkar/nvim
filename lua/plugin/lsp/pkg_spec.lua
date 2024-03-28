@@ -23,4 +23,5 @@ return {
     { "cssls", auto_install = true, mason_id = "css-lsp", hook_lspconfig = true },
     { "html", auto_install = true, mason_id = "html-lsp", hook_lspconfig = true },
     { "tsserver", auto_install = true, mason_id = "typescript-language-server", hook_lspconfig = true },
+    { "phpactor", auto_install = false },
 }

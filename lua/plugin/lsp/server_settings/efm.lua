@@ -46,10 +46,11 @@ local languages = {
     rust = { tools["rustfmt"] },
     html = { tools["prettier"] },
     javascript = { tools["prettier"] },
-    json = { tools["prettier"] },
+    php = { tools["prettier"] },
+
 }
 
-local filetypes = { "lua", "sh", "python", "json", "rust", "javascript", "html" }
+local filetypes = { "lua", "sh", "python", "php", "rust", "javascript", "html" }
 
 return {
     init_options = {

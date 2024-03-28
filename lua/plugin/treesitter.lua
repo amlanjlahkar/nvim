@@ -92,7 +92,7 @@ return {
 
     {
         "windwp/nvim-ts-autotag",
-        ft = { "html", "xml", "markdown", "javascriptreact" },
+        ft = { "html", "xml", "php", "markdown", "javascriptreact" },
         config = true,
     },
 }
