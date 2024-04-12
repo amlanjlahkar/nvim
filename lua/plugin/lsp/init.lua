@@ -1,3 +1,5 @@
+LSP_USEBUN = true
+
 local pkg_bin_dir = vim.fn.stdpath("data") .. "/lsp_utils/bin"
 local pkg_spec_path = vim.fn.stdpath("config") .. "/lua/plugin/lsp/pkg_spec.lua"
 local pkg_spec_module = string.gsub(vim.fn.fnamemodify(pkg_spec_path, ":r"), "%S+lua/", ""):gsub("/", ".")

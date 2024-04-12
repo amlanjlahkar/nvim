@@ -30,12 +30,9 @@ local tools = {
         formatStdin = true,
     },
     ["prettier"] = {
-        prefix = "prettierd",
-        formatCommand = "prettierd --stdin-filepath ${INPUT}",
+        prefix = "prettier",
+        formatCommand = "bunx prettier --stdin --stdin-filepath ${INPUT}",
         formatStdin = true,
-        env = {
-            string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn.expand("~/.config/tools/prettier/.prettierrc.toml")),
-        },
     },
 }
 
@@ -47,7 +44,6 @@ local languages = {
     html = { tools["prettier"] },
     javascript = { tools["prettier"] },
     php = { tools["prettier"] },
-
 }
 
 local filetypes = { "lua", "sh", "python", "php", "rust", "javascript", "html" }
