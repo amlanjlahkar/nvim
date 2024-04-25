@@ -1,6 +1,7 @@
 return {
     "clangd",
     "efm",
+    "sqls",
     { "typst_lsp", mason_id = "typst-lsp" },
 
     -- lua
