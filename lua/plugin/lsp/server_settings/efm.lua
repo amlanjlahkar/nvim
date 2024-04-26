@@ -44,9 +44,10 @@ local languages = {
     html = { tools["prettier"] },
     javascript = { tools["prettier"] },
     php = { tools["prettier"] },
+    sql = { tools["prettier"] },
 }
 
-local filetypes = { "lua", "sh", "python", "php", "rust", "javascript", "html" }
+local filetypes = { "lua", "sh", "python", "php", "rust", "javascript", "html", "sql" }
 
 return {
     init_options = {
