@@ -24,7 +24,7 @@ end
 
 function stl.get_filetype()
     local ftype = vim.bo.filetype
-    return ftype == "" and "" or format(" 󰅩 %s ", ftype)
+    return ftype == "" and "" or format(" %%#StatusLineImp#ft:%%#StatusLine# %s ", ftype)
 end
 
 function stl.get_git_status()
@@ -64,12 +64,11 @@ function stl.get_lsp_diagnostic_count()
         end
     end
 
-    return diagnostics .. "%#StatusLineNC# "
+    return diagnostics .. "%#StatusLine# "
 end
 
 function stl.get_attached_sources()
     local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-    local null_sources = package.loaded["null-ls"] and require("null-ls.sources").get_available(vim.bo.filetype) or {}
 
     local active, index = {}, nil
     for i = 1, #clients do
@@ -78,9 +77,6 @@ function stl.get_attached_sources()
         end
         active[i] = clients[i].name
     end
-    for i = 1, #null_sources do
-        active[#clients + i] = null_sources[i].name
-    end
 
     if index then
         active[#active], active[index] = active[index], active[#active]
@@ -88,7 +84,7 @@ function stl.get_attached_sources()
     end
 
     local attched = table.concat(active, ", ")
-    return (#attched == 0 or stl.is_truncated()) and "" or string.format(" 󱘖  [%s] ", attched)
+    return (#attched == 0 or stl.is_truncated()) and "" or string.format(" lsp: [%s] ", attched)
 end
 
 function stl.get_tshl_status()
@@ -110,7 +106,7 @@ function stl.setup()
                 "%=",
                 "%#StatusLine#",
                 self.get_filetype(),
-                self.get_attached_sources(),
+                -- self.get_attached_sources(),
                 "%#StatusLineInd#",
                 self.get_tshl_status(),
                 "%#StatusLine#",

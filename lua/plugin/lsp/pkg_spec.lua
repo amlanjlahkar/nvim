@@ -1,6 +1,7 @@
 return {
     "clangd",
     "efm",
+    "zls",
     "sqls",
     { "typst_lsp", mason_id = "typst-lsp" },
 
@@ -20,9 +21,8 @@ return {
     { "shfmt", hook_lspconfig = false },
 
     -- web
-    { "prettierd", auto_install = true, hook_lspconfig = false },
-    { "cssls", auto_install = true, mason_id = "css-lsp", hook_lspconfig = true },
-    { "html", auto_install = true, mason_id = "html-lsp", hook_lspconfig = true },
-    { "tsserver", auto_install = true, mason_id = "typescript-language-server", hook_lspconfig = true },
+    { "cssls", auto_install = false, mason_id = "css-lsp", hook_lspconfig = true },
+    { "html", auto_install = false, mason_id = "html-lsp", hook_lspconfig = true },
+    { "tsserver", auto_install = false, mason_id = "typescript-language-server", hook_lspconfig = true },
     { "phpactor", auto_install = false },
 }

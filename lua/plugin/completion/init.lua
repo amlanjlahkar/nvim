@@ -27,7 +27,7 @@ return {
                 sources = {
                     { name = "copilot", group_index = 2 },
                     { name = "nvim_lsp", group_index = 2 },
-                    { name = "luasnip", group_index = 3 },
+                    { name = "luasnip", group_index = 2 },
                 },
                 formatting = {
                     expandable_indicator = false,
@@ -35,7 +35,6 @@ return {
                     format = function(entry, kind)
                         kind.kind = string.format("%s", kind.kind)
                         kind.menu = ({
-                            copilot = " ",
                             nvim_lsp = "[LSP]",
                             luasnip = "[LuaSnip]",
                         })[entry.source.name]
@@ -43,7 +42,7 @@ return {
                     end,
                 },
                 performance = {
-                    max_view_entries = 10,
+                    max_view_entries = 15,
                 },
                 experimental = {
                     ghost_text = false,

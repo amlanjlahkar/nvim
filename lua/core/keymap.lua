@@ -85,6 +85,7 @@ key.xmap({
     { "J", ":m '>+1<CR>gv=gv" },
     { "K", ":m '<-2<CR>gv=gv" },
     { "v", "yP" },
+    { "<C-l>", "%" },
 })
 
 key.nxmap({

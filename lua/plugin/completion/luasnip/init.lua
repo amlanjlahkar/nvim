@@ -25,6 +25,14 @@ function M.setup_mappings()
                 end
             end,
         },
+        {
+            "<C-s>",
+            function()
+                if ls.choice_active() then
+                    ls.change_choice(1)
+                end
+            end,
+        },
     })
 end
 

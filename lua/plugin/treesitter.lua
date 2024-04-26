@@ -21,6 +21,7 @@ return {
                 "rust",
                 "typst",
                 "vimdoc",
+                "zig",
             },
 
             auto_install = false,
@@ -60,6 +61,7 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        enabled = false,
         keys = { "c", "d", "v", "y" },
         opts = {
             select = {

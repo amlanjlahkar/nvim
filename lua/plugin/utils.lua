@@ -5,24 +5,13 @@ return {
     "nvim-lua/plenary.nvim",
 
     {
-        "zbirenbaum/copilot.lua",
-        dependencies = { "zbirenbaum/copilot-cmp", main = "copilot_cmp", config = true },
-        cmd = "Copilot",
-        event = "InsertEnter",
-        opts = {
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-        },
-    },
-
-    {
         "echasnovski/mini.surround",
         keys = { "s", { "S", mode = "x" } },
         config = function(plugin)
             require(plugin.name).setup({
                 silent = true,
                 highlight_duration = 100,
-                search_method = "cover_or_prev",
+                search_method = "cover_or_next",
             })
             vim.keymap.set("x", "S", [[:lua MiniSurround.add("visual")<CR>]], { silent = true })
         end,

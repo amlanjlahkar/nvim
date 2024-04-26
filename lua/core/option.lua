@@ -41,6 +41,7 @@ o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", pr
 o.virtualedit = "block"
 o.completeopt = { "menu", "menuone", "noselect" }
 o.shortmess:append({ I = true })
+o.exrc = true
 
 o.ruler = false
 o.showmode = true

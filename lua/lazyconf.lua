@@ -39,7 +39,7 @@ local conf = {
             border = "single",
             pills = false,
             wrap = false,
-            size = { width = 0.6, height = 0.8 },
+            size = { width = 0.7, height = 0.85 },
             custom_keys = {
                 ["<localleader>l"] = false,
                 ["<localleader>t"] = false,

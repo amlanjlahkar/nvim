@@ -59,7 +59,7 @@ function M.setup_keymaps(bufnr)
         { "<leader>lh", lsp.signature_help, opts(bufnr) },
         { "<leader>lt", lsp.type_definition, opts(bufnr) },
         { "<leader>lf", vim.diagnostic.open_float, opts(bufnr) },
-        { "<leader>ld", vim.diagnostic.setqflist, opts(bufnr) },
+        { "<leader>ld", vim.diagnostic.setloclist, opts(bufnr) },
         { "]d", vim.diagnostic.goto_next, opts(bufnr) },
         { "[d", vim.diagnostic.goto_prev, opts(bufnr) },
         { "gd", function() check("definitions", "definition") end, opts(bufnr) },
@@ -73,7 +73,7 @@ function M.setup_keymaps(bufnr)
         function()
             vim.lsp.buf.format({
                 filter = function(client)
-                    local exclude = { "lua_ls", "html" }
+                    local exclude = { "sqls" }
                     return not vim.tbl_contains(exclude, client.name)
                 end,
                 timeout_ms = 5000,
