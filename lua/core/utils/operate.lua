@@ -51,12 +51,19 @@ function M:operate(file, cwd, prompt, sp)
     end
 
     local createfunc = vim.schedule_wrap(function(cmdict, args, url)
-        local bufnr = require("core.utils.jobwrite").jobstart(cmdict.cmd, args, cwd)
-        if bufnr then
-            vim.schedule(function()
-                require("core.utils.display").view_buf(bufnr, viewfunc)
-                api.nvim_buf_set_name(bufnr, url)
-            end)
+        local bufnr, job = require("core.utils.jobwrite").define(cmdict.cmd, args, cwd)
+
+        if job and not vim.loop.is_active(job["_shutdown_check"]) then
+            job:add_on_exit_callback(vim.schedule_wrap(function()
+                if api.nvim_buf_is_valid(bufnr) then
+                    api.nvim_buf_set_option(bufnr, "ft", "opout")
+                    api.nvim_buf_set_name(bufnr, url)
+
+                    require("core.utils.display").view_buf(bufnr, viewfunc)
+                end
+            end))
+
+            job:start()
         end
     end)
 
@@ -73,11 +80,12 @@ function M:operate(file, cwd, prompt, sp)
                 return
             end
 
+            --stylua: ignore
             local url = string.format(
                 "op://%s/%s/%s",
                 cwd:gsub("/$", ""),
                 fn.fnamemodify(file, ":t"),
-                cmd:gsub("[%s%-]+", "%%")
+                cmd:gsub("[%s]+", "")
             )
 
             require("core.utils.display"):init(url, viewfunc, function()
