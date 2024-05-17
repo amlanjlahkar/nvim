@@ -9,7 +9,7 @@ local M = {}
 ---@param cwd? string Path to git repository
 ---@param pattern? string Regex to search for in file history
 function M.pick_files(cwd, pattern)
-    cwd = cwd and vim.fs.normalize(cwd) or vim.loop.cwd()
+    cwd = cwd and vim.fs.normalize(cwd) or vim.uv.cwd()
     if githist.is_gitrepo(cwd) then
         local files = {}
         builtin.git_files(_, {

@@ -9,7 +9,7 @@ function M.switch_dir(cwd)
     if cwd then
         _cwd = cwd
     else
-        _cwd = vim.loop.cwd()
+        _cwd = vim.uv.cwd()
     end
     builtin.find_files(_, {
         prompt_title = "Choose directory",

@@ -97,8 +97,8 @@ return {
                         end
                     end, { "i", "s" }),
 
-                    ["<C-j>"] = cmp.mapping(cmp.mapping.scroll_docs(2), { "i", "s" }),
-                    ["<C-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-2), { "i", "s" }),
+                    ["<M-j>"] = cmp.mapping(cmp.mapping.scroll_docs(2), { "i", "s" }),
+                    ["<M-k>"] = cmp.mapping(cmp.mapping.scroll_docs(-2), { "i", "s" }),
                     ["<C-e>"] = cmp.mapping({
                         i = cmp.mapping.abort(),
                         c = cmp.mapping.close(),

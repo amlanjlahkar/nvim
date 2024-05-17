@@ -82,7 +82,7 @@ end
 
 function M.get_dwots()
     local dothome = function()
-        if vim.loop.os_uname().sysname == "Darwin" then
+        if vim.uv.os_uname().sysname == "Darwin" then
             return fn.finddir("~/dwots_mac/")
         end
         return fn.finddir("~/dwots/")

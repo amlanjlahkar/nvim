@@ -4,7 +4,7 @@ end
 
 local function init_lazy(path)
     path = path or vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-    if not vim.loop.fs_stat(path) then
+    if not vim.uv.fs_stat(path) then
         vim.notify("Installing lazy and corresponding plugins...", vim.log.levels.INFO)
         vim.fn.system({
             "git",

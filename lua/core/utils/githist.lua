@@ -4,7 +4,7 @@
     -   Load results into quickfix list on success
 --]]
 
-local uv = vim.loop
+local uv = vim.uv
 local api = vim.api
 local fn = vim.fn
 local insert = table.insert

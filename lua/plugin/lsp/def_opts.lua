@@ -9,12 +9,9 @@ function M.handlers()
             lsp.handlers.signature_help,
             { border = "single", style = "minimal" }
         ),
-        -- ["textDocument/publishDiagnostics"] = lsp.with(
-        --   lsp.diagnostic.on_publish_diagnostics,
-        --   require("plugin.lsp.diagnostics"):default_opts()
-        -- ),
     }
 end
+
 -- 1}}}
 
 -- Capabilities {{{1
@@ -50,21 +47,21 @@ function M.setup_keymaps(bufnr)
     local opts = key.new_opts
 
     --stylua: ignore start
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
     key.imap({ "<C-s>", lsp.signature_help })
     key.nmap({
-        { "K", lsp.hover, opts(bufnr) },
-        { "<leader>lr", lsp.rename, opts(bufnr) },
-        { "<leader>la", lsp.code_action, opts(bufnr) },
-        { "<leader>lh", lsp.signature_help, opts(bufnr) },
-        { "<leader>lt", lsp.type_definition, opts(bufnr) },
-        { "<leader>lf", vim.diagnostic.open_float, opts(bufnr) },
-        { "<leader>ld", vim.diagnostic.setloclist, opts(bufnr) },
-        { "]d", vim.diagnostic.goto_next, opts(bufnr) },
-        { "[d", vim.diagnostic.goto_prev, opts(bufnr) },
-        { "gd", function() check("definitions", "definition") end, opts(bufnr) },
-        { "gi", function() check("implementations", "implementation") end, opts(bufnr) },
-        { "gr", function() check("references") end, opts(bufnr) },
+        { "K",          lsp.hover,                                                                                   opts(bufnr) },
+        { "<leader>lr", lsp.rename,                                                                                  opts(bufnr) },
+        { "<leader>la", lsp.code_action,                                                                             opts(bufnr) },
+        { "<leader>lh", lsp.signature_help,                                                                          opts(bufnr) },
+        { "<leader>lt", lsp.type_definition,                                                                         opts(bufnr) },
+        { "<leader>lf", vim.diagnostic.open_float,                                                                   opts(bufnr) },
+        { "<leader>ld", vim.diagnostic.setloclist,                                                                   opts(bufnr) },
+        { "]d",         vim.diagnostic.goto_next,                                                                    opts(bufnr) },
+        { "[d",         vim.diagnostic.goto_prev,                                                                    opts(bufnr) },
+        { "gd",         function() check("definitions", "definition") end,                                           opts(bufnr) },
+        { "gi",         function() check("implementations", "implementation") end,                                   opts(bufnr) },
+        { "gr",         function() check("references") end,                                                          opts(bufnr) },
         { "<leader>ls", function() check("dynamic_workspace_symbols", "workspace_symbol", { fname_width = 40 }) end, opts(bufnr) },
     })
     --stylua: ignore end
@@ -83,11 +80,12 @@ function M.setup_keymaps(bufnr)
         opts(bufnr),
     })
 end
+
 -- 2}}}
 
 function M.on_attach(client, bufnr)
     local api = vim.api
-    if client.server_capabilities.documentHighlightProvider then
+    if client.supports_method("textDocument/documentHighlight") then
         ---@diagnostic disable-next-line: param-type-mismatch
         local is_defined, _ = pcall(vim.cmd, "silent hi LspReference")
         if is_defined then
@@ -116,6 +114,7 @@ function M.on_attach(client, bufnr)
 
     M.setup_keymaps(bufnr)
 end
+
 -- 1}}}
 
 return M

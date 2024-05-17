@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
     end,
 })
 
-local pkgs_exist = vim.loop.fs_access(pkg_bin_dir, "R")
+local pkgs_exist = vim.uv.fs_access(pkg_bin_dir, "R")
 local schedule_pkg_install = function(pkg_spec)
     return require("plugin.lsp.installer").schedule_install(pkg_spec)
 end

@@ -19,6 +19,7 @@ return {
 
     {
         "numToStr/Comment.nvim",
+        enabled = false,
         keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = { "x", "o" } } },
         config = function()
             local avail, ts_config = pcall(require, "nvim-treesitter['config']")
@@ -118,7 +119,7 @@ return {
                                 cwd() .. fname,
                                 cwd(),
                                 string.format("On %s > ", fname),
-                                "vsp"
+                                "sp"
                             )
                         end
                     end,
@@ -140,7 +141,7 @@ return {
     {
         "ThePrimeagen/harpoon",
         -- branch = "harpoon2",
-        enabled = false,
+        -- enabled = false,
         dependencies = "nvim-lua/plenary.nvim",
         keys = "<leader>m",
         init = function(plugin)
@@ -156,7 +157,7 @@ return {
             end
 
             local sys = vim.fn.system
-            local cwd = vim.loop.cwd()
+            local cwd = vim.uv.cwd()
 
             --stylua: ignore start
             assert(vim.fn.executable("jq") > 0, plugin.name .. " didn't load(jq isn't installed)")

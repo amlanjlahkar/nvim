@@ -86,7 +86,7 @@ function M.send(query)
 
     if vim.v.shell_error > 0 then
         local curr_winid = string.sub(call("tmux display -p '#{window_id}'"), 1, -2)
-        call(format("tmux new-window -d -c %s -a -t '%s' -n %s", vim.loop.cwd(), curr_winid, win_name))
+        call(format("tmux new-window -d -c %s -a -t '%s' -n %s", vim.uv.cwd(), curr_winid, win_name))
         winid = string.sub(call(format([[tmux lsw -F '#{window_id} "#W"' | awk '$2 ~ /"%s"/ { print $1 }']], win_name)), 1, -2)
     end
 

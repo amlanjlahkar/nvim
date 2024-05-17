@@ -1,6 +1,6 @@
 local api = vim.api
 local fn = vim.fn
-local uv = vim.loop
+local uv = vim.uv
 local cmd = api.nvim_create_user_command
 
 cmd("W", "w", {})

@@ -53,7 +53,7 @@ key.nmap({
             local session = vim.fs.find("Session.vim", {
                 upward = true,
                 stop = os.getenv("HOME"),
-                path = vim.loop.cwd(),
+                path = vim.uv.cwd(),
             })
             local mks = true
             if #session < 1 then

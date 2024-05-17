@@ -59,6 +59,8 @@ M.custom = {
   { "StatusLineNC",               { bg = BgShadeDark, fg = Fg } },
   -- 1}}}
   -- native {{{1
+  { "WinBar",                     { bg = Bg } },
+  { "WinBarNC",                   { bg = Bg } },
   { "LineNr",                     { bg = Bg, fg = RedShadeDark } },
   { "CursorLine",                 { bg = BgShadeLight } },
   { "CursorLineNr",               { bg = Bg, fg = FgShadeLight, bold = false } },

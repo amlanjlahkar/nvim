@@ -25,6 +25,7 @@ o.foldmethod = "marker"
 o.foldcolumn = "1"
 
 -- editor preference
+o.smoothscroll = true
 o.timeoutlen = 500
 o.ttimeoutlen = 100
 o.number = true
@@ -33,13 +34,14 @@ o.numberwidth = 4
 o.ignorecase = false
 o.smartcase = false
 o.incsearch = true
+o.inccommand = "split"
 o.hlsearch = false
 o.scrolloff = 8
 o.sidescrolloff = 8
 o.list = true
 o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
 o.virtualedit = "block"
-o.completeopt = { "menu", "menuone", "noselect" }
+o.completeopt = { "menu", "menuone", "noselect", "popup" }
 o.shortmess:append({ I = true })
 o.exrc = true
 
@@ -81,5 +83,6 @@ o.dip:append("algorithm:minimal")
 o.clipboard = ""
 o.mouse = "nv" -- nervous laughter
 o.termguicolors = true
+-- o.guicursor:append("n-v-c:blinkon500-blinkoff500")
 
 vim.g.editorconfig = true

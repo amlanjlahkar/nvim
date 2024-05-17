@@ -53,10 +53,10 @@ function M:operate(file, cwd, prompt, sp)
     local createfunc = vim.schedule_wrap(function(cmdict, args, url)
         local bufnr, job = require("core.utils.jobwrite").define(cmdict.cmd, args, cwd)
 
-        if job and not vim.loop.is_active(job["_shutdown_check"]) then
+        if job and not vim.uv.is_active(job["_shutdown_check"]) then
             job:add_on_exit_callback(vim.schedule_wrap(function()
                 if api.nvim_buf_is_valid(bufnr) then
-                    api.nvim_buf_set_option(bufnr, "ft", "opout")
+                    api.nvim_set_option_value("ft", "opout", { buf = bufnr })
                     api.nvim_buf_set_name(bufnr, url)
 
                     require("core.utils.display").view_buf(bufnr, viewfunc)

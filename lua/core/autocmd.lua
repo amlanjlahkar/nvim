@@ -41,7 +41,7 @@ M.autocmd_definitions = {
         "FileType",
         {
             desc = "'q'uick unload of certain filetype buffers",
-            pattern = { "help", "fugitive", "git", "checkhealth", "query", "qf" },
+            pattern = { "help", "fugitive", "git", "checkhealth", "query", "qf", "opout" },
             callback = function(self)
                 vim.keymap.set("n", "q", ":bd<CR>", { buffer = self.buf, silent = true, nowait = true })
             end,

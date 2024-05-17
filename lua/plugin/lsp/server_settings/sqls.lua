@@ -3,5 +3,5 @@ return {
     root_dir = function(fname)
         return require("lspconfig").util.root_pattern(".sqls.yml")(fname)
     end,
-    cmd = { "sqls", "--config", vim.loop.cwd() .. "/.sqls.yml" },
+    cmd = { "sqls", "--config", vim.uv.cwd() .. "/.sqls.yml" },
 }

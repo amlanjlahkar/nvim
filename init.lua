@@ -1,4 +1,3 @@
-vim.loader.enable()
 vim.g.mapleader = " "
 
 local req = require("core.utils.req").req
