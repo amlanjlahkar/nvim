@@ -22,13 +22,7 @@ local conf = {
     lazyopts = {
         defaults = { lazy = true },
         lockfile = vim.fn.stdpath("config") .. "/lazylock.json",
-        checker = {
-            enabled = false,
-            concurrency = nil,
-            notify = false,
-        },
         change_detection = {
-            enabled = true,
             notify = false,
         },
         dev = {

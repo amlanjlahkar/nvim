@@ -140,8 +140,6 @@ return {
 
     {
         "ThePrimeagen/harpoon",
-        -- branch = "harpoon2",
-        -- enabled = false,
         dependencies = "nvim-lua/plenary.nvim",
         keys = "<leader>m",
         init = function(plugin)
@@ -159,13 +157,13 @@ return {
             local sys = vim.fn.system
             local cwd = vim.uv.cwd()
 
-            --stylua: ignore start
             assert(vim.fn.executable("jq") > 0, plugin.name .. " didn't load(jq isn't installed)")
-            if sys(string.format("jq '.projects.\"%s\"' %s", cwd, schema[1])) ~= "null\n" and
-                sys(string.format("jq '.projects.\"%s\".mark.marks == []' %s", cwd, schema[1])) == "false\n" then
-                    LAZYLOAD(plugin.name)
+            if
+                sys(string.format("jq '.projects.\"%s\"' %s", cwd, schema[1])) ~= "null\n"
+                and sys(string.format("jq '.projects.\"%s\".mark.marks == []' %s", cwd, schema[1])) == "false\n"
+            then
+                LAZYLOAD(plugin.name)
             end
-            --stylua: ignore end
         end,
         config = function()
             local ui = require("harpoon.ui")

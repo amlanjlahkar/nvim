@@ -1,24 +1,31 @@
 LSP_USEBUN = true
 
 local pkg_bin_dir = vim.fn.stdpath("data") .. "/lsp_utils/bin"
+local pkgs_exist = vim.uv.fs_access(pkg_bin_dir, "R")
 local pkg_spec_path = vim.fn.stdpath("config") .. "/lua/plugin/lsp/pkg_spec.lua"
 local pkg_spec_module = string.gsub(vim.fn.fnamemodify(pkg_spec_path, ":r"), "%S+lua/", ""):gsub("/", ".")
 
-local augroup = vim.api.nvim_create_augroup("_lsp.mason", { clear = true })
-vim.api.nvim_create_autocmd({ "BufReadPost", "FileReadPost" }, {
-    group = augroup,
+local schedule_pkg_install = function(pkg_spec)
+    return require("plugin.lsp.installer").schedule_install(pkg_spec)
+end
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    desc = "Auto install required packages",
+    group = vim.api.nvim_create_augroup("_lsp.mason", { clear = true }),
     pattern = pkg_spec_path,
     callback = function()
         if not package.loaded["mason"] then
             LAZYLOAD("mason.nvim")
         end
+        require("plenary.reload").reload_module(pkg_spec_module)
+        schedule_pkg_install()
     end,
 })
 
-local pkgs_exist = vim.uv.fs_access(pkg_bin_dir, "R")
-local schedule_pkg_install = function(pkg_spec)
-    return require("plugin.lsp.installer").schedule_install(pkg_spec)
-end
+-- configure diagnostics globally
+local diagnostics = require("plugin.lsp.diagnostics")
+diagnostics:setup_signs()
+vim.diagnostic.config(diagnostics:default_opts())
 
 return {
     {
@@ -51,7 +58,7 @@ return {
             end
             return false
         end,
-        event = { "BufReadPre", "BufNewFile" },
+        lazy = false,
         config = function()
             local function hook_lspconfig(pkg)
                 if type(pkg.hook_lspconfig) == "boolean" then
@@ -68,16 +75,6 @@ return {
                 end
             end
             require("lspconfig.ui.windows").default_options.border = "single"
-
-            vim.api.nvim_create_autocmd("BufWritePost", {
-                desc = "Auto install required packages",
-                group = augroup,
-                pattern = pkg_spec_path,
-                callback = function()
-                    require("plenary.reload").reload_module(pkg_spec_module)
-                    schedule_pkg_install()
-                end,
-            })
         end,
     },
 }

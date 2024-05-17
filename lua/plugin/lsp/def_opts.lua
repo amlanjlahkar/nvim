@@ -108,10 +108,6 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    local diagnostics = require("plugin.lsp.diagnostics")
-    diagnostics:setup_signs()
-    vim.diagnostic.config(diagnostics:default_opts())
-
     M.setup_keymaps(bufnr)
 end
 

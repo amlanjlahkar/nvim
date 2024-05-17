@@ -25,7 +25,6 @@ o.foldmethod = "marker"
 o.foldcolumn = "1"
 
 -- editor preference
-o.smoothscroll = true
 o.timeoutlen = 500
 o.ttimeoutlen = 100
 o.number = true
