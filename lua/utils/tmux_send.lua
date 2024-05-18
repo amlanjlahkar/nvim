@@ -5,7 +5,7 @@
 
 local call = vim.fn.system
 local format = string.format
-local clrscr = require("core.utils").clrscr
+local clrscr = require("utils").clrscr
 
 local M = {}
 

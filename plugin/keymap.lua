@@ -1,4 +1,4 @@
-local key = require("core.utils.map")
+local key = require("utils.map")
 local cmd, opts = key.cmd, key.new_opts
 local nosilent = opts(key.nosilent)
 local api = vim.api
@@ -73,7 +73,7 @@ key.nmap({
     },
 
     --stylua: ignore
-    { "<leader>s", function() require("core.utils.tmux_send").send() end },
+    { "<leader>s", function() require("utils.tmux_send").send() end },
 })
 -- 2}}}
 -- 1}}}

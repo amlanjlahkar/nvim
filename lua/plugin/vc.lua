@@ -1,4 +1,4 @@
-local key = require("core.utils.map")
+local key = require("utils.map")
 local opts = key.new_opts
 
 return {

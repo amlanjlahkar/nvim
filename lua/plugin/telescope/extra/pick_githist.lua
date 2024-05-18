@@ -1,7 +1,7 @@
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local builtin = require("plugin.telescope.function").pick("telescope.builtin")
-local githist = require("core.utils.githist")
+local githist = require("utils.githist")
 
 local M = {}
 

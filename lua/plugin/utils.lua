@@ -1,4 +1,4 @@
-local key = require("core.utils.map")
+local key = require("utils.map")
 local keyopts = key.new_opts
 
 return {
@@ -115,7 +115,7 @@ return {
                     function()
                         if type(bufnr()) == "number" then
                             local fname = entry().name
-                            require("core.utils.operate"):operate(
+                            require("utils.operate"):operate(
                                 cwd() .. fname,
                                 cwd(),
                                 string.format("On %s > ", fname),

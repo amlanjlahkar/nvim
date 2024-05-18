@@ -6,7 +6,7 @@ local stl = {}
 
 function stl.is_truncated(fpath_len)
     fpath_len = fpath_len or string.len(fn.expand("%:p:."))
-    local global_width = require("core.utils").get_width({ combined = true })
+    local global_width = require("utils").get_width({ combined = true })
     return fpath_len > global_width / 2.5
 end
 

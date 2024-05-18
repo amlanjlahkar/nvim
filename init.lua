@@ -1,15 +1,43 @@
 vim.g.mapleader = " "
 
-local req = require("core.utils.req").req
-
-local exclude = {}
-for _, u in pairs(req("core/utils")) do
-    table.insert(exclude, u)
+function _G.LAZYLOAD(plugin_name)
+    require("lazy").load({ plugins = plugin_name })
 end
 
-for _, m in pairs(req("core", exclude)) do
-    require(m)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
+    vim.notify("Installing lazy and corresponding plugins...", vim.log.levels.INFO)
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "--branch=stable",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath,
+    })
 end
+vim.opt.rtp:prepend(lazypath)
 
-require("lazyconf"):setup()
+require("lazy").setup("plugin", {
+    defaults = { lazy = true },
+    change_detection = {
+        notify = false,
+    },
+    dev = {
+        path = "~/projects/nvim_plugins/",
+        fallback = false,
+    },
+    ui = {
+        border = "single",
+        pills = false,
+        wrap = false,
+        size = { width = 0.7, height = 0.85 },
+        custom_keys = {
+            ["<localleader>l"] = false,
+            ["<localleader>t"] = false,
+        },
+    },
+    install = { colorscheme = { require("color").custom, require("color").default } },
+})
+
 require("color"):try_colorscheme()

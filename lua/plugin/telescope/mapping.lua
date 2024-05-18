@@ -1,7 +1,7 @@
 local fn = require("plugin.telescope.function")
 local tb = fn.pick("telescope.builtin")
 
-local key = require("core.utils.map")
+local key = require("utils.map")
 local opts = key.new_opts
 
 local M = {

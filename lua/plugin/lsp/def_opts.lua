@@ -43,7 +43,7 @@ function M.setup_keymaps(bufnr)
         end
     end
     local lsp = vim.lsp.buf
-    local key = require("core.utils.map")
+    local key = require("utils.map")
     local opts = key.new_opts
 
     --stylua: ignore start
