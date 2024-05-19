@@ -72,7 +72,6 @@ function keymap.cu(str)
     return "<C-u><cmd>" .. str .. "<CR>"
 end
 
----@private
 local function keymap_set(mode, tbl)
     vim.validate({
         tbl = { tbl, "table" },
@@ -86,18 +85,18 @@ local function keymap_set(mode, tbl)
     vim.keymap.set(mode, tbl[1], tbl[2], options)
 end
 
-local function map(mod)
+local function map(mode)
     return function(tbl)
         vim.validate({
             tbl = { tbl, "table" },
         })
 
-        if type(tbl[1]) == "table" and type(tbl[2]) == "table" then
+        if type(tbl[1]) == "table" then
             for _, v in pairs(tbl) do
-                keymap_set(mod, v)
+                keymap_set(mode, v)
             end
         else
-            keymap_set(mod, tbl)
+            keymap_set(mode, tbl)
         end
     end
 end

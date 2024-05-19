@@ -1,8 +1,10 @@
+local api = vim.api
+local lsp = vim.lsp
+
 local M = {}
 
 -- Handlers {{{1
 function M.handlers()
-    local lsp = vim.lsp
     return {
         ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single", style = "minimal" }),
         ["textDocument/signatureHelp"] = lsp.with(
@@ -11,11 +13,10 @@ function M.handlers()
         ),
     }
 end
-
 -- 1}}}
 
 -- Capabilities {{{1
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = lsp.protocol.make_client_capabilities()
 
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities.textDocument.foldingRange = {
@@ -30,72 +31,17 @@ end
 -- 1}}}
 
 -- On_attach {{{1
--- Keymaps {{{2
-function M.setup_keymaps(bufnr)
-    local function check(action, fallback, opts)
-        fallback = fallback or action
-        opts = opts or {}
-        local is_avail, tb = pcall(require, "telescope.builtin")
-        if is_avail then
-            tb["lsp_" .. action](opts)
-        else
-            vim.lsp.buf[fallback]()
-        end
-    end
-    local lsp = vim.lsp.buf
-    local key = require("utils.map")
-    local opts = key.new_opts
-
-    --stylua: ignore start
-    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-    key.imap({ "<C-s>", lsp.signature_help })
-    key.nmap({
-        { "K",          lsp.hover,                                                                                   opts(bufnr) },
-        { "<leader>lr", lsp.rename,                                                                                  opts(bufnr) },
-        { "<leader>la", lsp.code_action,                                                                             opts(bufnr) },
-        { "<leader>lh", lsp.signature_help,                                                                          opts(bufnr) },
-        { "<leader>lt", lsp.type_definition,                                                                         opts(bufnr) },
-        { "<leader>lf", vim.diagnostic.open_float,                                                                   opts(bufnr) },
-        { "<leader>ld", vim.diagnostic.setloclist,                                                                   opts(bufnr) },
-        { "]d",         vim.diagnostic.goto_next,                                                                    opts(bufnr) },
-        { "[d",         vim.diagnostic.goto_prev,                                                                    opts(bufnr) },
-        { "gd",         function() check("definitions", "definition") end,                                           opts(bufnr) },
-        { "gi",         function() check("implementations", "implementation") end,                                   opts(bufnr) },
-        { "gr",         function() check("references") end,                                                          opts(bufnr) },
-        { "<leader>ls", function() check("dynamic_workspace_symbols", "workspace_symbol", { fname_width = 40 }) end, opts(bufnr) },
-    })
-    --stylua: ignore end
-    key.nxmap({
-        "<leader>f",
-        function()
-            vim.lsp.buf.format({
-                filter = function(client)
-                    local exclude = { "sqls" }
-                    return not vim.tbl_contains(exclude, client.name)
-                end,
-                timeout_ms = 5000,
-                async = true,
-            })
-        end,
-        opts(bufnr),
-    })
-end
-
--- 2}}}
-
 function M.on_attach(client, bufnr)
-    local api = vim.api
+    local au = api.nvim_create_autocmd
+    local id = api.nvim_create_augroup("_lsp.on_attach", { clear = false })
+
     if client.supports_method("textDocument/documentHighlight") then
-        ---@diagnostic disable-next-line: param-type-mismatch
-        local is_defined, _ = pcall(vim.cmd, "silent hi LspReference")
-        if is_defined then
+        if api.nvim_get_hl(0, { name = "LspReference" }) then
             for _, ref in pairs({ "Text", "Read", "Write" }) do
                 api.nvim_set_hl(0, "LspReference" .. ref, { link = "LspReference" })
             end
         end
 
-        local au = api.nvim_create_autocmd
-        local id = api.nvim_create_augroup("_lsp.on_attach", { clear = false })
         au("CursorHold", {
             group = id,
             buffer = bufnr,
@@ -108,9 +54,28 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    M.setup_keymaps(bufnr)
-end
+    if client.supports_method("textDocument/inlayHint") then
+        local inlay_hint = vim.lsp.inlay_hint
 
+        au("InsertEnter", {
+            group = id,
+            buffer = bufnr,
+            callback = function()
+                if inlay_hint.is_enabled({ bufnr = bufnr }) then
+                    inlay_hint.enable(false)
+                end
+            end,
+        })
+    end
+
+    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+    local keymaps = require("plugin.lsp.keymaps").keymaps(bufnr)
+    local key = require("utils.map")
+
+    for mode, map in pairs(keymaps) do
+        key[mode](map)
+    end
+end
 -- 1}}}
 
 return M
