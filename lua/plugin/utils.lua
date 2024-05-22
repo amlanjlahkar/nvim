@@ -46,95 +46,7 @@ return {
         end,
         keys = { "-", "\\", "<leader>o" },
         config = function()
-            require("oil").setup({
-                columns = { "permissions", "size", "mtime" },
-                keymaps = {
-                    ["gh"] = "actions.toggle_hidden",
-                    ["."] = "actions.open_cmdline",
-                    ["<C-y>"] = "actions.copy_entry_path",
-                    ["<C-j>"] = "actions.select",
-                },
-                -- buf_options = { buflisted = true, bufhidden = "delete" },
-                win_options = { rnu = false, nu = false },
-                view_options = {
-                    show_hidden = true,
-                    is_always_hidden = function(name, _)
-                        local pattern = { ".git", "LICENSE" }
-                        return vim.tbl_contains(pattern, name) and true or false
-                    end,
-                },
-                preview = {
-                    border = "single",
-                },
-            })
-            local entry = require("oil").get_cursor_entry
-            local cwd = require("oil").get_current_dir
-            local bufnr = function()
-                return vim.bo.filetype == "oil" and vim.fn.bufnr() or nil
-            end
-
-            key.nmap({
-                {
-                    "-",
-                    function()
-                        if vim.bo.filetype ~= "fugitive" then
-                            require("oil").open()
-                        end
-                    end,
-                    keyopts("Oil: Open parent directory"),
-                },
-
-                {
-                    "\\",
-                    function()
-                        if vim.bo.filetype ~= "fugitive" then
-                            local ssize = math.floor(vim.opt.co:get() / 2.3)
-                            vim.cmd(ssize .. 'vsp | lua require("oil").open()')
-                        end
-                    end,
-                    keyopts("Oil: Open parent directory"),
-                },
-
-                {
-                    "<leader>ob",
-                    function()
-                        if type(bufnr()) == "number" then
-                            local path = cwd() .. entry().name
-                            if entry().type == "file" then
-                                vim.cmd("Git blame " .. path)
-                            else
-                                vim.notify(entry .. " is not a regular file!", vim.log.levels.ERROR)
-                            end
-                        end
-                    end,
-                    keyopts(bufnr(), "Oil: View git blame for file under cursor"),
-                },
-
-                {
-                    "<leader>op",
-                    function()
-                        if type(bufnr()) == "number" then
-                            local fname = entry().name
-                            require("utils.operate"):operate(
-                                cwd() .. fname,
-                                cwd(),
-                                string.format("On %s > ", fname),
-                                "sp"
-                            )
-                        end
-                    end,
-                    keyopts(bufnr(), "Oil: Perform external operation on file under cursor"),
-                },
-
-                {
-                    "<leader>os",
-                    function()
-                        ---@diagnostic disable-next-line: different-requires
-                        require("plugin.telescope.extra.oil").switch_dir(cwd())
-                    end,
-                    keyopts("Oil: Fuzzy search and switch to directory"),
-                },
-            })
+            require("plugin.config.oil").setup()
         end,
     },
 
@@ -147,7 +59,7 @@ return {
                 type = "file",
                 upward = true,
                 stop = vim.fs.normalize("~/.local"),
-                path = vim.fn.stdpath("data"),
+                path = vim.fn.stdpath("data")
             })
 
             if #schema < 1 then
