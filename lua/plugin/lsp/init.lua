@@ -58,7 +58,7 @@ return {
             end
             return false
         end,
-        lazy = false,
+        event = { "BufReadPost", "BufNewFile", "BufWritePre" },
         config = function()
             local function hook_lspconfig(pkg)
                 if type(pkg.hook_lspconfig) == "boolean" then

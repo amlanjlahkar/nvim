@@ -6,20 +6,19 @@ return {
         end
 
         client.settings.Lua = {
-            runtime = {
-                version = "LuaJIT",
-            },
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim", "_" } },
+            hint = { enable = true },
+            format = { enable = false },
+            telemetry = { enable = false },
+            single_file_support = true,
+
             completion = {
                 enable = true,
                 workspaceWord = true,
                 callSnippet = "Replace",
             },
-            diagnostics = {
-                globals = { "vim", "_" },
-            },
-            format = {
-                enable = false,
-            },
+
             workspace = {
                 library = {
                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -27,10 +26,6 @@ return {
                 },
                 checkThirdParty = false,
             },
-            telemetry = {
-                enable = false,
-            },
-            single_file_support = true,
         }
         client.notify("workspace/didChangeConfiguration", { settings = client.settings })
     end,

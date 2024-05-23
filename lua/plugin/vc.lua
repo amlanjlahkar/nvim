@@ -13,7 +13,7 @@ return {
 
     {
         "lewis6991/gitsigns.nvim",
-        lazy = false,
+        event = { "BufReadPost", "BufNewFile", "BufWritePre" },
         opts = function()
             return {
                 signs = {

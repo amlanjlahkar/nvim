@@ -17,23 +17,29 @@ key.nmap({
     { "<leader>j", "<cmd>m .+1<CR>==" },
     { "<leader>k", "<cmd>m .-2<CR>==" },
     { "gl", "$" },
-    { "gh", "^" },
     { "n", "nzzzv" },
     { "N", "Nzzzv" },
     { "J", "mzJ`z" },
     { "]q", cmd("cnext") },
     { "[q", cmd("cprev") },
-    -- { "<C-k>", 'd$O<Esc>""p==j$' },
     -- { "<C-j>", 'd$o<Esc>""p==k$' },
     -- 2}}}
 
     -- misc {{{2
+    { "gh", ":helpgrep ", nosilent },
     { "<F11>", cmd("setlocal spell!") },
     { "<F12>", cmd("!$BROWSER %") },
     { "gV", "`[v`]" },
-    --stylua: ignore
+
     {
-        "<leader>d", function()
+        "<leader>s", function()
+            require("utils.tmux_send").send()
+        end,
+    },
+
+    {
+        "<leader>d",
+        function()
             local start = api.nvim_get_current_buf()
             vim.cmd("vnew | set buftype=nofile | read ++edit # | 0d_ | diffthis")
             local scratch = api.nvim_get_current_buf()
@@ -44,7 +50,8 @@ key.nmap({
                     vim.keymap.del("n", "q", { buffer = start })
                 end, { buffer = buf })
             end
-        end, opts("Get relative diff for current file"),
+        end,
+        opts("Get relative diff for current file"),
     },
 
     {
@@ -71,9 +78,6 @@ key.nmap({
             end
         end,
     },
-
-    --stylua: ignore
-    { "<leader>s", function() require("utils.tmux_send").send() end },
 })
 -- 2}}}
 -- 1}}}
@@ -92,7 +96,6 @@ key.nxmap({
     { "<C-y>", '"+y' },
     { "<C-e>", '"+y$' },
 })
-
 -- 1}}}
 
 -- insert {{{1
@@ -100,6 +103,13 @@ key.nxmap({
 
 -- command {{{1
 key.cmap({
+    { "<C-k>", "<HOME>", nosilent },
+    { "<C-j>", "<END>", nosilent },
+    { "<C-b>", "<S-Left>", nosilent },
+    { "<C-e>", "<S-Right>", nosilent },
+    { "<C-n>", "<Down>", nosilent },
+    { "<C-p>", "<Up>", nosilent },
+
     {
         "%%",
         function()
@@ -107,12 +117,6 @@ key.cmap({
         end,
         opts(key.expr, key.nosilent, "Append to relative path"),
     },
-    { "<C-k>", "<HOME>", nosilent },
-    { "<C-j>", "<END>", nosilent },
-    { "<C-b>", "<S-Left>", nosilent },
-    { "<C-e>", "<S-Right>", nosilent },
-    { "<C-n>", "<Down>", nosilent },
-    { "<C-p>", "<Up>", nosilent },
 })
 -- 1}}}
 

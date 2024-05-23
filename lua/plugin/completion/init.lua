@@ -25,7 +25,6 @@ return {
             local cmp = require("cmp")
             cmp.setup({
                 sources = {
-                    { name = "copilot", group_index = 2 },
                     { name = "nvim_lsp", group_index = 2 },
                     { name = "luasnip", group_index = 2 },
                 },
@@ -33,7 +32,6 @@ return {
                     expandable_indicator = false,
                     fields = { "abbr", "kind", "menu" },
                     format = function(entry, kind)
-                        kind.kind = string.format("%s", kind.kind)
                         kind.menu = ({
                             nvim_lsp = "[LSP]",
                             luasnip = "[LuaSnip]",

@@ -70,6 +70,7 @@ function M.setup()
         },
         preview = { border = "single" },
         experimental_watch_for_changes = true,
+        natural_sort = false,
     })
 
     local key = require("utils.map")

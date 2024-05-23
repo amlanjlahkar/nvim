@@ -23,7 +23,7 @@ function stl.get_fileperm()
 end
 
 function stl.get_filetype()
-    local ftype = vim.bo.filetype
+    local ftype = vim.bo.ft
     return ftype == "" and "" or format(" %%#StatusLineImp#ft:%%#StatusLine# %s ", ftype)
 end
 

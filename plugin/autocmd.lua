@@ -10,7 +10,7 @@ M.autocmd_definitions = {
             desc = "Remove trailing whitespaces on writing a buffer",
             pattern = "*",
             callback = function()
-                if vim.bo.filetype ~= "diff" then
+                if vim.bo.ft ~= "diff" then
                     local view = fn.winsaveview()
                     vim.cmd([[keeppatterns %s/\s\+$//e]])
                     fn.winrestview(view)
@@ -76,7 +76,7 @@ function M.setup()
         local opts = entry[2]
         opts.group = "_core"
         if not pcall(api.nvim_get_autocmds, { group = opts.group }) then
-            api.nvim_create_augroup(opts.group, { clear = true })
+            api.nvim_create_augroup(opts.group, { clear = false })
         end
         api.nvim_create_autocmd(event, opts)
     end

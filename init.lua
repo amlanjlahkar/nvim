@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 vim.g.mapleader = " "
 
 function _G.LAZYLOAD(plugin_name)

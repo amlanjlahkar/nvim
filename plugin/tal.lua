@@ -27,7 +27,7 @@ function tal.tabline()
         elseif bufname ~= "" then
             t = t .. string.format("%s ", fn.fnamemodify(bufname, ":t:r")):lower()
         else
-            t = t .. string.format("%s ", vim.bo.filetype):lower()
+            t = t .. string.format("%s ", vim.bo.ft):lower()
         end
     end
 
