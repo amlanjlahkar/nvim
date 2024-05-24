@@ -10,6 +10,7 @@ return {
 
     {
         "kristijanhusak/vim-dadbod-ui",
+        enabled = false,
         dependencies = { "tpope/vim-dadbod" },
         ft = "sql",
         cmd = {

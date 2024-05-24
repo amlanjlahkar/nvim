@@ -4,6 +4,7 @@ local M = {
         "nvim-lua/plenary.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
+    version = "*",
     cmd = "Telescope",
     keys = require("plugin.telescope.mapping").prefix,
 }
