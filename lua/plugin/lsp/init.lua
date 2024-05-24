@@ -51,27 +51,16 @@ return {
 
     {
         "neovim/nvim-lspconfig",
-        enabled = function()
-            if pkgs_exist then
-                vim.env.PATH = string.format("%s:%s", pkg_bin_dir, vim.env.PATH)
-                return true
-            end
-            return false
+        init = function()
+            vim.env.PATH = pkgs_exist and string.format("%s:%s", pkg_bin_dir, vim.env.PATH)
         end,
         event = { "BufReadPost", "BufNewFile", "BufWritePre" },
         config = function()
-            local function hook_lspconfig(pkg)
-                if type(pkg.hook_lspconfig) == "boolean" then
-                    return pkg.hook_lspconfig
-                end
-                return true
-            end
-
-            for _, pkg in pairs(require(pkg_spec_module)) do
-                local server = type(pkg) == "table" and pkg[1] or pkg
-                if hook_lspconfig(pkg) then
-                    local opts = require("plugin.lsp.equip_opts").setup(server)
-                    require("lspconfig")[server].setup(opts)
+            local servers = require(pkg_spec_module):import_servers()
+            if servers then
+                for _, s in pairs(servers) do
+                    local opts = require("plugin.lsp.equip_opts").setup(s)
+                    require("lspconfig")[s].setup(opts)
                 end
             end
             require("lspconfig.ui.windows").default_options.border = "single"

@@ -19,14 +19,16 @@ end
 local M = {}
 
 function M:ensure_install(pkg_spec)
-    pkg_spec = pkg_spec or require("plugin.lsp.pkg_spec")
-    for _, pkg in pairs(pkg_spec) do
-        if auto_install(pkg) then
-            local pkgname = get_pkgname(pkg)
-            local p = assert(registry.get_package(pkgname))
-            if not registry.is_installed(pkgname) then
-                vim.notify("Installing " .. pkgname)
-                p:install()
+    pkg_spec = pkg_spec or require("plugin.lsp.pkg_spec").import_spec()
+    if pkg_spec then
+        for _, pkg in pairs(pkg_spec) do
+            if auto_install(pkg) then
+                local pkgname = get_pkgname(pkg)
+                local p = assert(registry.get_package(pkgname))
+                if not registry.is_installed(pkgname) then
+                    vim.notify("Installing " .. pkgname)
+                    p:install()
+                end
             end
         end
     end
