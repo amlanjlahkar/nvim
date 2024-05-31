@@ -1,7 +1,7 @@
 return {
     {
         "L3MON4D3/LuaSnip",
-        version = "v2.*",
+        version = false,
         build = "make install_jsregexp",
         config = function()
             require("plugin.completion.luasnip").setup()
