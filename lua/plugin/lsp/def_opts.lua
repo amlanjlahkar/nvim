@@ -4,15 +4,10 @@ local lsp = vim.lsp
 local M = {}
 
 -- Handlers {{{1
-function M.handlers()
-    return {
-        ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single", style = "minimal" }),
-        ["textDocument/signatureHelp"] = lsp.with(
-            lsp.handlers.signature_help,
-            { border = "single", style = "minimal" }
-        ),
-    }
-end
+M.handlers = {
+    ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single", style = "minimal" }),
+    ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single", style = "minimal" }),
+}
 -- 1}}}
 
 -- Capabilities {{{1

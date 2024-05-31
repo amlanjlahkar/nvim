@@ -1,24 +1,23 @@
 LSP_USEBUN = true
 
-local pkg_bin_dir = vim.fn.stdpath("data") .. "/lsp_utils/bin"
-local pkgs_exist = vim.uv.fs_access(pkg_bin_dir, "R")
-local pkg_spec_path = vim.fn.stdpath("config") .. "/lua/plugin/lsp/pkg_spec.lua"
-local pkg_spec_module = string.gsub(vim.fn.fnamemodify(pkg_spec_path, ":r"), "%S+lua/", ""):gsub("/", ".")
+local pkg_install_dir = vim.fn.stdpath("data") .. "/lsp_utils/bin"
+local pkgs_exist = vim.uv.fs_access(pkg_install_dir, "R")
 
-local schedule_pkg_install = function(pkg_spec)
-    return require("plugin.lsp.installer").schedule_install(pkg_spec)
+local parser = require("plugin.lsp.parse_spec")
+local get_pkg_spec = function()
+    return require("plugin.lsp.pkg_spec")
 end
 
 vim.api.nvim_create_autocmd("BufWritePost", {
     desc = "Auto install required packages",
     group = vim.api.nvim_create_augroup("_lsp.mason", { clear = true }),
-    pattern = pkg_spec_path,
+    pattern = vim.fn.stdpath("config") .. "/lua/plugin/lsp/pkg_spec.lua",
     callback = function()
         if not package.loaded["mason"] then
             LAZYLOAD("mason.nvim")
         end
-        require("plenary.reload").reload_module(pkg_spec_module)
-        schedule_pkg_install()
+        require("plenary.reload").reload_module("plugin.lsp.pkg_spec")
+        parser.schedule_install(get_pkg_spec())
     end,
 })
 
@@ -33,12 +32,12 @@ return {
         init = function(plugin)
             if not pkgs_exist then
                 LAZYLOAD(plugin.name)
-                schedule_pkg_install()
+                parser.schedule_install(get_pkg_spec())
             end
         end,
         cmd = "Mason",
         opts = {
-            install_root_dir = vim.fn.fnamemodify(pkg_bin_dir, ":h"),
+            install_root_dir = vim.fn.fnamemodify(pkg_install_dir, ":h"),
             PATH = "skip",
             ui = {
                 border = "single",
@@ -52,17 +51,19 @@ return {
     {
         "neovim/nvim-lspconfig",
         init = function()
-            vim.env.PATH = pkgs_exist and string.format("%s:%s", pkg_bin_dir, vim.env.PATH)
+            vim.env.PATH = pkgs_exist and string.format("%s:%s", pkg_install_dir, vim.env.PATH)
         end,
         event = { "BufReadPost", "BufNewFile", "BufWritePre" },
         config = function()
-            local servers = require(pkg_spec_module):import_servers()
+            local servers = parser:import_servers(get_pkg_spec())
+
             if servers then
                 for _, s in pairs(servers) do
                     local opts = require("plugin.lsp.equip_opts").setup(s)
                     require("lspconfig")[s].setup(opts)
                 end
             end
+
             require("lspconfig.ui.windows").default_options.border = "single"
         end,
     },
