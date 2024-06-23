@@ -15,10 +15,16 @@ cmd("GhBrowse", function(opts)
         local fpath = fn.fnamemodify(fn.expand("%"), ":.:h") .. "/" .. fn.expand("%:t")
         return opts.range > 0 and string.format("%s:%s-%s", fpath, opts.line1, opts.line2) or fpath
     end
+
+    local branch = function()
+        local head = vim.b.gitsigns_status_dict["head"]
+        return head and head or "main"
+    end
+
     require("plenary.job")
         :new({
             command = "gh",
-            args = { "browse", "--no-browser", region() },
+            args = { "browse", "--no-browser", "--branch", branch(), region() },
             on_exit = vim.schedule_wrap(function(job, exit_code)
                 if exit_code > 0 then
                     for _, line in ipairs(job:stderr_result()) do
@@ -57,16 +63,21 @@ cmd("Transparent", function()
         "StatusLineDiagnosticHint",
         "StatusLineDiagnosticInfo",
         "StatusLineDiagnosticWarn",
+        "LineNrAbove",
         "LineNr",
+        "LineNrBelow",
         "CursorLineNr",
         "CursorLine",
         "SignColumn",
-        "GitGutterAdd",
-        "GitGutterChange",
-        "GitGutterDelete",
+        "GitSignsAdd",
+        "GitSignsChange",
+        "GitSignsDelete",
+        "GitSignsChangeDelete",
         "Normal",
         "NormalFloat",
         "FloatBorder",
+        "WinBar",
+        "WinBarNC",
     }
     for _, hlg in ipairs(groups) do
         vim.cmd.highlight(hlg .. " guibg=NONE")

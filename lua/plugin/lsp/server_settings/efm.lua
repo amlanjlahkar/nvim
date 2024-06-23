@@ -45,9 +45,13 @@ local languages = {
     javascript = { tools["prettier"] },
     php = { tools["prettier"] },
     sql = { tools["prettier"] },
+    json = { tools["prettier"] },
 }
 
-local filetypes = { "lua", "sh", "python", "php", "rust", "javascript", "html", "sql" }
+local filetypes = {}
+for ft, _ in pairs(languages) do
+    table.insert(filetypes, ft)
+end
 
 return {
     init_options = {

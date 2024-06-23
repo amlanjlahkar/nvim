@@ -8,4 +8,13 @@ return {
             vim.g.boo_colorscheme_theme = "crimson_moonlight"
         end,
     },
+
+    {
+        "brenoprata10/nvim-highlight-colors",
+        cmd = "HighlightColors",
+        opts = {
+            render = "virtual",
+            exclude_filetypes = { "lazy" },
+        },
+    },
 }

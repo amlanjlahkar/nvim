@@ -53,6 +53,7 @@ return {
     {
         "ThePrimeagen/harpoon",
         dependencies = "nvim-lua/plenary.nvim",
+        branch = "harpoon2",
         keys = "<leader>m",
         init = function(plugin)
             local schema = vim.fs.find("harpoon.json", {
@@ -78,15 +79,16 @@ return {
             end
         end,
         config = function()
-            local ui = require("harpoon.ui")
+            local harpoon = require("harpoon")
+            harpoon:setup()
             --stylua: ignore
             key.nmap({
-                { "<leader>ma", ':lua require("harpoon.mark").add_file()<CR>' },
-                { "<leader>mm", ui.toggle_quick_menu },
-                { "<C-j>", function() ui.nav_file(1) end },
-                { "<C-k>", function() ui.nav_file(2) end },
-                { "<C-l>", function() ui.nav_file(3) end },
-                { "<C-h>", function() ui.nav_file(4) end },
+                { "<leader>ma", function() harpoon:list():add() end },
+                { "<leader>mm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
+                { "<C-j>", function() harpoon:list():select(1) end },
+                { "<C-k>", function() harpoon:list():select(2) end },
+                { "<C-l>", function() harpoon:list():select(3) end },
+                { "<C-;>", function() harpoon:list():select(4) end },
             })
         end,
     },

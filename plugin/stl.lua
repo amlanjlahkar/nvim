@@ -15,7 +15,7 @@ function stl.get_filepath()
     if stl.is_truncated() then
         fpath = format("%s", fn.pathshorten(fpath, 3))
     end
-    return format(" %%<%s ", fpath)
+    return format("%%<%s ", fpath)
 end
 
 function stl.get_fileperm()
@@ -24,7 +24,7 @@ end
 
 function stl.get_filetype()
     local ftype = vim.bo.ft
-    return ftype == "" and "" or format(" %%#StatusLineImp#ft:%%#StatusLine# %s ", ftype)
+    return ftype == "" and "" or format("%%#StatusLineImp#ft:%%#StatusLine# %s", ftype)
 end
 
 function stl.get_git_status()
@@ -60,14 +60,14 @@ function stl.get_lsp_diagnostic_count()
     for _, d in ipairs(dict) do
         local count = vim.tbl_count(vim.diagnostic.get(0, { severity = d.severity }))
         if count > 0 then
-            diagnostics = format("%s %%#%s#%s%s", diagnostics, d.hlgroup, d.sign, count)
+            diagnostics = format("%s %%#%s#%s%s ", diagnostics, d.hlgroup, d.sign, count)
         end
     end
 
     return diagnostics .. "%#StatusLine# "
 end
 
-function stl.get_attached_sources()
+function stl.get_attached_clients()
     local clients = vim.lsp.get_active_clients({ bufnr = 0 })
 
     local active, index = {}, nil
@@ -84,13 +84,13 @@ function stl.get_attached_sources()
     end
 
     local attched = table.concat(active, ", ")
-    return (#attched == 0 or stl.is_truncated()) and "" or string.format(" lsp: [%s] ", attched)
+    return (#attched == 0 or stl.is_truncated()) and "" or string.format("%%#StatusLineImp#lsp:%%#StatusLine# [%s]  ", attched)
 end
 
 function stl.get_tshl_status()
     local buf = api.nvim_get_current_buf()
     local hl = require("vim.treesitter.highlighter")
-    return hl.active[buf] and " 󰄬 " or ""
+    return hl.active[buf] and "󰄬  " or ""
 end
 
 function stl.setup()
@@ -104,12 +104,11 @@ function stl.setup()
                 self.get_git_status(),
                 self.get_lsp_diagnostic_count(),
                 "%=",
-                "%#StatusLine#",
-                self.get_filetype(),
-                -- self.get_attached_sources(),
                 "%#StatusLineInd#",
-                self.get_tshl_status(),
+                -- self.get_tshl_status(),
                 "%#StatusLine#",
+                self.get_attached_clients(),
+                self.get_filetype(),
             })
         end,
     })

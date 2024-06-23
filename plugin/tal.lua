@@ -18,14 +18,9 @@ function tal.tabline()
 
         t = t .. string.format(" %s:", index)
 
-        if bufname:match("^fugitive://%g+") then
-            t = t .. "fugitive "
-        elseif bufname:match("^term://%g+") then
-            t = t .. "terminal "
-        elseif bufname:match("^oil://%g+") then
-            t = t .. "oil "
-        elseif bufname ~= "" then
-            t = t .. string.format("%s ", fn.fnamemodify(bufname, ":t:r")):lower()
+        if bufname ~= "" then
+            local url = bufname:match("[%w]+://")
+            t = url and t .. (url:gsub("://", "")) or t .. string.format("%s ", fn.fnamemodify(bufname, ":t")):lower()
         else
             t = t .. string.format("%s ", vim.bo.ft):lower()
         end

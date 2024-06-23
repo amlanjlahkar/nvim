@@ -61,6 +61,7 @@ return {
 
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        requires = "nvim-treesitter/nvim-treesitter",
         enabled = false,
         keys = { "c", "d", "v", "y" },
         opts = {
@@ -81,13 +82,16 @@ return {
                 border = "single",
                 floating_preview_opts = {},
                 peek_definition_code = {
-                    ["<leader>df"] = "@function.outer",
+                    ["<leader>ll"] = "@function.outer",
                 },
             },
         },
         config = function(_, opts)
             if package.loaded["nvim-treesitter"] then
                 require("nvim-treesitter.configs").setup({ textobjects = opts })
+                local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+                vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+                vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
             end
         end,
     },

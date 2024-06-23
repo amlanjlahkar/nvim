@@ -94,7 +94,7 @@ function M:ensure_install(registry, pkg_spec)
             local pkgname = get_pkgname(pkg)
             local p = assert(registry.get_package(pkgname))
             if not registry.is_installed(pkgname) then
-                vim.notify("Installing " .. pkgname)
+                vim.notify("Installing " .. pkgname .. "...")
                 p:install()
             end
         end

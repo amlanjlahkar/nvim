@@ -4,21 +4,30 @@ Background
         - Lighter: default bg for emphasizing elements on floating windows
         - Light: reserved(Cursorline)
         - Dark: default bg for floating windows
+    Visual
+        - Complementary bg for special cases(selection, statusbar)
 ]]
 local Bg = "#0f0f10"
 local BgShadeLighter = "#211c1d"
 local BgShadeLight = "#201c1c"
 local BgShadeDark = "#141415"
+local BgVisual = "#232a2b"
 
 --[[
 Foreground
     Shades:
         - Light: Default fg for important elements
         - Dark: Default fg for less important elements
+    Visual
+        - Default fg for BgVisual
+        Shades:
+            - Light: Higher emphasis than FgVisual
 ]]
 local Fg = "#726464"
 local FgShadeLight = "#a99697"
 local FgShadeDark = "#51494a"
+local FgVisual = "#778d92"
+local FgVisualShadeLight = "#95b1b8"
 
 --[[
 Indicator
@@ -49,19 +58,22 @@ local M = {}
 --stylua: ignore
 M.custom = {
   -- statusline {{{1
-  { "StatusLine",                 { bg = BgShadeDark, fg = FgShadeDark } },
-  { "StatusLineDiagnosticError",  { bg = BgShadeDark, fg = "#fe697d" } },
-  { "StatusLineDiagnosticHint",   { bg = BgShadeDark, fg = "#694347" } },
-  { "StatusLineDiagnosticInfo",   { bg = BgShadeDark, fg = "#e4dcec" } },
-  { "StatusLineDiagnosticWarn",   { bg = BgShadeDark, fg = "#dfb8bc" } },
-  { "StatusLineImp",              { bg = BgShadeDark, fg = FgShadeLight } },
-  { "StatusLineInd",              { bg = BgShadeDark, fg = Red } },
-  { "StatusLineNC",               { bg = BgShadeDark, fg = Fg } },
+  { "StatusLine",                 { bg = Bg, fg = FgVisual } },
+  { "StatusLineDiagnosticError",  { bg = Bg, fg = "#fe697d" } },
+  { "StatusLineDiagnosticHint",   { bg = Bg, fg = "#694347" } },
+  { "StatusLineDiagnosticInfo",   { bg = Bg, fg = "#e4dcec" } },
+  { "StatusLineDiagnosticWarn",   { bg = Bg, fg = "#dfb8bc" } },
+  { "StatusLineImp",              { bg = Bg, fg = FgVisualShadeLight } },
+  { "StatusLineInd",              { bg = Bg, fg = Red } },
+  { "StatusLineNC",               { bg = Bg, fg = StFg } },
   -- 1}}}
   -- native {{{1
+  { "ModeMsg",                    { fg = FgShadeLight, bold = false } },
   { "WinBar",                     { bg = Bg } },
   { "WinBarNC",                   { bg = Bg } },
-  { "LineNr",                     { bg = Bg, fg = RedShadeDark } },
+  { "LineNrAbove",                { bg = Bg, fg = RedShadeDark } },
+  { "LineNr",                     { bg = Bg, fg = FgShadeLight, bold = true } },
+  { "LineNrBelow",                { bg = Bg, fg = RedShadeDark } },
   { "CursorLine",                 { bg = BgShadeLight } },
   { "CursorLineNr",               { bg = Bg, fg = FgShadeLight, bold = false } },
   { "SignColumn",                 { bg = Bg } },
@@ -75,11 +87,11 @@ M.custom = {
   { "TabLine",                    { bg = BgShadeDark, fg = FgShadeDark, bold = true } },
   { "TabLineFill",                { bg = BgShadeDark } },
   { "TabLineSel",                 { bg = Bg, fg = FgShadeLight, bold = true } },
-  { "Visual",                     { bg = BgShadeLighter, fg = FgShadeLight } },
+  { "Visual",                     { bg = BgVisual, fg = FgVisual } },
   { "MatchParen",                 { bg = "#351a3d", fg = Magenta, bold = true } },
   { "NonText",                    { fg = FgShadeDark } },
   { "Comment",                    { bg = none, fg = "#9a666d", italic = true } },
-  { "MoreMsg",                    { fg = Green, bold = true } },
+  { "MoreMsg",                    { fg = FgVisualShadeLight, bold = true } },
   { "Error",                      { bg = none, fg = none } }, -- causes weird paren,brace highlighting on floating windows by default
     -- quickfix list {{{2
   { "QuickFixLine",               { bg = BgShadeLighter } },

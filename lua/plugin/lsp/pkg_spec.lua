@@ -2,9 +2,8 @@ return {
     "clangd",
     "efm",
     "zls",
-    "sqls",
-
-    { "typst_lsp", mason_id = "typst-lsp" },
+    "tinymist",
+    -- "sqls",
 
     -- lua
     { "lua_ls", mason_id = "lua-language-server" },
@@ -12,7 +11,7 @@ return {
 
     -- python
     { "pylsp", mason_id = "python-lsp-server", auto_install = false },
-    { "ruff", hook_lspconfig = false },
+    { "ruff", hook_lspconfig = false, auto_install = false },
 
     -- rust
     { "rust_analyzer", auto_install = false, hook_lspconfig = true },

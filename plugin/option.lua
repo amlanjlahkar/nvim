@@ -1,7 +1,7 @@
 local o = vim.opt
 
 -- file handling
-o.shada = "!,'15,<0,/0,:20,f0"
+o.shada = "!,'15,<0,/0,:50,f0"
 o.hidden = true
 o.confirm = true
 o.autowrite = true
@@ -35,21 +35,22 @@ o.smartcase = false
 o.incsearch = true
 o.inccommand = "split"
 o.hlsearch = false
-o.scrolloff = 8
-o.sidescrolloff = 8
+o.scrolloff = 6
+o.sidescrolloff = 6
 o.list = true
 o.listchars:append({ tab = "»·", nbsp = "+", trail = "·", extends = "", precedes = "" })
 o.virtualedit = "block"
-o.completeopt = { "menu", "menuone", "noselect", "popup" }
+o.completeopt = { "menu", "menuone", "noselect", "noinsert", "popup" }
 o.shortmess:append({ I = true })
 o.exrc = true
 
 o.ruler = false
 o.showmode = true
-o.cursorline = true
+o.cursorline = false
 o.culopt = "both"
 o.showtabline = 1
 o.cmdheight = 1
+o.cmdwinheight = 10
 o.laststatus = 3
 o.winbar = " "
 o.signcolumn = "auto:1-4"
@@ -77,7 +78,7 @@ o.dictionary:append(vim.fn.stdpath("config") .. "/dict/dictionary_en.txt")
 o.thesaurus:append(vim.fn.stdpath("config") .. "/dict/thesaurus.txt")
 o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
-o.grepprg = "rg --hidden --vimgrep --smart-case --"
+o.grepprg = "rg -uu --hidden --vimgrep --smart-case --"
 o.dip:append("algorithm:minimal")
 o.clipboard = ""
 o.mouse = "nv" -- nervous laughter

@@ -130,6 +130,20 @@ function M.setup()
             keyopts("Oil: Fuzzy search and switch to directory"),
         },
     })
+
+    -- Enable cursorline in oil buffer
+    if not vim.opt.cursorline:get() then
+        api.nvim_create_autocmd({ "BufWinEnter", "BufWinLeave" }, {
+            group = api.nvim_create_augroup("_plug.oil", { clear = true }),
+            callback = function(args)
+                if vim.bo[args.buf].ft == "oil" then
+                    vim.wo.cursorline = true
+                    return
+                end
+                vim.wo.cursorline = false
+            end,
+        })
+    end
 end
 
 return M
