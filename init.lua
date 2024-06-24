@@ -1,6 +1,7 @@
 vim.loader.enable()
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ";"
 
 function _G.LAZYLOAD(plugin_name)
     require("lazy").load({ plugins = plugin_name })

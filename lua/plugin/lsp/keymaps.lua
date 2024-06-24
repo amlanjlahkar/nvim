@@ -22,7 +22,7 @@ function M.keymaps(bufnr)
 
         nxmap = {
             {
-                "<leader>f",
+                "<localleader>f",
                 function()
                     lsp_buf.format({
                         filter = function(client)
@@ -44,32 +44,32 @@ function M.keymaps(bufnr)
                 opts(bufnr),
             },
             {
-                "<leader>lr",
+                "<localleader>r",
                 lsp_buf.rename,
                 opts(bufnr),
             },
             {
-                "<leader>la",
+                "<localleader>a",
                 lsp_buf.code_action,
                 opts(bufnr),
             },
             {
-                "<leader>lh",
+                "<localleader>s",
                 lsp_buf.signature_help,
                 opts(bufnr),
             },
             {
-                "<leader>lt",
+                "<localleader>t",
                 lsp_buf.type_definition,
                 opts(bufnr),
             },
             {
-                "<leader>lf",
+                "<localleader>o",
                 vim.diagnostic.open_float,
                 opts(bufnr),
             },
             {
-                "<leader>ld",
+                "<localleader>d",
                 vim.diagnostic.setloclist,
                 opts(bufnr),
             },
@@ -105,14 +105,14 @@ function M.keymaps(bufnr)
                 opts(bufnr),
             },
             {
-                "<leader>ls",
+                "<localleader>w",
                 function()
                     telepick("dynamic_workspace_symbols", "workspace_symbol", { fname_width = 40 })
                 end,
                 opts(bufnr),
             },
             {
-                "<leader>li",
+                "<localleader>i",
                 function()
                     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
                 end,
