@@ -55,29 +55,6 @@ return {
         dependencies = "nvim-lua/plenary.nvim",
         branch = "harpoon2",
         keys = "<leader>m",
-        init = function(plugin)
-            local schema = vim.fs.find("harpoon.json", {
-                type = "file",
-                upward = true,
-                stop = vim.fs.normalize("~/.local"),
-                path = vim.fn.stdpath("data")
-            })
-
-            if #schema < 1 then
-                return
-            end
-
-            local sys = vim.fn.system
-            local cwd = vim.uv.cwd()
-
-            assert(vim.fn.executable("jq") > 0, plugin.name .. " didn't load(jq isn't installed)")
-            if
-                sys(string.format("jq '.projects.\"%s\"' %s", cwd, schema[1])) ~= "null\n"
-                and sys(string.format("jq '.projects.\"%s\".mark.marks == []' %s", cwd, schema[1])) == "false\n"
-            then
-                LAZYLOAD(plugin.name)
-            end
-        end,
         config = function()
             local harpoon = require("harpoon")
             harpoon:setup()

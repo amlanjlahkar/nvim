@@ -1,6 +1,5 @@
 local api = vim.api
 local fn = vim.fn
-local uv = vim.uv
 local cmd = api.nvim_create_user_command
 
 cmd("W", "w", {})
@@ -52,34 +51,3 @@ cmd("Msg", function()
     end)
     vim.cmd("sbuf + " .. bufnr)
 end, { desc = "Redirect and open :messages output in a separate readonly buffer" })
-
-cmd("Transparent", function()
-    local groups = {
-        "StatusLine",
-        "StatusLineNC",
-        "StatusLineImp",
-        "StatusLineInd",
-        "StatusLineDiagnosticError",
-        "StatusLineDiagnosticHint",
-        "StatusLineDiagnosticInfo",
-        "StatusLineDiagnosticWarn",
-        "LineNrAbove",
-        "LineNr",
-        "LineNrBelow",
-        "CursorLineNr",
-        "CursorLine",
-        "SignColumn",
-        "GitSignsAdd",
-        "GitSignsChange",
-        "GitSignsDelete",
-        "GitSignsChangeDelete",
-        "Normal",
-        "NormalFloat",
-        "FloatBorder",
-        "WinBar",
-        "WinBarNC",
-    }
-    for _, hlg in ipairs(groups) do
-        vim.cmd.highlight(hlg .. " guibg=NONE")
-    end
-end, { desc = "Disable background color for certain hlgroups" })

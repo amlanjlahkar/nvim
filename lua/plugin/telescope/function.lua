@@ -57,6 +57,7 @@ function M.get_nvim_conf()
     local opts = {
         prompt_title = "Neovim Config",
         cwd = fn.stdpath("config"),
+        no_ignore = true,
     }
     tb.find_files(_, opts)
 end

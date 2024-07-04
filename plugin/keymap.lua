@@ -6,8 +6,8 @@ local api = vim.api
 -- normal {{{1
 key.nmap({
     -- buffers and windows {{{2
-    { "];", cmd("bn") },
-    { "[;", cmd("bp") },
+    { "<C-]>", cmd("bn") },
+    { "<C-[>", cmd("bp") },
     { "<leader>;", "<cmd>ls!<CR>:buf<Space>", nosilent },
     { "<leader>bd", cmd("bd") },
     { "<leader>bD", cmd("%bd|e#|bd#|normal `") },
@@ -22,6 +22,8 @@ key.nmap({
     { "J", "mzJ`z" },
     { "]q", cmd("cnext") },
     { "[q", cmd("cprev") },
+    { "]l", cmd("lnext") },
+    { "[l", cmd("lprev") },
     -- { "<C-j>", 'd$o<Esc>""p==k$' },
     -- 2}}}
 
@@ -89,7 +91,6 @@ key.xmap({
     { "J", ":m '>+1<CR>gv=gv" },
     { "K", ":m '<-2<CR>gv=gv" },
     { "v", "yP" },
-    { "<C-l>", "%" },
 })
 
 key.nxmap({

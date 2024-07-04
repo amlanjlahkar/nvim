@@ -1,5 +1,5 @@
 local tools = {
-    ["StyLua"] = {
+    ["stylua"] = {
         prefix = "stylua",
         formatCommand = "stylua ${--range-start:charStart} ${--range-end:charEnd} --verify -",
         formatCanRange = true,
@@ -11,7 +11,7 @@ local tools = {
         formatCommand = "shfmt -filename ${INPUT} -i 2 -ci -bn -",
         formatStdin = true,
     },
-    ["ShellCheck"] = {
+    ["shellcheck"] = {
         prefix = "shellcheck",
         lintCommand = "shellcheck --format=gcc -",
         lintStdin = true,
@@ -37,8 +37,8 @@ local tools = {
 }
 
 local languages = {
-    lua = { tools["StyLua"] },
-    sh = { tools["shfmt"], tools["ShellCheck"] },
+    lua = { tools["stylua"] },
+    sh = { tools["shfmt"], tools["shellcheck"] },
     python = { tools["ruff"] },
     rust = { tools["rustfmt"] },
     html = { tools["prettier"] },
