@@ -1,14 +1,5 @@
 return {
     {
-        "chomosuke/typst-preview.nvim",
-        ft = "typst",
-        version = false,
-        build = function()
-            require("typst-preview").update()
-        end,
-    },
-
-    {
         "kristijanhusak/vim-dadbod-ui",
         enabled = false,
         dependencies = { "tpope/vim-dadbod" },

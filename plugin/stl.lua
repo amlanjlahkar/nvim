@@ -6,8 +6,8 @@ local stl = {}
 
 function stl.is_truncated(fpath_len)
     fpath_len = fpath_len or string.len(fn.expand("%:p:."))
-    local global_width = require("utils").get_width({ combined = true })
-    return fpath_len > global_width / 2.5
+    local col_width = vim.opt.co:get()
+    return fpath_len > col_width / 2.5
 end
 
 function stl.get_filepath()
@@ -18,7 +18,7 @@ function stl.get_filepath()
     return format("%%<%s ", fpath)
 end
 
-function stl.get_fileperm()
+function stl.is_readonly()
     return vim.bo.readonly and "[RO] " or ""
 end
 
@@ -32,6 +32,7 @@ function stl.get_git_status()
     if not dict or stl.is_truncated() then
         return ""
     end
+
     --stylua: ignore
     return dict.head ~= "" and
         format("(󰘬 %s)[+%s ~%s -%s] ",
@@ -64,7 +65,7 @@ function stl.get_lsp_diagnostic_count()
         end
     end
 
-    return diagnostics .. "%#StatusLine# "
+    return diagnostics .. "%#StatusLine#"
 end
 
 function stl.get_attached_clients()
@@ -99,14 +100,13 @@ function stl.setup()
             return table.concat({
                 "%#StatusLineImp#",
                 self.get_filepath(),
+                vim.fn.FugitiveStatusline() .. " ",
+                self.is_readonly(),
                 "%#StatusLine#",
-                self.get_fileperm(),
-                self.get_git_status(),
+                -- self.get_git_status(),
                 self.get_lsp_diagnostic_count(),
                 "%=",
-                "%#StatusLineInd#",
-                -- self.get_tshl_status(),
-                "%#StatusLine#",
+                "(%l,%c%V)  ",
                 self.get_attached_clients(),
                 self.get_filetype(),
             })

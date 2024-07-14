@@ -39,22 +39,22 @@ key.nmap({
         end,
     },
 
-    {
-        "<leader>d",
-        function()
-            local start = api.nvim_get_current_buf()
-            vim.cmd("vnew | set buftype=nofile | read ++edit # | 0d_ | diffthis")
-            local scratch = api.nvim_get_current_buf()
-            vim.cmd("wincmd p | diffthis")
-            for _, buf in ipairs({ scratch, start }) do
-                vim.keymap.set("n", "q", function()
-                    api.nvim_buf_delete(scratch, { force = true })
-                    vim.keymap.del("n", "q", { buffer = start })
-                end, { buffer = buf })
-            end
-        end,
-        opts("Get relative diff for current file"),
-    },
+    -- {
+    --     "<leader>d",
+    --     function()
+    --         local start = api.nvim_get_current_buf()
+    --         vim.cmd("vnew | set buftype=nofile | read ++edit # | 0d_ | diffthis")
+    --         local scratch = api.nvim_get_current_buf()
+    --         vim.cmd("wincmd p | diffthis")
+    --         for _, buf in ipairs({ scratch, start }) do
+    --             vim.keymap.set("n", "q", function()
+    --                 api.nvim_buf_delete(scratch, { force = true })
+    --                 vim.keymap.del("n", "q", { buffer = start })
+    --             end, { buffer = buf })
+    --         end
+    --     end,
+    --     opts("Get relative diff for current file"),
+    -- },
 
     {
         "<leader>w",

@@ -16,8 +16,11 @@ cmd("GhBrowse", function(opts)
     end
 
     local branch = function()
-        local head = vim.b.gitsigns_status_dict["head"]
-        return head and head or "main"
+        local err, head = pcall(vim.call, "FugitiveHead")
+        if err or head == "" then
+            return "main"
+        end
+        return head
     end
 
     require("plenary.job")

@@ -31,7 +31,12 @@ local tools = {
     },
     ["prettier"] = {
         prefix = "prettier",
-        formatCommand = "bunx prettier --stdin --stdin-filepath ${INPUT}",
+        formatCommand = "bunx prettier --stdin-filepath ${INPUT}",
+        formatStdin = true,
+    },
+    ["jq"] = {
+        prefix = "jq",
+        formatCommand = "jq",
         formatStdin = true,
     },
 }
@@ -45,7 +50,7 @@ local languages = {
     javascript = { tools["prettier"] },
     php = { tools["prettier"] },
     sql = { tools["prettier"] },
-    json = { tools["prettier"] },
+    json = { tools["jq"] },
 }
 
 local filetypes = {}

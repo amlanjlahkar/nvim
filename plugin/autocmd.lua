@@ -41,7 +41,7 @@ M.autocmd_definitions = {
         "FileType",
         {
             desc = "'q'uick unload of certain filetype buffers",
-            pattern = { "help", "fugitive", "git", "checkhealth", "query", "qf", "opout" },
+            pattern = { "help", "git", "checkhealth", "query", "qf", "opout" },
             callback = function(self)
                 vim.keymap.set("n", "q", ":bd<CR>", { buffer = self.buf, silent = true, nowait = true })
             end,
@@ -76,7 +76,7 @@ function M.setup()
         local opts = entry[2]
         opts.group = "_core"
         if not pcall(api.nvim_get_autocmds, { group = opts.group }) then
-            api.nvim_create_augroup(opts.group, { clear = false })
+            api.nvim_create_augroup(opts.group, { clear = true })
         end
         api.nvim_create_autocmd(event, opts)
     end

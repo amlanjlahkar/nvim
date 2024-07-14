@@ -5,14 +5,23 @@ return {
     {
         "tpope/vim-fugitive",
         cmd = "Git",
-        keys = "<leader>g",
+        lazy = false,
         config = function()
-            key.nmap({ "<leader>gg", ":tab Git<CR>", opts("Open git interface") })
+            vim.g.fugitive_no_maps = 1
+            key.nmap({
+                { "<leader>gg", ":tab Git<CR>", opts("Fugitive: Open git interface") },
+                {
+                    "<leader>gv",
+                    ":Gvdiffsplit! ",
+                    opts(key.nosilent, "Fugitive: Populate the cmdline with Gvdiffsplit for additional arguments"),
+                },
+            })
         end,
     },
 
     {
         "lewis6991/gitsigns.nvim",
+        enabled = false,
         event = { "BufReadPost", "BufNewFile", "BufWritePre" },
         opts = function()
             return {
