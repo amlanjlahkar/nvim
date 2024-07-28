@@ -18,25 +18,6 @@ return {
     },
 
     {
-        "numToStr/Comment.nvim",
-        enabled = false,
-        keys = { "gc", "gb", { "gc", mode = "x" }, { "gb", mode = { "x", "o" } } },
-        config = function()
-            local avail, ts_config = pcall(require, "nvim-treesitter['config']")
-            if avail then
-                ts_config.setup({
-                    context_commentstring = {
-                        enable = true,
-                        enable_autocmd = false,
-                    },
-                })
-            end
-            LAZYLOAD("mini.ai")
-            require("Comment").setup()
-        end,
-    },
-
-    {
         "stevearc/oil.nvim",
         init = function(plugin)
             local arg = vim.fn.argv(0)
