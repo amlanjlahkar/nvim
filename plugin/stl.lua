@@ -28,19 +28,25 @@ function stl.get_filetype()
 end
 
 function stl.get_git_status()
-    local dict = vim.b.gitsigns_status_dict
-    if not dict or stl.is_truncated() then
-        return ""
-    end
+    local signs_dict = vim.b.gitsigns_status_dict
+    local avail, fugitive_head = pcall(vim.call, "FugitiveStatusline")
 
-    --stylua: ignore
-    return dict.head ~= "" and
-        format("(󰘬 %s)[+%s ~%s -%s] ",
-            dict.head,
-            dict.added,
-            dict.changed,
-            dict.removed)
-        or ""
+    if not stl.is_truncated() then
+        if signs_dict then
+            return signs_dict.head ~= ""
+                    and format(
+                        "(󰘬 %s)[+%s ~%s -%s] ",
+                        signs_dict.head,
+                        signs_dict.added,
+                        signs_dict.changed,
+                        signs_dict.removed
+                    )
+                or ""
+        elseif avail then
+            return fugitive_head .. " "
+        end
+    end
+    return ""
 end
 
 function stl.get_lsp_diagnostic_count()
@@ -85,7 +91,8 @@ function stl.get_attached_clients()
     end
 
     local attched = table.concat(active, ", ")
-    return (#attched == 0 or stl.is_truncated()) and "" or string.format("%%#StatusLineImp#lsp:%%#StatusLine# [%s]  ", attched)
+    return (#attched == 0 or stl.is_truncated()) and ""
+        or string.format("%%#StatusLineImp#lsp:%%#StatusLine# [%s]  ", attched)
 end
 
 function stl.get_tshl_status()
@@ -100,7 +107,7 @@ function stl.setup()
             return table.concat({
                 "%#StatusLineImp#",
                 self.get_filepath(),
-                vim.fn.FugitiveStatusline() .. " ",
+                self.get_git_status(),
                 self.is_readonly(),
                 "%#StatusLine#",
                 -- self.get_git_status(),
