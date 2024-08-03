@@ -107,10 +107,9 @@ function stl.setup()
             return table.concat({
                 "%#StatusLineImp#",
                 self.get_filepath(),
-                self.get_git_status(),
-                self.is_readonly(),
                 "%#StatusLine#",
-                -- self.get_git_status(),
+                self.is_readonly(),
+                self.get_git_status(),
                 self.get_lsp_diagnostic_count(),
                 "%=",
                 "(%l,%c%V)  ",

@@ -1,6 +1,6 @@
 local key = require("utils.map")
 local cmd, opts = key.cmd, key.new_opts
-local nosilent = opts(key.nosilent)
+local nosilent, expr = opts(key.nosilent), opts(key.expr)
 local api = vim.api
 
 -- normal {{{1
@@ -34,7 +34,8 @@ key.nmap({
     { "gV", "`[v`]" },
 
     {
-        "<leader>s", function()
+        "<leader>s",
+        function()
             require("utils.tmux_send").send()
         end,
     },
@@ -92,11 +93,6 @@ key.xmap({
     { "K", ":m '<-2<CR>gv=gv" },
     { "v", "yP" },
 })
-
-key.nxmap({
-    { "<C-y>", '"+y' },
-    { "<C-e>", '"+y$' },
-})
 -- 1}}}
 
 -- insert {{{1
@@ -124,4 +120,33 @@ key.cmap({
 -- terminal {{{1
 key.nmap({ "<leader><leader>t", cmd("tabnew term://bash") })
 key.tmap({ "<C-N>", "<C-\\><C-N>" })
+-- 1}}}
+
+-- yanking {{{1
+-- Retain cursor postion after yanking
+local get_curpos = function()
+    return api.nvim_win_get_cursor(0)
+end
+local curpos
+key.nxmap({
+    -- stylua: ignore start
+    { "y", function() curpos = get_curpos() return "y" end, expr },
+    { "<C-y>", function() curpos = get_curpos() return '"+y' end, expr },
+    { "<C-e>", '"+yy' },
+    -- stylua: ignore end
+})
+
+vim.keymap.set("n", "Y", function()
+    curpos = get_curpos()
+    return "y$"
+end, { expr = true })
+
+api.nvim_create_autocmd("TextYankPost", {
+    group = api.nvim_create_augroup("_core.keymap", { clear = true }),
+    callback = function()
+        if vim.v.event.operator == "y" and curpos then
+            api.nvim_win_set_cursor(0, curpos)
+        end
+    end,
+})
 -- 1}}}
