@@ -23,9 +23,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugin", {
     defaults = { lazy = true },
-    change_detection = {
-        notify = false,
-    },
+    rocks = { enabled = false },
+    change_detection = { notify = false },
     dev = {
         path = "~/projects/nvim_plugins/",
         fallback = false,

@@ -107,7 +107,7 @@ function M.setup()
                     end
                 end
             end,
-            keyopts(bufnr(), "Oil: View git blame for file under cursor"),
+            keyopts("Oil: View git blame for file under cursor"),
         },
 
         {
@@ -118,7 +118,7 @@ function M.setup()
                     require("utils.operate"):operate(cwd() .. fname, cwd(), string.format("On %s > ", fname), "sp")
                 end
             end,
-            keyopts(bufnr(), "Oil: Perform external operation on file under cursor"),
+            keyopts("Oil: Perform external operation on file under cursor"),
         },
 
         {

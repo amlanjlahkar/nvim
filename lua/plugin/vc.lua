@@ -21,7 +21,7 @@ return {
 
     {
         "lewis6991/gitsigns.nvim",
-        enabled = false,
+        -- enabled = false,
         event = { "BufReadPost", "BufNewFile", "BufWritePre" },
         opts = function()
             return {
