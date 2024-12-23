@@ -143,6 +143,8 @@ M.custom = {
   { "CmpItemKindCopilot",         { fg = Magenta } },
   { "FloatBorderAlt",             { bg = BgShadeDark, fg = BgShadeDark } },
   { "NormalFloatAlt",             { bg = BgShadeDark, fg = Fg } },
+  { "BlinkCmpDocBorder",          { bg = BgShadeDark, fg = BgShadeDark } },
+  { "BlinkCmpMenuBorder",         { bg = BgShadeDark, fg = BgShadeDark } },
   -- 2}}}
   -- gitsigns/fugitive {{{2
   { "DiffAdd",                    { bg = DiffAddBg, fg = DiffAddFg } },

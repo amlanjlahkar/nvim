@@ -1,11 +1,58 @@
 return {
     {
-        "L3MON4D3/LuaSnip",
-        version = false,
-        build = "make install_jsregexp",
-        config = function()
-            require("plugin.completion.luasnip").setup()
-        end,
+        "saghen/blink.cmp",
+        version = "v0.*",
+        event = "InsertEnter",
+        module = false,
+        dependencies = {
+            {
+                "L3MON4D3/LuaSnip",
+                version = "v2.*",
+                build = "make install_jsregexp",
+                config = function()
+                    require("plugin.completion.luasnip").setup()
+                end,
+            },
+        },
+        opts = {
+            keymap = {
+                preset = "default",
+                ["<C-l>"] = { "select_and_accept" },
+                ["<C-k>"] = { "scroll_documentation_up", "fallback" },
+                ["<C-j>"] = { "scroll_documentation_down", "fallback" },
+            },
+            completion = {
+                ghost_text = { enabled = true },
+                documentation = {
+                    auto_show = true,
+                    window = { border = "single" },
+                },
+                menu = {
+                    border = "single",
+                    draw = {
+                        treesitter = { 'lsp' },
+                        columns = { { "label", "label_description" }, { "kind" }, { "source_name" } },
+                    },
+                },
+            },
+            snippets = {
+                ---@diagnostic disable different-requires
+                expand = function(snippet)
+                    require("luasnip").lsp_expand(snippet)
+                end,
+                active = function(filter)
+                    if filter and filter.direction then
+                        return require("luasnip").jumpable(filter.direction)
+                    end
+                    return require("luasnip").in_snippet()
+                end,
+                jump = function(direction)
+                    require("luasnip").jump(direction)
+                end,
+            },
+            sources = { default = { "lsp", "path", "luasnip", "buffer" } },
+            signature = { enabled = true },
+        },
     },
 
     {
@@ -15,6 +62,7 @@ return {
             { "hrsh7th/cmp-nvim-lsp", module = false },
         },
         event = "InsertEnter",
+        enabled = false,
 
         config = function()
             local function has_words_before()

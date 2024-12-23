@@ -19,9 +19,9 @@ M.capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
-local is_cmp_available, cmp_nvim = pcall(require, "cmp_nvim_lsp")
+local is_cmp_available, cmp = pcall(require, "blink.cmp")
 if is_cmp_available then
-    M.capabilities = cmp_nvim.default_capabilities(M.capabilities)
+    M.capabilities = cmp.get_lsp_capabilities(M.capabilities)
 end
 -- 1}}}
 
