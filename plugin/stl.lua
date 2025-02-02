@@ -24,7 +24,7 @@ end
 
 function stl.get_filetype()
     local ftype = vim.bo.ft
-    return ftype == "" and "" or format("%%#StatusLineImp#ft:%%#StatusLine# %s", ftype)
+    return ftype == "" and "" or format("  %%#StatusLineImp#ft:%%#StatusLine# %s", ftype)
 end
 
 function stl.get_git_status()
@@ -92,7 +92,7 @@ function stl.get_attached_clients()
 
     local attched = table.concat(active, ", ")
     return (#attched == 0 or stl.is_truncated()) and ""
-        or string.format("%%#StatusLineImp#lsp:%%#StatusLine# [%s]  ", attched)
+        or string.format("  %%#StatusLineImp#lsp:%%#StatusLine# [%s]", attched)
 end
 
 function stl.get_tshl_status()
@@ -112,7 +112,7 @@ function stl.setup()
                 self.get_git_status(),
                 self.get_lsp_diagnostic_count(),
                 "%=",
-                "(%l,%c%V)  ",
+                "  (%l,%c%V)",
                 self.get_attached_clients(),
                 self.get_filetype(),
             })

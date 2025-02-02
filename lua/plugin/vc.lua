@@ -4,7 +4,6 @@ local opts = key.new_opts
 return {
     {
         "tpope/vim-fugitive",
-        cmd = "Git",
         lazy = false,
         config = function()
             vim.g.fugitive_no_maps = 1
@@ -22,7 +21,7 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         -- enabled = false,
-        event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+        lazy = false,
         opts = function()
             return {
                 signs = {

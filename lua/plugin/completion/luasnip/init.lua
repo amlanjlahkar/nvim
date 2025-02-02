@@ -26,10 +26,18 @@ function M.setup_mappings()
             end,
         },
         {
-            "<C-s>",
+            "<C-j>",
             function()
                 if ls.choice_active() then
                     ls.change_choice(1)
+                end
+            end,
+        },
+        {
+            "<C-k>",
+            function()
+                if ls.choice_active() then
+                    require("luasnip.extras.select_choice")()
                 end
             end,
         },

@@ -181,7 +181,7 @@ M.custom = {
   { "FidgetTask",                 { fg = FgShadeDark, blend = 0 } },
   { "LspReference",               { bg = BgShadeLighter, fg = "#d9d6cf", underline = false } },
   { "MiniIndentScopeSymbol",      { fg = RedShadeDark } },
-  { "SnipChoiceNode",             { bg = Bg, fg = Blue } },
+  { "SnipChoiceNode",             { bg = Bg, fg = Red } },
   { "SnipInsertNode",             { bg = Bg, fg = Green } },
   { "StatusColSep",               { bg = BgShadeDark, fg = BgShadeLighter } },
   { "TreesitterContext",          { bg = BgShadeDark, italic = false } },
