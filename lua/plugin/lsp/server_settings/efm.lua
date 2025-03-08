@@ -39,6 +39,18 @@ local tools = {
         formatCommand = "jq",
         formatStdin = true,
     },
+    ["pint"] = {
+        prefix = "pint",
+        formatCommand = "pint --quiet --no-interaction ${INPUT}",
+        formatStdin = false,
+        rootMarkers = "pint.json",
+        requireMarker = true,
+    },
+    ["blade-formatter"] = {
+        prefix = "bf",
+        formatCommand = "blade-formatter --stdin ${INPUT}",
+        formatStdin = true,
+    },
 }
 
 local languages = {
@@ -49,6 +61,7 @@ local languages = {
     html = { tools["prettier"] },
     javascript = { tools["prettier"] },
     php = { tools["prettier"] },
+    blade = { tools["blade-formatter"] },
     sql = { tools["prettier"] },
     json = { tools["jq"] },
 }
@@ -64,6 +77,7 @@ return {
         documentRangeFormatting = true,
         documentSymbol = true,
         codeAction = true,
+        hover = true,
     },
     settings = {
         rootMarkers = { ".git/" },

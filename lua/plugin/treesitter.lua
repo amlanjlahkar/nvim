@@ -54,6 +54,14 @@ return {
 
             parser_config.bash.filetype_to_parsename = "sh"
             parser_config.typst.filetype_to_parsename = "typ"
+            parser_config.blade = {
+                install_info = {
+                    url = "https://github.com/EmranMR/tree-sitter-blade",
+                    files = { "src/parser.c" },
+                    branch = "main",
+                },
+                filetype = "blade",
+            }
 
             require("nvim-treesitter.configs").setup(opts)
         end,
@@ -98,7 +106,7 @@ return {
 
     {
         "windwp/nvim-ts-autotag",
-        ft = { "html", "xml", "php", "markdown", "javascriptreact" },
+        ft = { "html", "xml", "php", "markdown", "javascriptreact", "blade" },
         config = true,
     },
 }
