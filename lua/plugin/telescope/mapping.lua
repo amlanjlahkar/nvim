@@ -73,8 +73,8 @@ function M:setup()
         {
             p .. "w",
             function()
-                local opt = {}
-                require("plugin.telescope.extra.set_bg"):pick(true, fn.use_theme(opt))
+                local opts = {}
+                require("plugin.telescope.extra.set_bg"):pick(true, fn.use_theme(opts))
             end,
             opts("Telescope: Set wallpaper"),
         },
@@ -85,6 +85,17 @@ function M:setup()
                 require("plugin.telescope.extra.pick_githist").pick_files()
             end,
             opts("Telescope: Search git log"),
+        },
+
+        {
+            p .. "m",
+            function ()
+                local is_avail, harpoon = pcall(require, "harpoon")
+                if not is_avail then return end
+
+                local opts = {}
+                require("plugin.telescope.extra.harpoon").pick_file(harpoon:list(), fn.use_theme(opts))
+            end
         },
     })
 end

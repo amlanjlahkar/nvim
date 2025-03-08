@@ -11,7 +11,7 @@ local Bg = "#0f0f10"
 local BgShadeLighter = "#211c1d"
 local BgShadeLight = "#201c1c"
 local BgShadeDark = "#141415"
-local BgVisual = "#232a2b"
+local BgVisual = "#191c1d"
 
 --[[
 Foreground
@@ -58,14 +58,14 @@ local M = {}
 --stylua: ignore
 M.custom = {
   -- statusline {{{1
-  { "StatusLine",                 { bg = Bg, fg = FgVisual } },
-  { "StatusLineDiagnosticError",  { bg = Bg, fg = "#fe697d" } },
-  { "StatusLineDiagnosticHint",   { bg = Bg, fg = "#694347" } },
-  { "StatusLineDiagnosticInfo",   { bg = Bg, fg = "#e4dcec" } },
-  { "StatusLineDiagnosticWarn",   { bg = Bg, fg = "#dfb8bc" } },
-  { "StatusLineImp",              { bg = Bg, fg = FgVisualShadeLight } },
-  { "StatusLineInd",              { bg = Bg, fg = Red } },
-  { "StatusLineNC",               { bg = Bg, fg = StFg } },
+  { "StatusLine",                 { bg = BgVisual, fg = FgVisual } },
+  { "StatusLineDiagnosticError",  { bg = BgVisual, fg = "#fe697d" } },
+  { "StatusLineDiagnosticHint",   { bg = BgVisual, fg = "#694347" } },
+  { "StatusLineDiagnosticInfo",   { bg = BgVisual, fg = "#e4dcec" } },
+  { "StatusLineDiagnosticWarn",   { bg = BgVisual, fg = "#dfb8bc" } },
+  { "StatusLineImp",              { bg = BgVisual, fg = FgVisualShadeLight } },
+  { "StatusLineInd",              { bg = BgVisual, fg = Red } },
+  { "StatusLineNC",               { bg = BgVisual, fg = StFg } },
   -- 1}}}
   -- native {{{1
   { "ModeMsg",                    { fg = FgShadeLight, bold = false } },
@@ -123,6 +123,7 @@ M.custom = {
   { "@lsp.typemode.string.injected",    { link = "@string" } },
   { "@lsp.typemode.variable.defaultLibrary",  { link = "@variable.builtin" } },
   { "@lsp.typemode.variable.injected",  { link = "@variable" } },
+  { "@markup.link.label",         { bg = none, fg = Fg } },
   -- 2}}}
     -- markdown {{{2
   { "markdownH1Delimiter",        { bg = none, fg = none } },

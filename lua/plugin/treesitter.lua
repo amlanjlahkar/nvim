@@ -8,6 +8,7 @@ return {
             ensure_installed = {
                 "bash",
                 "c",
+                "clojure",
                 "comment",
                 "css",
                 "go",
@@ -18,6 +19,7 @@ return {
                 "make",
                 "markdown",
                 "python",
+                "query",
                 "rust",
                 "typst",
                 "vimdoc",
@@ -98,8 +100,8 @@ return {
             if package.loaded["nvim-treesitter"] then
                 require("nvim-treesitter.configs").setup({ textobjects = opts })
                 local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-                vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-                vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+                -- vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+                -- vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
             end
         end,
     },

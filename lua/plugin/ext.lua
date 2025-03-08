@@ -1,9 +1,9 @@
 return {
     {
         "kristijanhusak/vim-dadbod-ui",
-        enabled = false,
+        -- enabled = false,
         dependencies = { "tpope/vim-dadbod" },
-        ft = "sql",
+        ft = { "sql", "plsql" },
         cmd = {
             "DB",
             "DBUI",
@@ -29,6 +29,13 @@ return {
                 end
                 return "dbquery-" .. opts.table .. "-" .. id
             end
+            vim.keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", { silent = true })
+            vim.keymap.set({ "n", "v" }, "<leader>ds", "<Plug>(DBUI_ExecuteQuery)<CR>", {})
         end,
+    },
+
+    {
+        "Olical/conjure",
+        ft = { "clojure" },
     },
 }

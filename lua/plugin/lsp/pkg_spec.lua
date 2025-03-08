@@ -3,7 +3,7 @@ return {
     "efm",
     "zls",
     "tinymist",
-    -- "sqls",
+    "sqls",
     { "jsonnet_ls", auto_install = false },
 
     -- lua
@@ -23,6 +23,7 @@ return {
 
     -- web
     { "cssls", auto_install = false, mason_id = "css-lsp", hook_lspconfig = true },
+    { "tailwindcss", auto_install = false, mason_id = "tailwindcss-language-server", hook_lspconfig = true },
     { "html", auto_install = false, mason_id = "html-lsp", hook_lspconfig = true },
     { "ts_ls", auto_install = false, mason_id = "typescript-language-server", hook_lspconfig = true },
     { "phpactor", auto_install = false },

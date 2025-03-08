@@ -33,7 +33,7 @@ require("lazy").setup("plugin", {
         border = "single",
         pills = false,
         wrap = false,
-        backdrop = 100,
+        backdrop = 60,
         size = { width = 0.7, height = 0.85 },
         custom_keys = {
             ["<localleader>l"] = false,

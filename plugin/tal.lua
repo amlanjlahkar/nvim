@@ -20,7 +20,7 @@ function tal.tabline()
 
         if bufname ~= "" then
             local url = bufname:match("[%w]+://")
-            t = url and t .. (url:gsub("://", " ")) or t .. string.format("%s ", fn.fnamemodify(bufname, ":t")):lower()
+            t = url and t .. (url:gsub("://", " ")) or t .. string.format("%s ", fn.fnamemodify(bufname, ":t"))
         else
             t = t .. string.format("%s ", vim.bo.ft):lower()
         end

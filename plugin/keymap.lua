@@ -24,6 +24,8 @@ key.nmap({
     { "[q", cmd("cprev") },
     { "]l", cmd("lnext") },
     { "[l", cmd("lprev") },
+    { "<leader>]", "gt" },
+    { "<leader>[", "gT" },
     -- { "<C-j>", 'd$o<Esc>""p==k$' },
     -- 2}}}
 
