@@ -74,7 +74,7 @@ o.fillchars:append({
     foldclose = "",
 })
 
-o.dictionary:append(vim.fn.stdpath("config") .. "/dict/dictionary_en.txt")
+o.dictionary:append(vim.fn.stdpath("config") .. "/dict/eng.txt")
 o.thesaurus:append(vim.fn.stdpath("config") .. "/dict/thesaurus.txt")
 o.spelllang = "en_us"
 o.spellsuggest = { "best", 5 }
