@@ -35,18 +35,19 @@ return {
         "ThePrimeagen/harpoon",
         dependencies = "nvim-lua/plenary.nvim",
         branch = "harpoon2",
-        keys = "<leader>m",
+        lazy = false,
+        -- keys = "<leader>m",
         config = function()
             local harpoon = require("harpoon")
             harpoon:setup()
             --stylua: ignore
             key.nmap({
-                { "<leader>ma", function() harpoon:list():add() end },
-                { "<leader>mm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
-                { "<C-j>", function() harpoon:list():select(1) end },
-                { "<C-k>", function() harpoon:list():select(2) end },
-                { "<C-l>", function() harpoon:list():select(3) end },
-                { "<C-;>", function() harpoon:list():select(4) end },
+                { "<localleader>ma", function() harpoon:list():add() end },
+                { "<localleader>mm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end },
+                { "<localleader><C-h>", function() harpoon:list():select(1) end },
+                { "<localleader><C-j>", function() harpoon:list():select(2) end },
+                { "<localleader><C-k>", function() harpoon:list():select(3) end },
+                { "<localleader><C-l>", function() harpoon:list():select(4) end },
             })
         end,
     },
