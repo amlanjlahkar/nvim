@@ -1,7 +1,18 @@
 return {
     {
+        "supermaven-inc/supermaven-nvim",
+        enabled = false,
+        event = "InsertEnter",
+        opts = {
+            disable_keymaps = true,
+            color = {
+                suggestion_color = "#51494a",
+            },
+        },
+    },
+    {
         "saghen/blink.cmp",
-        version = "v0.*",
+        version = "v1.*",
         event = "InsertEnter",
         module = false,
         dependencies = {
@@ -40,7 +51,14 @@ return {
                 },
             },
             snippets = { preset = "luasnip" },
-            signature = { enabled = true },
+            signature = {
+                enabled = true,
+                window = {
+                    border = "single",
+                    winhighlight = "Normal:NormalFLoat,FloatBorder:FloatBorder",
+                    show_documentation = false,
+                },
+            },
             cmdline = { enabled = false },
             sources = {
                 default = { "lsp", "path", "snippets", "buffer", "dictionary" },

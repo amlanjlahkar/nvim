@@ -73,9 +73,7 @@ function keymap.cu(str)
 end
 
 local function keymap_set(mode, tbl)
-    vim.validate({
-        tbl = { tbl, "table" },
-    })
+    vim.validate("tbl", tbl, "table")
     local len = #tbl
 
     assert(len >= 2, "Keymap must have rhs")
@@ -87,10 +85,7 @@ end
 
 local function map(mode)
     return function(tbl)
-        vim.validate({
-            tbl = { tbl, "table" },
-        })
-
+        vim.validate("tbl", tbl, "table")
         if type(tbl[1]) == "table" then
             for _, v in pairs(tbl) do
                 keymap_set(mode, v)

@@ -3,13 +3,6 @@ local lsp = vim.lsp
 
 local M = {}
 
--- Handlers {{{1
-M.handlers = {
-    ["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single", style = "minimal" }),
-    ["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, { border = "single", style = "minimal" }),
-}
--- 1}}}
-
 -- Capabilities {{{1
 M.capabilities = lsp.protocol.make_client_capabilities()
 
@@ -30,7 +23,7 @@ function M.on_attach(client, bufnr)
     local au = api.nvim_create_autocmd
     local id = api.nvim_create_augroup("_lsp.on_attach", { clear = false })
 
-    if client.supports_method("textDocument/documentHighlight") then
+    if client:supports_method("textDocument/documentHighlight", bufnr) then
         if api.nvim_get_hl(0, { name = "LspReference" }) then
             for _, ref in pairs({ "Text", "Read", "Write" }) do
                 api.nvim_set_hl(0, "LspReference" .. ref, { link = "LspReference" })
@@ -49,7 +42,7 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    if client.supports_method("textDocument/inlayHint") then
+    if client:supports_method("textDocument/inlayHint", bufnr) then
         local inlay_hint = vim.lsp.inlay_hint
 
         au("InsertEnter", {

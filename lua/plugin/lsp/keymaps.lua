@@ -79,7 +79,9 @@ function M.keymaps(bufnr)
         nmap = {
             {
                 "K",
-                lsp_buf.hover,
+                function()
+                    lsp_buf.hover({ border = "single" })
+                end,
                 opts(bufnr),
             },
             {
@@ -94,7 +96,9 @@ function M.keymaps(bufnr)
             },
             {
                 "<localleader>s",
-                lsp_buf.signature_help,
+                function()
+                    lsp_buf.signature_help({ border = "single" })
+                end,
                 opts(bufnr),
             },
             {
@@ -114,12 +118,16 @@ function M.keymaps(bufnr)
             },
             {
                 "]d",
-                vim.diagnostic.goto_next,
+                function()
+                    vim.diagnostic.jump({ count = 1, float = false })
+                end,
                 opts(bufnr),
             },
             {
                 "[d",
-                vim.diagnostic.goto_prev,
+                function()
+                    vim.diagnostic.jump({ count = -1, float = false })
+                end,
                 opts(bufnr),
             },
             {

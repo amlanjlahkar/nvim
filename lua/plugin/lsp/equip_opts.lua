@@ -3,7 +3,6 @@ local M = {}
 function M.setup(server)
     local default = require("plugin.lsp.def_opts")
     local opts = {
-        handlers = default.handlers,
         on_attach = default.on_attach,
         capabilities = default.capabilities,
     }
