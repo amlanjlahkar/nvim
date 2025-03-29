@@ -51,4 +51,18 @@ return {
             })
         end,
     },
+    {
+        "mbbill/undotree",
+        keys = { "<leader>uu" },
+        config = function()
+            local g = vim.g
+            g.undotree_HelpLine = 0
+            g.undotree_WindowLayout = 2
+            g.undotree_SplitWidth = 45
+            g.undotree_SetFocusWhenToggle = 1
+            key.nmap({
+                { "<leader>uu", "<cmd>UndotreeToggle<CR>" },
+            })
+        end,
+    }
 }
