@@ -3,6 +3,8 @@
 ---@field hook_lspconfig boolean|nil Register with lspconfig setup hook. Default is true
 ---@field mason_id string|nil Mason identifer for pkg. Uses the same name as pkg when nil
 
+local validate = vim.validate
+
 ---@param pkg Pkg
 ---@return boolean
 local function auto_install(pkg)
@@ -22,46 +24,19 @@ local function get_pkgname(pkg)
 end
 
 ---@param pkg_spec table
----@return boolean
----@return table|nil #Returns pkg_spec if valid, else err message with stacktrace
 local function validate_pkg_spec(pkg_spec)
     assert(type(pkg_spec) == "table")
-
     for _, pkg in pairs(pkg_spec) do
-        local valid_param, err = pcall(vim.validate, {
-            auto_install = { pkg["auto_install"], { "nil", "boolean" } },
-            hook_lspconfig = { pkg["hook_lspconfig"], { "nil", "boolean" } },
-            mason_id = { pkg["mason_id"], { "nil", "string" } },
-        })
-
-        if not valid_param then
-            return false, error(string.format("error evaluating spec for %s -> %s", pkg[1], err))
-        end
+        validate('auto_install', pkg['auto_install'], { 'nil', 'boolean' })
+        validate('hook_lspconfig', pkg['hook_lspconfig'], { 'nil', 'boolean' })
+        validate('mason_id', pkg['mason_id'], { 'nil', 'string' })
     end
-
-    return true, pkg_spec
 end
 
 local M = {}
 
-function M.import_validated_spec(pkg_spec)
-    local is_valid_spec, result = validate_pkg_spec(pkg_spec)
-
-    if not is_valid_spec then
-        ---@diagnostic disable-next-line: param-type-mismatch
-        vim.notify(result, vim.log.levels.ERROR)
-        return nil
-    end
-
-    return result
-end
-
 function M:import_servers(pkg_spec)
-    pkg_spec = self.import_validated_spec(pkg_spec)
-
-    if not pkg_spec then
-        return nil
-    end
+    validate_pkg_spec(pkg_spec)
 
     local servers = {}
 
@@ -83,11 +58,7 @@ function M:import_servers(pkg_spec)
 end
 
 function M:ensure_install(registry, pkg_spec)
-    pkg_spec = self.import_validated_spec(pkg_spec)
-
-    if not pkg_spec then
-        return
-    end
+    validate_pkg_spec(pkg_spec)
 
     for _, pkg in pairs(pkg_spec) do
         if auto_install(pkg) then

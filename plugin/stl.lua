@@ -29,7 +29,7 @@ end
 
 function stl.get_git_status()
     local signs_dict = vim.b.gitsigns_status_dict
-    local avail, fugitive_head = pcall(vim.call, "FugitiveStatusline")
+    local fugitive_head = vim.call("FugitiveStatusline")
 
     if not stl.is_truncated() then
         if signs_dict then
@@ -42,7 +42,7 @@ function stl.get_git_status()
                         signs_dict.removed
                     )
                 or ""
-        elseif avail then
+        elseif fugitive_head ~= "" then
             return fugitive_head .. " "
         end
     end
@@ -75,7 +75,7 @@ function stl.get_lsp_diagnostic_count()
 end
 
 function stl.get_attached_clients()
-    local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
 
     local active, index = {}, nil
     for i = 1, #clients do
@@ -112,9 +112,9 @@ function stl.setup()
                 self.get_git_status(),
                 self.get_lsp_diagnostic_count(),
                 "%=",
-                "  (%l,%c%V)",
-                self.get_attached_clients(),
                 self.get_filetype(),
+                self.get_attached_clients(),
+                "  (%l,%c%V)",
             })
         end,
     })

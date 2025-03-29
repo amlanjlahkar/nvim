@@ -10,7 +10,7 @@ key.nmap({
     { "<C-[>", cmd("bp") },
     { "<leader>;", "<cmd>ls!<CR>:buf<Space>", nosilent },
     { "<leader>bd", cmd("bd") },
-    { "<leader>bD", cmd("%bd|e#|bd#|normal `") },
+    { "<leader>bD", cmd('%bd|e #|norm `"') },
     -- 2}}}
 
     -- movements {{{2
@@ -20,10 +20,6 @@ key.nmap({
     { "n", "nzzzv" },
     { "N", "Nzzzv" },
     { "J", "mzJ`z" },
-    { "]q", cmd("cnext") },
-    { "[q", cmd("cprev") },
-    { "]l", cmd("lnext") },
-    { "[l", cmd("lprev") },
     { "<leader>]", "gt" },
     { "<leader>[", "gT" },
     -- { "<C-j>", 'd$o<Esc>""p==k$' },
@@ -32,7 +28,6 @@ key.nmap({
     -- misc {{{2
     { "gh", ":helpgrep ", nosilent },
     { "<F11>", cmd("setlocal spell!") },
-    { "<F12>", cmd("!$BROWSER %") },
     { "gV", "`[v`]" },
 
     {

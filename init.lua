@@ -1,5 +1,3 @@
-vim.loader.enable()
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = ";"
 
@@ -8,6 +6,7 @@ function _G.LAZYLOAD(plugin_name)
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+---@diagnostic disable-next-line: undefined-field
 if not vim.uv.fs_stat(lazypath) then
     vim.notify("Installing lazy and corresponding plugins...", vim.log.levels.INFO)
     vim.fn.system({
