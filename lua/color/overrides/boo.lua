@@ -1,5 +1,6 @@
 --[[
 Background
+    Alt: Alternate background color with a lighter shade
     Shades:
         - Lighter: default bg for emphasizing elements on floating windows
         - Light: reserved(Cursorline)
@@ -8,6 +9,7 @@ Background
         - Complementary bg for special cases(selection, statusbar)
 ]]
 local Bg = "#0f0f10"
+local BgAlt = "#191718"
 local BgShadeLighter = "#211c1d"
 local BgShadeLight = "#201c1c"
 local BgShadeDark = "#141415"
@@ -48,7 +50,7 @@ local Cyan = "#849da2"
 
 -- Diffs
 local DiffAddBg = "#0c1d0e"
-local DiffAddFg = "#2f7373"
+local DiffAddFg = "#3a6a6a"
 local DiffDeleteBg = "#2a080f"
 local DiffDeleteFg = "#a6334c"
 
@@ -58,25 +60,25 @@ local M = {}
 --stylua: ignore
 M.custom = {
   -- statusline {{{1
-  { "StatusLine",                 { bg = BgVisual, fg = FgVisual } },
-  { "StatusLineDiagnosticError",  { bg = BgVisual, fg = "#fe697d" } },
-  { "StatusLineDiagnosticHint",   { bg = BgVisual, fg = "#694347" } },
-  { "StatusLineDiagnosticInfo",   { bg = BgVisual, fg = "#e4dcec" } },
-  { "StatusLineDiagnosticWarn",   { bg = BgVisual, fg = "#dfb8bc" } },
-  { "StatusLineImp",              { bg = BgVisual, fg = FgVisualShadeLight } },
-  { "StatusLineInd",              { bg = BgVisual, fg = Red } },
-  { "StatusLineNC",               { bg = BgVisual, fg = StFg } },
+  { "StatusLine",                 { bg = BgShadeDark, fg = Fg } },
+  { "StatusLineDiagnosticError",  { bg = BgShadeDark, fg = "#fe697d" } },
+  { "StatusLineDiagnosticHint",   { bg = BgShadeDark, fg = "#694347" } },
+  { "StatusLineDiagnosticInfo",   { bg = BgShadeDark, fg = "#e4dcec" } },
+  { "StatusLineDiagnosticWarn",   { bg = BgShadeDark, fg = "#dfb8bc" } },
+  { "StatusLineImp",              { bg = BgShadeDark, fg = FgShadeLight } },
+  { "StatusLineInd",              { bg = BgShadeDark, fg = Red } },
+  { "StatusLineNC",               { bg = BgShadeDark, fg = FgShadeDark } },
   -- 1}}}
   -- native {{{1
+  { "Normal",                     { fg = "#e1d9ea", bg = BgAlt } },
   { "ModeMsg",                    { fg = FgShadeLight, bold = false } },
-  { "WinBar",                     { bg = Bg } },
-  { "WinBarNC",                   { bg = Bg } },
-  { "LineNrAbove",                { bg = Bg, fg = RedShadeDark } },
-  { "LineNr",                     { bg = Bg, fg = FgShadeLight, bold = true } },
-  { "LineNrBelow",                { bg = Bg, fg = RedShadeDark } },
-  { "CursorLine",                 { bg = BgShadeLight } },
-  { "CursorLineNr",               { bg = Bg, fg = FgShadeLight, bold = false } },
-  { "SignColumn",                 { bg = Bg } },
+  { "WinBar",                     { bg = BgAlt } },
+  { "WinBarNC",                   { bg = BgAlt } },
+  { "LineNrAbove",                { bg = BgAlt, fg = RedShadeDark } },
+  { "LineNr",                     { bg = BgAlt, fg = FgShadeLight, bold = true } },
+  { "LineNrBelow",                { bg = BgAlt, fg = RedShadeDark } },
+  { "CursorLineNr",               { bg = BgAlt, fg = FgShadeLight, bold = false } },
+  { "SignColumn",                 { bg = BgAlt } },
   { "NormalFloat",                { bg = BgShadeDark, fg = Fg } },
   { "FloatBorder",                { bg = BgShadeDark, fg = BgShadeDark } },
   { "FloatTitle",                 { bg = BgShadeLighter, fg = Fg, underline = true } },
@@ -84,9 +86,9 @@ M.custom = {
   { "PmenuSbar",                  { bg = BgShadeLighter  } },
   { "PmenuSel",                   { bg = BgShadeLighter, fg = Red } },
   { "PmenuThumb",                 { bg = RedShadeDark } },
-  { "TabLine",                    { bg = BgShadeDark, fg = FgShadeDark, bold = true } },
+  { "TabLine",                    { bg = BgShadeDark, fg = FgShadeDark, bold = false } },
   { "TabLineFill",                { bg = BgShadeDark } },
-  { "TabLineSel",                 { bg = Bg, fg = FgShadeLight, bold = true } },
+  { "TabLineSel",                 { bg = BgAlt, fg = FgShadeLight, bold = false } },
   { "Visual",                     { bg = BgVisual, fg = FgVisual } },
   { "MatchParen",                 { bg = "#351a3d", fg = Magenta, bold = true } },
   { "NonText",                    { fg = FgShadeDark } },
@@ -150,10 +152,10 @@ M.custom = {
   -- gitsigns/fugitive {{{2
   { "DiffAdd",                    { bg = DiffAddBg, fg = DiffAddFg } },
   { "DiffDelete",                 { bg = DiffDeleteBg, fg = DiffDeleteFg } },
-  { "GitSignsAdd",                { bg = Bg, fg = Green } },
-  { "GitSignsChange",             { bg = Bg, fg = Blue } },
-  { "GitSignsChangeDelete",       { bg = Bg, fg = Magenta } },
-  { "GitSignsDelete",             { bg = Bg, fg = Red } },
+  { "GitSignsAdd",                { bg = BgAlt, fg = DiffAddFg } },
+  { "GitSignsChange",             { bg = BgAlt, fg = "#4a7aa0" } },
+  { "GitSignsChangeDelete",       { bg = BgAlt, fg = Magenta } },
+  { "GitSignsDelete",             { bg = BgAlt, fg = Red } },
   { "GitSignsAddInline",          { bg = DiffAddBg, fg = Green, bold = true } },
   { "GitSignsDeleteInline",       { bg = DiffDeleteBg, fg = RedShadeLight, bold = true } },
   { "diffAdded",                  { bg = DiffAddBg, fg = Green } },

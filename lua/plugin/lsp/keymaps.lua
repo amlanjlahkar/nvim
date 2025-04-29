@@ -119,14 +119,14 @@ function M.keymaps(bufnr)
             {
                 "]d",
                 function()
-                    vim.diagnostic.jump({ count = 1, float = false })
+                    vim.diagnostic.jump({ count = 1, float = true })
                 end,
                 opts(bufnr),
             },
             {
                 "[d",
                 function()
-                    vim.diagnostic.jump({ count = -1, float = false })
+                    vim.diagnostic.jump({ count = -1, float = true })
                 end,
                 opts(bufnr),
             },

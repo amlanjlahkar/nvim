@@ -50,9 +50,9 @@ function stl.get_git_status()
 end
 
 function stl.get_lsp_diagnostic_count()
-    if stl.is_truncated() then
-        return ""
-    end
+    -- if stl.is_truncated() then
+    --     return ""
+    -- end
 
     local signs = require("plugin.lsp.diagnostics").signs
     local hl = "StatusLineDiagnostic"

@@ -32,8 +32,8 @@ require("lazy").setup("plugin", {
         border = "single",
         pills = false,
         wrap = false,
-        backdrop = 60,
-        size = { width = 0.7, height = 0.85 },
+        backdrop = 100,
+        size = { width = 0.6, height = 0.8 },
         custom_keys = {
             ["<localleader>l"] = false,
             ["<localleader>t"] = false,

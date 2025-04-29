@@ -15,7 +15,7 @@ function M:default_opts()
         update_in_insert = false,
         underline = false,
         severity_sort = true,
-        virtual_text = true,
+        virtual_text = false,
         -- virtual_text = {
         --     spacing = 3,
         --     prefix = self.virtual_prefix,

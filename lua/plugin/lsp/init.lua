@@ -43,6 +43,7 @@ return {
                 border = "single",
                 width = 0.6,
                 height = 0.8,
+                backdrop = 100,
                 check_outdated_packages_on_open = false,
             },
         },

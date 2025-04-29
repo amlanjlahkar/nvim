@@ -63,14 +63,17 @@ function M.setup()
         win_options = { rnu = false, nu = false },
         view_options = {
             show_hidden = true,
+            natural_order = 'fast',
             is_always_hidden = function(name, _)
                 local pattern = { ".git", "LICENSE" }
                 return vim.tbl_contains(pattern, name)
             end,
         },
+        lsp_file_methods = {
+            enabled = false,
+        },
         preview = { border = "single" },
         experimental_watch_for_changes = true,
-        natural_sort = false,
     })
 
     local key = require("utils.map")
@@ -125,7 +128,7 @@ function M.setup()
             "<leader>os",
             function()
                 ---@diagnostic disable-next-line: different-requires
-                require("plugin.telescope.extra.oil").switch_dir(cwd())
+                require("plugin.telescope.extra.oil").switch_dir()
             end,
             keyopts("Oil: Fuzzy search and switch to directory"),
         },
