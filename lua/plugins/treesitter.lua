@@ -8,6 +8,7 @@ return {
 
         ts.install({
             'bash',
+            'typst',
         })
 
         vim.api.nvim_create_autocmd('FileType', {

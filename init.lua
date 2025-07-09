@@ -21,11 +21,11 @@ require('lazy').setup({
     spec = {
         { import = 'plugins' },
     },
+    pkg = { enabled = false },
+    rocks = { enabled = false },
+    ui = { pills = false },
     install = { colorscheme = { 'boo', 'default' } },
-    checker = { enabled = false },
     change_detection = { enabled = false },
 })
 
 require('lsp')
-
-vim.cmd.colorscheme('boo')
