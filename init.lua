@@ -9,7 +9,7 @@ if not vim.uv.fs_stat(lazypath) then
         vim.api.nvim_echo({
             { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
             { out, 'WarningMsg' },
-            { '\nPress any key to exit...' },
+                    { '\nPress any key to exit...' },
         }, true, {})
         vim.fn.getchar()
         os.exit(1)
@@ -23,7 +23,8 @@ require('lazy').setup({
     },
     pkg = { enabled = false },
     rocks = { enabled = false },
-    ui = { pills = false },
+    dev = { path = '~/Projects/nvim_plugins' },
+    ui = { pills = false, backdrop = 100 },
     install = { colorscheme = { 'boo', 'default' } },
     change_detection = { enabled = false },
 })

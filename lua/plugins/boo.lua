@@ -11,5 +11,7 @@ return {
 
         -- Highlight group overrides
         set_hl(0, 'WinSeparator', { fg = '#222827' })
+        set_hl(0, 'StatusLine', { fg = '#63b0b0' })
+        set_hl(0, 'StatusLineNC', { fg = '#654a96' })
     end,
 }

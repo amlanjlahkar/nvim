@@ -3,6 +3,7 @@ local prefix = '<leader>q'
 return {
     'ibhagwan/fzf-lua',
     cmd = { 'FzfLua' },
+    dev = false,
     keys = { prefix },
     opts = {
         winopts = {
@@ -10,6 +11,7 @@ return {
             width = 0.5,
             row = 0.2, -- (0=top, 1=bottom)
             col = 0.5, -- (0=left, 1=right)
+            backdrop = 100,
             border = 'single',
             title_flags = false,
             preview = {
@@ -17,6 +19,7 @@ return {
                 title = false,
                 scrollbar = false,
                 vertical = 'down:60%',
+                border = 'single',
             },
         },
 
@@ -26,7 +29,7 @@ return {
             return {
                 files = {
                     false,
-                    -- keybinds follow the fzf syntax
+                    -- Keybinds follow the fzf syntax
                     ['enter'] = actions.file_switch_or_edit,
                     ['ctrl-x'] = actions.file_split,
                     ['ctrl-v'] = actions.file_vsplit,
@@ -40,7 +43,7 @@ return {
         keymap = {
             builtin = {
                 false,
-                ['<Bslash>'] = 'toggle-preview',
+                -- ['<Bslash>'] = 'toggle-preview',
                 ['<S-k>'] = 'preview-page-up',
                 ['<S-j>'] = 'preview-page-down',
                 ['<C-k>'] = 'preview-up',
@@ -48,7 +51,7 @@ return {
             },
             fzf = {
                 false,
-                -- keybinds follow the fzf syntax
+                -- Keybinds follow the fzf syntax
                 ['ctrl-s'] = 'toggle-all',
             },
         },
@@ -56,9 +59,15 @@ return {
         files = {
             hidden = false,
         },
+
+        oldfiles = {
+            cwd_only = true,
+        },
     },
     config = function(plugin)
-        require('fzf-lua').setup(plugin.opts)
+        local fzf = require('fzf-lua')
+
+        fzf.setup(plugin.opts)
 
         local keymap = require('utils.keymap')
 
@@ -66,9 +75,26 @@ return {
             { prefix .. 'p', ':FzfLua files<CR>' },
             { prefix .. 'o', ':FzfLua oldfiles<CR>' },
             { prefix .. 'b', ':FzfLua buffers<CR>' },
-            { prefix .. 's', ':FzfLua live_grep<CR>' },
+            { prefix .. 'l', ':FzfLua live_grep<CR>' },
             { prefix .. 'h', ':FzfLua helptags<CR>' },
             { prefix .. 'u', ':FzfLua resume<CR>' },
+            {
+                prefix .. 'n',
+                function()
+                    fzf.files({
+                        cwd = vim.fn.stdpath('config'),
+                    })
+                end,
+            },
+            {
+                prefix .. 's',
+                function()
+                    local cwd = vim.fn.expand('%:p:h')
+                    fzf.files({
+                        cwd = cwd,
+                    })
+                end,
+            },
         })
     end,
 }

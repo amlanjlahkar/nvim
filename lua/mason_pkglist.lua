@@ -6,4 +6,6 @@ Currently being used by the `MasonEnsureInstalled` user command (:com MasonEnsur
 return {
     'lua-language-server',
     'stylua',
+    'svelte-language-server',
+    'eslint-lsp',
 }

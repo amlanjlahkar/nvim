@@ -6,10 +6,6 @@ o.autowrite = true
 o.undofile = true
 o.undodir = vim.fn.stdpath('state') .. '/undo'
 
-o.autoindent = false
-o.tabstop = 8
-o.softtabstop = 4
-o.shiftwidth = 4
 o.expandtab = true
 o.wrap = false
 o.breakindent = true
@@ -52,3 +48,4 @@ o.fillchars:append({
     foldclose = '',
 })
 o.winborder = 'single'
+o.foldmethod = 'expr'
