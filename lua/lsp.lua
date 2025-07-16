@@ -2,18 +2,20 @@ local lsp = vim.lsp
 local au = vim.api.nvim_create_autocmd
 local ag = vim.api.nvim_create_augroup
 
-lsp.enable({ 'luals' })
+local keymap = require('utils.keymap')
+local mapopts = keymap.new_opts
+
+local ag_lsp = ag('lsp', { clear = true })
+local ag_lsp_doc_highlight = ag('lsp_doc_highlight', { clear = true })
 
 au('LspAttach', {
-    group = ag('lsp_attach', { clear = true }),
+    group = ag_lsp,
     callback = function(ev)
         local client = lsp.get_client_by_id(ev.data.client_id)
         local bufnr = ev.buf
 
         ---@diagnostic disable-next-line: need-check-nil
         if client:supports_method('textDocument/documentHighlight', bufnr) then
-            local ag_lsp_doc_highlight = ag('lsp_doc_highlight', { clear = false })
-
             au({ 'CursorHold' }, {
                 group = ag_lsp_doc_highlight,
                 buffer = bufnr,
@@ -28,11 +30,36 @@ au('LspAttach', {
         end
 
         ---@diagnostic disable-next-line: need-check-nil
-        local ns_lsp_diagnostic = lsp.diagnostic.get_namespace(client.id)
+        local ns_lsp_diagnostic = lsp.diagnostic.get_namespace(client.id, false)
 
         vim.diagnostic.config({
-            virtual_lines = true,
-        }, ns_lsp_diagnostic)
+            -- underline = {
+            --     severity = {
+            --         min = vim.diagnostic.severity.WARN,
+            --         max = vim.diagnostic.severity.ERROR,
+            --     },
+            -- },
+            underline = false,
+            virtual_lines = false,
+            virtual_text = {
+                virt_text_pos = 'eol',
+            },
+            float = {
+                source = true,
+            },
+        })
+
+        keymap.nmap({
+            { 'gd', vim.lsp.buf.definition, mapopts(bufnr, 'Lsp: Goto definition') },
+            {
+                '<localleader>i',
+                function()
+                    lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled(), { bufnr })
+                end,
+                mapopts(bufnr, 'Lsp: Toggle inlay hints'),
+            },
+        })
     end,
 })
 
+lsp.enable({ 'luals', 'gleam', 'eslint', 'zls' })

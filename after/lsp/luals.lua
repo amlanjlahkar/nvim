@@ -31,6 +31,7 @@ vim.lsp.config['luals'] = {
                     '${3rd}/luv/library',
                 },
             },
+            hint = { enable = true },
         })
     end,
     settings = {
