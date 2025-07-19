@@ -58,10 +58,15 @@ return {
 
         files = {
             hidden = false,
+            fd_opts = [[--color=never --type f --type l --exclude .git --exclude .jj --no-require-git]],
         },
 
         oldfiles = {
             cwd_only = true,
+        },
+
+        grep = {
+            rg_opts = [[--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --no-require-git -e]],
         },
     },
     config = function(plugin)
