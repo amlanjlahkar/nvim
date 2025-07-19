@@ -8,4 +8,5 @@ return {
     'stylua',
     'svelte-language-server',
     'eslint-lsp',
+    'zls',
 }
