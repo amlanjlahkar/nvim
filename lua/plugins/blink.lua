@@ -5,17 +5,22 @@ return {
     opts = {
         keymap = {
             preset = 'default',
+            ['<C-s>'] = { 'show' },
             ['<C-l>'] = { 'select_and_accept' },
             ['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
             ['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
         },
         completion = {
             ghost_text = { enabled = false },
+            completion = {
+                list = { selection = { preselect = false, auto_insert = true } },
+            },
             documentation = {
                 auto_show = true,
                 window = { border = 'single' },
             },
             menu = {
+                auto_show = false,
                 border = 'single',
                 draw = {
                     treesitter = { 'lsp' },
@@ -23,7 +28,7 @@ return {
                 },
             },
         },
-        snippets = { preset = 'luasnip' },
+        -- snippets = { preset = 'luasnip' },
         signature = {
             enabled = true,
             window = {

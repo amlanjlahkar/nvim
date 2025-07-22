@@ -57,8 +57,7 @@ return {
         },
 
         files = {
-            hidden = false,
-            fd_opts = [[--color=never --type f --type l --exclude .git --exclude .jj --no-require-git]],
+            fd_opts = [[--color=never --type f --type l --hidden --exclude .git --exclude .jj --no-require-git]],
         },
 
         oldfiles = {

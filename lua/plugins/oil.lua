@@ -13,6 +13,9 @@ return {
             ['<CR>'] = false,
             ['<C-j>'] = 'actions.select',
         },
+        view_options = {
+            show_hidden = true,
+        }
     },
     config = function(plugin)
         require('oil').setup(plugin.opts)

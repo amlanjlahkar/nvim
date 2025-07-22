@@ -23,8 +23,6 @@ return {
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
 
-    ---@module "conform"
-    ---@type conform.setupOpts
     opts = {
         formatters_by_ft = {
             css = { 'prettier' },
@@ -34,6 +32,7 @@ return {
             lua = { 'stylua' },
             svelte = { 'prettier' },
             typescript = { 'prettier' },
+            bash = { 'shfmt' },
         },
         default_format_opts = {
             lsp_format = 'fallback',

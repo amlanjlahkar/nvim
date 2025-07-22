@@ -1,6 +1,5 @@
 local api = vim.api
 local au = api.nvim_create_autocmd
-local ag_ts = api.nvim_create_augroup('treesitter', { clear = true })
 
 local parsers = {
     'bash',
@@ -27,10 +26,13 @@ return {
             -- Include filetypes for builtin parsers
             local ts_parser_ft = vim.list_extend(parsers, { 'c', 'help', 'lua', 'markdown' })
 
+            local ag_ts = api.nvim_create_augroup('treesitter', { clear = true })
+
             au('FileType', {
+                desc = 'Use treesitter provided highligting, indenting and folding',
                 group = ag_ts,
                 pattern = ts_parser_ft,
-                callback = function(ev)
+                callback = function()
                     vim.treesitter.start()
 
                     local winid = vim.api.nvim_get_current_win()
