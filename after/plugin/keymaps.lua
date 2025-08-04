@@ -2,7 +2,7 @@ local api = vim.api
 
 local keymap = require('utils.keymap')
 local opts = keymap.new_opts
-local nosilent, expr = opts(keymap.nosilent), opts(keymap.expr)
+local expr = opts(keymap.expr)
 
 keymap.nmap({
     { '<leader>j', '<Cmd>m .+1<CR>==' },
@@ -13,17 +13,16 @@ keymap.nmap({
 keymap.xmap({
     { '<', '<gv' },
     { '>', '>gv' },
-    { 'J', "<Cmd>m '>+1<CR>gv=gv" },
-    { 'K', "<Cmd>m '<-2<CR>gv=gv" },
     { 'v', 'yP' },
 })
 
 -- Yanking {{{1
 -- Retain cursor postion after yanking
+local curpos
 local get_curpos = function()
     return api.nvim_win_get_cursor(0)
 end
-local curpos
+
 keymap.nxmap({
     -- stylua: ignore start
     { "y", function() curpos = get_curpos() return "y" end, expr },
@@ -31,11 +30,6 @@ keymap.nxmap({
     { "<C-e>", '"+yy' },
     -- stylua: ignore end
 })
-
-vim.keymap.set('n', 'Y', function()
-    curpos = get_curpos()
-    return 'y$'
-end, { expr = true })
 
 api.nvim_create_autocmd('TextYankPost', {
     callback = function()
