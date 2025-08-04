@@ -12,4 +12,6 @@ return {
     'svelte-language-server',
     'eslint-lsp',
     'zls',
+    'typescript-language-server',
+    'shfmt',
 }

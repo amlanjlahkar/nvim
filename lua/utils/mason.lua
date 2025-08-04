@@ -75,36 +75,51 @@ function M:install(pkg_list)
     end
 
     local is_outdated = false
+
     for _, p in pairs(pkgs) do
         if not p:is_installed() then
-            notify('Installing ' .. p.name .. '...', vim.log.levels.INFO)
             p:install(
                 {},
                 vim.schedule_wrap(function(success)
+                    notify('Installing ' .. p.name .. '...', vim.log.levels.INFO)
                     if success then
                         notify(p.name .. ' was sucessfully installed', vim.log.levels.INFO)
+                    else
+                        notify(
+                            'Unable to install ' .. p.name .. ': failed to fetch registry source.',
+                            vim.log.levels.ERROR
+                        )
                     end
                 end)
             )
             is_outdated = true
         else
-            registry.refresh(function()
-                local pkg_vinstalled, pkg_vlatest = p:get_installed_version(), p:get_latest_version()
-                if pkg_vinstalled ~= pkg_vlatest then
+            registry.refresh(vim.schedule_wrap(function(success)
+                if success then
+                    local pkg_vinstalled, pkg_vlatest = p:get_installed_version(), p:get_latest_version()
+                    if pkg_vinstalled ~= pkg_vlatest then
+                        notify(
+                            string.format(
+                                'New version of "%s" avaiable: %s -> %s\nYou may install it through Mason UI.',
+                                p.name,
+                                pkg_vinstalled,
+                                pkg_vlatest
+                            ),
+                            vim.log.levels.INFO
+                        )
+                        is_outdated = true
+                    end
+                else
                     notify(
-                        string.format(
-                            'New version of "%s" avaiable: %s -> %s\nYou may install it through Mason UI.',
-                            p.name,
-                            pkg_vinstalled,
-                            pkg_vlatest
-                        ),
-                        vim.log.levels.INFO
+                        'Unable to check for package update for ' .. p.name .. ': failed to fetch registry source.',
+                        vim.log.levels.ERROR
                     )
                     is_outdated = true
                 end
-            end)
+            end))
         end
     end
+
     if not is_outdated then
         notify('All packages are up-to-date.', vim.log.levels.INFO)
     end
