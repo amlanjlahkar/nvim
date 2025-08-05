@@ -17,9 +17,11 @@ o.relativenumber = true
 o.inccommand = 'split'
 o.scrolloff = 6
 o.sidescrolloff = 6
+o.pumheight = 15
 o.list = true
 o.listchars:append({ tab = '»·', nbsp = '+', trail = '·', extends = '', precedes = '' })
 o.fillchars:append({ eob = ' ', diff = '╱' })
+o.completeopt:append({ 'noselect' })
 o.winborder = 'single'
 o.foldmethod = 'expr'
 o.virtualedit = 'block'
