@@ -1,6 +1,7 @@
 return {
     'stevearc/conform.nvim',
     cmd = { 'ConformInfo' },
+    version = 'v9.*',
     keys = {
         {
             '<leader>f',

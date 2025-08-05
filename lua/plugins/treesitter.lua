@@ -58,6 +58,7 @@ return {
 
     {
         'windwp/nvim-ts-autotag',
+        pin = true,
         ft = { 'html', 'svelte' },
         opts = {},
     },
