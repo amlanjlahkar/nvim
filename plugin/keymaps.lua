@@ -16,6 +16,10 @@ keymap.xmap({
     { 'v', 'yP' },
 })
 
+keymap.tmap({
+    { '<C-n>', '<C-\\><C-n>' },
+})
+
 -- Yanking {{{1
 -- Retain cursor postion after yanking
 local curpos
