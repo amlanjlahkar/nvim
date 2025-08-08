@@ -2,6 +2,7 @@ local prefix = '<leader>q'
 
 return {
     'ibhagwan/fzf-lua',
+    enabled = false,
     cmd = { 'FzfLua' },
     dev = false,
     keys = { prefix },
