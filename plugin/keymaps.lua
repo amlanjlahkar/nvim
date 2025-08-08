@@ -1,8 +1,7 @@
 local api = vim.api
 
 local keymap = require('utils.keymap')
-local opts = keymap.new_opts
-local expr = opts(keymap.expr)
+local mapopts = keymap.new_opts
 
 keymap.nmap({
     { '<leader>j', '<Cmd>m .+1<CR>==' },
@@ -20,6 +19,16 @@ keymap.tmap({
     { '<C-n>', '<C-\\><C-n>' },
 })
 
+keymap.cmap({
+    {
+        '%%',
+        function()
+            return vim.fn.getcmdtype() == ':' and string.format('%s/', vim.fn.expand('%:h')) or '%%'
+        end,
+        mapopts(keymap.expr, keymap.nosilent, 'Append to relative path'),
+    },
+})
+
 -- Yanking {{{1
 -- Retain cursor postion after yanking
 local curpos
@@ -29,8 +38,8 @@ end
 
 keymap.nxmap({
     -- stylua: ignore start
-    { "y", function() curpos = get_curpos() return "y" end, expr },
-    { "<C-y>", function() curpos = get_curpos() return '"+y' end, expr },
+    { "y", function() curpos = get_curpos() return "y" end, mapopts(keymap.expr) },
+    { "<C-y>", function() curpos = get_curpos() return '"+y' end, mapopts(keymap.expr) },
     { "<C-e>", '"+yy' },
     -- stylua: ignore end
 })

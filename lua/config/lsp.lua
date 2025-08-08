@@ -4,6 +4,7 @@ local ag = vim.api.nvim_create_augroup
 
 local keymap = require('utils.keymap')
 local mapopts = keymap.new_opts
+local map_prefix = '<leader>;'
 
 local ag_lsp = ag('lsp', { clear = true })
 local ag_lsp_doc_highlight = ag('lsp_doc_highlight', { clear = true })
@@ -50,9 +51,14 @@ au('LspAttach', {
         })
 
         keymap.nmap({
-            { 'gd', vim.lsp.buf.definition, mapopts(bufnr, 'Lsp: Goto definition') },
+            { 'gd', lsp.buf.definition, mapopts(bufnr, 'Lsp: Goto definition') },
             {
-                '<localleader>i',
+                map_prefix .. 'd',
+                vim.diagnostic.setloclist,
+                mapopts(bufnr, 'Lsp: Populate location list with diagnotics'),
+            },
+            {
+                map_prefix .. 'i',
                 function()
                     lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled(), { bufnr })
                 end,
