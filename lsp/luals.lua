@@ -32,14 +32,15 @@ vim.lsp.config['luals'] = {
                 },
             },
             hint = { enable = true },
+            diagnostics = {
+                globals = {
+                    'MiniPick',
+                },
+            },
         })
     end,
     settings = {
-        Lua = {
-            runtime = {
-                version = 'LuaJIT',
-            },
-        },
+        Lua = {},
     },
     cmd = { 'lua-language-server' },
     filetypes = { 'lua' },

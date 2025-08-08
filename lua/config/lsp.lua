@@ -7,7 +7,6 @@ local mapopts = keymap.new_opts
 local map_prefix = '<leader>;'
 
 local ag_lsp = ag('lsp', { clear = true })
-local ag_lsp_doc_highlight = ag('lsp_doc_highlight', { clear = true })
 
 au('LspAttach', {
     group = ag_lsp,
@@ -17,6 +16,7 @@ au('LspAttach', {
 
         ---@diagnostic disable-next-line: need-check-nil
         if client:supports_method('textDocument/documentHighlight', bufnr) then
+            local ag_lsp_doc_highlight = ag('lsp_doc_highlight', { clear = true })
             au({ 'CursorHold' }, {
                 group = ag_lsp_doc_highlight,
                 buffer = bufnr,
@@ -30,16 +30,7 @@ au('LspAttach', {
             })
         end
 
-        ---@diagnostic disable-next-line: need-check-nil
-        local ns_lsp_diagnostic = lsp.diagnostic.get_namespace(client.id, false)
-
         vim.diagnostic.config({
-            -- underline = {
-            --     severity = {
-            --         min = vim.diagnostic.severity.WARN,
-            --         max = vim.diagnostic.severity.ERROR,
-            --     },
-            -- },
             underline = false,
             virtual_lines = false,
             virtual_text = {
