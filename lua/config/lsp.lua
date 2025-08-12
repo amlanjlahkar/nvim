@@ -59,4 +59,4 @@ au('LspAttach', {
     end,
 })
 
-lsp.enable({ 'luals', 'gleam', 'eslint', 'zls' })
+lsp.enable({ 'luals', 'gleam', 'eslint', 'zls', 'clangd' })
