@@ -55,6 +55,7 @@ au('LspAttach', {
                 end,
                 mapopts(bufnr, 'Lsp: Toggle inlay hints'),
             },
+            { map_prefix .. 'a', lsp.buf.code_action, mapopts(bufnr, 'Lsp: select code action at curpos') },
         })
     end,
 })

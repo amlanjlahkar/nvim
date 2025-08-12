@@ -10,9 +10,46 @@ return {
             content_from_bottom = true,
             use_cache = true,
         },
+        window = {
+            -- center floating window on top
+            config = function()
+                local height = math.floor(0.45 * vim.o.lines)
+                local width = math.floor(0.45 * vim.o.columns)
+                return {
+                    anchor = 'NW',
+                    height = height,
+                    width = width,
+                    row = 0,
+                    col = math.floor(0.5 * (vim.o.columns - width)),
+                }
+            end,
+        },
     },
     config = function(plugin)
         require('mini.pick').setup(plugin.opts)
+
+        local fd_opts = {
+            'fd',
+            '--type',
+            'f',
+            '--no-follow',
+            '--hidden',
+            '--exclude',
+            '.git',
+            '--exclude',
+            '.jj',
+            '--no-require-git',
+            '--color=never',
+        }
+
+        local function new_fd_picker(cwd, name)
+            cwd = cwd or vim.uv.cwd()
+            name = name or 'Files'
+            local files = vim.schedule_wrap(function()
+                MiniPick.set_picker_items_from_cli(fd_opts)
+            end)
+            MiniPick.start({ source = { name = name, items = files, cwd = cwd } })
+        end
 
         local keymap = require('utils.keymap')
         local mapopts = keymap.new_opts
@@ -24,12 +61,13 @@ return {
             { map_prefix .. ';', builtin.buffers, mapopts('MiniPick: Pick buffers') },
             { map_prefix .. 's', builtin.grep, mapopts('MiniPick: Pick grepped items') },
             { map_prefix .. 'u', builtin.resume, mapopts('MiniPick: Resume picker') },
+            { map_prefix .. 'p', new_fd_picker, mapopts('Minipick: Pick files') },
             {
-                map_prefix .. 'p',
+                map_prefix .. 'd',
                 function()
-                    builtin.files({ tool = 'fd' })
+                    new_fd_picker('~/Documents/dwots', 'Dotfiles')
                 end,
-                mapopts('Minipick: Pick files'),
+                mapopts('Minipick: Pick dotfiles'),
             },
             {
                 map_prefix .. 'o',
@@ -47,12 +85,7 @@ return {
                         vim.notify('No recent files found', vim.log.levels.INFO)
                         return
                     end
-                    MiniPick.start({
-                        source = {
-                            name = 'Oldfiles',
-                            items = oldfiles,
-                        },
-                    })
+                    MiniPick.start({ source = { name = 'Oldfiles', items = oldfiles } })
                 end,
                 mapopts('MiniPick: Pick oldfiles'),
             },

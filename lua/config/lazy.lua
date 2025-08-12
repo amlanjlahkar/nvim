@@ -22,7 +22,7 @@ require('lazy').setup({
     },
     pkg = { enabled = false },
     rocks = { enabled = false },
-    dev = { path = '~/Projects/nvim_plugins' },
+    dev = { path = '~/Dev/projects/nvim_plugins' },
     ui = { pills = false, backdrop = 100 },
     install = { colorscheme = { 'boo', 'default' } },
     change_detection = { enabled = false },

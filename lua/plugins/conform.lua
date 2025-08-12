@@ -25,6 +25,11 @@ return {
     end,
 
     opts = {
+        formatters = {
+            shfmt = {
+                prepend_args = { "-i", "4", "-ci" },
+            },
+        },
         formatters_by_ft = {
             css = { 'prettier' },
             html = { 'prettier' },
@@ -34,6 +39,7 @@ return {
             svelte = { 'prettier' },
             typescript = { 'prettier' },
             bash = { 'shfmt' },
+            sh = { 'shfmt' },
         },
         default_format_opts = {
             lsp_format = 'fallback',
