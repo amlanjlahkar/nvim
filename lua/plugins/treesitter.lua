@@ -10,6 +10,7 @@ local parsers = {
     'html',
     'css',
     'javascript',
+    'zig',
 }
 
 return {

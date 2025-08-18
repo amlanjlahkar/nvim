@@ -7,7 +7,7 @@ return {
     keys = { map_prefix },
     opts = {
         options = {
-            content_from_bottom = true,
+            -- content_from_bottom = true,
             use_cache = true,
         },
         window = {
@@ -19,7 +19,7 @@ return {
                     anchor = 'NW',
                     height = height,
                     width = width,
-                    row = 0,
+                    row = math.floor(0.5 * (vim.o.lines - 5)),
                     col = math.floor(0.5 * (vim.o.columns - width)),
                 }
             end,
@@ -65,9 +65,16 @@ return {
             {
                 map_prefix .. 'd',
                 function()
-                    new_fd_picker('~/Documents/dwots', 'Dotfiles')
+                    new_fd_picker('~/dwots_mac', 'Dotfiles')
                 end,
                 mapopts('Minipick: Pick dotfiles'),
+            },
+            {
+                map_prefix .. 'n',
+                function()
+                    new_fd_picker(vim.fn.stdpath('config'), 'Neovim config')
+                end,
+                mapopts('Minipick: Nvim config'),
             },
             {
                 map_prefix .. 'o',
