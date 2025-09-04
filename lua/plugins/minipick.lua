@@ -2,28 +2,28 @@ local map_prefix = '<leader>q'
 
 return {
     'echasnovski/mini.pick',
-    version = '*',
+    -- version = '*',
     cmd = { 'Pick', 'MiniPick' },
     keys = { map_prefix },
     opts = {
         options = {
-            -- content_from_bottom = true,
+            content_from_bottom = true,
             use_cache = true,
         },
-        window = {
-            -- center floating window on top
-            config = function()
-                local height = math.floor(0.45 * vim.o.lines)
-                local width = math.floor(0.45 * vim.o.columns)
-                return {
-                    anchor = 'NW',
-                    height = height,
-                    width = width,
-                    row = math.floor(0.5 * (vim.o.lines - 5)),
-                    col = math.floor(0.5 * (vim.o.columns - width)),
-                }
-            end,
-        },
+        -- window = {
+        --     -- center floating window on top
+        --     config = function()
+        --         local height = math.floor(0.45 * vim.o.lines)
+        --         local width = math.floor(0.45 * vim.o.columns)
+        --         return {
+        --             anchor = 'NW',
+        --             height = height,
+        --             width = width,
+        --             row = math.floor(0.5 * (vim.o.lines - 5)),
+        --             col = math.floor(0.5 * (vim.o.columns - width)),
+        --         }
+        --     end,
+        -- },
     },
     config = function(plugin)
         require('mini.pick').setup(plugin.opts)

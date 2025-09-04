@@ -3,6 +3,7 @@ local au = api.nvim_create_autocmd
 
 local parsers = {
     'bash',
+    'cpp',
     'typst',
     'gleam',
     'jsonnet',
@@ -10,6 +11,9 @@ local parsers = {
     'html',
     'css',
     'javascript',
+    'typescript',
+    'javascriptreact',
+    'typescriptreact',
     'zig',
 }
 
@@ -33,12 +37,17 @@ return {
                 desc = 'Use treesitter provided highligting, indenting and folding',
                 group = ag_ts,
                 pattern = ts_parser_ft,
-                callback = function()
+                callback = function(ev)
                     vim.treesitter.start()
 
                     local winid = vim.api.nvim_get_current_win()
                     vim.wo[winid].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-                    -- vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+                    -- treesitter indenting works reliably only for some specific parsers
+                    local ft = api.nvim_get_option_value('ft', { buf = ev.buf })
+                    if vim.list_contains({ 'javascriptreact', 'typescriptreact' }, ft) then
+                        vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end
                 end,
             })
 
@@ -60,7 +69,7 @@ return {
     {
         'windwp/nvim-ts-autotag',
         pin = true,
-        ft = { 'html', 'svelte' },
+        ft = { 'html', 'svelte', 'javascriptreact', 'typescriptreact' },
         opts = {},
     },
 }

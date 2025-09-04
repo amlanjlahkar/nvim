@@ -8,8 +8,9 @@
 
 return {
     'lua-language-server',
+    'clangd',
     'stylua',
-    'svelte-language-server',
+    -- 'svelte-language-server',
     'eslint-lsp',
     'zls',
     'typescript-language-server',

@@ -1,6 +1,6 @@
 return {
     'stevearc/oil.nvim',
-    version = 'v2.*',
+    -- version = 'v2.*',
     lazy = false,
     opts = {
         columns = {

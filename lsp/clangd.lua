@@ -15,7 +15,6 @@ return {
         'compile_flags.txt',
     },
     capabilities = {
-        offsetEncoding = { 'utf-8', 'utf-16' },
         textDocument = {
             completion = {
                 completionItem = {

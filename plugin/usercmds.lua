@@ -12,6 +12,7 @@ command('MasonEnsureInstalled', function()
         require('utils.mason'):install(pkg_list)
     end))
 end, {
+    nargs = 0,
     bang = false,
     bar = false,
     desc = 'Install mason packages from user provided pkglist',
