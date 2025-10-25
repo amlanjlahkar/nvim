@@ -12,7 +12,7 @@ return {
     'stylua',
     -- 'svelte-language-server',
     'eslint-lsp',
-    'zls',
+    -- 'zls',
     'typescript-language-server',
     'shfmt',
 }

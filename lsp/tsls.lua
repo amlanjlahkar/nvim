@@ -34,7 +34,19 @@
 --- - remove unused code
 
 return {
-    init_options = { hostInfo = 'neovim' },
+    init_options = {
+        hostInfo = 'neovim',
+        preferences = {
+            includeInlayParameterNameHints = 'all',
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = false,
+            includeInlayVariableTypeHints = false,
+            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+            includeInlayPropertyDeclarationTypeHints = false,
+            includeInlayEnumMemberValueHints = false,
+        },
+    },
     cmd = { 'typescript-language-server', '--stdio' },
     filetypes = {
         'javascript',

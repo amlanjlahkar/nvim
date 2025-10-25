@@ -60,4 +60,4 @@ au('LspAttach', {
     end,
 })
 
-lsp.enable({ 'luals', 'gleam', 'eslint', 'zls', 'clangd' })
+lsp.enable({ 'luals', 'eslint', 'tsls', 'clangd', 'cssls' })
