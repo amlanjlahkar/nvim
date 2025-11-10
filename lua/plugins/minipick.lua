@@ -81,7 +81,9 @@ return {
                 function()
                     -- Capture oldfiles relative to cwd
                     local oldfiles_iter = vim.iter(vim.v.oldfiles):map(function(item)
-                        local idx_i, idx_j = item:find(vim.uv.cwd() .. '/+')
+                        ---@diagnostic disable-next-line: param-type-mismatch
+                        local cwd = string.gsub(vim.uv.cwd(), '(%W)', '%%%1')
+                        local idx_i, idx_j = item:find('^' .. cwd .. '/+')
                         if idx_i == 1 then
                             local rpath = item:sub(idx_j + 1)
                             return vim.uv.fs_stat(rpath) and rpath
