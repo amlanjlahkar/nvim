@@ -11,8 +11,8 @@ return {
     'clangd',
     'stylua',
     -- 'svelte-language-server',
-    'eslint-lsp',
+    -- 'eslint-lsp',
     -- 'zls',
-    'typescript-language-server',
+    -- 'typescript-language-server',
     'shfmt',
 }

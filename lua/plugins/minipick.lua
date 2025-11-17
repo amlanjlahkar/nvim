@@ -30,8 +30,6 @@ return {
 
         local fd_opts = {
             'fd',
-            '--type',
-            'f',
             '--no-follow',
             '--hidden',
             '--exclude',
@@ -42,9 +40,12 @@ return {
             '--color=never',
         }
 
-        local function new_fd_picker(cwd, name)
+        local function new_fd_picker(cwd, name, extra_args)
             cwd = cwd or vim.uv.cwd()
             name = name or 'Files'
+            extra_args = extra_args or { '--type', 'f' }
+
+            fd_opts = vim.list_extend(fd_opts, extra_args)
             local files = vim.schedule_wrap(function()
                 MiniPick.set_picker_items_from_cli(fd_opts)
             end)
@@ -62,6 +63,13 @@ return {
             { map_prefix .. 's', builtin.grep, mapopts('MiniPick: Pick grepped items') },
             { map_prefix .. 'u', builtin.resume, mapopts('MiniPick: Resume picker') },
             { map_prefix .. 'p', new_fd_picker, mapopts('Minipick: Pick files') },
+            {
+                map_prefix .. 'j',
+                function()
+                    new_fd_picker(vim.uv.cwd(), 'Directories', { '--type', 'd' })
+                end,
+                mapopts('MiniPick: Pick directories'),
+            },
             {
                 map_prefix .. 'd',
                 function()
