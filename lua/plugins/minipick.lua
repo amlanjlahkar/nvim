@@ -24,6 +24,12 @@ return {
         --         }
         --     end,
         -- },
+        mappings = {
+            choose_marked = '<C-q>',
+            scroll_down = '<C-j>',
+            scroll_up = '<C-k>',
+            toggle_info = '<C-i>',
+        },
     },
     config = function(plugin)
         require('mini.pick').setup(plugin.opts)
@@ -105,6 +111,43 @@ return {
                     MiniPick.start({ source = { name = 'Oldfiles', items = oldfiles } })
                 end,
                 mapopts('MiniPick: Pick oldfiles'),
+            },
+            {
+                map_prefix .. 'd',
+                function()
+                    local checker = vim.system({ 'git', 'rev-parse', '--is-inside-work-tree' }):wait()
+                    if checker.code > 0 then
+                        vim.notify('Not a git repository', vim.log.levels.ERROR)
+                        return
+                    end
+                    local status = vim.fn.systemlist({ 'git', 'status', '--porcelain=v1' })
+                    local changes = vim.iter(status)
+                        -- Remove deleted file entries
+                        :filter(function(v)
+                            return string.match(v, '^%s*D') == nil
+                        end)
+                        :totable()
+                    if #changes == 0 then
+                        vim.notify('No changes are made (NOTE: deleted files are not listed)', vim.log.levels.INFO)
+                        return
+                    end
+                    local winid = vim.api.nvim_get_current_win()
+                    MiniPick.start({
+                        source = {
+                            name = 'Changed Files(Git)',
+                            items = changes,
+                            choose = function(item)
+                                -- TODO: This may not work always as expected
+                                local file = string.sub(item, 4)
+                                vim.api.nvim_win_call(winid, function()
+                                    vim.cmd('edit ' .. file)
+                                end)
+                                return false
+                            end,
+                        },
+                    })
+                end,
+                mapopts('MiniPick: Pick changed files tracked with git'),
             },
         })
     end,
