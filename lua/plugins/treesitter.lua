@@ -6,6 +6,7 @@ local parsers = {
     'cpp',
     'typst',
     'gleam',
+    'json',
     'jsonnet',
     'svelte',
     'html',
@@ -15,6 +16,7 @@ local parsers = {
     'tsx',
     'zig',
     'nix',
+    'make',
 }
 
 return {
@@ -29,7 +31,7 @@ return {
             ts.install(parsers)
 
             -- Include filetypes for builtin/installed parsers
-            local ts_parser_ft = vim.list_extend(parsers, { 'c', 'help', 'lua', 'markdown', 'typescriptreact', 'nix' })
+            local ts_parser_ft = vim.list_extend(parsers, { 'c', 'help', 'lua', 'markdown', 'typescriptreact' })
 
             local ag_ts = api.nvim_create_augroup('treesitter', { clear = true })
 

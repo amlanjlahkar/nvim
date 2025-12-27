@@ -77,13 +77,6 @@ return {
                 mapopts('MiniPick: Pick directories'),
             },
             {
-                map_prefix .. 'd',
-                function()
-                    new_fd_picker('~/dwots_mac', 'Dotfiles')
-                end,
-                mapopts('Minipick: Pick dotfiles'),
-            },
-            {
                 map_prefix .. 'n',
                 function()
                     new_fd_picker(vim.fn.stdpath('config'), 'Neovim config')

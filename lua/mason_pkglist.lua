@@ -15,4 +15,5 @@ return {
     -- 'zls',
     -- 'typescript-language-server',
     'shfmt',
+    'tinymist',
 }
