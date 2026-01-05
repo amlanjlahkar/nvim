@@ -1,8 +1,5 @@
 local o = vim.opt
 
-o.shada = "!,'15,<0,/0,:50,f0"
-o.updatetime = 200
-o.timeoutlen = 500
 o.confirm = true
 o.undofile = true
 o.swapfile = false

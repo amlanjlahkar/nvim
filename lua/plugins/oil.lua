@@ -1,6 +1,6 @@
 return {
     'stevearc/oil.nvim',
-    -- version = 'v2.*',
+    version = 'v2.*',
     lazy = false,
     opts = {
         columns = {
@@ -14,7 +14,7 @@ return {
         },
         view_options = {
             show_hidden = true,
-        }
+        },
     },
     config = function(plugin)
         require('oil').setup(plugin.opts)
