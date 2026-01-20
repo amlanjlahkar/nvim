@@ -89,7 +89,7 @@ function M:install(pkg_list)
             local pkg_vinstalled, pkg_vlatest = p:get_installed_version(), p:get_latest_version()
             if pkg_vinstalled ~= pkg_vlatest then
                 notify(
-                    string.format('New version of "%s" avaiable: %s -> %s', p.name, pkg_vinstalled, pkg_vlatest),
+                    string.format('New version of "%s" available: %s -> %s', p.name, pkg_vinstalled, pkg_vlatest),
                     vim.log.levels.INFO
                 )
             end

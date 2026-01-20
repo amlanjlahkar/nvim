@@ -20,6 +20,7 @@ require('lazy').setup({
     spec = {
         { import = 'plugins' },
     },
+    git = { timeout = 600 },
     pkg = { enabled = false },
     rocks = { enabled = false },
     dev = { path = '~/Dev/projects/nvim_plugins' },

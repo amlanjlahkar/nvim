@@ -1,6 +1,9 @@
 return {
     'saghen/blink.cmp',
-    version = 'v1.*',
+    -- enabled = false,
+    -- version = 'v1.*',
+    version = false,
+    build = 'nix run .#build-plugin',
     event = 'InsertEnter',
     opts = {
         completion = {

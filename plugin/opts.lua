@@ -1,5 +1,6 @@
 local o = vim.opt
 
+o.updatetime = 500
 o.confirm = true
 o.undofile = true
 o.swapfile = false

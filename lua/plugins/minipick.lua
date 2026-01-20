@@ -72,8 +72,14 @@ return {
             { map_prefix .. 's', builtin.grep, mapopts('MiniPick: Pick grepped items') },
             { map_prefix .. 'u', builtin.resume, mapopts('MiniPick: Resume picker') },
             { map_prefix .. 'p', new_fd_picker, mapopts('Minipick: Pick files') },
-            { map_prefix .. 'o', extra.oldfiles, mapopts('MiniPick: Pick oldfiles') },
             { map_prefix .. 'd', extra.git_hunks, mapopts('MiniPick: Pick unstaged hunks of current git repository') },
+            {
+                map_prefix .. 'o',
+                function()
+                    extra.oldfiles({ current_dir = true })
+                end,
+                mapopts('MiniPick: Pick oldfiles'),
+            },
             {
                 map_prefix .. 'j',
                 function()

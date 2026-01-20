@@ -17,6 +17,8 @@ local parsers = {
     'zig',
     'nix',
     'make',
+    'blade',
+    'php',
 }
 
 return {
@@ -70,8 +72,8 @@ return {
 
     {
         'windwp/nvim-ts-autotag',
-        pin = true,
-        ft = { 'html', 'svelte', 'javascriptreact', 'typescriptreact' },
+        -- pin = true,
+        ft = { 'html', 'blade', 'svelte', 'javascriptreact', 'typescriptreact' },
         opts = {},
     },
 }
