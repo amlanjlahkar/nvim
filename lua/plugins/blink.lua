@@ -4,6 +4,7 @@ return {
     -- version = 'v1.*',
     version = false,
     build = 'nix run .#build-plugin',
+    dependencies = { "rafamadriz/friendly-snippets" },
     event = 'InsertEnter',
     opts = {
         completion = {
