@@ -1,5 +1,7 @@
 local flake_path = '(builtins.getFlake "/Users/amlanjlahkar/nix-darwin")'
 local current_system = 'aarch64-darwin'
+
+---@type vim.lsp.Config
 return {
     cmd = { 'nixd', '--semantic-tokens=false' },
     filetypes = { 'nix' },

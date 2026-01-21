@@ -1,4 +1,5 @@
-vim.lsp.config['zls'] = {
+---@type vim.lsp.Config
+return {
     cmd = { 'zls' },
     filetypes = { 'zig' },
     root_markers = { 'zls.json', 'build.zig' },

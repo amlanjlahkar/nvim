@@ -33,6 +33,7 @@
 --- - organize imports
 --- - remove unused code
 
+---@type vim.lsp.Config
 return {
     init_options = {
         hostInfo = 'neovim',

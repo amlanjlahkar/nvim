@@ -16,4 +16,7 @@ return {
     -- 'typescript-language-server',
     'shfmt',
     'tinymist',
+    'laravel-ls',
+    'phpactor',
+    'tailwindcss-language-server',
 }
