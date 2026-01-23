@@ -44,12 +44,12 @@ return {
                 callback = function(ev)
                     vim.treesitter.start()
 
-                    local winid = vim.api.nvim_get_current_win()
-                    vim.wo[winid].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                    -- local winid = vim.api.nvim_get_current_win()
+                    -- vim.wo[winid].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
                     -- treesitter indenting works reliably only for some specific parsers
                     local ft = api.nvim_get_option_value('ft', { buf = ev.buf })
-                    if vim.list_contains({ 'javascriptreact', 'typescriptreact' }, ft) then
+                    if not vim.list_contains({ 'lua' }, ft) then
                         vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
                     end
                 end,
