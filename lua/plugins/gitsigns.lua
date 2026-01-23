@@ -34,20 +34,19 @@ return {
                 },
 
                 -- stylua: ignore start
-                { '<leader>ep', gs.preview_hunk, mapopts(bufnr) },
-                { '<leader>ei', gs.preview_hunk_inline, mapopts(bufnr) },
+                { '<leader>ep', gs.preview_hunk, mapopts(bufnr, 'Gitsigns: Preview hunk') },
+                { '<leader>ei', gs.preview_hunk_inline, mapopts(bufnr, 'Gitsigns: Preview hunk(inline)') },
 
-                { '<leader>ec', gs.toggle_current_line_blame, mapopts(bufnr) },
-                { '<leader>eb', function() gs.blame_line({ full = true }) end, mapopts(bufnr), },
+                { '<leader>ec', gs.toggle_current_line_blame, mapopts(bufnr, 'Gitsigns: Blame current line') },
+                { '<leader>eb', function() gs.blame_line({ full = true }) end, mapopts(bufnr, 'Gitsigns: Blame line'), },
 
-                { '<leader>ed', gs.diffthis, mapopts(bufnr) },
-                { '<leader>eD', function() gs.diffthis('~') end, mapopts(bufnr) },
+                { '<leader>ed', gs.diffthis, mapopts(bufnr, 'Gitsigns: Diff against current index') },
 
-                { '<leader>eq', gs.setqflist, mapopts(bufnr) },
-                { '<leader>eQ', function() gs.setqflist('all') end, mapopts(bufnr) },
+                { '<leader>eq', gs.setqflist, mapopts(bufnr, 'Gitsigns: Populate quickfixlist with hunks of current buffer') },
+                { '<leader>eQ', function() gs.setqflist('all') end, mapopts(bufnr, 'Gitsigns: Populate quickfixlist with all hunks of current repo') },
 
-                { '<leader>er', gs.reset_hunk, mapopts(bufnr) },
-                { '<leader>eR', gs.reset_buffer, mapopts(bufnr) },
+                { '<leader>er', gs.reset_hunk, mapopts(bufnr, 'Gitsigns: Reset hunk') },
+                { '<leader>eR', gs.reset_buffer, mapopts(bufnr, 'Gitsigns: Reset buffer') },
                 -- stylua: ignore end
             })
 
