@@ -19,6 +19,7 @@ local parsers = {
     'make',
     'blade',
     'php',
+    'just',
 }
 
 return {

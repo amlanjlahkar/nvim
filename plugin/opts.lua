@@ -21,7 +21,7 @@ o.listchars:append({ tab = '»·', nbsp = '+', trail = '·', extends = '', pr
 o.fillchars:append({ eob = ' ', diff = '╱' })
 o.completeopt:append({ 'noselect' })
 o.winborder = 'single'
-o.foldmethod = 'expr'
+-- o.foldmethod = 'expr'
 o.virtualedit = 'block'
 o.signcolumn = 'auto:1-4'
 o.exrc = true

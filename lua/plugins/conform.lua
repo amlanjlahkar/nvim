@@ -24,30 +24,37 @@ return {
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
 
-    opts = {
-        formatters = {
-            shfmt = {
-                prepend_args = { "-i", "4", "-ci" },
+    config = function()
+        local util = require('conform.util')
+
+        require('conform').setup({
+            formatters = {
+                shfmt = {
+                    prepend_args = { '-i', '4', '-ci' },
+                },
+                ['blade-formatter'] = {
+                    command = util.from_node_modules('blade-formatter'),
+                },
             },
-        },
-        formatters_by_ft = {
-            bash = { 'shfmt' },
-            blade = { 'prettier' },
-            css = { 'prettier' },
-            html = { 'prettier' },
-            javascript = { 'prettier' },
-            javascriptreact = { 'prettier' },
-            json = { 'prettier', 'jq', stop_after_first = true },
-            lua = { 'stylua' },
-            php = { 'pint' },
-            sh = { 'shfmt' },
-            svelte = { 'prettier' },
-            typescript = { 'prettier' },
-            typescriptreact = { 'prettier' },
-        },
-        default_format_opts = {
-            lsp_format = 'fallback',
-        },
-        log_level = vim.log.levels.DEBUG,
-    },
+            formatters_by_ft = {
+                bash = { 'shfmt' },
+                blade = { 'prettier' },
+                css = { 'prettier' },
+                html = { 'prettier' },
+                javascript = { 'prettier' },
+                javascriptreact = { 'prettier' },
+                json = { 'prettier', 'jq', stop_after_first = true },
+                lua = { 'stylua' },
+                php = { 'pint' },
+                sh = { 'shfmt' },
+                svelte = { 'prettier' },
+                typescript = { 'prettier' },
+                typescriptreact = { 'prettier' },
+            },
+            default_format_opts = {
+                lsp_format = 'fallback',
+            },
+            log_level = vim.log.levels.DEBUG,
+        })
+    end,
 }
