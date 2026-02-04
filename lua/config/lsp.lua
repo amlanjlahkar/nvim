@@ -42,20 +42,14 @@ au('LspAttach', {
         })
 
         keymap.nmap({
+            -- stylua: ignore start
             { 'gd', lsp.buf.definition, mapopts(bufnr, 'Lsp: Goto definition') },
-            {
-                map_prefix .. 'd',
-                vim.diagnostic.setloclist,
-                mapopts(bufnr, 'Lsp: Populate location list with diagnotics'),
-            },
-            {
-                map_prefix .. 'i',
-                function()
-                    lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled(), { bufnr })
-                end,
-                mapopts(bufnr, 'Lsp: Toggle inlay hints'),
-            },
+            { ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, mapopts(bufnr) },
+            { '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, mapopts(bufnr) },
             { map_prefix .. 'a', lsp.buf.code_action, mapopts(bufnr, 'Lsp: select code action at curpos') },
+            { map_prefix .. 'd', vim.diagnostic.setloclist, mapopts(bufnr, 'Lsp: Populate location list with diagnotics') },
+            { map_prefix .. 'i', function() lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled(), { bufnr }) end, mapopts(bufnr, 'Lsp: Toggle inlay hints') },
+            -- stylua: ignore end
         })
     end,
 })
