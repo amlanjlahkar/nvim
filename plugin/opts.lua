@@ -10,6 +10,10 @@ o.wrap = false
 o.breakindent = true
 o.linebreak = true
 
+o.hlsearch = false
+o.ignorecase = true
+o.smartcase = true
+
 o.number = true
 o.relativenumber = true
 o.inccommand = 'split'
