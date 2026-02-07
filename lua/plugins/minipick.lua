@@ -14,7 +14,7 @@ return {
         window = {
             -- center floating window on top
             config = function()
-                local height = math.floor(0.35 * vim.o.lines)
+                local height = math.floor(0.5 * vim.o.lines)
                 local width = math.floor(0.5 * vim.o.columns)
                 return {
                     anchor = 'NW',
@@ -69,47 +69,55 @@ return {
         local extra = MiniExtra.pickers
 
         keymap.nmap({
-            { map_prefix .. 'h', builtin.help, mapopts('Minipick: Pick help tags') },
-            { map_prefix .. ';', builtin.buffers, mapopts('MiniPick: Pick buffers') },
-            { map_prefix .. 's', builtin.grep, mapopts('MiniPick: Pick grepped items') },
-            { map_prefix .. 'u', builtin.resume, mapopts('MiniPick: Resume picker') },
-            { map_prefix .. 'p', new_fd_picker, mapopts('Minipick: Pick files') },
-            { map_prefix .. 'c', extra.git_hunks, mapopts('MiniPick: Pick unstaged hunks of current git repository') },
+            { map_prefix .. 'h', builtin.help, mapopts('Mini: Pick help tags') },
+            { map_prefix .. ';', builtin.buffers, mapopts('Mini: Pick buffers') },
+            { map_prefix .. 's', builtin.grep, mapopts('Mini: Pick grepped items') },
+            { map_prefix .. 'u', builtin.resume, mapopts('Mini: Resume picker') },
+            { map_prefix .. 'p', new_fd_picker, mapopts('Mini: Pick files') },
+            { map_prefix .. 'c', extra.git_hunks, mapopts('Mini: Pick unstaged hunks of current git repository') },
             {
                 map_prefix .. 'p',
                 function()
                     new_fd_picker({})
                 end,
-                mapopts('Minipick: Pick files'),
+                mapopts('Mini: Pick files'),
             },
             {
                 map_prefix .. 'j',
                 function()
                     new_fd_picker({ cwd = vim.uv.cwd(), name = 'Directories', extra_args = { '--type', 'd' } })
                 end,
-                mapopts('MiniPick: Pick directories'),
+                mapopts('Mini: Pick directories'),
             },
             {
                 map_prefix .. 'n',
                 function()
                     new_fd_picker({ cwd = vim.fn.stdpath('config'), name = 'Neovim config' })
                 end,
-                mapopts('Minipick: Nvim config'),
+                mapopts('Mini: Nvim config'),
             },
             {
                 map_prefix .. 'd',
                 function()
                     new_fd_picker({ cwd = os.getenv('HOME') .. '/nix-darwin', name = 'Nix config' })
                 end,
-                mapopts('Minipick: Nvim config'),
+                mapopts('Mini: Nvim config'),
             },
             {
                 map_prefix .. 'o',
                 function()
                     extra.oldfiles({ current_dir = true })
                 end,
-                mapopts('MiniPick: Pick oldfiles'),
+                mapopts('Mini: Pick oldfiles'),
             },
+            {
+                '<leader>;s',
+                function()
+                    extra.lsp({ scope = 'document_symbol' })
+                end,
+                mapopts('Mini: Pick lsp document symbols'),
+            },
+
             -- {
             --     map_prefix .. 'o',
             --     function()
