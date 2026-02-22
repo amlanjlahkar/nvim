@@ -29,7 +29,6 @@ return {
             choose_marked = '<C-q>',
             scroll_down = '<C-j>',
             scroll_up = '<C-k>',
-            toggle_info = '<C-i>',
         },
     },
 
