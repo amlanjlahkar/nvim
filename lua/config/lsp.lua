@@ -54,4 +54,4 @@ au('LspAttach', {
     end,
 })
 
-lsp.enable({ 'luals', 'eslint', 'tsls', 'clangd', 'cssls', 'nixd', 'laravel_ls', 'phpactor', 'tailwind' })
+lsp.enable({ 'luals', 'eslint', 'tsls', 'clangd', 'cssls', 'nixd', 'laravel_ls', 'phpactor', 'tailwind', 'jsonnet_ls' })
