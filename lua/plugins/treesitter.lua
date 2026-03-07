@@ -20,6 +20,8 @@ local parsers = {
     'blade',
     'php',
     'just',
+    'toml',
+    'yaml',
 }
 
 return {
