@@ -19,4 +19,5 @@ return {
     'laravel-ls',
     'phpactor',
     'tailwindcss-language-server',
+    'gopls',
 }

@@ -23,6 +23,7 @@ local parsers = {
     'just',
     'toml',
     'yaml',
+    'go',
 }
 
 return {
