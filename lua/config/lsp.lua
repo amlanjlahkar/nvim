@@ -33,9 +33,11 @@ au('LspAttach', {
         vim.diagnostic.config({
             underline = false,
             virtual_lines = false,
-            virtual_text = {
-                virt_text_pos = 'eol',
-            },
+            virtual_text = false,
+            -- virtual_text = {
+            --     virt_text_pos = 'right_align',
+            --     hl_mode = 'combine',
+            -- },
             float = {
                 source = true,
             },

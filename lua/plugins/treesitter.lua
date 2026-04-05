@@ -30,6 +30,7 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         branch = 'main',
+        pin = true,
         build = ':TSUpdate',
 
         config = function()
@@ -60,7 +61,7 @@ return {
                     -- vim.wo[winid].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
                     -- treesitter indenting works reliably only for some specific parsers
-                    local excluded_ft = { 'lua', 'jsonnet' }
+                    local excluded_ft = { 'lua', 'jsonnet', 'nix' }
                     local ft = api.nvim_get_option_value('ft', { buf = ev.buf })
                     if not vim.list_contains(excluded_ft, ft) then
                         vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

@@ -15,6 +15,9 @@ return {
         view_options = {
             show_hidden = true,
         },
+        lsp_file_methods = {
+            enabled = false,
+        },
     },
     config = function(plugin)
         require('oil').setup(plugin.opts)
