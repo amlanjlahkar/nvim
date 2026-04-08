@@ -1,5 +1,6 @@
 local o = vim.opt
 
+o.exrc = true
 o.updatetime = 500
 o.confirm = true
 o.undofile = true
@@ -30,4 +31,6 @@ o.winborder = 'single'
 -- o.foldmethod = 'expr'
 o.virtualedit = 'block'
 o.signcolumn = 'auto:1-4'
-o.exrc = true
+
+o.spelllang = { 'en' }
+o.dictionary:append({ '/usr/share/dict/words' })
