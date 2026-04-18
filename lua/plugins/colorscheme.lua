@@ -23,6 +23,8 @@ return {
 
             set_hl(0, 'DiagnosticError', { fg = '#7f5479' })
             set_hl(0, 'Comment', { fg = '#66919a', italic = true })
+
+            set_hl(0, 'GitSignsCurrentLineBlame', { fg = '#4c4c60' })
         end,
     },
 }
