@@ -4,7 +4,7 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.g.boo_colorscheme_italic = true
+            vim.g.boo_colorscheme_italic = false
             vim.g.boo_colorscheme_theme = 'boo'
 
             vim.cmd.colorscheme('boo')

@@ -9,7 +9,7 @@ return {
     opts = {
         options = {
             content_from_bottom = true,
-            use_cache = false,
+            use_cache = true,
         },
         window = {
             -- center floating window on top
