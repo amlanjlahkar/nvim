@@ -9,12 +9,14 @@ keymap.nmap({
     { 'gV', '`[v`]' },
     { '<localleader>o', ':bp<CR>' },
     { '<localleader>p', ':bn<CR>' },
+    { '<C-e>', '"+yy' },
 })
 
 keymap.xmap({
     { '<', '<gv' },
     { '>', '>gv' },
     { 'v', 'yP' },
+    { '<C-y>', '"+y' },
 })
 
 keymap.tmap({
@@ -29,27 +31,4 @@ keymap.cmap({
         end,
         mapopts(keymap.expr, keymap.nosilent, 'Append to relative path'),
     },
-})
-
--- Yanking {{{1
--- Retain cursor postion after yanking
-local curpos
-local get_curpos = function()
-    return api.nvim_win_get_cursor(0)
-end
-
-keymap.nxmap({
-    -- stylua: ignore start
-    { "y", function() curpos = get_curpos() return "y" end, mapopts(keymap.expr) },
-    { "<C-y>", function() curpos = get_curpos() return '"+y' end, mapopts(keymap.expr) },
-    { "<C-e>", '"+yy' },
-    -- stylua: ignore end
-})
-
-api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        if vim.v.event.operator == 'y' and curpos then
-            api.nvim_win_set_cursor(0, curpos)
-        end
-    end,
 })
