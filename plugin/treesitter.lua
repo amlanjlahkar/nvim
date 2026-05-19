@@ -77,12 +77,12 @@ au('FileType', {
     end,
 })
 
-au('BufWinEnter', {
+au('BufEnter', {
     desc = 'Open all folds if using treesitter based folding upon displaying a buffer',
     group = ag_ts,
     callback = function()
         if vim.opt.foldmethod:get() == 'expr' and vim.opt.foldexpr:get() == 'v:lua.vim.treesitter.foldexpr()' then
-            vim.cmd.normal('zR')
+            api.nvim_feedkeys('zR', 'n', true)
         end
     end,
 })

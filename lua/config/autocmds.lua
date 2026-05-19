@@ -33,8 +33,8 @@ au('FileType', {
 
 au({ 'BufWritePre', 'FileWritePre' }, {
     desc = 'Create missing parent directories before save',
-    callback = function(self)
-        local root = fn.fnamemodify(self.file, ':p:h')
+    callback = function(ev)
+        local root = fn.fnamemodify(ev.file, ':p:h')
         if not root:find('%S+://*') then
             fn.mkdir(root, 'p')
         end

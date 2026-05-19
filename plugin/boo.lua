@@ -2,10 +2,10 @@ vim.pack.add({
     'https://github.com/rockerBOO/boo-colorscheme-nvim',
 })
 
-vim.g.boo_colorscheme_italic = false
-vim.g.boo_colorscheme_theme = 'boo'
-
-vim.cmd.colorscheme('boo')
+require('boo-colorscheme').use({
+    italic = false,
+    theme = 'boo',
+})
 
 local set_hl = vim.api.nvim_set_hl
 

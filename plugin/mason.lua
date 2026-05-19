@@ -21,13 +21,13 @@ vim.pack.add({
 
 -- Make packages installed through mason available in PATH
 -- regardless of mason being lazyloaded
-_G.MASON_DIR = vim.fn.stdpath('data') .. '/mason'
-if vim.uv.fs_stat(MASON_DIR) then
-    vim.env.PATH = string.format('%s:%s', MASON_DIR .. '/bin', vim.env.PATH)
+local mason_install_dir = vim.fn.stdpath('data') .. '/mason'
+if vim.uv.fs_stat(mason_install_dir) then
+    vim.env.PATH = string.format('%s:%s', mason_install_dir .. '/bin', vim.env.PATH)
 end
 
 local opts = {
-    install_root_dir = MASON_DIR,
+    install_root_dir = mason_install_dir,
     PATH = 'skip',
     ui = {
         backdrop = 100,
