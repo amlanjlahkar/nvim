@@ -65,8 +65,8 @@ au('FileType', {
     callback = function(ev)
         vim.treesitter.start()
 
-        -- local winid = vim.api.nvim_get_current_win()
-        -- vim.wo[winid].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        local winid = vim.api.nvim_get_current_win()
+        vim.wo[winid].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
         -- treesitter indenting works reliably only for some specific parsers
         local excluded_ft = { 'lua', 'jsonnet', 'nix' }
