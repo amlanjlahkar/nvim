@@ -30,8 +30,6 @@ local opts = {
     install_root_dir = mason_install_dir,
     PATH = 'skip',
     ui = {
-        backdrop = 100,
-        border = false,
         check_outdated_packages_on_open = false,
     },
 }

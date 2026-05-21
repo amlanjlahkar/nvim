@@ -69,9 +69,9 @@ local map_prefix = '<leader>q'
 keymap.nmap({
     { map_prefix .. 'h', builtin.help, mapopts('Mini: Pick help tags') },
     { map_prefix .. ';', builtin.buffers, mapopts('Mini: Pick buffers') },
+    { map_prefix .. 'l', builtin.grep_live, mapopts('Mini: Pick grepped items') },
     { map_prefix .. 's', builtin.grep, mapopts('Mini: Pick grepped items') },
     { map_prefix .. 'u', builtin.resume, mapopts('Mini: Resume picker') },
-    { map_prefix .. 'p', new_fd_picker, mapopts('Mini: Pick files') },
     { map_prefix .. 'c', extra.git_hunks, mapopts('Mini: Pick unstaged hunks of current git repository') },
     {
         map_prefix .. 'p',
@@ -85,21 +85,21 @@ keymap.nmap({
         function()
             new_fd_picker({ cwd = vim.uv.cwd(), name = 'Directories', extra_args = { '--type', 'd' } })
         end,
-        mapopts('Mini: Pick directories'),
+        mapopts('Mini: Pick directories in cwd'),
     },
     {
         map_prefix .. 'n',
         function()
             new_fd_picker({ cwd = vim.fn.stdpath('config'), name = 'Neovim config' })
         end,
-        mapopts('Mini: Nvim config'),
+        mapopts('Mini: Pick neovim config'),
     },
     {
         map_prefix .. 'd',
         function()
-            new_fd_picker({ cwd = os.getenv('HOME') .. '/nix-darwin', name = 'Nix config' })
+            new_fd_picker({ cwd = os.getenv('HOME') .. '/nix-darwin', name = 'Nix dotfiles' })
         end,
-        mapopts('Mini: Nvim config'),
+        mapopts('Mini: Pick dotfiles'),
     },
     {
         map_prefix .. 'o',
@@ -113,6 +113,6 @@ keymap.nmap({
         function()
             extra.lsp({ scope = 'document_symbol' })
         end,
-        mapopts('Mini: Pick lsp document symbols'),
+        mapopts('Mini: Pick document symbols'),
     },
 })

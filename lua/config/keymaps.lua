@@ -1,5 +1,3 @@
-local api = vim.api
-
 local keymap = require('utils.keymap')
 local mapopts = keymap.new_opts
 

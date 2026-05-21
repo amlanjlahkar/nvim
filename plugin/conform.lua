@@ -4,7 +4,7 @@ vim.pack.add({
 
 local util = require('conform.util')
 
-require('conform').setup({
+local opts = {
     formatters = {
         shfmt = {
             prepend_args = { '-i', '4', '-ci' },
@@ -32,7 +32,9 @@ require('conform').setup({
         lsp_format = 'fallback',
     },
     log_level = vim.log.levels.DEBUG,
-})
+}
+
+require('conform').setup(opts)
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
