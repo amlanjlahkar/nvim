@@ -49,3 +49,6 @@ require('vim._core.ui2').enable({})
 vim.cmd.packadd('nvim.undotree')
 vim.cmd.packadd('cfilter')
 
+require('colorscheme')
+vim.g.boo_colorscheme_italic = false
+vim.cmd.colorscheme('boo')
