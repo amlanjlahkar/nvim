@@ -35,10 +35,13 @@ local on_exit = function(obj)
     end)
 end
 
-handle = vim.system(find_cmd, {
-    cwd = vim.uv.cwd(),
-    text = true,
-}, on_exit)
+local cwd = vim.uv.cwd()
+if cwd ~= os.getenv('HOME') then
+    handle = vim.system(find_cmd, {
+        cwd = cwd,
+        text = true,
+    }, on_exit)
+end
 
 -- :help ui2
 require('vim._core.ui2').enable({})
