@@ -1,5 +1,7 @@
 -- Enable experimental lua module loader from lazy
 vim.loader.enable()
+-- :help ui2
+require('vim._core.ui2').enable({})
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ';'
@@ -42,9 +44,6 @@ if cwd ~= os.getenv('HOME') then
         text = true,
     }, on_exit)
 end
-
--- :help ui2
-require('vim._core.ui2').enable({})
 
 vim.cmd.packadd('nvim.undotree')
 vim.cmd.packadd('cfilter')
