@@ -30,10 +30,14 @@ local handle = {}
 local on_exit = function(obj)
     assert(obj.code, obj.stderr)
 
-    local path = string.gsub(handle._state.stdout_data[1], '\n', ',')
+    local stdout = handle._state.stdout_data[1]
+    -- Return if no directories found
+    if not stdout then
+        return
+    end
 
     vim.schedule(function()
-        vim.opt.path = '.,' .. path
+        vim.opt.path = '.,' .. string.gsub(stdout, '\n', ',')
     end)
 end
 
