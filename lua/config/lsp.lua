@@ -68,4 +68,5 @@ lsp.enable({
     'tailwind',
     'jsonnet_ls',
     'gopls',
+    'clojure_lsp'
 })

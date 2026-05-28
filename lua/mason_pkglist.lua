@@ -20,4 +20,5 @@ return {
     'phpactor',
     'tailwindcss-language-server',
     'gopls',
+    'clojure-lsp',
 }

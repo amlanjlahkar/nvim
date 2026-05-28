@@ -13,6 +13,10 @@
       "rev": "24c70347f6b2128679f47d2eb765156ef34bf9e0",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "conjure": {
+      "rev": "c51a9ca7495b36c05686a85e71d888efb81f1e06",
+      "src": "https://github.com/olical/conjure"
+    },
     "fidget.nvim": {
       "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
       "src": "https://github.com/j-hui/fidget.nvim"
