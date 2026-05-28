@@ -61,13 +61,14 @@ function M:install(pkg_list)
 
     if not valid then
         if #pkgs == 0 then
-            notify('The package list is empty.', vim.log.levels.ERROR)
+            notify('The package list is empty.', vim.log.levels.WARN)
         else
             notify(
-                'Invalid packages found: '
-                    .. table.concat(pkgs, ', ')
-                    .. '\nMake sure the package names match those defined in the mason-registry schema.\n'
-                    .. [[https://github.com/mason-org/mason-registry/tree/main/packages]],
+                (
+                    'Invalid packages found: %s.\n'
+                    .. 'Make sure the package names match those defined in the mason-registry schema.\n'
+                    .. '(https://github.com/mason-org/mason-registry/tree/main/packages)'
+                ):format(table.concat(pkgs, ', ')),
                 vim.log.levels.ERROR
             )
         end
@@ -76,22 +77,21 @@ function M:install(pkg_list)
 
     for _, p in pairs(pkgs) do
         if not p:is_installed() then
+            notify(('Installing %s...'):format(p.name))
             p:install(
                 {},
                 vim.schedule_wrap(function(success)
-                    notify('Installing ' .. p.name .. '...', vim.log.levels.INFO)
                     if success then
-                        notify(p.name .. ' was sucessfully installed', vim.log.levels.INFO)
+                        notify(('%s was sucessfully installed'):format(p.name))
+                    else
+                        notify(('Error installing %s. Check logs in :MasonLog'):format(p.name), vim.log.levels.ERROR)
                     end
                 end)
             )
         else
             local pkg_vinstalled, pkg_vlatest = p:get_installed_version(), p:get_latest_version()
             if pkg_vinstalled ~= pkg_vlatest then
-                notify(
-                    string.format('New version of "%s" available: %s -> %s', p.name, pkg_vinstalled, pkg_vlatest),
-                    vim.log.levels.INFO
-                )
+                notify(('New version of "%s" available: %s -> %s'):format(p.name, pkg_vinstalled, pkg_vlatest))
             end
         end
     end
