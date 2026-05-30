@@ -34,3 +34,5 @@ o.signcolumn = 'auto:1-4'
 
 o.spelllang = { 'en' }
 o.dictionary:append({ '/usr/share/dict/words' })
+
+o.termguicolors = true
