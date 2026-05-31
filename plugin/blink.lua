@@ -26,7 +26,6 @@ vim.api.nvim_create_autocmd('InsertEnter', {
     once = true,
     callback = function()
         vim.pack.add({
-            'https://github.com/rafamadriz/friendly-snippets',
             { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.10.x') },
         })
 

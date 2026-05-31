@@ -17,14 +17,6 @@
       "rev": "c51a9ca7495b36c05686a85e71d888efb81f1e06",
       "src": "https://github.com/olical/conjure"
     },
-    "fidget.nvim": {
-      "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
-      "src": "https://github.com/j-hui/fidget.nvim"
-    },
-    "friendly-snippets": {
-      "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
-      "src": "https://github.com/rafamadriz/friendly-snippets"
-    },
     "gitsigns.nvim": {
       "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
@@ -32,10 +24,6 @@
     "mason.nvim": {
       "rev": "bb639d4bf385a4d89f478b83af4d770be05ab7eb",
       "src": "https://github.com/mason-org/mason.nvim"
-    },
-    "mini.clue": {
-      "rev": "0e37cddd6307eb40248e4226be65304e85df1d18",
-      "src": "https://github.com/echasnovski/mini.clue"
     },
     "mini.extra": {
       "rev": "5b0acf09d7f7958946973367c66bf5aafe4209dd",
