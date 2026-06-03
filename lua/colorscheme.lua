@@ -20,5 +20,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         set_hl(0, 'Comment', { fg = '#66919a', italic = true })
 
         set_hl(0, 'GitSignsCurrentLineBlame', { fg = '#4c4c60' })
+        set_hl(0, 'SpellBad', { fg = '#c0c0dd', sp = '#cd749c', undercurl = true })
     end,
 })
