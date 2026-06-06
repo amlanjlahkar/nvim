@@ -10,35 +10,35 @@
       "src": "https://github.com/rockerBOO/boo-colorscheme-nvim"
     },
     "conform.nvim": {
-      "rev": "24c70347f6b2128679f47d2eb765156ef34bf9e0",
+      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "conjure": {
-      "rev": "c51a9ca7495b36c05686a85e71d888efb81f1e06",
+      "rev": "8a3bb39987357c1ae4d9b267e8481401d904cac4",
       "src": "https://github.com/olical/conjure"
     },
     "gitsigns.nvim": {
-      "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
+      "rev": "25050e4ed39e628282831d4cbecb1850454ce915",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "mason.nvim": {
-      "rev": "bb639d4bf385a4d89f478b83af4d770be05ab7eb",
+      "rev": "16ba83bfc8a25f52bb545134f5bee082b195c460",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.extra": {
-      "rev": "5b0acf09d7f7958946973367c66bf5aafe4209dd",
+      "rev": "eb21c1117207d3aa1ae532c666c692e94909087e",
       "src": "https://github.com/nvim-mini/mini.extra"
     },
     "mini.pick": {
-      "rev": "4522d9ab65224675df2cf1ede8c12f0410aae2be",
+      "rev": "1ffba38c7221669d3da7792d4bbe1c9761075f4d",
       "src": "https://github.com/echasnovski/mini.pick"
     },
     "mini.surround": {
-      "rev": "1e37ade260e2b655c3a9b8407ba7e6b0fb995b28",
+      "rev": "9fd5ebef2b34cc4ac3c0f1811a6726ea6d92fa91",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nvim-lspconfig": {
-      "rev": "9573948c38bfabeec353ae7dd7d3ffec4c506a6b",
+      "rev": "229b79051b380377664edc4cbd534930154921a1",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -47,7 +47,7 @@
       "version": "'main'"
     },
     "oil.nvim": {
-      "rev": "21c669e7bfeb1546ae988b52813138e4d674bbf5",
+      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
     }
   }
