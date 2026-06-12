@@ -8,7 +8,7 @@ local opts = {
             },
         },
         documentation = {
-            auto_show = true,
+            auto_show = false,
             window = { scrollbar = false },
         },
         list = { selection = { preselect = false } },

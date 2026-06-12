@@ -4,7 +4,6 @@ local mapopts = keymap.new_opts
 keymap.nmap({
     { '<leader>j', '<Cmd>m .+1<CR>==' },
     { '<leader>k', '<Cmd>m .-2<CR>==' },
-    { 'gV', '`[v`]' },
     { '<localleader>o', ':bp<CR>' },
     { '<localleader>p', ':bn<CR>' },
     { '<C-e>', '"+yy' },
