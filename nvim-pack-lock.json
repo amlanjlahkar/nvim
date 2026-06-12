@@ -14,7 +14,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "conjure": {
-      "rev": "8a3bb39987357c1ae4d9b267e8481401d904cac4",
+      "rev": "16b436c0124dae26250986fd4e660529d6bb14f0",
       "src": "https://github.com/olical/conjure"
     },
     "gitsigns.nvim": {
@@ -22,7 +22,7 @@
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "mason.nvim": {
-      "rev": "16ba83bfc8a25f52bb545134f5bee082b195c460",
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.extra": {
@@ -30,15 +30,15 @@
       "src": "https://github.com/nvim-mini/mini.extra"
     },
     "mini.pick": {
-      "rev": "1ffba38c7221669d3da7792d4bbe1c9761075f4d",
+      "rev": "0b3599e6df730f3ced3359d33c674288de0d186d",
       "src": "https://github.com/echasnovski/mini.pick"
     },
     "mini.surround": {
-      "rev": "9fd5ebef2b34cc4ac3c0f1811a6726ea6d92fa91",
+      "rev": "d401c3856585473693e5ce9ec4c8e5b608b4c0fe",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "nvim-lspconfig": {
-      "rev": "229b79051b380377664edc4cbd534930154921a1",
+      "rev": "96f363ce07d46c1804532ca2d1eb3a157d11ee29",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
