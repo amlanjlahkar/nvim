@@ -30,6 +30,19 @@ au('LspAttach', {
             })
         end
 
+        ---@diagnostic disable-next-line: need-check-nil
+        if client:supports_method('textDocument/documentColor', bufnr) then
+            local document_color = lsp.document_color
+            document_color.enable(false, { bufnr = bufnr })
+            keymap.nmap({
+                map_prefix .. 'c',
+                function()
+                    document_color.enable(not document_color.is_enabled())
+                end,
+                mapopts(bufnr, 'Lsp: Toggle document color'),
+            })
+        end
+
         vim.diagnostic.config({
             underline = false,
             virtual_lines = false,
@@ -58,15 +71,16 @@ au('LspAttach', {
 
 lsp.enable({
     'luals',
-    'eslint',
-    'tsls',
+    'ts_ls',
     'clangd',
     'cssls',
     'nixd',
     'laravel_ls',
     'phpactor',
-    'tailwind',
+    'tailwindcss',
     'jsonnet_ls',
     'gopls',
-    'clojure_lsp'
+    'clojure_lsp',
+    'denols',
+    'svelte',
 })
