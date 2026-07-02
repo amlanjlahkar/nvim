@@ -7,13 +7,14 @@ local util = require('conform.util')
 local opts = {
     formatters = {
         shfmt = {
-            prepend_args = { '-i', '4', '-ci' },
+            append_args = { '-i', '4', '-ci' },
         },
         ['blade-formatter'] = {
             command = util.from_node_modules('blade-formatter'),
         },
     },
     formatters_by_ft = {
+        astro = { 'prettier' },
         bash = { 'shfmt' },
         blade = { 'prettier' },
         css = { 'prettier' },
