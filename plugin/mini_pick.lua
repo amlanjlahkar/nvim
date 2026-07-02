@@ -69,7 +69,6 @@ keymap.nmap({
     { map_prefix .. 'h', builtin.help, mapopts('Mini: Pick help tags') },
     { map_prefix .. ';', builtin.buffers, mapopts('Mini: Pick buffers') },
     { map_prefix .. 'l', builtin.grep_live, mapopts('Mini: Pick grepped items') },
-    { map_prefix .. 's', builtin.grep, mapopts('Mini: Pick grepped items') },
     { map_prefix .. 'u', builtin.resume, mapopts('Mini: Resume picker') },
     { map_prefix .. 'c', extra.git_hunks, mapopts('Mini: Pick unstaged hunks of current git repository') },
     {
@@ -78,6 +77,15 @@ keymap.nmap({
             new_fd_picker({})
         end,
         mapopts('Mini: Pick files'),
+    },
+    {
+        map_prefix .. 's',
+        function()
+            local lspconfig_path = vim.fn.stdpath('data') .. '/site/pack/core/opt/nvim-lspconfig/lsp'
+            assert(vim.fn.isdirectory(lspconfig_path) == 1, 'Unable to find lsp config path!')
+            new_fd_picker({ cwd = lspconfig_path })
+        end,
+        mapopts('Mini: Pick lsp configuarations'),
     },
     {
         map_prefix .. 'j',
