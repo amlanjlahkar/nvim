@@ -12,6 +12,7 @@ local opts = {
         'php',
         'svelte',
         'blade',
+        'astro',
     },
     auto_rename = {
         enabled = false,

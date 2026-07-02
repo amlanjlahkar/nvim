@@ -83,4 +83,6 @@ lsp.enable({
     'clojure_lsp',
     'denols',
     'svelte',
+    'astro',
+    'cssls',
 })

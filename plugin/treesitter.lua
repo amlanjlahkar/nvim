@@ -18,6 +18,7 @@ vim.pack.add({
 })
 
 local parsers = {
+    'astro',
     'bash',
     'cpp',
     'typst',
